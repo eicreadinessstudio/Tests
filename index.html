@@ -40,9 +40,44 @@ nav.raised{background:rgba(255,255,255,.93);backdrop-filter:blur(16px) saturate(
 .nav-cta:hover{background:#312e81!important;transform:translateY(-1px)!important;box-shadow:0 4px 20px rgba(55,48,163,.35)!important;}
 
 /* HERO */
-.hero{position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;padding:128px 0 100px;background:var(--white);isolation:isolate;}
-#particle-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.95;}
-.hero-lines{position:absolute;inset:0;z-index:0;pointer-events:none;background-image:repeating-linear-gradient(180deg,transparent,transparent 31px,rgba(55,48,163,.03) 31px,rgba(55,48,163,.03) 32px);mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 12%,rgba(0,0,0,.55) 88%,transparent 100%);}
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:128px 0 100px;
+  background:
+    radial-gradient(circle at 18% 28%, rgba(14,165,233,.08), transparent 0 28%),
+    radial-gradient(circle at 78% 24%, rgba(79,70,229,.07), transparent 0 26%),
+    linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  isolation:isolate;
+}
+#particle-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+  opacity:.98;
+}
+.hero-glow{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 22% 30%, rgba(14,165,233,.08), transparent 0 18%),
+    radial-gradient(circle at 62% 22%, rgba(79,70,229,.07), transparent 0 22%),
+    radial-gradient(circle at 40% 58%, rgba(55,48,163,.05), transparent 0 20%);
+  filter:blur(18px);
+}
+.hero-lines{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(180deg,transparent,transparent 31px,rgba(55,48,163,.028) 31px,rgba(55,48,163,.028) 32px);
+  mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.5) 12%,rgba(0,0,0,.5) 88%,transparent 100%);
+}
 .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,540px);gap:clamp(40px,5vw,80px);align-items:center;}
 
 .hero-kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--indigo-mid);background:var(--indigo-soft);border:1px solid rgba(79,70,229,.15);padding:6px 14px;border-radius:4px;margin-bottom:32px;opacity:0;animation:slideUp .7s var(--ease) .05s forwards;}
@@ -214,6 +249,7 @@ footer{background:var(--bg-deep);padding:80px 0 56px;}
 
 <section class="hero" id="top">
   <canvas id="particle-canvas"></canvas>
+  <div class="hero-glow"></div>
   <div class="hero-lines"></div>
   <div class="wrap">
     <div class="hero-inner">
@@ -360,7 +396,7 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('raised', window.scrollY > 24);
 }, { passive: true });
 
-// CANVAS PARTICLES
+// PREMIUM PARTICLE SYSTEM
 (function () {
   const canvas = document.getElementById('particle-canvas');
   const hero = document.getElementById('top');
@@ -370,9 +406,9 @@ window.addEventListener('scroll', () => {
 
   const INDIGO = '#3730a3';
   const SKY = '#0ea5e9';
-  const COUNT = 68;
-  const CONNECT_DIST = 120;
-  const MOUSE_RADIUS = 140;
+  const COUNT = 84;
+  const CONNECT_DIST = 138;
+  const MOUSE_RADIUS = 150;
 
   let w = 0;
   let h = 0;
@@ -409,13 +445,13 @@ window.addEventListener('scroll', () => {
       this.vx = 0;
       this.vy = 0;
 
-      this.radius = Math.random() * 2.2 + 1.2;
+      this.radius = Math.random() * 1.8 + 1.2;
       this.color = Math.random() < 0.28 ? SKY : INDIGO;
-      this.alpha = Math.random() * 0.35 + 0.28;
+      this.alpha = Math.random() * 0.22 + 0.22;
 
       this.orbitAngle = Math.random() * Math.PI * 2;
-      this.orbitSpeed = (Math.random() * 0.012) + 0.004;
-      this.orbitRadius = Math.random() * 12 + 6;
+      this.orbitSpeed = Math.random() * 0.006 + 0.0025;
+      this.orbitRadius = Math.random() * 18 + 8;
     }
 
     update() {
@@ -424,8 +460,8 @@ window.addEventListener('scroll', () => {
       const targetX = this.baseX + Math.cos(this.orbitAngle) * this.orbitRadius;
       const targetY = this.baseY + Math.sin(this.orbitAngle) * this.orbitRadius;
 
-      const spring = 0.018;
-      const friction = 0.93;
+      const spring = 0.014;
+      const friction = 0.945;
 
       this.vx += (targetX - this.x) * spring;
       this.vy += (targetY - this.y) * spring;
@@ -436,7 +472,7 @@ window.addEventListener('scroll', () => {
         const dist = Math.sqrt(dx * dx + dy * dy) || 0.0001;
 
         if (dist < MOUSE_RADIUS) {
-          const force = (1 - dist / MOUSE_RADIUS) * 1.4;
+          const force = (1 - dist / MOUSE_RADIUS) * 1.15;
           this.vx += (dx / dist) * force;
           this.vy += (dy / dist) * force;
         }
@@ -449,7 +485,22 @@ window.addEventListener('scroll', () => {
       this.y += this.vy;
     }
 
-    draw() {
+    drawGlow() {
+      const glowRadius = this.radius * 4.8;
+      const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
+      const rgb = this.color === SKY ? '14,165,233' : '55,48,163';
+
+      gradient.addColorStop(0, `rgba(${rgb},0.18)`);
+      gradient.addColorStop(1, `rgba(${rgb},0)`);
+
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, glowRadius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    drawDot() {
       ctx.globalAlpha = this.alpha;
       ctx.fillStyle = this.color;
       ctx.beginPath();
@@ -475,11 +526,11 @@ window.addEventListener('scroll', () => {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < CONNECT_DIST) {
-          const opacity = (1 - dist / CONNECT_DIST) * 0.22;
+          const opacity = (1 - dist / CONNECT_DIST) * 0.13;
 
           ctx.globalAlpha = opacity;
           ctx.strokeStyle = a.color === SKY || b.color === SKY ? SKY : INDIGO;
-          ctx.lineWidth = 0.7;
+          ctx.lineWidth = 0.65;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -492,15 +543,10 @@ window.addEventListener('scroll', () => {
   function animate() {
     ctx.clearRect(0, 0, w, h);
 
-    for (const p of particles) {
-      p.update();
-    }
-
+    for (const p of particles) p.update();
+    for (const p of particles) p.drawGlow();
     drawConnections();
-
-    for (const p of particles) {
-      p.draw();
-    }
+    for (const p of particles) p.drawDot();
 
     ctx.globalAlpha = 1;
     requestAnimationFrame(animate);
@@ -529,7 +575,7 @@ window.addEventListener('scroll', () => {
   animate();
 })();
 
-// FRAME ROWS stagger
+// FRAME ROWS STAGGER
 window.addEventListener('load', () => {
   document.querySelectorAll('.frame-row').forEach((r, i) => {
     setTimeout(() => {
