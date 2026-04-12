@@ -136,8 +136,8 @@ nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
   overflow:hidden;
   padding:96px 0 92px;
   background:
-    radial-gradient(circle at 18% 24%, rgba(14,165,233,.025), transparent 0 18%),
-    radial-gradient(circle at 82% 76%, rgba(79,70,229,.03), transparent 0 20%),
+    radial-gradient(circle at 18% 24%, rgba(14,165,233,.022), transparent 0 18%),
+    radial-gradient(circle at 82% 76%, rgba(79,70,229,.028), transparent 0 20%),
     linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
   isolation:isolate;
 }
@@ -149,7 +149,7 @@ nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
   height:100%;
   pointer-events:none;
   z-index:0;
-  opacity:.82;
+  opacity:.84;
 }
 
 .hero-glow{
@@ -158,8 +158,8 @@ nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
   z-index:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 16% 22%, rgba(14,165,233,.02), transparent 0 14%),
-    radial-gradient(circle at 84% 78%, rgba(79,70,229,.025), transparent 0 16%);
+    radial-gradient(circle at 14% 20%, rgba(14,165,233,.018), transparent 0 13%),
+    radial-gradient(circle at 86% 78%, rgba(79,70,229,.022), transparent 0 15%);
   filter:blur(10px);
 }
 
@@ -173,8 +173,8 @@ nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
     180deg,
     transparent,
     transparent 31px,
-    rgba(55,48,163,.018) 31px,
-    rgba(55,48,163,.018) 32px
+    rgba(55,48,163,.016) 31px,
+    rgba(55,48,163,.016) 32px
   );
   mask-image: linear-gradient(
     180deg,
@@ -1123,10 +1123,8 @@ document.addEventListener('DOMContentLoaded', function () {
     reveals.forEach(el => el.classList.add('in'));
   }
 
-  // REFINED PARTICLE SYSTEM
   const canvas = document.getElementById('particle-canvas');
   const hero = document.getElementById('top');
-
   if (!canvas || !hero) return;
 
   const ctx = canvas.getContext('2d');
@@ -1134,20 +1132,22 @@ document.addEventListener('DOMContentLoaded', function () {
   const INDIGO = '#3730a3';
   const SKY = '#0ea5e9';
 
-  const COUNT = 54;
-  const CORE_COUNT = 3;
-  const CONNECT_DIST = 118;
-  const CLUSTER_CONNECT_DIST = 132;
-  const MOUSE_RADIUS = 135;
-  const FOCUS_RADIUS = 150;
-  const FLOW_SPEED = 0.01;
+  const BASE_COUNT = 58;
+  const CORE_COUNT = 4;
+  const CONNECT_DIST = 122;
+  const CLUSTER_CONNECT_DIST = 142;
+  const MOUSE_RADIUS = 150;
+  const FOCUS_RADIUS = 180;
+  const FLOW_SPEED = 0.0085;
 
   let w = 0;
   let h = 0;
   let dpr = Math.max(1, window.devicePixelRatio || 1);
   let particles = [];
   let edges = [];
+  let routes = [];
   let time = 0;
+  let lastInteractionAt = performance.now();
 
   const mouse = {
     x: -9999,
@@ -1175,16 +1175,72 @@ document.addEventListener('DOMContentLoaded', function () {
     return Math.sqrt(dx * dx + dy * dy);
   }
 
+  function pointInRect(x, y, rect) {
+    return x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h;
+  }
+
+  function avoidRect(x, y, rect, padding) {
+    const px = rect.x - padding;
+    const py = rect.y - padding;
+    const pw = rect.w + padding * 2;
+    const ph = rect.h + padding * 2;
+
+    if (!pointInRect(x, y, { x: px, y: py, w: pw, h: ph })) {
+      return { x, y };
+    }
+
+    const left = Math.abs(x - px);
+    const right = Math.abs((px + pw) - x);
+    const top = Math.abs(y - py);
+    const bottom = Math.abs((py + ph) - y);
+
+    const min = Math.min(left, right, top, bottom);
+
+    if (min === left) return { x: px, y };
+    if (min === right) return { x: px + pw, y };
+    if (min === top) return { x, y: py };
+    return { x, y: py + ph };
+  }
+
+  function getCleanZone() {
+    const title = hero.querySelector('h1');
+    const sub = hero.querySelector('.hero-sub');
+    if (!title || !sub) {
+      return {
+        x: w * 0.04,
+        y: h * 0.10,
+        w: w * 0.48,
+        h: h * 0.54
+      };
+    }
+
+    const heroRect = hero.getBoundingClientRect();
+    const t = title.getBoundingClientRect();
+    const s = sub.getBoundingClientRect();
+
+    const left = Math.min(t.left, s.left) - heroRect.left;
+    const top = Math.min(t.top, s.top) - heroRect.top;
+    const right = Math.max(t.right, s.right) - heroRect.left;
+    const bottom = Math.max(t.bottom, s.bottom) - heroRect.top;
+
+    return {
+      x: left,
+      y: top,
+      w: right - left,
+      h: bottom - top
+    };
+  }
+
   function clusterSeeds() {
     return [
-      { x: w * 0.16, y: h * 0.22, spreadX: 72, spreadY: 62 },
-      { x: w * 0.74, y: h * 0.70, spreadX: 110, spreadY: 82 },
-      { x: w * 0.90, y: h * 0.56, spreadX: 54, spreadY: 72 }
+      { x: w * 0.14, y: h * 0.18, spreadX: 86, spreadY: 64 },
+      { x: w * 0.77, y: h * 0.72, spreadX: 118, spreadY: 86 },
+      { x: w * 0.90, y: h * 0.52, spreadX: 58, spreadY: 82 }
     ];
   }
 
   class Particle {
-    constructor({ x, y, cluster, core = false, accent = false }) {
+    constructor({ x, y, cluster, core = false, accent = false, layer = 1 }) {
       this.baseX = x;
       this.baseY = y;
       this.x = x;
@@ -1192,27 +1248,51 @@ document.addEventListener('DOMContentLoaded', function () {
       this.cluster = cluster;
       this.core = core;
       this.accent = accent;
+      this.layer = layer;
 
       this.vx = 0;
       this.vy = 0;
 
-      this.radius = core ? (Math.random() * 1.1 + 2.0) : (Math.random() * 0.9 + 0.9);
+      this.radius = core
+        ? (Math.random() * 1.0 + 2.2)
+        : layer === 0
+          ? (Math.random() * 0.5 + 0.55)
+          : (Math.random() * 0.8 + 0.9);
+
       this.color = accent ? SKY : INDIGO;
-      this.alpha = core ? 0.62 : (accent ? 0.32 : 0.18);
+      this.alpha = core
+        ? 0.62
+        : accent
+          ? 0.32
+          : layer === 0
+            ? 0.08
+            : 0.17;
 
       this.orbitAngle = Math.random() * Math.PI * 2;
-      this.orbitSpeed = core ? (Math.random() * 0.002 + 0.0012) : (Math.random() * 0.004 + 0.0015);
-      this.orbitRadius = core ? (Math.random() * 7 + 4) : (Math.random() * 11 + 5);
+      this.orbitSpeed = core
+        ? (Math.random() * 0.0015 + 0.001)
+        : layer === 0
+          ? (Math.random() * 0.001 + 0.0006)
+          : (Math.random() * 0.003 + 0.0012);
+
+      this.orbitRadius = core
+        ? (Math.random() * 8 + 5)
+        : layer === 0
+          ? (Math.random() * 5 + 2)
+          : (Math.random() * 12 + 5);
     }
 
-    update() {
+    update(now) {
       this.orbitAngle += this.orbitSpeed;
 
-      const targetX = this.baseX + Math.cos(this.orbitAngle) * this.orbitRadius;
-      const targetY = this.baseY + Math.sin(this.orbitAngle) * this.orbitRadius;
+      const idle = now - lastInteractionAt > 2600;
+      const idleBreath = idle ? Math.sin(now * 0.00045 + this.cluster * 1.2) * 3.5 : 0;
 
-      const spring = this.core ? 0.018 : 0.014;
-      const friction = this.core ? 0.945 : 0.952;
+      const targetX = this.baseX + Math.cos(this.orbitAngle) * (this.orbitRadius + idleBreath * 0.3);
+      const targetY = this.baseY + Math.sin(this.orbitAngle) * (this.orbitRadius + idleBreath * 0.3);
+
+      const spring = this.core ? 0.018 : 0.013;
+      const friction = this.core ? 0.944 : 0.952;
 
       this.vx += (targetX - this.x) * spring;
       this.vy += (targetY - this.y) * spring;
@@ -1223,7 +1303,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const dist = Math.sqrt(dx * dx + dy * dy) || 0.0001;
 
         if (dist < MOUSE_RADIUS) {
-          const force = (1 - dist / MOUSE_RADIUS) * (this.core ? 0.65 : 0.9);
+          const force = (1 - dist / MOUSE_RADIUS) * (this.core ? 0.55 : 0.85);
           this.vx += (dx / dist) * force;
           this.vy += (dy / dist) * force;
         }
@@ -1239,12 +1319,12 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!this.core && !this.accent) return;
 
       const boost = mouse.active
-        ? Math.max(0, 1 - distance(this.x, this.y, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.6
+        ? Math.max(0, 1 - distance(this.x, this.y, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.7
         : 0;
 
-      const glowRadius = this.core ? this.radius * 4.2 : this.radius * 3.2;
+      const glowRadius = this.core ? this.radius * 4.2 : this.radius * 3.0;
       const rgb = this.color === SKY ? '14,165,233' : '55,48,163';
-      const intensity = this.core ? 0.10 + boost * 0.08 : 0.05 + boost * 0.04;
+      const intensity = this.core ? 0.10 + boost * 0.08 : 0.04 + boost * 0.04;
 
       const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
       gradient.addColorStop(0, `rgba(${rgb},${intensity})`);
@@ -1259,7 +1339,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     drawDot() {
       const boost = mouse.active
-        ? Math.max(0, 1 - distance(this.x, this.y, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.14
+        ? Math.max(0, 1 - distance(this.x, this.y, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.16
         : 0;
 
       ctx.globalAlpha = Math.min(1, this.alpha + boost);
@@ -1273,40 +1353,59 @@ document.addEventListener('DOMContentLoaded', function () {
   function initParticles() {
     particles = [];
     edges = [];
+    routes = [];
 
+    const cleanZone = getCleanZone();
     const seeds = clusterSeeds();
-    const perCluster = Math.floor((COUNT - CORE_COUNT) / seeds.length);
+    const perCluster = Math.floor((BASE_COUNT - CORE_COUNT) / seeds.length);
 
     seeds.forEach((seed, clusterIndex) => {
       for (let i = 0; i < perCluster; i++) {
-        const x = seed.x + (Math.random() - 0.5) * seed.spreadX * 2;
-        const y = seed.y + (Math.random() - 0.5) * seed.spreadY * 2;
+        let x = seed.x + (Math.random() - 0.5) * seed.spreadX * 2;
+        let y = seed.y + (Math.random() - 0.5) * seed.spreadY * 2;
+
+        const adjusted = avoidRect(x, y, cleanZone, 70);
+        x = adjusted.x;
+        y = adjusted.y;
+
         const accent = Math.random() < 0.10;
-        particles.push(new Particle({ x, y, cluster: clusterIndex, accent }));
+        const layer = Math.random() < 0.18 ? 0 : 1;
+
+        particles.push(new Particle({
+          x,
+          y,
+          cluster: clusterIndex,
+          accent,
+          layer
+        }));
       }
     });
 
-    const corePositions = [
-      { x: w * 0.20, y: h * 0.18, cluster: 0, accent: false },
-      { x: w * 0.76, y: h * 0.66, cluster: 1, accent: true },
-      { x: w * 0.88, y: h * 0.60, cluster: 2, accent: false }
+    const corePositionsRaw = [
+      { x: w * 0.17, y: h * 0.18, cluster: 0, accent: false },
+      { x: w * 0.80, y: h * 0.68, cluster: 1, accent: true },
+      { x: w * 0.90, y: h * 0.58, cluster: 2, accent: false },
+      { x: w * 0.72, y: h * 0.78, cluster: 1, accent: false }
     ];
 
-    corePositions.forEach(pos => {
+    corePositionsRaw.forEach(pos => {
+      const adjusted = avoidRect(pos.x, pos.y, cleanZone, 90);
       particles.push(new Particle({
-        x: pos.x,
-        y: pos.y,
+        x: adjusted.x,
+        y: adjusted.y,
         cluster: pos.cluster,
         core: true,
-        accent: pos.accent
+        accent: pos.accent,
+        layer: 2
       }));
     });
 
-    buildEdges();
+    buildEdgesAndRoutes();
   }
 
-  function buildEdges() {
+  function buildEdgesAndRoutes() {
     edges = [];
+    routes = [];
 
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
@@ -1316,73 +1415,153 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const sameCluster = a.cluster === b.cluster;
         const hasCore = a.core || b.core;
-
-        if (
+        const edgeAllowed =
           (sameCluster && dist < CLUSTER_CONNECT_DIST) ||
-          (hasCore && dist < CONNECT_DIST)
-        ) {
+          (hasCore && dist < CONNECT_DIST);
+
+        if (edgeAllowed) {
           edges.push({
             a,
             b,
-            flowOffset: Math.random()
+            flowOffset: Math.random(),
+            strength: sameCluster ? 1 : 0.7
+          });
+        }
+      }
+    }
+
+    const cores = particles.filter(p => p.core);
+    for (let i = 0; i < cores.length; i++) {
+      for (let j = i + 1; j < cores.length; j++) {
+        const a = cores[i];
+        const b = cores[j];
+        const dist = distance(a.baseX, a.baseY, b.baseX, b.baseY);
+        if (dist < 320) {
+          routes.push({
+            a,
+            b,
+            offset: Math.random(),
+            activeBias: Math.random()
           });
         }
       }
     }
   }
 
-  function drawConnections() {
+  function drawEdges(now) {
     for (const edge of edges) {
-      const { a, b } = edge;
+      const { a, b, strength } = edge;
       const dist = distance(a.x, a.y, b.x, b.y);
-      const maxDist = (a.cluster === b.cluster) ? CLUSTER_CONNECT_DIST : CONNECT_DIST;
+      const maxDist = a.cluster === b.cluster ? CLUSTER_CONNECT_DIST : CONNECT_DIST;
 
-      if (dist > maxDist * 1.15) continue;
+      if (dist > maxDist * 1.18) continue;
 
       const baseOpacity = Math.max(0, 1 - dist / maxDist);
+      const mx = (a.x + b.x) * 0.5;
+      const my = (a.y + b.y) * 0.5;
+
       const focusBoost = mouse.active
-        ? Math.max(
-            0,
-            1 - distance((a.x + b.x) / 2, (a.y + b.y) / 2, mouse.x, mouse.y) / FOCUS_RADIUS
-          ) * 0.08
+        ? Math.max(0, 1 - distance(mx, my, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.11
         : 0;
 
-      const opacity = baseOpacity * (0.045 + focusBoost);
+      const idle = now - lastInteractionAt > 2600;
+      const idleBoost = idle && (a.core || b.core) ? 0.018 : 0;
+
+      const opacity = baseOpacity * (0.035 + focusBoost + idleBoost) * strength;
 
       ctx.globalAlpha = opacity;
       ctx.strokeStyle = (a.color === SKY || b.color === SKY) ? SKY : INDIGO;
-      ctx.lineWidth = (a.core || b.core) ? 0.7 : 0.45;
+      ctx.lineWidth = (a.core || b.core) ? 0.75 : 0.42;
       ctx.beginPath();
       ctx.moveTo(a.x, a.y);
       ctx.lineTo(b.x, b.y);
       ctx.stroke();
 
-      const shouldPulse = (a.core || b.core || a.accent || b.accent) && baseOpacity > 0.3;
+      const shouldPulse = (a.core || b.core || a.accent || b.accent) && baseOpacity > 0.32;
       if (shouldPulse) {
         const t = (time * FLOW_SPEED + edge.flowOffset) % 1;
         const px = a.x + (b.x - a.x) * t;
         const py = a.y + (b.y - a.y) * t;
 
-        const grad = ctx.createRadialGradient(px, py, 0, px, py, 4.5);
-        grad.addColorStop(0, 'rgba(56,189,248,0.22)');
+        const grad = ctx.createRadialGradient(px, py, 0, px, py, 4.2);
+        grad.addColorStop(0, 'rgba(56,189,248,0.18)');
         grad.addColorStop(1, 'rgba(56,189,248,0)');
 
-        ctx.globalAlpha = 0.5 * baseOpacity;
+        ctx.globalAlpha = 0.42 * baseOpacity;
         ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.arc(px, py, 4.5, 0, Math.PI * 2);
+        ctx.arc(px, py, 4.2, 0, Math.PI * 2);
         ctx.fill();
       }
     }
   }
 
-  function animate() {
+  function drawRoutes(now) {
+    for (const route of routes) {
+      const { a, b, offset, activeBias } = route;
+      const dist = distance(a.x, a.y, b.x, b.y);
+      if (dist > 360) continue;
+
+      const mx = (a.x + b.x) * 0.5;
+      const my = (a.y + b.y) * 0.5;
+
+      const focusBoost = mouse.active
+        ? Math.max(0, 1 - distance(mx, my, mouse.x, mouse.y) / (FOCUS_RADIUS + 20)) * 0.16
+        : 0;
+
+      const idle = now - lastInteractionAt > 2400;
+      const idlePhase = idle ? (0.5 + 0.5 * Math.sin(now * 0.001 + activeBias * 10)) : 0;
+
+      const opacity = 0.02 + focusBoost + idlePhase * 0.035;
+
+      ctx.globalAlpha = opacity;
+      ctx.strokeStyle = SKY;
+      ctx.lineWidth = 0.55;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+
+      const t = (time * (FLOW_SPEED * 1.55) + offset) % 1;
+      const px = a.x + (b.x - a.x) * t;
+      const py = a.y + (b.y - a.y) * t;
+
+      const grad = ctx.createRadialGradient(px, py, 0, px, py, 5.8);
+      grad.addColorStop(0, 'rgba(56,189,248,0.26)');
+      grad.addColorStop(1, 'rgba(56,189,248,0)');
+
+      ctx.globalAlpha = 0.46 + focusBoost * 1.2 + idlePhase * 0.12;
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(px, py, 5.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function drawFocusLens() {
+    if (!mouse.active) return;
+
+    const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, FOCUS_RADIUS * 0.7);
+    gradient.addColorStop(0, 'rgba(79,70,229,0.018)');
+    gradient.addColorStop(0.55, 'rgba(14,165,233,0.010)');
+    gradient.addColorStop(1, 'rgba(14,165,233,0)');
+
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, FOCUS_RADIUS * 0.7, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function animate(now) {
     time += 1;
     ctx.clearRect(0, 0, w, h);
 
-    for (const p of particles) p.update();
+    for (const p of particles) p.update(now);
+    drawFocusLens();
     for (const p of particles) p.drawGlow();
-    drawConnections();
+    drawEdges(now);
+    drawRoutes(now);
     for (const p of particles) p.drawDot();
 
     ctx.globalAlpha = 1;
@@ -1394,12 +1573,18 @@ document.addEventListener('DOMContentLoaded', function () {
     mouse.x = e.clientX - rect.left;
     mouse.y = e.clientY - rect.top;
     mouse.active = true;
+    lastInteractionAt = performance.now();
   }, { passive: true });
+
+  hero.addEventListener('mouseenter', () => {
+    lastInteractionAt = performance.now();
+  });
 
   hero.addEventListener('mouseleave', () => {
     mouse.x = -9999;
     mouse.y = -9999;
     mouse.active = false;
+    lastInteractionAt = performance.now();
   });
 
   window.addEventListener('resize', () => {
@@ -1407,9 +1592,20 @@ document.addEventListener('DOMContentLoaded', function () {
     initParticles();
   }, { passive: true });
 
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    resize();
+    initParticles();
+    drawFocusLens();
+    for (const p of particles) p.drawGlow();
+    drawEdges(performance.now());
+    drawRoutes(performance.now());
+    for (const p of particles) p.drawDot();
+    return;
+  }
+
   resize();
   initParticles();
-  animate();
+  requestAnimationFrame(animate);
 });
 </script>
 
