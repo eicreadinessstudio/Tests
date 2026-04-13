@@ -136,8 +136,8 @@ nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
   overflow:hidden;
   padding:96px 0 92px;
   background:
-    radial-gradient(circle at 18% 24%, rgba(14,165,233,.022), transparent 0 18%),
-    radial-gradient(circle at 82% 76%, rgba(79,70,229,.028), transparent 0 20%),
+    radial-gradient(circle at 18% 24%, rgba(148,163,184,.05), transparent 0 18%),
+    radial-gradient(circle at 82% 76%, rgba(55,48,163,.03), transparent 0 20%),
     linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
   isolation:isolate;
 }
@@ -158,9 +158,9 @@ nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
   z-index:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 14% 20%, rgba(14,165,233,.018), transparent 0 13%),
-    radial-gradient(circle at 86% 78%, rgba(79,70,229,.022), transparent 0 15%);
-  filter:blur(10px);
+    radial-gradient(circle at 14% 20%, rgba(148,163,184,.035), transparent 0 13%),
+    radial-gradient(circle at 86% 78%, rgba(55,48,163,.02), transparent 0 15%);
+  filter:blur(12px);
 }
 
 .hero::before {
@@ -173,8 +173,8 @@ nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
     180deg,
     transparent,
     transparent 31px,
-    rgba(55,48,163,.012) 31px,
-    rgba(55,48,163,.012) 32px
+    rgba(148,163,184,.012) 31px,
+    rgba(148,163,184,.012) 32px
   );
   mask-image: linear-gradient(
     180deg,
@@ -317,8 +317,8 @@ nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(55,48,163,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(55,48,163,.05) 1px, transparent 1px);
+    linear-gradient(rgba(148,163,184,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148,163,184,.06) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -604,7 +604,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--sky);
+  background: var(--indigo-mid);
   transition: width .4s var(--ease);
 }
 
@@ -727,7 +727,7 @@ footer {
   align-items: center;
 }
 
-/* REVEAL - safe version */
+/* REVEAL */
 .reveal {
   opacity: 1;
   transform: none;
@@ -784,33 +784,6 @@ footer {
 
   .hero-shot-frame.hero-no-img {
     min-height: 360px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(145deg, #f0f4fb 0%, #e8eef7 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-shot-frame.hero-no-img::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(55,48,163,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(55,48,163,.05) 1px, transparent 1px);
-    background-size: 32px 32px;
-  }
-
-  .hero-shot-frame.hero-no-img::after {
-    content: 'Interface fragment coming soon';
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: .1em;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
   }
 
   .hero-shot-frame img {
@@ -1129,10 +1102,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const ctx = canvas.getContext('2d');
 
-  const INDIGO = '#3730a3';
-  const INDIGO_RGB = '55,48,163';
-  const SKY = '#0ea5e9';
-  const SKY_RGB = '14,165,233';
+  const NETWORK = '#94a3b8';
+  const NETWORK_RGB = '148,163,184';
+  const ACCENT = '#3730a3';
+  const ACCENT_RGB = '55,48,163';
 
   const BASE_COUNT = 66;
   const CORE_COUNT = 5;
@@ -1142,7 +1115,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const FOCUS_RADIUS = 185;
   const FLOW_SPEED = 0.006;
   const TOPOLOGY_SPEED = 0.00035;
-  const EDGE_ALPHA_BASE = 0.05;
+  const EDGE_ALPHA_BASE = 0.048;
 
   let w = 0;
   let h = 0;
@@ -1251,24 +1224,24 @@ document.addEventListener('DOMContentLoaded', function () {
       this.vy = 0;
 
       this.radius = core
-        ? (Math.random() * 1.2 + 2.4)
+        ? (Math.random() * 1.15 + 2.35)
         : layer === 0
-          ? (Math.random() * 0.55 + 0.7)
+          ? (Math.random() * 0.5 + 0.68)
           : layer === 2
-            ? (Math.random() * 0.9 + 1.2)
-            : (Math.random() * 0.95 + 1.05);
+            ? (Math.random() * 0.85 + 1.15)
+            : (Math.random() * 0.9 + 1.0);
 
-      this.color = accent ? SKY : INDIGO;
+      this.color = accent ? ACCENT : NETWORK;
 
       this.alpha = core
-        ? 0.82
+        ? 0.72
         : accent
-          ? 0.52
+          ? 0.50
           : layer === 0
-            ? 0.14
+            ? 0.12
             : layer === 2
-              ? 0.34
-              : 0.26;
+              ? 0.30
+              : 0.24;
 
       this.orbitAngle = Math.random() * Math.PI * 2;
       this.orbitSpeed = core
@@ -1340,12 +1313,12 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!this.core && !this.accent) return;
 
       const boost = mouse.active
-        ? Math.max(0, 1 - distance(this.x, this.y, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.7
+        ? Math.max(0, 1 - distance(this.x, this.y, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.65
         : 0;
 
-      const glowRadius = this.core ? this.radius * 4.4 : this.radius * 3.1;
-      const rgb = this.color === SKY ? SKY_RGB : INDIGO_RGB;
-      const intensity = this.core ? 0.16 + boost * 0.10 : 0.07 + boost * 0.06;
+      const glowRadius = this.core ? this.radius * 4.2 : this.radius * 2.9;
+      const rgb = this.color === ACCENT ? ACCENT_RGB : NETWORK_RGB;
+      const intensity = this.core ? 0.12 + boost * 0.08 : 0.05 + boost * 0.04;
 
       const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, glowRadius);
       gradient.addColorStop(0, `rgba(${rgb},${intensity})`);
@@ -1360,7 +1333,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     drawDot() {
       const boost = mouse.active
-        ? Math.max(0, 1 - distance(this.x, this.y, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.22
+        ? Math.max(0, 1 - distance(this.x, this.y, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.20
         : 0;
 
       ctx.globalAlpha = Math.min(1, this.alpha + boost);
@@ -1389,7 +1362,7 @@ document.addEventListener('DOMContentLoaded', function () {
         x = adjusted.x;
         y = adjusted.y;
 
-        const accent = Math.random() < 0.10;
+        const accent = Math.random() < 0.08;
         const layerRoll = Math.random();
         const layer = layerRoll < 0.16 ? 0 : layerRoll > 0.9 ? 2 : 1;
 
@@ -1404,7 +1377,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const corePositionsRaw = [
-      { x: w * 0.17, y: h * 0.17, cluster: 0, accent: false },
+      { x: w * 0.17, y: h * 0.17, cluster: 0, accent: true },
       { x: w * 0.79, y: h * 0.67, cluster: 1, accent: true },
       { x: w * 0.90, y: h * 0.57, cluster: 2, accent: false },
       { x: w * 0.72, y: h * 0.79, cluster: 1, accent: false },
@@ -1475,8 +1448,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function drawAmbientDepth() {
     const gradient = ctx.createRadialGradient(w * 0.82, h * 0.52, 0, w * 0.82, h * 0.52, Math.min(w, h) * 0.25);
-    gradient.addColorStop(0, 'rgba(55,48,163,0.015)');
-    gradient.addColorStop(1, 'rgba(55,48,163,0)');
+    gradient.addColorStop(0, 'rgba(148,163,184,0.028)');
+    gradient.addColorStop(1, 'rgba(148,163,184,0)');
 
     ctx.globalAlpha = 1;
     ctx.fillStyle = gradient;
@@ -1498,18 +1471,18 @@ document.addEventListener('DOMContentLoaded', function () {
       const my = (a.y + b.y) * 0.5;
 
       const focusBoost = mouse.active
-        ? Math.max(0, 1 - distance(mx, my, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.12
+        ? Math.max(0, 1 - distance(mx, my, mouse.x, mouse.y) / FOCUS_RADIUS) * 0.11
         : 0;
 
       const idle = now - lastInteractionAt > 2400;
-      const idleBoost = idle && (a.core || b.core) ? 0.02 : 0;
-      const latentCut = latent ? 0.58 : 1;
+      const idleBoost = idle && (a.core || b.core) ? 0.018 : 0;
+      const latentCut = latent ? 0.56 : 1;
 
-      const opacity = baseOpacity * (EDGE_ALPHA_BASE + focusBoost + idleBoost) * strength * latentCut * 1.15;
+      const opacity = baseOpacity * (EDGE_ALPHA_BASE + focusBoost + idleBoost) * strength * latentCut;
 
       ctx.globalAlpha = opacity;
-      ctx.strokeStyle = (a.color === SKY || b.color === SKY) ? SKY : INDIGO;
-      ctx.lineWidth = (a.core || b.core) ? 0.76 : a.layer === 0 || b.layer === 0 ? 0.34 : 0.44;
+      ctx.strokeStyle = (a.color === ACCENT || b.color === ACCENT) ? ACCENT : NETWORK;
+      ctx.lineWidth = (a.core || b.core) ? 0.74 : a.layer === 0 || b.layer === 0 ? 0.34 : 0.42;
       ctx.beginPath();
       ctx.moveTo(a.x, a.y);
       ctx.lineTo(b.x, b.y);
@@ -1517,7 +1490,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const pulseEligible =
         ((a.core && b.core) || (a.core || b.core)) &&
-        baseOpacity > 0.5 &&
+        baseOpacity > 0.54 &&
         !latent;
 
       if (pulseEligible) {
@@ -1525,14 +1498,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const px = a.x + (b.x - a.x) * t;
         const py = a.y + (b.y - a.y) * t;
 
-        const grad = ctx.createRadialGradient(px, py, 0, px, py, 3.8);
-        grad.addColorStop(0, 'rgba(56,189,248,0.14)');
-        grad.addColorStop(1, 'rgba(56,189,248,0)');
+        const grad = ctx.createRadialGradient(px, py, 0, px, py, 3.7);
+        grad.addColorStop(0, 'rgba(55,48,163,0.16)');
+        grad.addColorStop(1, 'rgba(55,48,163,0)');
 
-        ctx.globalAlpha = 0.28 * baseOpacity;
+        ctx.globalAlpha = 0.24 * baseOpacity;
         ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.arc(px, py, 3.8, 0, Math.PI * 2);
+        ctx.arc(px, py, 3.7, 0, Math.PI * 2);
         ctx.fill();
       }
     }
@@ -1552,14 +1525,14 @@ document.addEventListener('DOMContentLoaded', function () {
         : 0;
 
       const idle = now - lastInteractionAt > 2300;
-      const routeWindow = activeBias > 0.55;
+      const routeWindow = activeBias > 0.58;
       const idlePhase = idle ? (0.5 + 0.5 * Math.sin(now * 0.00105 + activeBias * 10)) : 0.08;
-      const activityGate = routeWindow ? idlePhase : idlePhase * 0.22;
+      const activityGate = routeWindow ? idlePhase : idlePhase * 0.18;
 
-      const opacity = 0.01 + focusBoost + activityGate * 0.022;
+      const opacity = 0.01 + focusBoost + activityGate * 0.02;
 
       ctx.globalAlpha = opacity;
-      ctx.strokeStyle = SKY;
+      ctx.strokeStyle = ACCENT;
       ctx.lineWidth = width;
       ctx.beginPath();
       ctx.moveTo(a.x, a.y);
@@ -1567,35 +1540,19 @@ document.addEventListener('DOMContentLoaded', function () {
       ctx.stroke();
 
       if (routeWindow) {
-        const t1 = (time * (FLOW_SPEED * 1.28) + offset) % 1;
+        const t1 = (time * (FLOW_SPEED * 1.18) + offset) % 1;
         const px1 = a.x + (b.x - a.x) * t1;
         const py1 = a.y + (b.y - a.y) * t1;
 
-        const grad1 = ctx.createRadialGradient(px1, py1, 0, px1, py1, 5.0);
-        grad1.addColorStop(0, 'rgba(56,189,248,0.18)');
-        grad1.addColorStop(1, 'rgba(56,189,248,0)');
+        const grad1 = ctx.createRadialGradient(px1, py1, 0, px1, py1, 4.8);
+        grad1.addColorStop(0, 'rgba(55,48,163,0.22)');
+        grad1.addColorStop(1, 'rgba(55,48,163,0)');
 
-        ctx.globalAlpha = 0.28 + focusBoost * 0.9 + activityGate * 0.08;
+        ctx.globalAlpha = 0.24 + focusBoost * 0.8 + activityGate * 0.07;
         ctx.fillStyle = grad1;
         ctx.beginPath();
-        ctx.arc(px1, py1, 5.0, 0, Math.PI * 2);
+        ctx.arc(px1, py1, 4.8, 0, Math.PI * 2);
         ctx.fill();
-
-        if (idlePhase > 0.82 && activeBias > 0.78) {
-          const t2 = (time * (FLOW_SPEED * 0.92) + offset + 0.41) % 1;
-          const px2 = a.x + (b.x - a.x) * t2;
-          const py2 = a.y + (b.y - a.y) * t2;
-
-          const grad2 = ctx.createRadialGradient(px2, py2, 0, px2, py2, 3.6);
-          grad2.addColorStop(0, 'rgba(79,70,229,0.10)');
-          grad2.addColorStop(1, 'rgba(79,70,229,0)');
-
-          ctx.globalAlpha = 0.12 + idlePhase * 0.05;
-          ctx.fillStyle = grad2;
-          ctx.beginPath();
-          ctx.arc(px2, py2, 3.6, 0, Math.PI * 2);
-          ctx.fill();
-        }
       }
     }
   }
@@ -1604,9 +1561,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!mouse.active) return;
 
     const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, FOCUS_RADIUS * 0.72);
-    gradient.addColorStop(0, 'rgba(79,70,229,0.018)');
-    gradient.addColorStop(0.55, 'rgba(14,165,233,0.010)');
-    gradient.addColorStop(1, 'rgba(14,165,233,0)');
+    gradient.addColorStop(0, 'rgba(55,48,163,0.018)');
+    gradient.addColorStop(0.55, 'rgba(148,163,184,0.012)');
+    gradient.addColorStop(1, 'rgba(148,163,184,0)');
 
     ctx.globalAlpha = 1;
     ctx.fillStyle = gradient;
