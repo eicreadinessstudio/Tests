@@ -23,118 +23,243 @@
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
-    body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;text-rendering:optimizeLegibility;}
+    body{
+      font-family:var(--sans);
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+      text-rendering:optimizeLegibility;
+    }
     a{text-decoration:none;color:inherit;}
     img{display:block;max-width:100%;}
     .wrap{width:min(var(--max),calc(100% - 48px));margin:0 auto;}
 
-    nav{position:sticky;top:0;z-index:120;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);transition:box-shadow .25s;}
+    nav{
+      position:sticky;top:0;z-index:120;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line-soft);
+      transition:box-shadow .25s;
+    }
     nav.raised{box-shadow:0 1px 18px rgba(55,48,163,.07);}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:32px;}
-    .logo{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-size:19px;font-weight:400;color:var(--text);letter-spacing:-.02em;transition:color .2s;}
+    .logo{
+      display:flex;align-items:center;gap:10px;
+      font-family:var(--sans);font-size:19px;font-weight:400;
+      color:var(--text);letter-spacing:-.02em;transition:color .2s;
+    }
     .logo:hover{color:var(--indigo);}
     .nav-links{display:flex;align-items:center;gap:28px;}
-    .nav-links a{font-size:14px;font-weight:400;color:var(--text-soft);letter-spacing:.01em;transition:color .18s;}
+    .nav-links a{
+      font-size:14px;font-weight:400;color:var(--text-soft);
+      letter-spacing:.01em;transition:color .18s;
+    }
     .nav-links a:hover{color:var(--text);}
-    .nav-cta{background:var(--indigo)!important;color:#fff!important;padding:9px 20px;border-radius:6px;font-size:13px!important;font-weight:500!important;transition:background .18s,transform .18s!important;}
+    .nav-cta{
+      background:var(--indigo)!important;color:#fff!important;
+      padding:9px 20px;border-radius:6px;
+      font-size:13px!important;font-weight:500!important;
+      transition:background .18s,transform .18s!important;
+    }
     .nav-cta:hover{background:#312e81!important;transform:translateY(-1px)!important;}
 
     .hero{
-      position:relative;overflow:hidden;min-height:96vh;display:flex;align-items:center;
+      position:relative;overflow:hidden;
+      min-height:96vh;display:flex;align-items:center;
       padding:104px 0 94px;
       background:
         radial-gradient(circle at 12% 30%, rgba(79,70,229,.060), transparent 0 20%),
-        radial-gradient(circle at 68% 48%, rgba(14,165,233,.045), transparent 0 23%),
+        radial-gradient(circle at 70% 50%, rgba(14,165,233,.045), transparent 0 23%),
         linear-gradient(160deg,#fbfcff 0%,#f5f8fc 58%,#eef3f9 100%);
       isolation:isolate;
     }
-    #topo-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+    #topo-canvas{
+      position:absolute;inset:0;width:100%;height:100%;
+      pointer-events:none;z-index:0;
+    }
     .hero-vignette{
       position:absolute;inset:0;z-index:1;pointer-events:none;
       background:
         linear-gradient(90deg,
           rgba(249,251,255,.96) 0%,
           rgba(249,251,255,.86) 26%,
-          rgba(249,251,255,.46) 49%,
-          rgba(249,251,255,.12) 70%,
+          rgba(249,251,255,.44) 50%,
+          rgba(249,251,255,.12) 72%,
           transparent 100%
         ),
         radial-gradient(circle at 22% 38%, rgba(255,255,255,.48), transparent 0 26%);
     }
-    .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,520px);gap:clamp(36px,5vw,72px);align-items:center;}
+    .hero-inner{
+      position:relative;z-index:2;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(320px,520px);
+      gap:clamp(36px,5vw,72px);
+      align-items:center;
+    }
+
     .hero-tag{
-      display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:500;
-      letter-spacing:.14em;text-transform:uppercase;color:var(--indigo-mid);
-      background:rgba(255,255,255,.84);border:1px solid rgba(79,70,229,.12);backdrop-filter:blur(10px);
-      padding:6px 12px;border-radius:999px;margin-bottom:28px;box-shadow:0 6px 20px rgba(55,48,163,.05);
+      display:inline-flex;align-items:center;gap:8px;
+      font-family:var(--mono);font-size:11px;font-weight:500;
+      letter-spacing:.14em;text-transform:uppercase;
+      color:var(--indigo-mid);
+      background:rgba(255,255,255,.84);
+      border:1px solid rgba(79,70,229,.12);
+      backdrop-filter:blur(10px);
+      padding:6px 12px;border-radius:999px;
+      margin-bottom:28px;
+      box-shadow:0 6px 20px rgba(55,48,163,.05);
       opacity:0;animation:fadeUp .7s var(--ease) .05s forwards;
     }
-    .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--sky);box-shadow:0 0 10px rgba(14,165,233,.45);animation:pulse 2.4s ease-in-out infinite;}
-    @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.72);}}
+    .hero-tag::before{
+      content:'';
+      width:6px;height:6px;border-radius:50%;
+      background:var(--sky);
+      box-shadow:0 0 10px rgba(14,165,233,.45);
+      animation:pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{opacity:1;transform:scale(1);}
+      50%{opacity:.35;transform:scale(.72);}
+    }
+
     .hero h1{
-      font-family:var(--serif);font-size:clamp(44px,6vw,84px);font-weight:400;line-height:.96;letter-spacing:-.03em;
-      color:var(--text);margin-bottom:24px;max-width:680px;opacity:0;animation:fadeUp .85s var(--ease) .15s forwards;text-wrap:balance;
+      font-family:var(--serif);
+      font-size:clamp(44px,6vw,84px);
+      font-weight:400;
+      line-height:.96;
+      letter-spacing:-.03em;
+      color:var(--text);
+      margin-bottom:24px;
+      max-width:680px;
+      opacity:0;animation:fadeUp .85s var(--ease) .15s forwards;
+      text-wrap:balance;
     }
     .hero h1 .accent{color:var(--indigo-mid);}
     .hero-sub{
-      font-size:18px;line-height:1.82;color:var(--text-soft);max-width:520px;font-weight:300;margin-bottom:36px;
+      font-size:18px;line-height:1.82;color:var(--text-soft);
+      max-width:520px;font-weight:300;margin-bottom:36px;
       opacity:0;animation:fadeUp .85s var(--ease) .25s forwards;
     }
-    .hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .85s var(--ease) .35s forwards;}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
-    @keyframes fadeIn{from{opacity:0;transform:translateX(16px);}to{opacity:1;transform:none;}}
+    .hero-actions{
+      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+      opacity:0;animation:fadeUp .85s var(--ease) .35s forwards;
+    }
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(18px);}
+      to{opacity:1;transform:none;}
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateX(16px);}
+      to{opacity:1;transform:none;}
+    }
 
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.01em;cursor:pointer;border:1px solid transparent;transition:transform .2s var(--ease),box-shadow .2s,background .18s,border-color .18s;}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;padding:13px 26px;
+      border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:500;
+      letter-spacing:.01em;cursor:pointer;border:1px solid transparent;
+      transition:transform .2s var(--ease),box-shadow .2s,background .18s,border-color .18s;
+    }
     .btn:hover{transform:translateY(-2px);}
-    .btn-primary{background:linear-gradient(135deg,#4f46e5 0%,#3730a3 100%);color:#fff;box-shadow:0 8px 28px rgba(79,70,229,.20);}
+    .btn-primary{
+      background:linear-gradient(135deg,#4f46e5 0%,#3730a3 100%);
+      color:#fff;box-shadow:0 8px 28px rgba(79,70,229,.20);
+    }
     .btn-primary:hover{box-shadow:0 12px 36px rgba(79,70,229,.30);}
-    .btn-outline{background:rgba(255,255,255,.78);backdrop-filter:blur(12px);color:var(--text-mid);border-color:rgba(221,227,237,.92);box-shadow:0 4px 16px rgba(13,20,36,.04);}
+    .btn-outline{
+      background:rgba(255,255,255,.78);backdrop-filter:blur(12px);
+      color:var(--text-mid);border-color:rgba(221,227,237,.92);
+      box-shadow:0 4px 16px rgba(13,20,36,.04);
+    }
     .btn-outline:hover{border-color:var(--text-dim);background:rgba(255,255,255,.94);}
 
-    .hero-aside{display:flex;justify-content:flex-end;width:100%;opacity:0;animation:fadeIn .9s var(--ease) .3s forwards;}
+    .hero-aside{
+      display:flex;justify-content:flex-end;width:100%;
+      opacity:0;animation:fadeIn .9s var(--ease) .3s forwards;
+    }
     .hero-shot{width:100%;max-width:540px;}
     .hero-shot-frame{
-      border:1px solid rgba(198,208,224,.72);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.82);
+      border:1px solid rgba(198,208,224,.72);
+      border-radius:20px;overflow:hidden;background:rgba(255,255,255,.82);
       backdrop-filter:blur(20px) saturate(160%);
       box-shadow:0 20px 60px rgba(15,28,58,.08),inset 0 1px 0 rgba(255,255,255,.62);
       padding:18px;
     }
     .hero-shot-frame.hero-no-img{
-      min-height:360px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+      min-height:360px;display:flex;align-items:center;justify-content:center;
+      position:relative;overflow:hidden;
       background:linear-gradient(145deg,rgba(255,255,255,.88) 0%,rgba(241,245,251,.94) 100%);
     }
     .hero-shot-frame.hero-no-img::before{
       content:'';position:absolute;inset:0;
-      background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
+      background-image:
+        linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
       background-size:32px 32px;
     }
     .hero-shot-frame.hero-no-img::after{
-      content:'Interface fragment coming soon';font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#8f9db2;text-transform:uppercase;position:relative;z-index:1;
+      content:'Interface fragment coming soon';
+      font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#8f9db2;
+      text-transform:uppercase;position:relative;z-index:1;
     }
-    .hero-shot-frame img{width:100%;height:auto;max-height:640px;object-fit:contain;border-radius:14px;background:#fff;border:1px solid rgba(214,221,233,.8);}
-    .hero-shot-caption{margin-top:12px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8f9bb0;}
+    .hero-shot-frame img{
+      width:100%;height:auto;max-height:640px;object-fit:contain;
+      border-radius:14px;background:#fff;border:1px solid rgba(214,221,233,.8);
+    }
+    .hero-shot-caption{
+      margin-top:12px;font-family:var(--mono);font-size:10px;
+      letter-spacing:.12em;text-transform:uppercase;color:#8f9bb0;
+    }
 
     section{padding:112px 0;}
     section+section{border-top:1px solid var(--line-soft);}
-    .section-label{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:16px;}
-    .section-title{font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);font-weight:400;line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:18px;max-width:820px;}
-    .section-sub{font-size:17px;line-height:1.82;color:var(--text-soft);max-width:700px;font-weight:300;margin-bottom:52px;}
+    .section-label{
+      font-family:var(--mono);font-size:11px;font-weight:500;
+      letter-spacing:.16em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:16px;
+    }
+    .section-title{
+      font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);font-weight:400;
+      line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:18px;max-width:820px;
+    }
+    .section-sub{
+      font-size:17px;line-height:1.82;color:var(--text-soft);max-width:700px;font-weight:300;margin-bottom:52px;
+    }
 
     #mission-vision{background:var(--bg-off);}
     .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:12px;overflow:hidden;}
-    .mv-card{background:var(--bg);padding:40px 36px 44px;border:1px solid var(--line-soft);position:relative;overflow:hidden;transition:background .25s;}
+    .mv-card{
+      background:var(--bg);padding:40px 36px 44px;border:1px solid var(--line-soft);
+      position:relative;overflow:hidden;transition:background .25s;
+    }
     .mv-card:hover{background:var(--indigo-pale);}
-    .mv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--indigo),var(--sky));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+    .mv-card::after{
+      content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--indigo),var(--sky));
+      transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+    }
     .mv-card:hover::after{transform:scaleX(1);}
-    .mv-label{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:18px;}
-    .mv-card p{font-family:var(--serif);font-size:22px;line-height:1.42;letter-spacing:-.01em;color:var(--text);max-width:480px;}
+    .mv-label{
+      font-family:var(--mono);font-size:10px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:18px;
+    }
+    .mv-card p{
+      font-family:var(--serif);font-size:22px;line-height:1.42;
+      letter-spacing:-.01em;color:var(--text);max-width:480px;
+    }
 
     .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
     .prob-card{border-top:2px solid var(--line);padding:28px 0 0;position:relative;}
-    .prob-card::before{content:'';position:absolute;top:-2px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--sky),var(--indigo-mid));transition:width .4s var(--ease);}
+    .prob-card::before{
+      content:'';position:absolute;top:-2px;left:0;width:0;height:2px;
+      background:linear-gradient(90deg,var(--sky),var(--indigo-mid));transition:width .4s var(--ease);
+    }
     .prob-card:hover::before{width:100%;}
     .prob-num{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--text-dim);margin-bottom:14px;}
-    .prob-card h3{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;}
+    .prob-card h3{
+      font-family:var(--serif);font-size:22px;font-weight:400;
+      letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;
+    }
     .prob-card p{font-size:15px;line-height:1.82;color:var(--text-soft);font-weight:300;}
 
     .solution-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:56px;align-items:start;}
@@ -151,7 +276,10 @@
     .strata{display:grid;gap:1px;border-radius:10px;overflow:hidden;}
     .strata-row{display:grid;grid-template-columns:200px 1fr;align-items:stretch;transition:filter .18s;}
     .strata-row:hover{filter:brightness(.97);}
-    .strata-label{padding:24px 26px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.08);}
+    .strata-label{
+      padding:24px 26px;font-family:var(--mono);font-size:11px;font-weight:500;
+      letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.08);
+    }
     .strata-body{padding:24px 32px;font-size:15px;line-height:1.75;display:flex;align-items:center;font-weight:300;}
     .strata-row:nth-child(1){background:#d1d9f0;color:#1e2650;}
     .strata-row:nth-child(2){background:#b8c4e8;color:#1e2650;}
@@ -159,13 +287,22 @@
     .strata-row:nth-child(4){background:#6e85cc;color:#111a3e;}
     .strata-row:nth-child(5){background:#4f68bc;color:#fff;}
     .strata-row:nth-child(6){background:#3730a3;color:#e0e7ff;}
-    .strata-row:nth-child(1) .strata-label,.strata-row:nth-child(2) .strata-label,.strata-row:nth-child(3) .strata-label,.strata-row:nth-child(4) .strata-label{border-right-color:rgba(0,0,0,.08);}
+    .strata-row:nth-child(1) .strata-label,
+    .strata-row:nth-child(2) .strata-label,
+    .strata-row:nth-child(3) .strata-label,
+    .strata-row:nth-child(4) .strata-label{border-right-color:rgba(0,0,0,.08);}
 
     .use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
     .use-card{border-top:2px solid var(--line);padding:26px 0 0;position:relative;}
-    .use-card::before{content:'';position:absolute;top:-2px;left:0;width:0;height:2px;background:var(--indigo-mid);transition:width .4s var(--ease);}
+    .use-card::before{
+      content:'';position:absolute;top:-2px;left:0;width:0;height:2px;
+      background:var(--indigo-mid);transition:width .4s var(--ease);
+    }
     .use-card:hover::before{width:100%;}
-    .use-card h3{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;}
+    .use-card h3{
+      font-family:var(--serif);font-size:22px;font-weight:400;
+      letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;
+    }
     .use-card p{font-size:15px;line-height:1.82;color:var(--text-soft);font-weight:300;}
 
     .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
@@ -188,7 +325,8 @@
     .reveal{opacity:1;transform:none;transition:opacity .65s var(--ease),transform .65s var(--ease);}
     .js .reveal{opacity:0;transform:translateY(22px);}
     .js .reveal.in{opacity:1;transform:none;}
-    .d1{transition-delay:.08s;} .d2{transition-delay:.16s;}
+    .d1{transition-delay:.08s;}
+    .d2{transition-delay:.16s;}
 
     @media(max-width:1180px){
       .hero-inner{grid-template-columns:1fr;gap:40px;}
@@ -237,6 +375,7 @@
 <section class="hero" id="top">
   <canvas id="topo-canvas"></canvas>
   <div class="hero-vignette"></div>
+
   <div class="wrap">
     <div class="hero-inner">
       <div>
@@ -390,33 +529,28 @@ document.addEventListener('DOMContentLoaded', () => {
     NOISE_SCALE: 0.0105,
     NOISE_SPEED: 0.00040,
 
-    AMP_LEFT: 54,
-    AMP_MID: 20,
-    AMP_RIGHT: 5,
+    AMP_LEFT: 72,
+    AMP_MID: 22,
+    AMP_RIGHT: 3.5,
 
-    SPRING_LEFT: 0.038,
+    SPRING_LEFT: 0.036,
     SPRING_MID: 0.060,
-    SPRING_RIGHT: 0.096,
+    SPRING_RIGHT: 0.102,
 
-    FRICTION_LEFT: 0.79,
+    FRICTION_LEFT: 0.80,
     FRICTION_MID: 0.73,
-    FRICTION_RIGHT: 0.63,
+    FRICTION_RIGHT: 0.61,
 
     MOUSE_RADIUS: 220,
-    MOUSE_PULL: 0.26,
+    MOUSE_PULL: 0.24,
 
-    DOT_R: 1.45,
-    DOT_R_ACTIVE: 3.4,
+    DOT_R: 1.42,
+    DOT_R_ACTIVE: 3.3,
 
-    EDGE_ALPHA_LEFT: 0.024,
-    EDGE_ALPHA_MID: 0.068,
-    EDGE_ALPHA_RIGHT: 0.170,
-
-    INDIGO: '55,48,163',
-    SKY: '14,165,233',
-    SLATE: '132,147,169',
-    VALID: '79,70,229',
-    WHITE: '255,255,255'
+    INDIGO: [55,48,163],
+    SKY: [14,165,233],
+    SLATE: [132,147,169],
+    VALID: [79,70,229]
   };
 
   let W, H, cellW, cellH, dpr;
@@ -424,12 +558,26 @@ document.addEventListener('DOMContentLoaded', () => {
   let time = 0;
   let mouse = { x: -9999, y: -9999 };
 
+  const FLOW_LINES = [
+    { y: 0.24, bend: -0.08, speed: 0.00125, phase: 0.08, color: 'indigo' },
+    { y: 0.50, bend:  0.02, speed: 0.00155, phase: 0.42, color: 'indigo' },
+    { y: 0.74, bend:  0.10, speed: 0.00110, phase: 0.71, color: 'indigo' }
+  ];
+
   function clamp(v, min, max) {
     return Math.max(min, Math.min(max, v));
   }
 
   function lerp(a, b, t) {
     return a + (b - a) * t;
+  }
+
+  function lerpColor(a, b, t) {
+    return [
+      Math.round(lerp(a[0], b[0], t)),
+      Math.round(lerp(a[1], b[1], t)),
+      Math.round(lerp(a[2], b[2], t))
+    ];
   }
 
   function smoothstep(a, b, x) {
@@ -490,7 +638,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const amp = lerp(lerp(CFG.AMP_LEFT, CFG.AMP_MID, toMid), CFG.AMP_RIGHT, toRight);
         const spring = lerp(lerp(CFG.SPRING_LEFT, CFG.SPRING_MID, toMid), CFG.SPRING_RIGHT, toRight);
         const friction = lerp(lerp(CFG.FRICTION_LEFT, CFG.FRICTION_MID, toMid), CFG.FRICTION_RIGHT, toRight);
-        const edgeAlpha = lerp(lerp(CFG.EDGE_ALPHA_LEFT, CFG.EDGE_ALPHA_MID, toMid), CFG.EDGE_ALPHA_RIGHT, toRight);
 
         const zone = xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed';
 
@@ -503,11 +650,6 @@ document.addEventListener('DOMContentLoaded', () => {
           zone === 'governed' &&
           (col === CFG.COLS - 9 || col === CFG.COLS - 6);
 
-        const transitNode =
-          zone === 'aligned' &&
-          (col === Math.floor(CFG.COLS * 0.54) || col === Math.floor(CFG.COLS * 0.60)) &&
-          (row === 5 || row === 10);
-
         pts.push({
           ox, oy,
           x: ox, y: oy,
@@ -517,12 +659,10 @@ document.addEventListener('DOMContentLoaded', () => {
           amp,
           spring,
           friction,
-          edgeAlpha,
           phase: Math.random() * Math.PI * 2,
           edge: col === 0 || col === CFG.COLS - 1 || row === 0 || row === CFG.ROWS - 1,
           validationHub,
-          backbone,
-          transitNode
+          backbone
         });
       }
     }
@@ -547,19 +687,20 @@ document.addEventListener('DOMContentLoaded', () => {
       dy += smoothNoise(nx * 2.05 + 3, ny * 2.05 + 2, t * 1.42) * p.amp * 0.20;
 
       if (p.zone === 'aligned') {
-        dx *= 0.76;
-        dy *= 0.66;
+        dx *= 0.74;
+        dy *= 0.64;
       }
 
       if (p.zone === 'governed') {
-        dx *= 0.30;
-        dy *= 0.28;
-        dx += Math.sin(t * 185 + p.row * 0.36) * 1.15;
+        dx *= 0.24;
+        dy *= 0.22;
+        dx += Math.sin(t * 185 + p.row * 0.36) * 0.85;
+        dy += Math.cos(t * 170 + p.col * 0.12) * 0.25;
       }
 
       if (p.zone === 'fragmented') {
-        dx += Math.sin(t * 255 + p.phase) * 3.4;
-        dy += Math.cos(t * 210 + p.phase) * 2.2;
+        dx += Math.sin(t * 260 + p.phase) * 4.2;
+        dy += Math.cos(t * 215 + p.phase) * 2.6;
       }
 
       let tx = p.ox + dx;
@@ -571,7 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (md < CFG.MOUSE_RADIUS && md > 0) {
         const falloff = 1 - md / CFG.MOUSE_RADIUS;
-        const pull = CFG.MOUSE_PULL * (p.zone === 'fragmented' ? 1.04 : p.zone === 'aligned' ? 0.90 : 0.70);
+        const pull = CFG.MOUSE_PULL * (p.zone === 'fragmented' ? 1.04 : p.zone === 'aligned' ? 0.90 : 0.68);
         tx += (mouse.x - p.x) * falloff * pull;
         ty += (mouse.y - p.y) * falloff * pull;
       }
@@ -587,7 +728,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function drawAtmosphere() {
     const leftGlow = ctx.createRadialGradient(W * 0.14, H * 0.48, 0, W * 0.14, H * 0.48, W * 0.34);
-    leftGlow.addColorStop(0, 'rgba(79,70,229,0.040)');
+    leftGlow.addColorStop(0, 'rgba(79,70,229,0.042)');
     leftGlow.addColorStop(1, 'rgba(79,70,229,0)');
     ctx.fillStyle = leftGlow;
     ctx.fillRect(0, 0, W, H);
@@ -599,10 +740,136 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillRect(0, 0, W, H);
 
     const rightGlow = ctx.createRadialGradient(W * 0.84, H * 0.42, 0, W * 0.84, H * 0.42, W * 0.27);
-    rightGlow.addColorStop(0, 'rgba(14,165,233,0.052)');
+    rightGlow.addColorStop(0, 'rgba(14,165,233,0.054)');
     rightGlow.addColorStop(1, 'rgba(14,165,233,0)');
     ctx.fillStyle = rightGlow;
     ctx.fillRect(0, 0, W, H);
+  }
+
+  function edgeThresholdForZone(zone) {
+    if (zone === 'fragmented') return 1.02;
+    if (zone === 'aligned') return 1.18;
+    return 1.24;
+  }
+
+  function drawEdges() {
+    for (let i = 0; i < pts.length; i++) {
+      const a = pts[i];
+      const neighbours = [];
+
+      if (a.col < CFG.COLS - 1) neighbours.push(pts[i + 1]);
+      if (a.row < CFG.ROWS - 1) neighbours.push(pts[i + CFG.COLS]);
+      if (a.zone !== 'fragmented' && a.col < CFG.COLS - 1 && a.row < CFG.ROWS - 1) {
+        neighbours.push(pts[i + CFG.COLS + 1]);
+      }
+
+      for (const b of neighbours) {
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const expected = Math.max(cellW, cellH) * 1.22;
+        const zone = a.zone === b.zone ? a.zone : (a.zone === 'governed' || b.zone === 'governed') ? 'aligned' : 'fragmented';
+
+        if (dist > expected * edgeThresholdForZone(zone)) continue;
+
+        // broken edges in fragmented zone
+        if (zone === 'fragmented' && dist > expected * 0.88) continue;
+
+        const mx = (a.x + b.x) * 0.5;
+        const my = (a.y + b.y) * 0.5;
+
+        const mdx = mx - mouse.x;
+        const mdy = my - mouse.y;
+        const md = Math.sqrt(mdx * mdx + mdy * mdy);
+        const mouseBoost = md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) * 0.12 : 0;
+
+        const distFade = Math.max(0, 1 - dist / (expected * 1.12));
+
+        const xNorm = clamp(mx / W, 0, 1);
+        const wGov = smoothstep(0.42, 0.92, xNorm);
+        const rgb = lerpColor(CFG.INDIGO, CFG.SKY, wGov);
+
+        let alphaBase = 0.024 + wGov * 0.12;
+        if (zone === 'fragmented') alphaBase *= 0.72;
+        if (zone === 'governed') alphaBase *= 1.16;
+
+        const isBackbone =
+          (a.zone === 'governed' && b.zone === 'governed') &&
+          (a.backbone || b.backbone);
+
+        const alpha = (alphaBase + mouseBoost) * distFade;
+
+        ctx.globalAlpha = isBackbone ? alpha * 1.16 : alpha;
+        ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+        ctx.lineWidth = isBackbone ? 0.95 : (a.edge || b.edge ? 0.42 : 0.62);
+
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  function bezierPoint(p0, p1, p2, p3, t) {
+    const mt = 1 - t;
+    return {
+      x:
+        mt * mt * mt * p0.x +
+        3 * mt * mt * t * p1.x +
+        3 * mt * t * t * p2.x +
+        t * t * t * p3.x,
+      y:
+        mt * mt * mt * p0.y +
+        3 * mt * mt * t * p1.y +
+        3 * mt * t * t * p2.y +
+        t * t * t * p3.y
+    };
+  }
+
+  function drawFlowLines() {
+    FLOW_LINES.forEach((line, i) => {
+      const p0 = { x: W * 0.18, y: H * line.y };
+      const p1 = { x: W * 0.38, y: H * (line.y + line.bend) };
+      const p2 = { x: W * 0.62, y: H * (line.y - line.bend * 0.45) };
+      const p3 = { x: W * 0.88, y: H * (line.y + line.bend * 0.18) };
+
+      ctx.save();
+      ctx.setLineDash([6, 10]);
+      ctx.lineDashOffset = -time * 0.04 * (i + 1);
+
+      const grad = ctx.createLinearGradient(p0.x, p0.y, p3.x, p3.y);
+      grad.addColorStop(0, 'rgba(55,48,163,0.10)');
+      grad.addColorStop(0.55, 'rgba(79,70,229,0.14)');
+      grad.addColorStop(1, 'rgba(14,165,233,0.15)');
+
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.0;
+      ctx.beginPath();
+      ctx.moveTo(p0.x, p0.y);
+      ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
+      ctx.stroke();
+      ctx.restore();
+
+      const tt = (time * line.speed + line.phase) % 1;
+      const pos = bezierPoint(p0, p1, p2, p3, tt);
+
+      const halo = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, 16);
+      halo.addColorStop(0, 'rgba(79,70,229,0.18)');
+      halo.addColorStop(1, 'rgba(79,70,229,0)');
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, 16, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.globalAlpha = 0.92;
+      ctx.fillStyle = `rgb(${CFG.INDIGO[0]},${CFG.INDIGO[1]},${CFG.INDIGO[2]})`;
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, 2.25, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
   }
 
   function drawBackboneLanes() {
@@ -614,8 +881,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (row === 1) ctx.moveTo(p.x, p.y);
         else ctx.lineTo(p.x, p.y);
       }
-      ctx.globalAlpha = 0.10 + Math.sin(time * 0.012 + i) * 0.016;
-      ctx.strokeStyle = i === 0 ? `rgb(${CFG.VALID})` : `rgb(${CFG.SKY})`;
+      ctx.globalAlpha = 0.11 + Math.sin(time * 0.012 + i) * 0.016;
+      ctx.strokeStyle = i === 0
+        ? `rgb(${CFG.VALID[0]},${CFG.VALID[1]},${CFG.VALID[2]})`
+        : `rgb(${CFG.SKY[0]},${CFG.SKY[1]},${CFG.SKY[2]})`;
       ctx.lineWidth = 1.1;
       ctx.stroke();
     });
@@ -642,66 +911,11 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fill();
 
     ctx.globalAlpha = 0.9;
-    ctx.fillStyle = `rgb(${CFG.SKY})`;
+    ctx.fillStyle = `rgb(${CFG.SKY[0]},${CFG.SKY[1]},${CFG.SKY[2]})`;
     ctx.beginPath();
-    ctx.arc(x, y, 2.4, 0, Math.PI * 2);
+    ctx.arc(x, y, 2.35, 0, Math.PI * 2);
     ctx.fill();
     ctx.globalAlpha = 1;
-  }
-
-  function drawEdges() {
-    for (let i = 0; i < pts.length; i++) {
-      const a = pts[i];
-      const neighbours = [];
-
-      if (a.col < CFG.COLS - 1) neighbours.push(pts[i + 1]);
-      if (a.row < CFG.ROWS - 1) neighbours.push(pts[i + CFG.COLS]);
-      if (a.zone !== 'fragmented' && a.col < CFG.COLS - 1 && a.row < CFG.ROWS - 1) {
-        neighbours.push(pts[i + CFG.COLS + 1]);
-      }
-
-      for (const b of neighbours) {
-        const dx = b.x - a.x;
-        const dy = b.y - a.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const expected = Math.max(cellW, cellH) * 1.23;
-
-        if (dist > expected * (a.zone === 'fragmented' ? 1.06 : 1.32)) continue;
-
-        const mx = (a.x + b.x) * 0.5;
-        const my = (a.y + b.y) * 0.5;
-
-        const mdx = mx - mouse.x;
-        const mdy = my - mouse.y;
-        const md = Math.sqrt(mdx * mdx + mdy * mdy);
-        const mouseBoost = md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) * 0.12 : 0;
-
-        const distFade = Math.max(0, 1 - dist / (expected * 1.14));
-
-        let baseAlpha = Math.max(a.edgeAlpha, b.edgeAlpha);
-        if (a.zone === 'governed' && b.zone === 'governed') baseAlpha *= 1.30;
-        if (a.zone === 'fragmented' && b.zone === 'fragmented') baseAlpha *= 0.72;
-
-        const alpha = (baseAlpha + mouseBoost) * distFade;
-
-        let color = CFG.SLATE;
-        if (a.zone === 'governed' && b.zone === 'governed') color = CFG.INDIGO;
-        else if (a.zone === 'fragmented' && b.zone === 'fragmented') color = CFG.INDIGO;
-        else color = CFG.SLATE;
-
-        const isBackbone =
-          (a.zone === 'governed' && b.zone === 'governed') &&
-          (a.backbone || b.backbone);
-
-        ctx.globalAlpha = isBackbone ? alpha * 1.20 : alpha;
-        ctx.strokeStyle = isBackbone ? `rgb(${CFG.SKY})` : `rgb(${color})`;
-        ctx.lineWidth = isBackbone ? 0.95 : (a.edge || b.edge ? 0.42 : 0.62);
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.stroke();
-      }
-    }
   }
 
   function drawDots() {
@@ -712,44 +926,38 @@ document.addEventListener('DOMContentLoaded', () => {
       const near = md < CFG.MOUSE_RADIUS;
       const mouseGlow = near ? (1 - md / CFG.MOUSE_RADIUS) : 0;
 
-      let color = CFG.SLATE;
-      let alpha = p.edge ? 0.070 : 0.17;
+      let rgb = CFG.SLATE;
+      let alpha = p.edge ? 0.07 : 0.17;
       let radius = p.edge ? CFG.DOT_R * 0.72 : CFG.DOT_R;
 
       if (p.zone === 'fragmented') {
-        color = CFG.INDIGO;
+        rgb = CFG.INDIGO;
         alpha *= 0.80;
       } else if (p.zone === 'governed') {
-        color = CFG.SKY;
-        alpha *= 1.12;
+        rgb = CFG.SKY;
+        alpha *= 1.14;
       }
 
-      if (p.transitNode) {
-        color = CFG.SLATE;
-        alpha = 0.26 + Math.sin(time * 0.022 + p.col) * 0.04;
-        radius = 2.0;
+      if (p.backbone) {
+        rgb = CFG.SKY;
+        alpha *= 1.14;
       }
 
       if (p.validationHub) {
-        color = CFG.VALID;
+        rgb = CFG.VALID;
         alpha = 0.80 + Math.sin(time * 0.028 + p.row) * 0.08;
         radius = 3.0;
-      }
-
-      if (p.backbone && !p.validationHub) {
-        color = CFG.SKY;
-        alpha *= 1.15;
       }
 
       alpha += mouseGlow * 0.38;
       radius += mouseGlow * (CFG.DOT_R_ACTIVE - CFG.DOT_R);
 
-      if (mouseGlow > 0.10 || p.validationHub || p.transitNode) {
-        const haloR = p.validationHub ? radius * 4.8 : p.transitNode ? radius * 3.4 : radius * 4.0;
-        const haloAlpha = p.validationHub ? 0.16 : p.transitNode ? 0.07 : mouseGlow * 0.13;
+      if (mouseGlow > 0.10 || p.validationHub) {
+        const haloR = p.validationHub ? radius * 4.8 : radius * 4.0;
+        const haloAlpha = p.validationHub ? 0.16 : mouseGlow * 0.13;
         const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
-        grad.addColorStop(0, `rgba(${color},${haloAlpha})`);
-        grad.addColorStop(1, `rgba(${color},0)`);
+        grad.addColorStop(0, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${haloAlpha})`);
+        grad.addColorStop(1, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);
         ctx.globalAlpha = 1;
         ctx.fillStyle = grad;
         ctx.beginPath();
@@ -758,7 +966,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       ctx.globalAlpha = Math.min(1, alpha);
-      ctx.fillStyle = `rgb(${color})`;
+      ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
       ctx.fill();
@@ -766,7 +974,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (p.validationHub) {
         const ring = 5.2 + Math.sin(time * 0.022 + p.col) * 0.55;
         ctx.globalAlpha = 0.22;
-        ctx.strokeStyle = `rgb(${CFG.VALID})`;
+        ctx.strokeStyle = `rgb(${CFG.VALID[0]},${CFG.VALID[1]},${CFG.VALID[2]})`;
         ctx.lineWidth = 0.9;
         ctx.beginPath();
         ctx.arc(p.x, p.y, ring, 0, Math.PI * 2);
@@ -792,6 +1000,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawAtmosphere();
     drawSubtleAxis();
     drawEdges();
+    drawFlowLines();
     drawBackboneLanes();
     drawSignalPulses();
     drawDots();
