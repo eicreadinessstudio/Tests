@@ -1,180 +1,423 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Requivo — Governed operational knowledge from fragmented enterprise evidence</title>
-  <link rel="icon" href="favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <script>document.documentElement.classList.add('js');</script>
   <style>
     :root {
-      --bg: #ffffff;
-      --bg-off: #f8f9fc;
-      --bg-panel: #f2f4f8;
-      --bg-ice: #f6f8fc;
-      --bg-mist: #eef3f9;
-      --line: #dde3ed;
-      --line-soft: #eaecf2;
-      --text: #0d1424;
-      --text-mid: #374259;
-      --text-soft: #677390;
-      --text-dim: #98a3b8;
-      --indigo: #3730a3;
-      --indigo-mid: #4f46e5;
-      --indigo-soft: #eef2ff;
-      --indigo-pale: #f5f6ff;
-      --sky: #0ea5e9;
-      --sky-soft: #e0f2fe;
-      --font-serif: 'Instrument Serif', Georgia, serif;
-      --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
-      --font-mono: 'IBM Plex Mono', monospace;
-      --max: 1180px;
-      --ease: cubic-bezier(.16,1,.3,1);
+      --bg:#ffffff; --bg-off:#f8f9fc; --bg-panel:#f2f4f8; --bg-deep:#0f1c3a;
+      --line:#dde3ed; --line-soft:#eaecf2;
+      --text:#0d1424; --text-mid:#374259; --text-soft:#677390; --text-dim:#98a3b8;
+      --indigo:#3730a3; --indigo-mid:#4f46e5; --indigo-soft:#eef2ff; --indigo-pale:#f5f6ff;
+      --sky:#0ea5e9; --sky-soft:#e0f2fe;
+      --serif:'Instrument Serif',Georgia,serif;
+      --sans:'IBM Plex Sans',system-ui,sans-serif;
+      --mono:'IBM Plex Mono',monospace;
+      --max:1180px; --ease:cubic-bezier(.16,1,.3,1);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-    .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
 
-    nav { position: sticky; top: 0; z-index: 120; background: rgba(255,255,255,.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-soft); transition: box-shadow .25s; }
-    nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 32px; }
-    .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-size: 19px; font-weight: 400; color: var(--text); letter-spacing: -.02em; }
-    .nav-links { display: flex; align-items: center; gap: 28px; }
-    .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-soft); letter-spacing: .01em; transition: color .18s; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta { background: var(--indigo) !important; color: #fff !important; padding: 9px 20px; border-radius: 6px; font-size: 13px !important; font-weight: 500 !important; transition: background .18s, transform .18s !important; }
-    .nav-cta:hover { background: #312e81 !important; transform: translateY(-1px) !important; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-size: 19px; font-weight: 400; color: #fff; letter-spacing: -.02em; }
-
-    .hero { position: relative; overflow: hidden; min-height: 96vh; display: flex; align-items: center; padding: 104px 0 94px; background: radial-gradient(circle at 18% 22%, rgba(79,70,229,.07), transparent 0 18%), radial-gradient(circle at 72% 54%, rgba(14,165,233,.05), transparent 0 22%), linear-gradient(180deg, #fbfcfe 0%, #f4f7fb 100%); isolation: isolate; }
-    #webgl-hero { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-    .hero-haze { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.18), rgba(255,255,255,.00) 36%), radial-gradient(circle at 70% 45%, rgba(255,255,255,.14), rgba(255,255,255,.00) 30%), linear-gradient(90deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.30) 34%, rgba(255,255,255,.12) 60%, rgba(255,255,255,.06) 100%); }
-    .hero-grid { position: absolute; inset: 0; z-index: 1; pointer-events: none; background-image: repeating-linear-gradient(180deg, transparent, transparent 31px, rgba(79,70,229,.014) 31px, rgba(79,70,229,.014) 32px); mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.28) 16%, rgba(0,0,0,.28) 84%, transparent 100%); }
-    .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 520px); gap: clamp(36px, 5vw, 72px); align-items: center; }
-
-    .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo-mid); background: rgba(255,255,255,.76); border: 1px solid rgba(79,70,229,.10); backdrop-filter: blur(12px); padding: 6px 12px; border-radius: 999px; margin-bottom: 28px; box-shadow: 0 8px 28px rgba(13,20,36,.04); }
-    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sky); box-shadow: 0 0 14px rgba(14,165,233,.34); }
-    .hero h1 { font-family: var(--font-serif); font-size: clamp(44px, 6vw, 84px); font-weight: 400; line-height: .96; letter-spacing: -.03em; color: var(--text); margin-bottom: 24px; max-width: 760px; text-wrap: balance; }
-    .hero h1 .accent { color: var(--indigo-mid); }
-    .hero-sub { font-size: 18px; line-height: 1.82; color: var(--text-soft); max-width: 580px; font-weight: 300; margin-bottom: 36px; }
-    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 999px; font-family: var(--font-sans); font-size: 14px; font-weight: 500; letter-spacing: .01em; cursor: pointer; border: 1px solid transparent; transition: transform .2s var(--ease), box-shadow .2s, background .18s, border-color .18s; }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: #fff; border-color: rgba(255,255,255,.08); box-shadow: 0 10px 34px rgba(79,70,229,.22); }
-    .btn-primary:hover { box-shadow: 0 14px 42px rgba(79,70,229,.28); }
-    .btn-outline { background: rgba(255,255,255,.62); backdrop-filter: blur(12px); color: var(--text-mid); border-color: rgba(221,227,237,.92); box-shadow: 0 8px 28px rgba(13,20,36,.04); }
-    .btn-outline:hover { border-color: var(--text-dim); background: rgba(255,255,255,.84); }
-
-    .hero-aside { display: flex; justify-content: flex-end; width: 100%; }
-    .hero-shot { width: 100%; max-width: 540px; }
-    .hero-shot-frame { border: 1px solid rgba(198,208,224,.74); border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(245,248,252,.88) 100%); box-shadow: 0 18px 50px rgba(15,28,58,.07), inset 0 1px 0 rgba(255,255,255,.46); backdrop-filter: blur(18px); padding: 18px; }
-    .hero-shot-frame.hero-no-img { min-height: 360px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(145deg, rgba(255,255,255,.84) 0%, rgba(241,245,251,.92) 100%); }
-    .hero-shot-frame.hero-no-img::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px); background-size: 32px 32px; }
-    .hero-shot-frame.hero-no-img::after { content: 'Interface fragment coming soon'; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; color: #8f9db2; text-transform: uppercase; position: relative; z-index: 1; }
-    .hero-shot-frame img { width: 100%; height: auto; max-height: 640px; object-fit: contain; object-position: center center; border-radius: 14px; background: #fff; border: 1px solid rgba(214,221,233,.8); }
-    .hero-shot-caption { margin-top: 12px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #8f9bb0; }
-
-    section { padding: 112px 0; }
-    section + section { border-top: 1px solid var(--line-soft); }
-    .section-label { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--indigo-mid); margin-bottom: 16px; }
-    .section-title { font-family: var(--font-serif); font-size: clamp(28px, 3.4vw, 46px); font-weight: 400; line-height: 1.08; letter-spacing: -.02em; color: var(--text); margin-bottom: 18px; max-width: 820px; }
-    .section-sub { font-size: 17px; line-height: 1.82; color: var(--text-soft); max-width: 700px; font-weight: 300; margin-bottom: 52px; }
-
-    #mission-vision { background: var(--bg-off); }
-    .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-radius: 12px; overflow: hidden; }
-    .mv-card { background: var(--bg); padding: 40px 36px 44px; border: 1px solid var(--line-soft); }
-    .mv-label { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 18px; }
-    .mv-card p { font-family: var(--font-serif); font-size: 22px; line-height: 1.42; letter-spacing: -.01em; color: var(--text); max-width: 480px; }
-
-    .prob-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .prob-card { border-top: 2px solid var(--line); padding: 28px 0 0; position: relative; }
-    .prob-card::before { content: ''; position: absolute; top: -2px; left: 0; width: 0; height: 2px; background: var(--indigo-mid); transition: width .4s var(--ease); }
-    .prob-card:hover::before { width: 100%; }
-    .prob-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; color: var(--text-dim); margin-bottom: 14px; }
-    .prob-card h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; letter-spacing: -.02em; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
-    .prob-card p { font-size: 15px; line-height: 1.82; color: var(--text-soft); font-weight: 300; }
-
-    .solution-layout { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr); gap: 56px; align-items: start; }
-    .sol-copy p { font-size: 17px; line-height: 1.88; color: var(--text-soft); font-weight: 300; margin-bottom: 20px; }
-    .sol-copy p:last-child { margin-bottom: 0; }
-    .sol-panels { display: grid; gap: 1px; }
-    .sol-panel { padding: 22px 24px; border-left: 2px solid var(--line); transition: border-color .2s, background .2s; }
-    .sol-panel:hover { border-left-color: var(--indigo-mid); background: var(--indigo-pale); }
-    .sol-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
-    .sol-panel h3 { font-family: var(--font-serif); font-size: 17px; font-weight: 400; color: var(--text); margin-bottom: 6px; letter-spacing: -.01em; }
-    .sol-panel p { font-size: 13.5px; line-height: 1.7; color: var(--text-soft); font-weight: 300; }
-
-    #why { background: var(--bg-off); }
-    .strata { display: grid; gap: 1px; border-radius: 10px; overflow: hidden; }
-    .strata-row { display: grid; grid-template-columns: 200px 1fr; align-items: stretch; transition: filter .18s; }
-    .strata-row:hover { filter: brightness(.97); }
-    .strata-label { padding: 24px 26px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; display: flex; align-items: center; border-right: 1px solid rgba(255,255,255,.08); }
-    .strata-body { padding: 24px 32px; font-size: 15px; line-height: 1.75; display: flex; align-items: center; font-weight: 300; }
-    .strata-row:nth-child(1) { background: #d1d9f0; color: #1e2650; }
-    .strata-row:nth-child(2) { background: #b8c4e8; color: #1e2650; }
-    .strata-row:nth-child(3) { background: #9baade; color: #1a224a; }
-    .strata-row:nth-child(4) { background: #6e85cc; color: #111a3e; }
-    .strata-row:nth-child(5) { background: #4f68bc; color: #ffffff; }
-    .strata-row:nth-child(6) { background: #3730a3; color: #e0e7ff; }
-    .strata-row:nth-child(1) .strata-label, .strata-row:nth-child(2) .strata-label, .strata-row:nth-child(3) .strata-label, .strata-row:nth-child(4) .strata-label { border-right-color: rgba(0,0,0,.08); }
-
-    .use-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .use-card { border-top: 2px solid var(--line); padding: 26px 0 0; position: relative; }
-    .use-card::before { content: ''; position: absolute; top: -2px; left: 0; width: 0; height: 2px; background: var(--indigo-mid); transition: width .4s var(--ease); }
-    .use-card:hover::before { width: 100%; }
-    .use-card h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; letter-spacing: -.02em; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
-    .use-card p { font-size: 15px; line-height: 1.82; color: var(--text-soft); font-weight: 300; }
-
-    .contact-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .contact-card { border-top: 1px solid var(--line); padding: 24px 0 0; }
-    .contact-card h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; letter-spacing: -.02em; color: var(--text); margin-bottom: 4px; }
-    .contact-role { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
-    .contact-email { font-size: 14px; color: var(--indigo-mid); transition: color .18s; }
-    .contact-email:hover { color: var(--indigo); text-decoration: underline; }
-
-    footer { background: #0f1c3a; padding: 80px 0 60px; }
-    .footer-grid { display: grid; grid-template-columns: 1.2fr .8fr .8fr 1fr; gap: 48px; margin-bottom: 56px; align-items: start; }
-    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
-    .footer-brand p { font-size: 14px; line-height: 1.8; font-weight: 300; color: #7b8fad; max-width: 280px; }
-    .footer-col h4 { font-family: var(--font-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #4a5e7a; margin-bottom: 18px; }
-    .footer-col a, .footer-col p { display: block; font-size: 14px; line-height: 2.1; font-weight: 300; color: #8fa3be; transition: color .18s; }
-    .footer-col a:hover { color: #fff; }
-    .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: #3d5070; display: flex; justify-content: space-between; align-items: center; }
-
-    .reveal { opacity: 1; transform: none; transition: opacity .65s var(--ease), transform .65s var(--ease); }
-    .js .reveal { opacity: 0; transform: translateY(22px); }
-    .js .reveal.in { opacity: 1; transform: none; }
-    .d1 { transition-delay: .08s; }
-    .d2 { transition-delay: .16s; }
-
-    @media (max-width: 1180px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-      .hero-aside { justify-content: flex-start; }
-      .hero-shot { max-width: 680px; }
-      .solution-layout { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:var(--sans);
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+      text-rendering:optimizeLegibility;
     }
-    @media (max-width: 768px) {
-      .wrap { width: calc(100% - 32px); }
-      .nav-links { display: none; }
-      section { padding: 80px 0; }
-      .prob-grid, .mv-grid, .use-grid, .contact-grid { grid-template-columns: 1fr; }
-      .strata-row { grid-template-columns: 1fr; }
-      .strata-label { padding: 16px 20px 6px; border-right: none; }
-      .strata-body { padding: 0 20px 16px; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 8px; }
-      .hero-shot-frame { padding: 12px; border-radius: 16px; }
-      .hero-shot-frame.hero-no-img { min-height: 360px; }
-      .hero-shot-frame img { max-height: none; }
-      .hero { min-height: auto; }
+    a{text-decoration:none;color:inherit;}
+    img{display:block;max-width:100%;}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin:0 auto;}
+
+    /* NAV */
+    nav{
+      position:sticky;top:0;z-index:120;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line-soft);
+      transition:box-shadow .25s;
+    }
+    nav.raised{box-shadow:0 1px 18px rgba(55,48,163,.07);}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:32px;}
+    .logo{
+      display:flex;align-items:center;gap:10px;
+      font-family:var(--sans);font-size:19px;font-weight:400;
+      color:var(--text);letter-spacing:-.02em;transition:color .2s;
+    }
+    .logo:hover{color:var(--indigo);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{
+      font-size:14px;font-weight:400;color:var(--text-soft);
+      letter-spacing:.01em;transition:color .18s;
+    }
+    .nav-links a:hover{color:var(--text);}
+    .nav-cta{
+      background:var(--indigo)!important;color:#fff!important;
+      padding:9px 20px;border-radius:6px;
+      font-size:13px!important;font-weight:500!important;
+      transition:background .18s,transform .18s!important;
+    }
+    .nav-cta:hover{background:#312e81!important;transform:translateY(-1px)!important;}
+
+    /* HERO */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      min-height:96vh;
+      display:flex;
+      align-items:center;
+      padding:104px 0 94px;
+      background:
+        radial-gradient(circle at 14% 28%, rgba(79,70,229,.055), transparent 0 22%),
+        radial-gradient(circle at 72% 54%, rgba(14,165,233,.04), transparent 0 24%),
+        linear-gradient(160deg,#fbfcff 0%,#f5f8fc 58%,#eef3f9 100%);
+      isolation:isolate;
+    }
+
+    #topo-canvas{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .hero-vignette{
+      position:absolute;inset:0;z-index:1;pointer-events:none;
+      background:
+        linear-gradient(90deg,
+          rgba(249,251,255,.95) 0%,
+          rgba(249,251,255,.84) 26%,
+          rgba(249,251,255,.42) 50%,
+          rgba(249,251,255,.10) 72%,
+          transparent 100%
+        ),
+        radial-gradient(circle at 22% 38%, rgba(255,255,255,.45), transparent 0 26%);
+    }
+
+    .hero-inner{
+      position:relative;z-index:2;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(320px,520px);
+      gap:clamp(36px,5vw,72px);
+      align-items:center;
+    }
+
+    .hero-tag{
+      display:inline-flex;align-items:center;gap:8px;
+      font-family:var(--mono);font-size:11px;font-weight:500;
+      letter-spacing:.14em;text-transform:uppercase;
+      color:var(--indigo-mid);
+      background:rgba(255,255,255,.84);
+      border:1px solid rgba(79,70,229,.12);
+      backdrop-filter:blur(10px);
+      padding:6px 12px;border-radius:999px;
+      margin-bottom:28px;
+      box-shadow:0 6px 20px rgba(55,48,163,.05);
+      opacity:0;animation:fadeUp .7s var(--ease) .05s forwards;
+    }
+    .hero-tag::before{
+      content:'';
+      width:6px;height:6px;border-radius:50%;
+      background:var(--sky);
+      box-shadow:0 0 10px rgba(14,165,233,.45);
+      animation:pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{opacity:1;transform:scale(1);}
+      50%{opacity:.35;transform:scale(.72);}
+    }
+
+    .hero h1{
+      font-family:var(--serif);
+      font-size:clamp(44px,6vw,84px);
+      font-weight:400;
+      line-height:.96;
+      letter-spacing:-.03em;
+      color:var(--text);
+      margin-bottom:24px;
+      max-width:680px;
+      opacity:0;animation:fadeUp .85s var(--ease) .15s forwards;
+      text-wrap:balance;
+    }
+    .hero h1 .accent{color:var(--indigo-mid);}
+    .hero-sub{
+      font-size:18px;line-height:1.82;color:var(--text-soft);
+      max-width:520px;font-weight:300;margin-bottom:36px;
+      opacity:0;animation:fadeUp .85s var(--ease) .25s forwards;
+    }
+    .hero-actions{
+      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+      opacity:0;animation:fadeUp .85s var(--ease) .35s forwards;
+    }
+
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(18px);}
+      to{opacity:1;transform:none;}
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateX(16px);}
+      to{opacity:1;transform:none;}
+    }
+
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 26px;border-radius:999px;
+      font-family:var(--sans);font-size:14px;font-weight:500;
+      letter-spacing:.01em;cursor:pointer;border:1px solid transparent;
+      transition:transform .2s var(--ease),box-shadow .2s,background .18s,border-color .18s;
+    }
+    .btn:hover{transform:translateY(-2px);}
+    .btn-primary{
+      background:linear-gradient(135deg,#4f46e5 0%,#3730a3 100%);
+      color:#fff;
+      box-shadow:0 8px 28px rgba(79,70,229,.20);
+    }
+    .btn-primary:hover{box-shadow:0 12px 36px rgba(79,70,229,.30);}
+    .btn-outline{
+      background:rgba(255,255,255,.78);
+      backdrop-filter:blur(12px);
+      color:var(--text-mid);
+      border-color:rgba(221,227,237,.92);
+      box-shadow:0 4px 16px rgba(13,20,36,.04);
+    }
+    .btn-outline:hover{
+      border-color:var(--text-dim);
+      background:rgba(255,255,255,.94);
+    }
+
+    .hero-aside{
+      display:flex;justify-content:flex-end;width:100%;
+      opacity:0;animation:fadeIn .9s var(--ease) .3s forwards;
+    }
+    .hero-shot{width:100%;max-width:540px;}
+    .hero-shot-frame{
+      border:1px solid rgba(198,208,224,.72);
+      border-radius:20px;
+      overflow:hidden;
+      background:rgba(255,255,255,.82);
+      backdrop-filter:blur(20px) saturate(160%);
+      box-shadow:
+        0 20px 60px rgba(15,28,58,.08),
+        inset 0 1px 0 rgba(255,255,255,.62);
+      padding:18px;
+    }
+    .hero-shot-frame.hero-no-img{
+      min-height:360px;
+      display:flex;align-items:center;justify-content:center;
+      position:relative;overflow:hidden;
+      background:linear-gradient(145deg,rgba(255,255,255,.88) 0%,rgba(241,245,251,.94) 100%);
+    }
+    .hero-shot-frame.hero-no-img::before{
+      content:'';
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
+      background-size:32px 32px;
+    }
+    .hero-shot-frame.hero-no-img::after{
+      content:'Interface fragment coming soon';
+      font-family:var(--mono);font-size:11px;
+      letter-spacing:.1em;color:#8f9db2;
+      text-transform:uppercase;position:relative;z-index:1;
+    }
+    .hero-shot-frame img{
+      width:100%;height:auto;max-height:640px;object-fit:contain;
+      border-radius:14px;background:#fff;border:1px solid rgba(214,221,233,.8);
+    }
+    .hero-shot-caption{
+      margin-top:12px;
+      font-family:var(--mono);font-size:10px;
+      letter-spacing:.12em;text-transform:uppercase;color:#8f9bb0;
+    }
+
+    /* SECTIONS */
+    section{padding:112px 0;}
+    section+section{border-top:1px solid var(--line-soft);}
+    .section-label{
+      font-family:var(--mono);font-size:11px;font-weight:500;
+      letter-spacing:.16em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:16px;
+    }
+    .section-title{
+      font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);font-weight:400;
+      line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:18px;max-width:820px;
+    }
+    .section-sub{
+      font-size:17px;line-height:1.82;color:var(--text-soft);max-width:700px;font-weight:300;margin-bottom:52px;
+    }
+
+    /* M/V */
+    #mission-vision{background:var(--bg-off);}
+    .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:12px;overflow:hidden;}
+    .mv-card{
+      background:var(--bg);padding:40px 36px 44px;border:1px solid var(--line-soft);
+      position:relative;overflow:hidden;transition:background .25s;
+    }
+    .mv-card:hover{background:var(--indigo-pale);}
+    .mv-card::after{
+      content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--indigo),var(--sky));
+      transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+    }
+    .mv-card:hover::after{transform:scaleX(1);}
+    .mv-label{
+      font-family:var(--mono);font-size:10px;font-weight:500;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:18px;
+    }
+    .mv-card p{
+      font-family:var(--serif);font-size:22px;line-height:1.42;
+      letter-spacing:-.01em;color:var(--text);max-width:480px;
+    }
+
+    /* PROBLEM */
+    .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .prob-card{border-top:2px solid var(--line);padding:28px 0 0;position:relative;}
+    .prob-card::before{
+      content:'';position:absolute;top:-2px;left:0;width:0;height:2px;
+      background:linear-gradient(90deg,var(--sky),var(--indigo-mid));
+      transition:width .4s var(--ease);
+    }
+    .prob-card:hover::before{width:100%;}
+    .prob-num{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--text-dim);margin-bottom:14px;}
+    .prob-card h3{
+      font-family:var(--serif);font-size:22px;font-weight:400;
+      letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;
+    }
+    .prob-card p{font-size:15px;line-height:1.82;color:var(--text-soft);font-weight:300;}
+
+    /* SOLUTION */
+    .solution-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:56px;align-items:start;}
+    .sol-copy p{font-size:17px;line-height:1.88;color:var(--text-soft);font-weight:300;margin-bottom:20px;}
+    .sol-copy p:last-child{margin-bottom:0;}
+    .sol-panels{display:grid;gap:1px;}
+    .sol-panel{
+      padding:22px 24px;border-left:2px solid var(--line);
+      transition:border-color .2s,background .2s,transform .2s var(--ease);
+    }
+    .sol-panel:hover{
+      border-left-color:var(--indigo-mid);
+      background:var(--indigo-pale);
+      transform:translateX(4px);
+    }
+    .sol-tag{
+      font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;
+    }
+    .sol-panel h3{
+      font-family:var(--serif);font-size:17px;font-weight:400;
+      color:var(--text);margin-bottom:6px;letter-spacing:-.01em;
+    }
+    .sol-panel p{font-size:13.5px;line-height:1.7;color:var(--text-soft);font-weight:300;}
+
+    /* WHY */
+    #why{background:var(--bg-off);}
+    .strata{display:grid;gap:1px;border-radius:10px;overflow:hidden;}
+    .strata-row{display:grid;grid-template-columns:200px 1fr;align-items:stretch;transition:filter .18s;}
+    .strata-row:hover{filter:brightness(.97);}
+    .strata-label{
+      padding:24px 26px;font-family:var(--mono);font-size:11px;font-weight:500;
+      letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;
+      border-right:1px solid rgba(255,255,255,.08);
+    }
+    .strata-body{padding:24px 32px;font-size:15px;line-height:1.75;display:flex;align-items:center;font-weight:300;}
+    .strata-row:nth-child(1){background:#d1d9f0;color:#1e2650;}
+    .strata-row:nth-child(2){background:#b8c4e8;color:#1e2650;}
+    .strata-row:nth-child(3){background:#9baade;color:#1a224a;}
+    .strata-row:nth-child(4){background:#6e85cc;color:#111a3e;}
+    .strata-row:nth-child(5){background:#4f68bc;color:#fff;}
+    .strata-row:nth-child(6){background:#3730a3;color:#e0e7ff;}
+    .strata-row:nth-child(1) .strata-label,
+    .strata-row:nth-child(2) .strata-label,
+    .strata-row:nth-child(3) .strata-label,
+    .strata-row:nth-child(4) .strata-label{border-right-color:rgba(0,0,0,.08);}
+
+    /* USE CASES */
+    .use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .use-card{border-top:2px solid var(--line);padding:26px 0 0;position:relative;}
+    .use-card::before{
+      content:'';position:absolute;top:-2px;left:0;width:0;height:2px;
+      background:var(--indigo-mid);transition:width .4s var(--ease);
+    }
+    .use-card:hover::before{width:100%;}
+    .use-card h3{
+      font-family:var(--serif);font-size:22px;font-weight:400;
+      letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;
+    }
+    .use-card p{font-size:15px;line-height:1.82;color:var(--text-soft);font-weight:300;}
+
+    /* CONTACT */
+    .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .contact-card{border-top:1px solid var(--line);padding:24px 0 0;}
+    .contact-card h3{
+      font-family:var(--serif);font-size:22px;font-weight:400;
+      letter-spacing:-.02em;color:var(--text);margin-bottom:4px;
+    }
+    .contact-role{
+      font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--text-dim);margin-bottom:14px;
+    }
+    .contact-email{font-size:14px;color:var(--indigo-mid);transition:color .18s;}
+    .contact-email:hover{color:var(--indigo);text-decoration:underline;}
+
+    /* FOOTER */
+    footer{background:var(--bg-deep);padding:80px 0 60px;}
+    .footer-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr 1fr;gap:48px;margin-bottom:56px;align-items:start;}
+    .footer-brand{display:flex;flex-direction:column;gap:16px;}
+    .footer-brand p{font-size:14px;line-height:1.8;font-weight:300;color:#7b8fad;max-width:280px;}
+    .footer-logo{
+      display:flex;align-items:center;gap:10px;
+      font-family:var(--sans);font-size:19px;font-weight:400;color:#fff;letter-spacing:-.02em;
+    }
+    .footer-col h4{
+      font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+      text-transform:uppercase;color:#4a5e7a;margin-bottom:18px;
+    }
+    .footer-col a,.footer-col p{
+      display:block;font-size:14px;line-height:2.1;font-weight:300;color:#8fa3be;transition:color .18s;
+    }
+    .footer-col a:hover{color:#fff;}
+    .footer-bottom{
+      padding-top:24px;border-top:1px solid rgba(255,255,255,.06);
+      font-size:12px;color:#3d5070;display:flex;justify-content:space-between;align-items:center;
+    }
+
+    /* REVEAL */
+    .reveal{opacity:1;transform:none;transition:opacity .65s var(--ease),transform .65s var(--ease);}
+    .js .reveal{opacity:0;transform:translateY(22px);}
+    .js .reveal.in{opacity:1;transform:none;}
+    .d1{transition-delay:.08s;}
+    .d2{transition-delay:.16s;}
+
+    /* RESPONSIVE */
+    @media(max-width:1180px){
+      .hero-inner{grid-template-columns:1fr;gap:40px;}
+      .hero-aside{justify-content:flex-start;}
+      .hero-shot{max-width:680px;}
+      .solution-layout{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:768px){
+      .wrap{width:calc(100% - 32px);}
+      .nav-links{display:none;}
+      section{padding:80px 0;}
+      .prob-grid,.mv-grid,.use-grid,.contact-grid{grid-template-columns:1fr;}
+      .strata-row{grid-template-columns:1fr;}
+      .strata-label{padding:16px 20px 6px;border-right:none;}
+      .strata-body{padding:0 20px 16px;}
+      .footer-grid{grid-template-columns:1fr;}
+      .footer-bottom{flex-direction:column;gap:8px;}
+      .hero-shot-frame{padding:12px;border-radius:16px;}
+      .hero{min-height:auto;}
     }
   </style>
 </head>
@@ -183,11 +426,10 @@
 <nav id="nav">
   <div class="wrap nav-inner">
     <a href="#top" class="logo" aria-label="Requivo home">
-      <svg viewBox="0 0 44 36" width="36" height="29" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M 16 3 Q 4 3 4 13 L 4 23 Q 4 33 16 33" stroke="#3730a3" stroke-width="3.8" stroke-linecap="round" fill="none"/>
-        <path d="M 28 3 Q 40 3 40 13 L 40 23 Q 40 33 28 33" stroke="#3730a3" stroke-width="3.8" stroke-linecap="round" fill="none"/>
-        <rect x="14" y="9" width="16" height="16" rx="2.5" fill="#0ea5e9" transform="rotate(45 22 17)"/>
-        <circle cx="22" cy="17" r="2.8" fill="#ffffff" opacity=".5"/>
+      <svg viewBox="0 0 44 44" width="26" height="26" fill="none" aria-hidden="true">
+        <path d="M 19 5 L 4 5 L 4 39 L 19 39" stroke="#3730a3" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+        <path d="M 25 5 L 40 5 L 40 39 L 25 39" stroke="#3730a3" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+        <polygon points="22,16 29,22 22,28 15,22" fill="#0ea5e9"/>
       </svg>
       Requivo
     </a>
@@ -202,9 +444,9 @@
 </nav>
 
 <section class="hero" id="top">
-  <div id="webgl-hero"></div>
-  <div class="hero-haze"></div>
-  <div class="hero-grid"></div>
+  <canvas id="topo-canvas"></canvas>
+  <div class="hero-vignette"></div>
+
   <div class="wrap">
     <div class="hero-inner">
       <div>
@@ -216,10 +458,11 @@
           <a href="#contact" class="btn btn-outline">Contact the team</a>
         </div>
       </div>
+
       <div class="hero-aside">
         <div class="hero-shot">
           <div class="hero-shot-frame">
-            <img src="requivo-fragment.png" alt="Selected interface fragment from Requivo" onerror="this.style.display='none';this.parentElement.classList.add('hero-no-img')" />
+            <img src="requivo-fragment.png" alt="Selected interface fragment from Requivo" onerror="this.style.display='none';this.parentElement.classList.add('hero-no-img')"/>
           </div>
           <div class="hero-shot-caption">Selected interface fragment</div>
         </div>
@@ -231,8 +474,14 @@
 <section id="mission-vision">
   <div class="wrap">
     <div class="mv-grid">
-      <div class="mv-card reveal"><div class="mv-label">Mission</div><p>To turn fragmented enterprise evidence into governed operational knowledge that organisations can trust, maintain, and reuse.</p></div>
-      <div class="mv-card reveal d1"><div class="mv-label">Vision</div><p>A world in which organisations no longer rely on scattered documents and tacit memory, but operate on governed, validated, and evolving knowledge.</p></div>
+      <div class="mv-card reveal">
+        <div class="mv-label">Mission</div>
+        <p>To turn fragmented enterprise evidence into governed operational knowledge that organisations can trust, maintain, and reuse.</p>
+      </div>
+      <div class="mv-card reveal d1">
+        <div class="mv-label">Vision</div>
+        <p>A world in which organisations no longer rely on scattered documents and tacit memory, but operate on governed, validated, and evolving knowledge.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -243,9 +492,21 @@
     <div class="section-title reveal">Critical operational knowledge is often scattered across systems, documents, workflows, and individual experts.</div>
     <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
     <div class="prob-grid">
-      <div class="prob-card reveal"><div class="prob-num">01</div><h3>Expertise disappears</h3><p>Critical know-how often remains embedded in individual people, workarounds, and context that never become properly structured or reusable across the organisation.</p></div>
-      <div class="prob-card reveal d1"><div class="prob-num">02</div><h3>Knowledge never fully transfers</h3><p>Teams may inherit documents, but not the reasoning, hierarchy, conflict resolution, and operational judgment behind them.</p></div>
-      <div class="prob-card reveal d2"><div class="prob-num">03</div><h3>Answers remain fragmented</h3><p>Relevant signals are distributed across documents, enterprise systems, workflows, and expert input, making them difficult to trust, maintain, and act upon together.</p></div>
+      <div class="prob-card reveal">
+        <div class="prob-num">01</div>
+        <h3>Expertise disappears</h3>
+        <p>Critical know-how often remains embedded in individual people, workarounds, and context that never become properly structured or reusable across the organisation.</p>
+      </div>
+      <div class="prob-card reveal d1">
+        <div class="prob-num">02</div>
+        <h3>Knowledge never fully transfers</h3>
+        <p>Teams may inherit documents, but not the reasoning, hierarchy, conflict resolution, and operational judgment behind them.</p>
+      </div>
+      <div class="prob-card reveal d2">
+        <div class="prob-num">03</div>
+        <h3>Answers remain fragmented</h3>
+        <p>Relevant signals are distributed across documents, enterprise systems, workflows, and expert input, making them difficult to trust, maintain, and act upon together.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -261,9 +522,21 @@
         <p>The concept should be understood as an operational knowledge system rather than a documentation platform, search tool, or generic assistant.</p>
       </div>
       <div class="sol-panels reveal d1">
-        <div class="sol-panel"><div class="sol-tag">Core flow</div><h3>Fragmented evidence → structure → governed layer</h3><p>From messy source material to reusable governed operational knowledge.</p></div>
-        <div class="sol-panel"><div class="sol-tag">Positioning</div><h3>Beyond retrieval</h3><p>Designed to support more structured and maintained operational knowledge.</p></div>
-        <div class="sol-panel"><div class="sol-tag">Applications</div><h3>One governed layer, multiple uses</h3><p>One governed knowledge layer, multiple applications.</p></div>
+        <div class="sol-panel">
+          <div class="sol-tag">Core flow</div>
+          <h3>Fragmented evidence → structure → governed layer</h3>
+          <p>From messy source material to reusable governed operational knowledge.</p>
+        </div>
+        <div class="sol-panel">
+          <div class="sol-tag">Positioning</div>
+          <h3>Beyond retrieval</h3>
+          <p>Designed to support more structured and maintained operational knowledge.</p>
+        </div>
+        <div class="sol-panel">
+          <div class="sol-tag">Applications</div>
+          <h3>One governed layer, multiple uses</h3>
+          <p>One governed knowledge layer, multiple applications.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -313,11 +586,10 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#top" class="footer-logo" aria-label="Requivo home">
-          <svg viewBox="0 0 44 36" width="36" height="29" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M 16 3 Q 4 3 4 13 L 4 23 Q 4 33 16 33" stroke="#ffffff" stroke-width="3.8" stroke-linecap="round" fill="none"/>
-            <path d="M 28 3 Q 40 3 40 13 L 40 23 Q 40 33 28 33" stroke="#ffffff" stroke-width="3.8" stroke-linecap="round" fill="none"/>
-            <rect x="14" y="9" width="16" height="16" rx="2.5" fill="#38bdf8" transform="rotate(45 22 17)"/>
-            <circle cx="22" cy="17" r="2.8" fill="#0f1c3a" opacity=".35"/>
+          <svg viewBox="0 0 44 44" width="22" height="22" fill="none" aria-hidden="true">
+            <path d="M 19 5 L 4 5 L 4 39 L 19 39" stroke="#ffffff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+            <path d="M 25 5 L 40 5 L 40 39 L 25 39" stroke="#ffffff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+            <polygon points="22,16 29,22 22,28 15,22" fill="#38bdf8"/>
           </svg>
           Requivo
         </a>
@@ -331,328 +603,423 @@
   </div>
 </footer>
 
-<script type="module">
-  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+<script>
+// NAV
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('raised', window.scrollY > 8), { passive: true });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const mount = document.getElementById('webgl-hero');
-    const nav   = document.getElementById('nav');
-
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('raised', window.scrollY > 8);
-    }, { passive: true });
-    nav.classList.toggle('raised', window.scrollY > 8);
-
-    const reveals = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries, obs) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      reveals.forEach(el => io.observe(el));
-    } else {
-      reveals.forEach(el => el.classList.add('in'));
-    }
-
-    if (!mount) return;
-
-    // ── SCENE ────────────────────────────────────────────────────
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0xf4f7fb, 0.05);
-
-    const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-    camera.position.set(0, 0, 12.5);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.setClearColor(0x000000, 0);
-    mount.appendChild(renderer.domElement);
-
-    const root = new THREE.Group();
-    scene.add(root);
-
-    // ── LIGHTS ───────────────────────────────────────────────────
-    scene.add(new THREE.AmbientLight(0xffffff, 0.88));
-    const keyLight = new THREE.DirectionalLight(0xffffff, 1.25);
-    keyLight.position.set(2.2, 2.1, 8.2);
-    scene.add(keyLight);
-    const fillLight = new THREE.DirectionalLight(0xdbeafe, 0.82);
-    fillLight.position.set(-3.4, -1.3, 5.0);
-    scene.add(fillLight);
-    const prismLight = new THREE.PointLight(0x818cf8, 1.2, 24, 2);
-    prismLight.position.set(3.8, 0.4, 3.5);
-    scene.add(prismLight);
-
-    const semanticGroup = new THREE.Group();
-    root.add(semanticGroup);
-
-    // ── KNOWLEDGE PLANES (translucent layers) ────────────────────
-    const planeMat = new THREE.MeshPhysicalMaterial({
-      color: 0xdbeafe, metalness: 0.0, roughness: 0.08,
-      transmission: 0.92, transparent: true, opacity: 0.16,
-      ior: 1.16, thickness: 1.0, depthWrite: false
+// SCROLL REVEAL
+document.addEventListener('DOMContentLoaded', () => {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
     });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    function makePlane(w, h, x, y, z, rx, ry, rz, color, opacity) {
-      const mat = planeMat.clone();
-      mat.color = new THREE.Color(color);
-      mat.opacity = opacity;
-      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), mat);
-      m.position.set(x, y, z);
-      m.rotation.set(rx, ry, rz);
-      semanticGroup.add(m);
-      return m;
-    }
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+});
 
-    const planes = [
-      makePlane(5.9, 3.3,  2.9,  0.1, -1.2, -0.22, -0.46,  0.02, 0xe0f2fe, 0.13),
-      makePlane(4.9, 2.7,  3.9, -1.1, -2.7, -0.16, -0.60,  0.06, 0xdbeafe, 0.10),
-      makePlane(3.5, 1.9,  1.6, -2.0, -0.7, -0.18, -0.30, -0.05, 0xe9efff, 0.08)
-    ];
+// LUXURY TOPOLOGY: FRAGMENTED → ALIGNED → GOVERNED
+(function () {
+  const canvas = document.getElementById('topo-canvas');
+  const ctx = canvas.getContext('2d');
+  const hero = document.getElementById('top');
 
-    // ── PRISM SHARDS ─────────────────────────────────────────────
-    const prismMat = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff, metalness: 0.0, roughness: 0.03,
-      transmission: 0.96, transparent: true, opacity: 0.26,
-      ior: 1.24, thickness: 2.4, reflectivity: 0.9, depthWrite: false
-    });
-    const prism = new THREE.Mesh(new THREE.OctahedronGeometry(0.68, 0), prismMat);
-    prism.position.set(3.15, 0.25, -1.0);
-    prism.rotation.set(0.35, 0.72, 0.12);
-    semanticGroup.add(prism);
-    const prismShard = new THREE.Mesh(new THREE.TetrahedronGeometry(0.42, 0), prismMat.clone());
-    prismShard.position.set(4.2, -1.35, -2.2);
-    prismShard.rotation.set(-0.22, 0.48, 0.10);
-    prismShard.material.opacity = 0.16;
-    semanticGroup.add(prismShard);
+  const CFG = {
+    COLS: 23,
+    ROWS: 15,
+    NOISE_SCALE: 0.0115,
+    NOISE_SPEED: 0.00042,
 
-    // ── KNOWLEDGE GRAPH NODES ────────────────────────────────────
-    const nodesGroup = new THREE.Group();
-    semanticGroup.add(nodesGroup);
+    AMP_LEFT: 50,
+    AMP_MID: 22,
+    AMP_RIGHT: 7,
 
-    const nodePositions = [
-      [1.10,  1.15, -0.35], [2.08,  0.72, -0.72], [3.00,  0.35, -1.00],
-      [3.82,  0.72, -1.42], [2.36, -0.28, -0.92], [3.16, -0.18, -1.06],
-      [4.18, -0.46, -1.84], [1.86, -1.04, -0.62], [2.86, -1.22, -1.10],
-      [4.78,  0.20, -2.36]
-    ];
+    SPRING_LEFT: 0.040,
+    SPRING_MID: 0.058,
+    SPRING_RIGHT: 0.088,
 
-    const nodeMeshes = [];
-    const nodeGeo = new THREE.SphereGeometry(0.046, 16, 16);
-    nodePositions.forEach((p, i) => {
-      const color = (i === 2 || i === 5 || i === 8) ? 0x4f46e5 : (i === 3 || i === 6) ? 0x0ea5e9 : 0x94a3b8;
-      const mat = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: i === 5 ? 0.98 : 0.74 });
-      const m = new THREE.Mesh(nodeGeo, mat);
-      m.position.set(p[0], p[1], p[2]);
-      nodesGroup.add(m);
-      nodeMeshes.push(m);
-    });
+    FRICTION_LEFT: 0.77,
+    FRICTION_MID: 0.72,
+    FRICTION_RIGHT: 0.65,
 
-    // ── GRAPH EDGES ──────────────────────────────────────────────
-    const edgePairs = [[0,1],[1,2],[2,3],[1,4],[4,5],[5,6],[0,7],[7,4],[4,8],[3,9],[5,3],[8,6]];
-    const linePos = [];
-    edgePairs.forEach(([a,b]) => {
-      linePos.push(...nodePositions[a], ...nodePositions[b]);
-    });
-    const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePos, 3));
-    const graphLines = new THREE.LineSegments(lineGeo, new THREE.LineBasicMaterial({ color: 0x8ca0bb, transparent: true, opacity: 0.28 }));
-    nodesGroup.add(graphLines);
+    MOUSE_RADIUS: 220,
+    MOUSE_PULL: 0.30,
 
-    // ── THREADS (CatmullRom tubes) ───────────────────────────────
-    function makeThread(color, opacity, radius, pts) {
-      const curve = new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(...p)));
-      const m = new THREE.Mesh(
-        new THREE.TubeGeometry(curve, 72, radius, 8, false),
-        new THREE.MeshBasicMaterial({ color, transparent: true, opacity })
-      );
-      semanticGroup.add(m);
-      return { m, curve };
-    }
+    DOT_R: 1.65,
+    DOT_R_ACTIVE: 3.6,
 
-    const threads = [
-      makeThread(0x4f46e5, 0.24, 0.013, [[0.9,1.3,-0.2],[1.8,0.9,-0.5],[2.6,0.5,-0.8],[3.2,0.3,-1.0],[4.2,0.7,-1.7],[5.0,0.2,-2.3]]),
-      makeThread(0x0ea5e9, 0.20, 0.012, [[1.4,-1.2,-0.4],[2.0,-0.7,-0.7],[2.7,-0.4,-0.9],[3.2,-0.2,-1.0],[4.1,-0.5,-1.6],[4.8,0.0,-2.3]]),
-      makeThread(0xa5b4fc, 0.16, 0.010, [[1.2,0.7,-0.1],[2.0,0.7,-0.5],[2.8,0.4,-0.9],[3.5,0.7,-1.3]])
-    ];
+    EDGE_ALPHA_LEFT: 0.032,
+    EDGE_ALPHA_MID: 0.072,
+    EDGE_ALPHA_RIGHT: 0.155,
 
-    // ── BEAM SHADER ──────────────────────────────────────────────
-    const beamVS = `varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`;
-    const beamFS = `varying vec2 vUv;uniform vec3 uColor;uniform float uOpacity;void main(){float core=smoothstep(0.5,0.0,abs(vUv.x-0.5));float fadeY=smoothstep(0.0,0.22,vUv.y)*smoothstep(1.0,0.70,vUv.y);float bloom=pow(core,1.1)*fadeY;gl_FragColor=vec4(uColor,bloom*uOpacity);}`;
+    INDIGO: '55,48,163',
+    SKY: '14,165,233',
+    SLATE: '132,147,169',
+    VALID: '79,70,229',
+    LIGHT: '255,255,255'
+  };
 
-    function makeBeam(color, opacity, w, h, x, y, z, rz) {
-      const mat = new THREE.ShaderMaterial({
-        transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-        uniforms: { uColor: { value: new THREE.Color(color) }, uOpacity: { value: opacity } },
-        vertexShader: beamVS, fragmentShader: beamFS
-      });
-      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), mat);
-      m.position.set(x, y, z);
-      m.rotation.z = rz;
-      semanticGroup.add(m);
-      return m;
-    }
+  let W, H, cellW, cellH, dpr;
+  let pts = [];
+  let time = 0;
+  let mouse = { x: -9999, y: -9999 };
 
-    const signalBeam     = makeBeam(0x4f46e5, 0.11, 1.1, 10.8,  2.9,  0.4, -1.35, -0.36);
-    const extractionBeam = makeBeam(0x0ea5e9, 0.08, 0.88, 8.8,  3.8, -0.2, -1.95,  0.22);
-    const softWhiteBeam  = makeBeam(0xffffff, 0.05, 1.8, 12.5,  2.1,  0.0, -2.8,  -0.06);
+  function clamp(v, min, max) {
+    return Math.max(min, Math.min(max, v));
+  }
 
-    // ── TRAVELING PULSES ─────────────────────────────────────────
-    const pulseVS = `varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`;
-    const pulseFS = `varying vec2 vUv;uniform vec3 uColor;void main(){vec2 uv=vUv-0.5;float d=length(uv);float a=smoothstep(0.5,0.0,d)*0.52;gl_FragColor=vec4(uColor,a);}`;
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
 
-    function makePulse(color, radius) {
-      const m = new THREE.Mesh(new THREE.PlaneGeometry(radius, radius),
-        new THREE.ShaderMaterial({
-          transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-          uniforms: { uColor: { value: new THREE.Color(color) } },
-          vertexShader: pulseVS, fragmentShader: pulseFS
-        }));
-      semanticGroup.add(m);
-      return m;
-    }
+  function smoothstep(a, b, x) {
+    const t = clamp((x - a) / (b - a), 0, 1);
+    return t * t * (3 - 2 * t);
+  }
 
-    const travelingPulses = [
-      { pulse: makePulse(0x4f46e5, 0.20), threadIndex: 0, speed: 0.10, offset: 0.02 },
-      { pulse: makePulse(0x0ea5e9, 0.18), threadIndex: 1, speed: 0.12, offset: 0.40 },
-      { pulse: makePulse(0xa5b4fc, 0.16), threadIndex: 2, speed: 0.08, offset: 0.66 }
-    ];
+  function noise(x, y, t) {
+    const n = Math.sin(x * 127.1 + y * 311.7 + t * 74.3) * 43758.5453;
+    return (n - Math.floor(n)) * 2 - 1;
+  }
 
-    // ── VALIDATION RING ──────────────────────────────────────────
-    const validationRing = new THREE.Mesh(
-      new THREE.RingGeometry(0.10, 0.13, 40),
-      new THREE.MeshBasicMaterial({ color: 0x0ea5e9, transparent: true, opacity: 0.56, side: THREE.DoubleSide })
+  function smoothNoise(x, y, t) {
+    const ix = Math.floor(x), iy = Math.floor(y);
+    const fx = x - ix, fy = y - iy;
+    const ux = fx * fx * (3 - 2 * fx);
+    const uy = fy * fy * (3 - 2 * fy);
+
+    return (
+      noise(ix, iy, t) * (1 - ux) * (1 - uy) +
+      noise(ix + 1, iy, t) * ux * (1 - uy) +
+      noise(ix, iy + 1, t) * (1 - ux) * uy +
+      noise(ix + 1, iy + 1, t) * ux * uy
     );
-    validationRing.position.set(...nodePositions[5]);
-    semanticGroup.add(validationRing);
+  }
 
-    // ── DUST PARTICLES ───────────────────────────────────────────
-    const dustCount = 1150;
-    const dpos = new Float32Array(dustCount * 3);
-    const dsizes = new Float32Array(dustCount);
-    const doff = new Float32Array(dustCount);
-    for (let i = 0; i < dustCount; i++) {
-      dpos[i*3]   = (Math.random() - 0.15) * 18;
-      dpos[i*3+1] = (Math.random() - 0.5) * 11;
-      dpos[i*3+2] = (Math.random() - 0.5) * 14;
-      dsizes[i] = Math.random() * 1.8 + 0.4;
-      doff[i]   = Math.random() * Math.PI * 2;
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = hero.offsetWidth;
+    H = hero.offsetHeight;
+
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+
+    cellW = W / (CFG.COLS - 1);
+    cellH = H / (CFG.ROWS - 1);
+
+    buildGrid();
+  }
+
+  function buildGrid() {
+    pts = [];
+
+    for (let row = 0; row < CFG.ROWS; row++) {
+      for (let col = 0; col < CFG.COLS; col++) {
+        const ox = col * cellW;
+        const oy = row * cellH;
+        const xn = ox / W;
+
+        const toMid = smoothstep(0.20, 0.52, xn);
+        const toRight = smoothstep(0.54, 0.88, xn);
+
+        const amp = lerp(lerp(CFG.AMP_LEFT, CFG.AMP_MID, toMid), CFG.AMP_RIGHT, toRight);
+        const spring = lerp(lerp(CFG.SPRING_LEFT, CFG.SPRING_MID, toMid), CFG.SPRING_RIGHT, toRight);
+        const friction = lerp(lerp(CFG.FRICTION_LEFT, CFG.FRICTION_MID, toMid), CFG.FRICTION_RIGHT, toRight);
+        const edgeAlpha = lerp(lerp(CFG.EDGE_ALPHA_LEFT, CFG.EDGE_ALPHA_MID, toMid), CFG.EDGE_ALPHA_RIGHT, toRight);
+
+        const zone = xn < 0.36 ? 'fragmented' : xn < 0.68 ? 'aligned' : 'governed';
+
+        const validationHub =
+          zone === 'governed' &&
+          (col === CFG.COLS - 5 || col === CFG.COLS - 8 || col === CFG.COLS - 11) &&
+          (row === 3 || row === 7 || row === 11);
+
+        const signalNode =
+          zone === 'aligned' &&
+          (col === Math.floor(CFG.COLS * 0.50) || col === Math.floor(CFG.COLS * 0.58)) &&
+          (row === 5 || row === 9);
+
+        pts.push({
+          ox, oy,
+          x: ox, y: oy,
+          vx: 0, vy: 0,
+          col, row,
+          zone,
+          amp,
+          spring,
+          friction,
+          edgeAlpha,
+          phase: Math.random() * Math.PI * 2,
+          edge: col === 0 || col === CFG.COLS - 1 || row === 0 || row === CFG.ROWS - 1,
+          validationHub,
+          signalNode
+        });
+      }
     }
-    const dustGeo = new THREE.BufferGeometry();
-    dustGeo.setAttribute('position', new THREE.BufferAttribute(dpos, 3));
-    dustGeo.setAttribute('aSize',    new THREE.BufferAttribute(dsizes, 1));
-    dustGeo.setAttribute('aOffset',  new THREE.BufferAttribute(doff, 1));
+  }
 
-    const dustMat = new THREE.ShaderMaterial({
-      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-      uniforms: {
-        uTime:       { value: 0 },
-        uColorA:     { value: new THREE.Color(0x94a3b8) },
-        uColorB:     { value: new THREE.Color(0x818cf8) },
-        uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 1.8) }
-      },
-      vertexShader: `
-        attribute float aSize; attribute float aOffset;
-        uniform float uTime; uniform float uPixelRatio;
-        varying float vMix;
-        void main() {
-          vec3 p = position;
-          p.y += sin(uTime * 0.18 + aOffset + position.x * 0.12) * 0.08;
-          p.x += cos(uTime * 0.10 + aOffset + position.y * 0.08) * 0.03;
-          vec4 mv = modelViewMatrix * vec4(p, 1.0);
-          gl_Position = projectionMatrix * mv;
-          gl_PointSize = aSize * uPixelRatio * (16.0 / -mv.z);
-          vMix = clamp((position.z + 7.0) / 14.0, 0.0, 1.0);
-        }`,
-      fragmentShader: `
-        uniform vec3 uColorA; uniform vec3 uColorB; varying float vMix;
-        void main() {
-          vec2 uv = gl_PointCoord - 0.5;
-          float a = smoothstep(0.5, 0.0, length(uv));
-          vec3 col = mix(uColorA, uColorB, vMix * 0.45);
-          gl_FragColor = vec4(col, a * 0.14);
-        }`
+  function pointIndex(col, row) {
+    return row * CFG.COLS + col;
+  }
+
+  function update() {
+    time += 1;
+    const t = time * CFG.NOISE_SPEED;
+
+    pts.forEach(p => {
+      const nx = p.ox * CFG.NOISE_SCALE;
+      const ny = p.oy * CFG.NOISE_SCALE;
+
+      let dx = smoothNoise(nx, ny, t) * p.amp;
+      let dy = smoothNoise(nx + 31, ny + 17, t) * p.amp;
+
+      dx += smoothNoise(nx * 2.1, ny * 2.1, t * 1.7) * p.amp * 0.28;
+      dy += smoothNoise(nx * 2.1 + 4, ny * 2.1 + 2, t * 1.5) * p.amp * 0.22;
+
+      if (p.zone === 'aligned') {
+        dx *= 0.80;
+        dy *= 0.70;
+      }
+
+      if (p.zone === 'governed') {
+        dx *= 0.38;
+        dy *= 0.34;
+        dx += Math.sin(t * 180 + p.row * 0.42) * 1.5;
+      }
+
+      if (p.zone === 'fragmented') {
+        dx += Math.sin(t * 260 + p.phase) * 3.2;
+        dy += Math.cos(t * 220 + p.phase) * 2.1;
+      }
+
+      let tx = p.ox + dx;
+      let ty = p.oy + dy;
+
+      const mdx = p.x - mouse.x;
+      const mdy = p.y - mouse.y;
+      const md = Math.sqrt(mdx * mdx + mdy * mdy);
+
+      if (md < CFG.MOUSE_RADIUS && md > 0) {
+        const falloff = 1 - md / CFG.MOUSE_RADIUS;
+        const pull = CFG.MOUSE_PULL * (p.zone === 'fragmented' ? 1.05 : p.zone === 'aligned' ? 0.92 : 0.76);
+        tx += (mouse.x - p.x) * falloff * pull;
+        ty += (mouse.y - p.y) * falloff * pull;
+      }
+
+      p.vx += (tx - p.x) * p.spring;
+      p.vy += (ty - p.y) * p.spring;
+      p.vx *= p.friction;
+      p.vy *= p.friction;
+      p.x += p.vx;
+      p.y += p.vy;
+    });
+  }
+
+  function drawBackgroundAtmosphere() {
+    const leftGlow = ctx.createRadialGradient(W * 0.16, H * 0.46, 0, W * 0.16, H * 0.46, W * 0.34);
+    leftGlow.addColorStop(0, 'rgba(79,70,229,0.045)');
+    leftGlow.addColorStop(1, 'rgba(79,70,229,0)');
+    ctx.fillStyle = leftGlow;
+    ctx.fillRect(0, 0, W, H);
+
+    const midGlow = ctx.createRadialGradient(W * 0.55, H * 0.48, 0, W * 0.55, H * 0.48, W * 0.22);
+    midGlow.addColorStop(0, 'rgba(255,255,255,0.28)');
+    midGlow.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = midGlow;
+    ctx.fillRect(0, 0, W, H);
+
+    const rightGlow = ctx.createRadialGradient(W * 0.84, H * 0.42, 0, W * 0.84, H * 0.42, W * 0.26);
+    rightGlow.addColorStop(0, 'rgba(14,165,233,0.055)');
+    rightGlow.addColorStop(1, 'rgba(14,165,233,0)');
+    ctx.fillStyle = rightGlow;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawExtractionLanes() {
+    const governedCols = [CFG.COLS - 8, CFG.COLS - 5];
+    governedCols.forEach((col, idx) => {
+      ctx.beginPath();
+      for (let row = 1; row < CFG.ROWS - 1; row++) {
+        const p = pts[pointIndex(col, row)];
+        if (row === 1) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+      ctx.globalAlpha = 0.09 + Math.sin(time * 0.012 + idx) * 0.018;
+      ctx.strokeStyle = idx === 0 ? `rgb(${CFG.VALID})` : `rgb(${CFG.SKY})`;
+      ctx.lineWidth = 1.1;
+      ctx.stroke();
+    });
+  }
+
+  function drawEdges() {
+    for (let i = 0; i < pts.length; i++) {
+      const a = pts[i];
+
+      const neighbours = [];
+      if (a.col < CFG.COLS - 1) neighbours.push(pts[i + 1]);
+      if (a.row < CFG.ROWS - 1) neighbours.push(pts[i + CFG.COLS]);
+      if (a.zone !== 'fragmented' && a.col < CFG.COLS - 1 && a.row < CFG.ROWS - 1) {
+        neighbours.push(pts[i + CFG.COLS + 1]);
+      }
+
+      for (const b of neighbours) {
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const expected = Math.max(cellW, cellH) * 1.26;
+
+        if (dist > expected * (a.zone === 'fragmented' ? 1.08 : 1.34)) continue;
+
+        const mx = (a.x + b.x) * 0.5;
+        const my = (a.y + b.y) * 0.5;
+
+        const mdx = mx - mouse.x;
+        const mdy = my - mouse.y;
+        const md = Math.sqrt(mdx * mdx + mdy * mdy);
+        const mouseBoost = md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) * 0.13 : 0;
+
+        const distFade = Math.max(0, 1 - dist / (expected * 1.16));
+
+        let baseAlpha = Math.max(a.edgeAlpha, b.edgeAlpha);
+        if (a.zone === 'governed' && b.zone === 'governed') baseAlpha *= 1.26;
+        if (a.zone === 'fragmented' && b.zone === 'fragmented') baseAlpha *= 0.76;
+
+        const alpha = (baseAlpha + mouseBoost) * distFade;
+
+        let color = CFG.SLATE;
+        if (a.zone === 'governed' && b.zone === 'governed') color = CFG.INDIGO;
+        else if (a.zone === 'fragmented' && b.zone === 'fragmented') color = CFG.INDIGO;
+        else color = CFG.SLATE;
+
+        const isExtractionPath =
+          (a.zone === 'governed' && b.zone === 'governed') &&
+          (a.col === CFG.COLS - 8 || a.col === CFG.COLS - 5 || b.col === CFG.COLS - 8 || b.col === CFG.COLS - 5);
+
+        ctx.globalAlpha = isExtractionPath ? alpha * 1.16 : alpha;
+        ctx.strokeStyle = isExtractionPath ? `rgb(${CFG.SKY})` : `rgb(${color})`;
+        ctx.lineWidth = isExtractionPath ? 0.95 : (a.edge || b.edge ? 0.45 : 0.66);
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  function drawDots() {
+    pts.forEach(p => {
+      const mdx = p.x - mouse.x;
+      const mdy = p.y - mouse.y;
+      const md = Math.sqrt(mdx * mdx + mdy * mdy);
+      const near = md < CFG.MOUSE_RADIUS;
+      const mouseGlow = near ? (1 - md / CFG.MOUSE_RADIUS) : 0;
+
+      let color = CFG.SLATE;
+      let alpha = p.edge ? 0.085 : 0.18;
+      let radius = p.edge ? CFG.DOT_R * 0.72 : CFG.DOT_R;
+
+      if (p.zone === 'fragmented') {
+        color = CFG.INDIGO;
+        alpha *= 0.82;
+      } else if (p.zone === 'aligned') {
+        color = CFG.SLATE;
+      } else {
+        color = CFG.SKY;
+        alpha *= 1.12;
+      }
+
+      if (p.signalNode) {
+        color = CFG.SLATE;
+        alpha = 0.30 + Math.sin(time * 0.022 + p.col) * 0.04;
+        radius = 2.1;
+      }
+
+      if (p.validationHub) {
+        color = CFG.VALID;
+        alpha = 0.80 + Math.sin(time * 0.03 + p.row) * 0.08;
+        radius = 3.0;
+      }
+
+      alpha += mouseGlow * 0.40;
+      radius += mouseGlow * (CFG.DOT_R_ACTIVE - CFG.DOT_R);
+
+      if (mouseGlow > 0.12 || p.validationHub || p.signalNode) {
+        const haloR = p.validationHub ? radius * 4.8 : p.signalNode ? radius * 3.8 : radius * 4.0;
+        const haloAlpha = p.validationHub ? 0.16 : p.signalNode ? 0.08 : mouseGlow * 0.14;
+        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
+        grad.addColorStop(0, `rgba(${color},${haloAlpha})`);
+        grad.addColorStop(1, `rgba(${color},0)`);
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, haloR, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.globalAlpha = Math.min(1, alpha);
+      ctx.fillStyle = `rgb(${color})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (p.validationHub) {
+        const ring = 5.4 + Math.sin(time * 0.025 + p.col) * 0.55;
+        ctx.globalAlpha = 0.22;
+        ctx.strokeStyle = `rgb(${CFG.VALID})`;
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, ring, 0, Math.PI * 2);
+        ctx.stroke();
+      }
     });
 
-    root.add(new THREE.Points(dustGeo, dustMat));
+    ctx.globalAlpha = 1;
+  }
 
-    // ── MOUSE ────────────────────────────────────────────────────
-    const mouse = { x: 0, y: 0 };
-    const targetMouse = { x: 0, y: 0 };
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    drawBackgroundAtmosphere();
+    drawEdges();
+    drawExtractionLanes();
+    drawDots();
+  }
 
-    window.addEventListener('pointermove', e => {
-      const r = mount.getBoundingClientRect();
-      targetMouse.x = ((e.clientX - r.left) / r.width  - 0.5) * 2;
-      targetMouse.y = ((e.clientY - r.top)  / r.height - 0.5) * 2;
-    }, { passive: true });
-    window.addEventListener('pointerleave', () => { targetMouse.x = 0; targetMouse.y = 0; }, { passive: true });
+  function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+  }
 
-    // ── RESIZE ───────────────────────────────────────────────────
-    function resize() {
-      const r = mount.getBoundingClientRect();
-      const w = Math.max(1, r.width), h = Math.max(1, r.height);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h, false);
-    }
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
+  window.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  }, { passive: true });
 
-    // ── ANIMATION LOOP ───────────────────────────────────────────
-    const clock = new THREE.Clock();
-
-    function animate() {
-      const t = clock.getElapsedTime();
-
-      mouse.x += (targetMouse.x - mouse.x) * 0.04;
-      mouse.y += (targetMouse.y - mouse.y) * 0.04;
-
-      dustMat.uniforms.uTime.value = t;
-
-      root.rotation.y  = mouse.x * 0.08;
-      root.rotation.x  = -mouse.y * 0.03;
-      root.position.x  = mouse.x * 0.14;
-      root.position.y  = -mouse.y * 0.07;
-
-      planes[0].rotation.z = 0.02 + Math.sin(t * 0.20) * 0.008;
-      planes[1].rotation.z = 0.06 + Math.sin(t * 0.15 + 1.4) * 0.010;
-      planes[2].rotation.z = -0.05 + Math.sin(t * 0.18 + 2.1) * 0.006;
-
-      prism.rotation.x += 0.0012; prism.rotation.y += 0.0018;
-      prismShard.rotation.x += 0.0009; prismShard.rotation.y += 0.0013;
-
-      nodeMeshes.forEach((n, i) => n.scale.setScalar(1 + Math.sin(t * (0.8 + i * 0.04) + i) * 0.05));
-      graphLines.material.opacity = 0.24 + Math.sin(t * 0.45) * 0.02;
-
-      signalBeam.material.uniforms.uOpacity.value     = 0.10 + Math.sin(t * 0.70) * 0.014;
-      extractionBeam.material.uniforms.uOpacity.value = 0.07 + Math.sin(t * 0.95 + 0.8) * 0.010;
-      softWhiteBeam.material.uniforms.uOpacity.value  = 0.045 + Math.sin(t * 0.52 + 2.2) * 0.006;
-
-      travelingPulses.forEach(item => {
-        const u = (t * item.speed + item.offset) % 1;
-        const p = threads[item.threadIndex].curve.getPointAt(u);
-        item.pulse.position.copy(p);
-        item.pulse.lookAt(camera.position);
-      });
-
-      validationRing.rotation.z = t * 0.9;
-      validationRing.material.opacity = 0.46 + Math.sin(t * 1.7) * 0.10;
-
-      camera.position.x += (mouse.x * 0.34 - camera.position.x) * 0.03;
-      camera.position.y += (-mouse.y * 0.14 - camera.position.y) * 0.03;
-      camera.lookAt(1.9, -0.1, -1.1);
-
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    }
-
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
-      renderer.render(scene, camera);
-    } else {
-      animate();
-    }
+  window.addEventListener('mouseleave', () => {
+    mouse.x = -9999;
+    mouse.y = -9999;
   });
-</script>
 
+  window.addEventListener('resize', resize, { passive: true });
+
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    resize();
+    draw();
+  } else {
+    resize();
+    loop();
+  }
+})();
+</script>
 </body>
 </html>
