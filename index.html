@@ -9,16 +9,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <script>document.documentElement.classList.add('js');</script>
+
   <style>
     :root {
-      --bg:#ffffff; --bg-off:#f8f9fc; --bg-panel:#f2f4f8; --bg-deep:#0f1c3a;
+      --bg:#ffffff; --bg-off:#f8f9fc; --bg-deep:#0f1c3a;
       --line:#dde3ed; --line-soft:#eaecf2;
       --text:#0d1424; --text-mid:#374259; --text-soft:#677390; --text-dim:#98a3b8;
       --indigo:#3730a3; --indigo-mid:#4f46e5; --indigo-soft:#eef2ff; --indigo-pale:#f5f6ff;
-      --sky:#0ea5e9; --sky-soft:#e0f2fe;
-      --serif:'Instrument Serif',Georgia,serif;
-      --sans:'IBM Plex Sans',system-ui,sans-serif;
-      --mono:'IBM Plex Mono',monospace;
+      --sky:#0ea5e9;
+      --serif:'Instrument Serif', Georgia, serif;
+      --sans:'IBM Plex Sans', system-ui, sans-serif;
+      --mono:'IBM Plex Mono', monospace;
       --max:1180px; --ease:cubic-bezier(.16,1,.3,1);
     }
 
@@ -30,12 +31,12 @@
       color:var(--text);
       line-height:1.65;
       -webkit-font-smoothing:antialiased;
-      overflow-x:hidden;
       text-rendering:optimizeLegibility;
+      overflow-x:hidden;
     }
     a{text-decoration:none;color:inherit;}
     img{display:block;max-width:100%;}
-    .wrap{width:min(var(--max),calc(100% - 48px));margin:0 auto;}
+    .wrap{width:min(var(--max), calc(100% - 48px));margin:0 auto;}
 
     nav{
       position:sticky;top:0;z-index:120;
@@ -123,6 +124,7 @@
       box-shadow:0 0 10px rgba(14,165,233,.45);
       animation:pulse 2.4s ease-in-out infinite;
     }
+
     @keyframes pulse{
       0%,100%{opacity:1;transform:scale(1);}
       50%{opacity:.35;transform:scale(.72);}
@@ -188,7 +190,7 @@
       border:1px solid rgba(198,208,224,.72);
       border-radius:20px;overflow:hidden;background:rgba(255,255,255,.82);
       backdrop-filter:blur(20px) saturate(160%);
-      box-shadow:0 20px 60px rgba(15,28,58,.08),inset 0 1px 0 rgba(255,255,255,.62);
+      box-shadow:0 20px 60px rgba(15,28,58,.08), inset 0 1px 0 rgba(255,255,255,.62);
       padding:18px;
     }
     .hero-shot-frame.hero-no-img{
@@ -333,14 +335,15 @@
     .d1{transition-delay:.08s;}
     .d2{transition-delay:.16s;}
 
-    @media(max-width:1180px){
+    @media (max-width:1180px){
       .hero-inner{grid-template-columns:1fr;gap:40px;}
       .hero-aside{justify-content:flex-start;}
       .hero-shot{max-width:680px;}
       .solution-layout{grid-template-columns:1fr;}
       .footer-grid{grid-template-columns:1fr 1fr;}
     }
-    @media(max-width:768px){
+
+    @media (max-width:768px){
       .wrap{width:calc(100% - 32px);}
       .nav-links{display:none;}
       section{padding:80px 0;}
@@ -566,8 +569,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let W, H, cellW, cellH, dpr;
   let pts = [];
   let ghostPts = [];
+  let memoryTrails = [];
   let time = 0;
-  let mouse = { x: -9999, y: -9999, active: false };
+  let mouse = { x: -9999, y: -9999, active: false, lastX: -9999, lastY: -9999 };
 
   function clamp(v, min, max) {
     return Math.max(min, Math.min(max, v));
@@ -667,21 +671,12 @@ document.addEventListener('DOMContentLoaded', () => {
           zone === 'governed' &&
           (col === CFG.COLS - 8 || col === CFG.COLS - 6);
 
-        const nodeType =
-          validationHub ? 'validation' :
-          anchor ? 'anchor' :
-          backbone ? 'backbone' :
-          zone === 'fragmented' ? 'evidence' :
-          zone === 'aligned' ? 'reconcile' :
-          'governed';
-
         pts.push({
           ox, oy,
           x: ox, y: oy,
           vx: 0, vy: 0,
           col, row,
           zone,
-          nodeType,
           amp,
           spring,
           friction,
@@ -717,12 +712,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function idx(col, row) {
-    return row * CFG.COLS + col;
-  }
-
   function updatePrimary() {
     const t = time * CFG.NOISE_SPEED;
+
+    const anchors = pts.filter(p => p.anchor);
 
     pts.forEach(p => {
       const nx = p.ox * CFG.NOISE_SCALE;
@@ -760,28 +753,26 @@ document.addEventListener('DOMContentLoaded', () => {
         dy *= 0.20;
       }
 
-      // invisible intelligence on the right:
-      // local snapping toward structural axes and anchor basins
       if (p.zone === 'governed') {
         const laneA = Math.round((W * 0.73) / cellW) * cellW;
         const laneB = Math.round((W * 0.82) / cellW) * cellW;
         const laneWeightA = Math.exp(-Math.abs(p.ox - laneA) / 120);
         const laneWeightB = Math.exp(-Math.abs(p.ox - laneB) / 120);
-        const snapTargetX = (laneA * laneWeightA + laneB * laneWeightB) / Math.max(0.0001, laneWeightA + laneWeightB);
-        dx += (snapTargetX - p.ox) * 0.012 * (laneWeightA + laneWeightB);
+        const laneMix = Math.max(0.0001, laneWeightA + laneWeightB);
+        const snapTargetX = (laneA * laneWeightA + laneB * laneWeightB) / laneMix;
 
-        const rowSnap = Math.round(p.oy / (cellH * 1.0)) * cellH;
+        dx += (snapTargetX - p.ox) * 0.012 * laneMix;
+
+        const rowSnap = Math.round(p.oy / cellH) * cellH;
         dy += (rowSnap - p.oy) * 0.010;
       }
 
-      // anchor basins
       if (p.zone === 'governed' && !p.anchor && !p.validationHub) {
         let basinX = 0;
         let basinY = 0;
         let basinW = 0;
 
-        pts.forEach(a => {
-          if (!a.anchor) return;
+        anchors.forEach(a => {
           const d = distance(p.ox, p.oy, a.ox, a.oy);
           if (d > 180) return;
           const w = 1 - d / 180;
@@ -791,10 +782,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (basinW > 0) {
-          const ax = basinX / basinW;
-          const ay = basinY / basinW;
-          dx += (ax - p.ox) * 0.010;
-          dy += (ay - p.oy) * 0.006;
+          dx += ((basinX / basinW) - p.ox) * 0.010;
+          dy += ((basinY / basinW) - p.oy) * 0.006;
         }
       }
 
@@ -831,10 +820,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function updateMemoryTrails() {
+    memoryTrails = memoryTrails
+      .map(t => ({ ...t, life: t.life - 1 }))
+      .filter(t => t.life > 0);
+  }
+
   function update() {
     time += 1;
     updatePrimary();
     updateGhost();
+    updateMemoryTrails();
   }
 
   function drawAtmosphere() {
@@ -1003,7 +999,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cols.forEach((col, i) => {
       ctx.beginPath();
       for (let row = 1; row < CFG.ROWS - 1; row++) {
-        const p = pts[idx(col, row)];
+        const p = pts[row * CFG.COLS + col];
         if (row === 1) ctx.moveTo(p.x, p.y);
         else ctx.lineTo(p.x, p.y);
       }
@@ -1032,6 +1028,48 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.beginPath();
     ctx.arc(mouse.x, mouse.y, CFG.REVEAL_RADIUS * 0.72, 0, Math.PI * 2);
     ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  function addMemoryTrail() {
+    if (!mouse.active) return;
+    if (mouse.x < W * 0.60) return;
+
+    const moved = distance(mouse.x, mouse.y, mouse.lastX, mouse.lastY);
+    if (moved < 14) return;
+
+    const nearby = pts.filter(p => {
+      if (p.zone !== 'governed') return false;
+      return distance(p.x, p.y, mouse.x, mouse.y) < 80;
+    }).slice(0, 8);
+
+    if (nearby.length < 2) return;
+
+    for (let i = 0; i < nearby.length - 1; i++) {
+      const a = nearby[i];
+      const b = nearby[i + 1];
+      memoryTrails.push({
+        x1: a.x, y1: a.y,
+        x2: b.x, y2: b.y,
+        life: 34
+      });
+    }
+
+    mouse.lastX = mouse.x;
+    mouse.lastY = mouse.y;
+  }
+
+  function drawMemoryTrails() {
+    memoryTrails.forEach(t => {
+      const alpha = (t.life / 34) * 0.13;
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = 'rgb(79,70,229)';
+      ctx.lineWidth = 0.7;
+      ctx.beginPath();
+      ctx.moveTo(t.x1, t.y1);
+      ctx.lineTo(t.x2, t.y2);
+      ctx.stroke();
+    });
     ctx.globalAlpha = 1;
   }
 
@@ -1135,6 +1173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawGhostEdges();
     drawPrimaryEdges();
     drawBackboneLanes();
+    drawMemoryTrails();
     drawInteractionRings();
     drawNodes();
     ctx.globalAlpha = 1;
@@ -1142,6 +1181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function loop() {
     update();
+    addMemoryTrail();
     draw();
     requestAnimationFrame(loop);
   }
