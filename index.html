@@ -21,314 +21,137 @@
       --mono:'IBM Plex Mono',monospace;
       --max:1180px; --ease:cubic-bezier(.16,1,.3,1);
     }
-
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
-    body{
-      font-family:var(--sans);
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.65;
-      -webkit-font-smoothing:antialiased;
-      overflow-x:hidden;
-      text-rendering:optimizeLegibility;
-    }
+    body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;text-rendering:optimizeLegibility;}
     a{text-decoration:none;color:inherit;}
     img{display:block;max-width:100%;}
     .wrap{width:min(var(--max),calc(100% - 48px));margin:0 auto;}
 
-    /* NAV */
-    nav{
-      position:sticky;top:0;z-index:120;
-      background:rgba(255,255,255,.92);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line-soft);
-      transition:box-shadow .25s;
-    }
+    nav{position:sticky;top:0;z-index:120;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);transition:box-shadow .25s;}
     nav.raised{box-shadow:0 1px 18px rgba(55,48,163,.07);}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:32px;}
-    .logo{
-      display:flex;align-items:center;gap:10px;
-      font-family:var(--sans);font-size:19px;font-weight:400;
-      color:var(--text);letter-spacing:-.02em;transition:color .2s;
-    }
+    .logo{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-size:19px;font-weight:400;color:var(--text);letter-spacing:-.02em;transition:color .2s;}
     .logo:hover{color:var(--indigo);}
     .nav-links{display:flex;align-items:center;gap:28px;}
-    .nav-links a{
-      font-size:14px;font-weight:400;color:var(--text-soft);
-      letter-spacing:.01em;transition:color .18s;
-    }
+    .nav-links a{font-size:14px;font-weight:400;color:var(--text-soft);letter-spacing:.01em;transition:color .18s;}
     .nav-links a:hover{color:var(--text);}
-    .nav-cta{
-      background:var(--indigo)!important;color:#fff!important;
-      padding:9px 20px;border-radius:6px;
-      font-size:13px!important;font-weight:500!important;
-      transition:background .18s,transform .18s!important;
-    }
+    .nav-cta{background:var(--indigo)!important;color:#fff!important;padding:9px 20px;border-radius:6px;font-size:13px!important;font-weight:500!important;transition:background .18s,transform .18s!important;}
     .nav-cta:hover{background:#312e81!important;transform:translateY(-1px)!important;}
 
-    /* HERO */
     .hero{
-      position:relative;
-      overflow:hidden;
-      min-height:96vh;
-      display:flex;
-      align-items:center;
+      position:relative;overflow:hidden;min-height:96vh;display:flex;align-items:center;
       padding:104px 0 94px;
       background:
-        radial-gradient(circle at 14% 28%, rgba(79,70,229,.055), transparent 0 22%),
-        radial-gradient(circle at 72% 54%, rgba(14,165,233,.04), transparent 0 24%),
+        radial-gradient(circle at 12% 30%, rgba(79,70,229,.060), transparent 0 20%),
+        radial-gradient(circle at 68% 48%, rgba(14,165,233,.045), transparent 0 23%),
         linear-gradient(160deg,#fbfcff 0%,#f5f8fc 58%,#eef3f9 100%);
       isolation:isolate;
     }
-
-    #topo-canvas{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      pointer-events:none;
-      z-index:0;
-    }
-
+    #topo-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;}
     .hero-vignette{
       position:absolute;inset:0;z-index:1;pointer-events:none;
       background:
         linear-gradient(90deg,
-          rgba(249,251,255,.95) 0%,
-          rgba(249,251,255,.84) 26%,
-          rgba(249,251,255,.42) 50%,
-          rgba(249,251,255,.10) 72%,
+          rgba(249,251,255,.96) 0%,
+          rgba(249,251,255,.86) 26%,
+          rgba(249,251,255,.46) 49%,
+          rgba(249,251,255,.12) 70%,
           transparent 100%
         ),
-        radial-gradient(circle at 22% 38%, rgba(255,255,255,.45), transparent 0 26%);
+        radial-gradient(circle at 22% 38%, rgba(255,255,255,.48), transparent 0 26%);
     }
-
-    .hero-inner{
-      position:relative;z-index:2;
-      display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(320px,520px);
-      gap:clamp(36px,5vw,72px);
-      align-items:center;
-    }
-
+    .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,520px);gap:clamp(36px,5vw,72px);align-items:center;}
     .hero-tag{
-      display:inline-flex;align-items:center;gap:8px;
-      font-family:var(--mono);font-size:11px;font-weight:500;
-      letter-spacing:.14em;text-transform:uppercase;
-      color:var(--indigo-mid);
-      background:rgba(255,255,255,.84);
-      border:1px solid rgba(79,70,229,.12);
-      backdrop-filter:blur(10px);
-      padding:6px 12px;border-radius:999px;
-      margin-bottom:28px;
-      box-shadow:0 6px 20px rgba(55,48,163,.05);
+      display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:500;
+      letter-spacing:.14em;text-transform:uppercase;color:var(--indigo-mid);
+      background:rgba(255,255,255,.84);border:1px solid rgba(79,70,229,.12);backdrop-filter:blur(10px);
+      padding:6px 12px;border-radius:999px;margin-bottom:28px;box-shadow:0 6px 20px rgba(55,48,163,.05);
       opacity:0;animation:fadeUp .7s var(--ease) .05s forwards;
     }
-    .hero-tag::before{
-      content:'';
-      width:6px;height:6px;border-radius:50%;
-      background:var(--sky);
-      box-shadow:0 0 10px rgba(14,165,233,.45);
-      animation:pulse 2.4s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      0%,100%{opacity:1;transform:scale(1);}
-      50%{opacity:.35;transform:scale(.72);}
-    }
-
+    .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--sky);box-shadow:0 0 10px rgba(14,165,233,.45);animation:pulse 2.4s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.72);}}
     .hero h1{
-      font-family:var(--serif);
-      font-size:clamp(44px,6vw,84px);
-      font-weight:400;
-      line-height:.96;
-      letter-spacing:-.03em;
-      color:var(--text);
-      margin-bottom:24px;
-      max-width:680px;
-      opacity:0;animation:fadeUp .85s var(--ease) .15s forwards;
-      text-wrap:balance;
+      font-family:var(--serif);font-size:clamp(44px,6vw,84px);font-weight:400;line-height:.96;letter-spacing:-.03em;
+      color:var(--text);margin-bottom:24px;max-width:680px;opacity:0;animation:fadeUp .85s var(--ease) .15s forwards;text-wrap:balance;
     }
     .hero h1 .accent{color:var(--indigo-mid);}
     .hero-sub{
-      font-size:18px;line-height:1.82;color:var(--text-soft);
-      max-width:520px;font-weight:300;margin-bottom:36px;
+      font-size:18px;line-height:1.82;color:var(--text-soft);max-width:520px;font-weight:300;margin-bottom:36px;
       opacity:0;animation:fadeUp .85s var(--ease) .25s forwards;
     }
-    .hero-actions{
-      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-      opacity:0;animation:fadeUp .85s var(--ease) .35s forwards;
-    }
+    .hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .85s var(--ease) .35s forwards;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+    @keyframes fadeIn{from{opacity:0;transform:translateX(16px);}to{opacity:1;transform:none;}}
 
-    @keyframes fadeUp{
-      from{opacity:0;transform:translateY(18px);}
-      to{opacity:1;transform:none;}
-    }
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateX(16px);}
-      to{opacity:1;transform:none;}
-    }
-
-    .btn{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:13px 26px;border-radius:999px;
-      font-family:var(--sans);font-size:14px;font-weight:500;
-      letter-spacing:.01em;cursor:pointer;border:1px solid transparent;
-      transition:transform .2s var(--ease),box-shadow .2s,background .18s,border-color .18s;
-    }
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.01em;cursor:pointer;border:1px solid transparent;transition:transform .2s var(--ease),box-shadow .2s,background .18s,border-color .18s;}
     .btn:hover{transform:translateY(-2px);}
-    .btn-primary{
-      background:linear-gradient(135deg,#4f46e5 0%,#3730a3 100%);
-      color:#fff;
-      box-shadow:0 8px 28px rgba(79,70,229,.20);
-    }
+    .btn-primary{background:linear-gradient(135deg,#4f46e5 0%,#3730a3 100%);color:#fff;box-shadow:0 8px 28px rgba(79,70,229,.20);}
     .btn-primary:hover{box-shadow:0 12px 36px rgba(79,70,229,.30);}
-    .btn-outline{
-      background:rgba(255,255,255,.78);
-      backdrop-filter:blur(12px);
-      color:var(--text-mid);
-      border-color:rgba(221,227,237,.92);
-      box-shadow:0 4px 16px rgba(13,20,36,.04);
-    }
-    .btn-outline:hover{
-      border-color:var(--text-dim);
-      background:rgba(255,255,255,.94);
-    }
+    .btn-outline{background:rgba(255,255,255,.78);backdrop-filter:blur(12px);color:var(--text-mid);border-color:rgba(221,227,237,.92);box-shadow:0 4px 16px rgba(13,20,36,.04);}
+    .btn-outline:hover{border-color:var(--text-dim);background:rgba(255,255,255,.94);}
 
-    .hero-aside{
-      display:flex;justify-content:flex-end;width:100%;
-      opacity:0;animation:fadeIn .9s var(--ease) .3s forwards;
-    }
+    .hero-aside{display:flex;justify-content:flex-end;width:100%;opacity:0;animation:fadeIn .9s var(--ease) .3s forwards;}
     .hero-shot{width:100%;max-width:540px;}
     .hero-shot-frame{
-      border:1px solid rgba(198,208,224,.72);
-      border-radius:20px;
-      overflow:hidden;
-      background:rgba(255,255,255,.82);
+      border:1px solid rgba(198,208,224,.72);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.82);
       backdrop-filter:blur(20px) saturate(160%);
-      box-shadow:
-        0 20px 60px rgba(15,28,58,.08),
-        inset 0 1px 0 rgba(255,255,255,.62);
+      box-shadow:0 20px 60px rgba(15,28,58,.08),inset 0 1px 0 rgba(255,255,255,.62);
       padding:18px;
     }
     .hero-shot-frame.hero-no-img{
-      min-height:360px;
-      display:flex;align-items:center;justify-content:center;
-      position:relative;overflow:hidden;
+      min-height:360px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
       background:linear-gradient(145deg,rgba(255,255,255,.88) 0%,rgba(241,245,251,.94) 100%);
     }
     .hero-shot-frame.hero-no-img::before{
-      content:'';
-      position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
+      content:'';position:absolute;inset:0;
+      background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
       background-size:32px 32px;
     }
     .hero-shot-frame.hero-no-img::after{
-      content:'Interface fragment coming soon';
-      font-family:var(--mono);font-size:11px;
-      letter-spacing:.1em;color:#8f9db2;
-      text-transform:uppercase;position:relative;z-index:1;
+      content:'Interface fragment coming soon';font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#8f9db2;text-transform:uppercase;position:relative;z-index:1;
     }
-    .hero-shot-frame img{
-      width:100%;height:auto;max-height:640px;object-fit:contain;
-      border-radius:14px;background:#fff;border:1px solid rgba(214,221,233,.8);
-    }
-    .hero-shot-caption{
-      margin-top:12px;
-      font-family:var(--mono);font-size:10px;
-      letter-spacing:.12em;text-transform:uppercase;color:#8f9bb0;
-    }
+    .hero-shot-frame img{width:100%;height:auto;max-height:640px;object-fit:contain;border-radius:14px;background:#fff;border:1px solid rgba(214,221,233,.8);}
+    .hero-shot-caption{margin-top:12px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8f9bb0;}
 
-    /* SECTIONS */
     section{padding:112px 0;}
     section+section{border-top:1px solid var(--line-soft);}
-    .section-label{
-      font-family:var(--mono);font-size:11px;font-weight:500;
-      letter-spacing:.16em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:16px;
-    }
-    .section-title{
-      font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);font-weight:400;
-      line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:18px;max-width:820px;
-    }
-    .section-sub{
-      font-size:17px;line-height:1.82;color:var(--text-soft);max-width:700px;font-weight:300;margin-bottom:52px;
-    }
+    .section-label{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:16px;}
+    .section-title{font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);font-weight:400;line-height:1.08;letter-spacing:-.02em;color:var(--text);margin-bottom:18px;max-width:820px;}
+    .section-sub{font-size:17px;line-height:1.82;color:var(--text-soft);max-width:700px;font-weight:300;margin-bottom:52px;}
 
-    /* M/V */
     #mission-vision{background:var(--bg-off);}
     .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:12px;overflow:hidden;}
-    .mv-card{
-      background:var(--bg);padding:40px 36px 44px;border:1px solid var(--line-soft);
-      position:relative;overflow:hidden;transition:background .25s;
-    }
+    .mv-card{background:var(--bg);padding:40px 36px 44px;border:1px solid var(--line-soft);position:relative;overflow:hidden;transition:background .25s;}
     .mv-card:hover{background:var(--indigo-pale);}
-    .mv-card::after{
-      content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-      background:linear-gradient(90deg,var(--indigo),var(--sky));
-      transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
-    }
+    .mv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--indigo),var(--sky));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
     .mv-card:hover::after{transform:scaleX(1);}
-    .mv-label{
-      font-family:var(--mono);font-size:10px;font-weight:500;
-      letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:18px;
-    }
-    .mv-card p{
-      font-family:var(--serif);font-size:22px;line-height:1.42;
-      letter-spacing:-.01em;color:var(--text);max-width:480px;
-    }
+    .mv-label{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:18px;}
+    .mv-card p{font-family:var(--serif);font-size:22px;line-height:1.42;letter-spacing:-.01em;color:var(--text);max-width:480px;}
 
-    /* PROBLEM */
     .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
     .prob-card{border-top:2px solid var(--line);padding:28px 0 0;position:relative;}
-    .prob-card::before{
-      content:'';position:absolute;top:-2px;left:0;width:0;height:2px;
-      background:linear-gradient(90deg,var(--sky),var(--indigo-mid));
-      transition:width .4s var(--ease);
-    }
+    .prob-card::before{content:'';position:absolute;top:-2px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--sky),var(--indigo-mid));transition:width .4s var(--ease);}
     .prob-card:hover::before{width:100%;}
     .prob-num{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--text-dim);margin-bottom:14px;}
-    .prob-card h3{
-      font-family:var(--serif);font-size:22px;font-weight:400;
-      letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;
-    }
+    .prob-card h3{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;}
     .prob-card p{font-size:15px;line-height:1.82;color:var(--text-soft);font-weight:300;}
 
-    /* SOLUTION */
     .solution-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:56px;align-items:start;}
     .sol-copy p{font-size:17px;line-height:1.88;color:var(--text-soft);font-weight:300;margin-bottom:20px;}
     .sol-copy p:last-child{margin-bottom:0;}
     .sol-panels{display:grid;gap:1px;}
-    .sol-panel{
-      padding:22px 24px;border-left:2px solid var(--line);
-      transition:border-color .2s,background .2s,transform .2s var(--ease);
-    }
-    .sol-panel:hover{
-      border-left-color:var(--indigo-mid);
-      background:var(--indigo-pale);
-      transform:translateX(4px);
-    }
-    .sol-tag{
-      font-family:var(--mono);font-size:10px;letter-spacing:.14em;
-      text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;
-    }
-    .sol-panel h3{
-      font-family:var(--serif);font-size:17px;font-weight:400;
-      color:var(--text);margin-bottom:6px;letter-spacing:-.01em;
-    }
+    .sol-panel{padding:22px 24px;border-left:2px solid var(--line);transition:border-color .2s,background .2s,transform .2s var(--ease);}
+    .sol-panel:hover{border-left-color:var(--indigo-mid);background:var(--indigo-pale);transform:translateX(4px);}
+    .sol-tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;}
+    .sol-panel h3{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);margin-bottom:6px;letter-spacing:-.01em;}
     .sol-panel p{font-size:13.5px;line-height:1.7;color:var(--text-soft);font-weight:300;}
 
-    /* WHY */
     #why{background:var(--bg-off);}
     .strata{display:grid;gap:1px;border-radius:10px;overflow:hidden;}
     .strata-row{display:grid;grid-template-columns:200px 1fr;align-items:stretch;transition:filter .18s;}
     .strata-row:hover{filter:brightness(.97);}
-    .strata-label{
-      padding:24px 26px;font-family:var(--mono);font-size:11px;font-weight:500;
-      letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;
-      border-right:1px solid rgba(255,255,255,.08);
-    }
+    .strata-label{padding:24px 26px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.08);}
     .strata-body{padding:24px 32px;font-size:15px;line-height:1.75;display:flex;align-items:center;font-weight:300;}
     .strata-row:nth-child(1){background:#d1d9f0;color:#1e2650;}
     .strata-row:nth-child(2){background:#b8c4e8;color:#1e2650;}
@@ -336,69 +159,37 @@
     .strata-row:nth-child(4){background:#6e85cc;color:#111a3e;}
     .strata-row:nth-child(5){background:#4f68bc;color:#fff;}
     .strata-row:nth-child(6){background:#3730a3;color:#e0e7ff;}
-    .strata-row:nth-child(1) .strata-label,
-    .strata-row:nth-child(2) .strata-label,
-    .strata-row:nth-child(3) .strata-label,
-    .strata-row:nth-child(4) .strata-label{border-right-color:rgba(0,0,0,.08);}
+    .strata-row:nth-child(1) .strata-label,.strata-row:nth-child(2) .strata-label,.strata-row:nth-child(3) .strata-label,.strata-row:nth-child(4) .strata-label{border-right-color:rgba(0,0,0,.08);}
 
-    /* USE CASES */
     .use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
     .use-card{border-top:2px solid var(--line);padding:26px 0 0;position:relative;}
-    .use-card::before{
-      content:'';position:absolute;top:-2px;left:0;width:0;height:2px;
-      background:var(--indigo-mid);transition:width .4s var(--ease);
-    }
+    .use-card::before{content:'';position:absolute;top:-2px;left:0;width:0;height:2px;background:var(--indigo-mid);transition:width .4s var(--ease);}
     .use-card:hover::before{width:100%;}
-    .use-card h3{
-      font-family:var(--serif);font-size:22px;font-weight:400;
-      letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;
-    }
+    .use-card h3{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.2;color:var(--text);margin-bottom:12px;}
     .use-card p{font-size:15px;line-height:1.82;color:var(--text-soft);font-weight:300;}
 
-    /* CONTACT */
     .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
     .contact-card{border-top:1px solid var(--line);padding:24px 0 0;}
-    .contact-card h3{
-      font-family:var(--serif);font-size:22px;font-weight:400;
-      letter-spacing:-.02em;color:var(--text);margin-bottom:4px;
-    }
-    .contact-role{
-      font-family:var(--mono);font-size:11px;letter-spacing:.12em;
-      text-transform:uppercase;color:var(--text-dim);margin-bottom:14px;
-    }
+    .contact-card h3{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.02em;color:var(--text);margin-bottom:4px;}
+    .contact-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:14px;}
     .contact-email{font-size:14px;color:var(--indigo-mid);transition:color .18s;}
     .contact-email:hover{color:var(--indigo);text-decoration:underline;}
 
-    /* FOOTER */
     footer{background:var(--bg-deep);padding:80px 0 60px;}
     .footer-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr 1fr;gap:48px;margin-bottom:56px;align-items:start;}
     .footer-brand{display:flex;flex-direction:column;gap:16px;}
     .footer-brand p{font-size:14px;line-height:1.8;font-weight:300;color:#7b8fad;max-width:280px;}
-    .footer-logo{
-      display:flex;align-items:center;gap:10px;
-      font-family:var(--sans);font-size:19px;font-weight:400;color:#fff;letter-spacing:-.02em;
-    }
-    .footer-col h4{
-      font-family:var(--mono);font-size:10px;letter-spacing:.2em;
-      text-transform:uppercase;color:#4a5e7a;margin-bottom:18px;
-    }
-    .footer-col a,.footer-col p{
-      display:block;font-size:14px;line-height:2.1;font-weight:300;color:#8fa3be;transition:color .18s;
-    }
+    .footer-logo{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-size:19px;font-weight:400;color:#fff;letter-spacing:-.02em;}
+    .footer-col h4{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#4a5e7a;margin-bottom:18px;}
+    .footer-col a,.footer-col p{display:block;font-size:14px;line-height:2.1;font-weight:300;color:#8fa3be;transition:color .18s;}
     .footer-col a:hover{color:#fff;}
-    .footer-bottom{
-      padding-top:24px;border-top:1px solid rgba(255,255,255,.06);
-      font-size:12px;color:#3d5070;display:flex;justify-content:space-between;align-items:center;
-    }
+    .footer-bottom{padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font-size:12px;color:#3d5070;display:flex;justify-content:space-between;align-items:center;}
 
-    /* REVEAL */
     .reveal{opacity:1;transform:none;transition:opacity .65s var(--ease),transform .65s var(--ease);}
     .js .reveal{opacity:0;transform:translateY(22px);}
     .js .reveal.in{opacity:1;transform:none;}
-    .d1{transition-delay:.08s;}
-    .d2{transition-delay:.16s;}
+    .d1{transition-delay:.08s;} .d2{transition-delay:.16s;}
 
-    /* RESPONSIVE */
     @media(max-width:1180px){
       .hero-inner{grid-template-columns:1fr;gap:40px;}
       .hero-aside{justify-content:flex-start;}
@@ -446,7 +237,6 @@
 <section class="hero" id="top">
   <canvas id="topo-canvas"></canvas>
   <div class="hero-vignette"></div>
-
   <div class="wrap">
     <div class="hero-inner">
       <div>
@@ -458,7 +248,6 @@
           <a href="#contact" class="btn btn-outline">Contact the team</a>
         </div>
       </div>
-
       <div class="hero-aside">
         <div class="hero-shot">
           <div class="hero-shot-frame">
@@ -474,14 +263,8 @@
 <section id="mission-vision">
   <div class="wrap">
     <div class="mv-grid">
-      <div class="mv-card reveal">
-        <div class="mv-label">Mission</div>
-        <p>To turn fragmented enterprise evidence into governed operational knowledge that organisations can trust, maintain, and reuse.</p>
-      </div>
-      <div class="mv-card reveal d1">
-        <div class="mv-label">Vision</div>
-        <p>A world in which organisations no longer rely on scattered documents and tacit memory, but operate on governed, validated, and evolving knowledge.</p>
-      </div>
+      <div class="mv-card reveal"><div class="mv-label">Mission</div><p>To turn fragmented enterprise evidence into governed operational knowledge that organisations can trust, maintain, and reuse.</p></div>
+      <div class="mv-card reveal d1"><div class="mv-label">Vision</div><p>A world in which organisations no longer rely on scattered documents and tacit memory, but operate on governed, validated, and evolving knowledge.</p></div>
     </div>
   </div>
 </section>
@@ -492,21 +275,9 @@
     <div class="section-title reveal">Critical operational knowledge is often scattered across systems, documents, workflows, and individual experts.</div>
     <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
     <div class="prob-grid">
-      <div class="prob-card reveal">
-        <div class="prob-num">01</div>
-        <h3>Expertise disappears</h3>
-        <p>Critical know-how often remains embedded in individual people, workarounds, and context that never become properly structured or reusable across the organisation.</p>
-      </div>
-      <div class="prob-card reveal d1">
-        <div class="prob-num">02</div>
-        <h3>Knowledge never fully transfers</h3>
-        <p>Teams may inherit documents, but not the reasoning, hierarchy, conflict resolution, and operational judgment behind them.</p>
-      </div>
-      <div class="prob-card reveal d2">
-        <div class="prob-num">03</div>
-        <h3>Answers remain fragmented</h3>
-        <p>Relevant signals are distributed across documents, enterprise systems, workflows, and expert input, making them difficult to trust, maintain, and act upon together.</p>
-      </div>
+      <div class="prob-card reveal"><div class="prob-num">01</div><h3>Expertise disappears</h3><p>Critical know-how often remains embedded in individual people, workarounds, and context that never become properly structured or reusable across the organisation.</p></div>
+      <div class="prob-card reveal d1"><div class="prob-num">02</div><h3>Knowledge never fully transfers</h3><p>Teams may inherit documents, but not the reasoning, hierarchy, conflict resolution, and operational judgment behind them.</p></div>
+      <div class="prob-card reveal d2"><div class="prob-num">03</div><h3>Answers remain fragmented</h3><p>Relevant signals are distributed across documents, enterprise systems, workflows, and expert input, making them difficult to trust, maintain, and act upon together.</p></div>
     </div>
   </div>
 </section>
@@ -522,21 +293,9 @@
         <p>The concept should be understood as an operational knowledge system rather than a documentation platform, search tool, or generic assistant.</p>
       </div>
       <div class="sol-panels reveal d1">
-        <div class="sol-panel">
-          <div class="sol-tag">Core flow</div>
-          <h3>Fragmented evidence → structure → governed layer</h3>
-          <p>From messy source material to reusable governed operational knowledge.</p>
-        </div>
-        <div class="sol-panel">
-          <div class="sol-tag">Positioning</div>
-          <h3>Beyond retrieval</h3>
-          <p>Designed to support more structured and maintained operational knowledge.</p>
-        </div>
-        <div class="sol-panel">
-          <div class="sol-tag">Applications</div>
-          <h3>One governed layer, multiple uses</h3>
-          <p>One governed knowledge layer, multiple applications.</p>
-        </div>
+        <div class="sol-panel"><div class="sol-tag">Core flow</div><h3>Fragmented evidence → structure → governed layer</h3><p>From messy source material to reusable governed operational knowledge.</p></div>
+        <div class="sol-panel"><div class="sol-tag">Positioning</div><h3>Beyond retrieval</h3><p>Designed to support more structured and maintained operational knowledge.</p></div>
+        <div class="sol-panel"><div class="sol-tag">Applications</div><h3>One governed layer, multiple uses</h3><p>One governed knowledge layer, multiple applications.</p></div>
       </div>
     </div>
   </div>
@@ -604,11 +363,9 @@
 </footer>
 
 <script>
-// NAV
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('raised', window.scrollY > 8), { passive: true });
 
-// SCROLL REVEAL
 document.addEventListener('DOMContentLoaded', () => {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -622,45 +379,44 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 });
 
-// LUXURY TOPOLOGY: FRAGMENTED → ALIGNED → GOVERNED
 (function () {
   const canvas = document.getElementById('topo-canvas');
   const ctx = canvas.getContext('2d');
   const hero = document.getElementById('top');
 
   const CFG = {
-    COLS: 23,
-    ROWS: 15,
-    NOISE_SCALE: 0.0115,
-    NOISE_SPEED: 0.00042,
+    COLS: 25,
+    ROWS: 16,
+    NOISE_SCALE: 0.0105,
+    NOISE_SPEED: 0.00040,
 
-    AMP_LEFT: 50,
-    AMP_MID: 22,
-    AMP_RIGHT: 7,
+    AMP_LEFT: 54,
+    AMP_MID: 20,
+    AMP_RIGHT: 5,
 
-    SPRING_LEFT: 0.040,
-    SPRING_MID: 0.058,
-    SPRING_RIGHT: 0.088,
+    SPRING_LEFT: 0.038,
+    SPRING_MID: 0.060,
+    SPRING_RIGHT: 0.096,
 
-    FRICTION_LEFT: 0.77,
-    FRICTION_MID: 0.72,
-    FRICTION_RIGHT: 0.65,
+    FRICTION_LEFT: 0.79,
+    FRICTION_MID: 0.73,
+    FRICTION_RIGHT: 0.63,
 
     MOUSE_RADIUS: 220,
-    MOUSE_PULL: 0.30,
+    MOUSE_PULL: 0.26,
 
-    DOT_R: 1.65,
-    DOT_R_ACTIVE: 3.6,
+    DOT_R: 1.45,
+    DOT_R_ACTIVE: 3.4,
 
-    EDGE_ALPHA_LEFT: 0.032,
-    EDGE_ALPHA_MID: 0.072,
-    EDGE_ALPHA_RIGHT: 0.155,
+    EDGE_ALPHA_LEFT: 0.024,
+    EDGE_ALPHA_MID: 0.068,
+    EDGE_ALPHA_RIGHT: 0.170,
 
     INDIGO: '55,48,163',
     SKY: '14,165,233',
     SLATE: '132,147,169',
     VALID: '79,70,229',
-    LIGHT: '255,255,255'
+    WHITE: '255,255,255'
   };
 
   let W, H, cellW, cellH, dpr;
@@ -728,25 +484,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const oy = row * cellH;
         const xn = ox / W;
 
-        const toMid = smoothstep(0.20, 0.52, xn);
-        const toRight = smoothstep(0.54, 0.88, xn);
+        const toMid = smoothstep(0.18, 0.52, xn);
+        const toRight = smoothstep(0.56, 0.89, xn);
 
         const amp = lerp(lerp(CFG.AMP_LEFT, CFG.AMP_MID, toMid), CFG.AMP_RIGHT, toRight);
         const spring = lerp(lerp(CFG.SPRING_LEFT, CFG.SPRING_MID, toMid), CFG.SPRING_RIGHT, toRight);
         const friction = lerp(lerp(CFG.FRICTION_LEFT, CFG.FRICTION_MID, toMid), CFG.FRICTION_RIGHT, toRight);
         const edgeAlpha = lerp(lerp(CFG.EDGE_ALPHA_LEFT, CFG.EDGE_ALPHA_MID, toMid), CFG.EDGE_ALPHA_RIGHT, toRight);
 
-        const zone = xn < 0.36 ? 'fragmented' : xn < 0.68 ? 'aligned' : 'governed';
+        const zone = xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed';
 
         const validationHub =
           zone === 'governed' &&
           (col === CFG.COLS - 5 || col === CFG.COLS - 8 || col === CFG.COLS - 11) &&
-          (row === 3 || row === 7 || row === 11);
+          (row === 3 || row === 8 || row === 12);
 
-        const signalNode =
+        const backbone =
+          zone === 'governed' &&
+          (col === CFG.COLS - 9 || col === CFG.COLS - 6);
+
+        const transitNode =
           zone === 'aligned' &&
-          (col === Math.floor(CFG.COLS * 0.50) || col === Math.floor(CFG.COLS * 0.58)) &&
-          (row === 5 || row === 9);
+          (col === Math.floor(CFG.COLS * 0.54) || col === Math.floor(CFG.COLS * 0.60)) &&
+          (row === 5 || row === 10);
 
         pts.push({
           ox, oy,
@@ -761,13 +521,14 @@ document.addEventListener('DOMContentLoaded', () => {
           phase: Math.random() * Math.PI * 2,
           edge: col === 0 || col === CFG.COLS - 1 || row === 0 || row === CFG.ROWS - 1,
           validationHub,
-          signalNode
+          backbone,
+          transitNode
         });
       }
     }
   }
 
-  function pointIndex(col, row) {
+  function idx(col, row) {
     return row * CFG.COLS + col;
   }
 
@@ -782,23 +543,23 @@ document.addEventListener('DOMContentLoaded', () => {
       let dx = smoothNoise(nx, ny, t) * p.amp;
       let dy = smoothNoise(nx + 31, ny + 17, t) * p.amp;
 
-      dx += smoothNoise(nx * 2.1, ny * 2.1, t * 1.7) * p.amp * 0.28;
-      dy += smoothNoise(nx * 2.1 + 4, ny * 2.1 + 2, t * 1.5) * p.amp * 0.22;
+      dx += smoothNoise(nx * 2.05, ny * 2.05, t * 1.55) * p.amp * 0.25;
+      dy += smoothNoise(nx * 2.05 + 3, ny * 2.05 + 2, t * 1.42) * p.amp * 0.20;
 
       if (p.zone === 'aligned') {
-        dx *= 0.80;
-        dy *= 0.70;
+        dx *= 0.76;
+        dy *= 0.66;
       }
 
       if (p.zone === 'governed') {
-        dx *= 0.38;
-        dy *= 0.34;
-        dx += Math.sin(t * 180 + p.row * 0.42) * 1.5;
+        dx *= 0.30;
+        dy *= 0.28;
+        dx += Math.sin(t * 185 + p.row * 0.36) * 1.15;
       }
 
       if (p.zone === 'fragmented') {
-        dx += Math.sin(t * 260 + p.phase) * 3.2;
-        dy += Math.cos(t * 220 + p.phase) * 2.1;
+        dx += Math.sin(t * 255 + p.phase) * 3.4;
+        dy += Math.cos(t * 210 + p.phase) * 2.2;
       }
 
       let tx = p.ox + dx;
@@ -810,7 +571,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (md < CFG.MOUSE_RADIUS && md > 0) {
         const falloff = 1 - md / CFG.MOUSE_RADIUS;
-        const pull = CFG.MOUSE_PULL * (p.zone === 'fragmented' ? 1.05 : p.zone === 'aligned' ? 0.92 : 0.76);
+        const pull = CFG.MOUSE_PULL * (p.zone === 'fragmented' ? 1.04 : p.zone === 'aligned' ? 0.90 : 0.70);
         tx += (mouse.x - p.x) * falloff * pull;
         ty += (mouse.y - p.y) * falloff * pull;
       }
@@ -824,47 +585,75 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function drawBackgroundAtmosphere() {
-    const leftGlow = ctx.createRadialGradient(W * 0.16, H * 0.46, 0, W * 0.16, H * 0.46, W * 0.34);
-    leftGlow.addColorStop(0, 'rgba(79,70,229,0.045)');
+  function drawAtmosphere() {
+    const leftGlow = ctx.createRadialGradient(W * 0.14, H * 0.48, 0, W * 0.14, H * 0.48, W * 0.34);
+    leftGlow.addColorStop(0, 'rgba(79,70,229,0.040)');
     leftGlow.addColorStop(1, 'rgba(79,70,229,0)');
     ctx.fillStyle = leftGlow;
     ctx.fillRect(0, 0, W, H);
 
-    const midGlow = ctx.createRadialGradient(W * 0.55, H * 0.48, 0, W * 0.55, H * 0.48, W * 0.22);
-    midGlow.addColorStop(0, 'rgba(255,255,255,0.28)');
-    midGlow.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = midGlow;
+    const centerLight = ctx.createRadialGradient(W * 0.52, H * 0.48, 0, W * 0.52, H * 0.48, W * 0.20);
+    centerLight.addColorStop(0, 'rgba(255,255,255,0.24)');
+    centerLight.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = centerLight;
     ctx.fillRect(0, 0, W, H);
 
-    const rightGlow = ctx.createRadialGradient(W * 0.84, H * 0.42, 0, W * 0.84, H * 0.42, W * 0.26);
-    rightGlow.addColorStop(0, 'rgba(14,165,233,0.055)');
+    const rightGlow = ctx.createRadialGradient(W * 0.84, H * 0.42, 0, W * 0.84, H * 0.42, W * 0.27);
+    rightGlow.addColorStop(0, 'rgba(14,165,233,0.052)');
     rightGlow.addColorStop(1, 'rgba(14,165,233,0)');
     ctx.fillStyle = rightGlow;
     ctx.fillRect(0, 0, W, H);
   }
 
-  function drawExtractionLanes() {
-    const governedCols = [CFG.COLS - 8, CFG.COLS - 5];
-    governedCols.forEach((col, idx) => {
+  function drawBackboneLanes() {
+    const cols = [CFG.COLS - 9, CFG.COLS - 6];
+    cols.forEach((col, i) => {
       ctx.beginPath();
       for (let row = 1; row < CFG.ROWS - 1; row++) {
-        const p = pts[pointIndex(col, row)];
+        const p = pts[idx(col, row)];
         if (row === 1) ctx.moveTo(p.x, p.y);
         else ctx.lineTo(p.x, p.y);
       }
-      ctx.globalAlpha = 0.09 + Math.sin(time * 0.012 + idx) * 0.018;
-      ctx.strokeStyle = idx === 0 ? `rgb(${CFG.VALID})` : `rgb(${CFG.SKY})`;
+      ctx.globalAlpha = 0.10 + Math.sin(time * 0.012 + i) * 0.016;
+      ctx.strokeStyle = i === 0 ? `rgb(${CFG.VALID})` : `rgb(${CFG.SKY})`;
       ctx.lineWidth = 1.1;
       ctx.stroke();
     });
   }
 
+  function drawSignalPulses() {
+    const col = CFG.COLS - 6;
+    const t = (time * 0.020) % (CFG.ROWS - 3);
+    const rowA = Math.floor(t) + 1;
+    const rowB = clamp(rowA + 1, 1, CFG.ROWS - 2);
+    const mix = t - Math.floor(t);
+
+    const p1 = pts[idx(col, rowA)];
+    const p2 = pts[idx(col, rowB)];
+    const x = lerp(p1.x, p2.x, mix);
+    const y = lerp(p1.y, p2.y, mix);
+
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, 14);
+    grad.addColorStop(0, 'rgba(14,165,233,0.18)');
+    grad.addColorStop(1, 'rgba(14,165,233,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(x, y, 14, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.globalAlpha = 0.9;
+    ctx.fillStyle = `rgb(${CFG.SKY})`;
+    ctx.beginPath();
+    ctx.arc(x, y, 2.4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
   function drawEdges() {
     for (let i = 0; i < pts.length; i++) {
       const a = pts[i];
-
       const neighbours = [];
+
       if (a.col < CFG.COLS - 1) neighbours.push(pts[i + 1]);
       if (a.row < CFG.ROWS - 1) neighbours.push(pts[i + CFG.COLS]);
       if (a.zone !== 'fragmented' && a.col < CFG.COLS - 1 && a.row < CFG.ROWS - 1) {
@@ -875,9 +664,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const dx = b.x - a.x;
         const dy = b.y - a.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const expected = Math.max(cellW, cellH) * 1.26;
+        const expected = Math.max(cellW, cellH) * 1.23;
 
-        if (dist > expected * (a.zone === 'fragmented' ? 1.08 : 1.34)) continue;
+        if (dist > expected * (a.zone === 'fragmented' ? 1.06 : 1.32)) continue;
 
         const mx = (a.x + b.x) * 0.5;
         const my = (a.y + b.y) * 0.5;
@@ -885,13 +674,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const mdx = mx - mouse.x;
         const mdy = my - mouse.y;
         const md = Math.sqrt(mdx * mdx + mdy * mdy);
-        const mouseBoost = md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) * 0.13 : 0;
+        const mouseBoost = md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) * 0.12 : 0;
 
-        const distFade = Math.max(0, 1 - dist / (expected * 1.16));
+        const distFade = Math.max(0, 1 - dist / (expected * 1.14));
 
         let baseAlpha = Math.max(a.edgeAlpha, b.edgeAlpha);
-        if (a.zone === 'governed' && b.zone === 'governed') baseAlpha *= 1.26;
-        if (a.zone === 'fragmented' && b.zone === 'fragmented') baseAlpha *= 0.76;
+        if (a.zone === 'governed' && b.zone === 'governed') baseAlpha *= 1.30;
+        if (a.zone === 'fragmented' && b.zone === 'fragmented') baseAlpha *= 0.72;
 
         const alpha = (baseAlpha + mouseBoost) * distFade;
 
@@ -900,13 +689,13 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (a.zone === 'fragmented' && b.zone === 'fragmented') color = CFG.INDIGO;
         else color = CFG.SLATE;
 
-        const isExtractionPath =
+        const isBackbone =
           (a.zone === 'governed' && b.zone === 'governed') &&
-          (a.col === CFG.COLS - 8 || a.col === CFG.COLS - 5 || b.col === CFG.COLS - 8 || b.col === CFG.COLS - 5);
+          (a.backbone || b.backbone);
 
-        ctx.globalAlpha = isExtractionPath ? alpha * 1.16 : alpha;
-        ctx.strokeStyle = isExtractionPath ? `rgb(${CFG.SKY})` : `rgb(${color})`;
-        ctx.lineWidth = isExtractionPath ? 0.95 : (a.edge || b.edge ? 0.45 : 0.66);
+        ctx.globalAlpha = isBackbone ? alpha * 1.20 : alpha;
+        ctx.strokeStyle = isBackbone ? `rgb(${CFG.SKY})` : `rgb(${color})`;
+        ctx.lineWidth = isBackbone ? 0.95 : (a.edge || b.edge ? 0.42 : 0.62);
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
@@ -924,37 +713,40 @@ document.addEventListener('DOMContentLoaded', () => {
       const mouseGlow = near ? (1 - md / CFG.MOUSE_RADIUS) : 0;
 
       let color = CFG.SLATE;
-      let alpha = p.edge ? 0.085 : 0.18;
+      let alpha = p.edge ? 0.070 : 0.17;
       let radius = p.edge ? CFG.DOT_R * 0.72 : CFG.DOT_R;
 
       if (p.zone === 'fragmented') {
         color = CFG.INDIGO;
-        alpha *= 0.82;
-      } else if (p.zone === 'aligned') {
-        color = CFG.SLATE;
-      } else {
+        alpha *= 0.80;
+      } else if (p.zone === 'governed') {
         color = CFG.SKY;
         alpha *= 1.12;
       }
 
-      if (p.signalNode) {
+      if (p.transitNode) {
         color = CFG.SLATE;
-        alpha = 0.30 + Math.sin(time * 0.022 + p.col) * 0.04;
-        radius = 2.1;
+        alpha = 0.26 + Math.sin(time * 0.022 + p.col) * 0.04;
+        radius = 2.0;
       }
 
       if (p.validationHub) {
         color = CFG.VALID;
-        alpha = 0.80 + Math.sin(time * 0.03 + p.row) * 0.08;
+        alpha = 0.80 + Math.sin(time * 0.028 + p.row) * 0.08;
         radius = 3.0;
       }
 
-      alpha += mouseGlow * 0.40;
+      if (p.backbone && !p.validationHub) {
+        color = CFG.SKY;
+        alpha *= 1.15;
+      }
+
+      alpha += mouseGlow * 0.38;
       radius += mouseGlow * (CFG.DOT_R_ACTIVE - CFG.DOT_R);
 
-      if (mouseGlow > 0.12 || p.validationHub || p.signalNode) {
-        const haloR = p.validationHub ? radius * 4.8 : p.signalNode ? radius * 3.8 : radius * 4.0;
-        const haloAlpha = p.validationHub ? 0.16 : p.signalNode ? 0.08 : mouseGlow * 0.14;
+      if (mouseGlow > 0.10 || p.validationHub || p.transitNode) {
+        const haloR = p.validationHub ? radius * 4.8 : p.transitNode ? radius * 3.4 : radius * 4.0;
+        const haloAlpha = p.validationHub ? 0.16 : p.transitNode ? 0.07 : mouseGlow * 0.13;
         const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
         grad.addColorStop(0, `rgba(${color},${haloAlpha})`);
         grad.addColorStop(1, `rgba(${color},0)`);
@@ -972,7 +764,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.fill();
 
       if (p.validationHub) {
-        const ring = 5.4 + Math.sin(time * 0.025 + p.col) * 0.55;
+        const ring = 5.2 + Math.sin(time * 0.022 + p.col) * 0.55;
         ctx.globalAlpha = 0.22;
         ctx.strokeStyle = `rgb(${CFG.VALID})`;
         ctx.lineWidth = 0.9;
@@ -985,12 +777,25 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.globalAlpha = 1;
   }
 
+  function drawSubtleAxis() {
+    const x = W * 0.67;
+    const grad = ctx.createLinearGradient(x - 18, 0, x + 18, 0);
+    grad.addColorStop(0, 'rgba(255,255,255,0)');
+    grad.addColorStop(0.5, 'rgba(79,70,229,0.055)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x - 18, 0, 36, H);
+  }
+
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    drawBackgroundAtmosphere();
+    drawAtmosphere();
+    drawSubtleAxis();
     drawEdges();
-    drawExtractionLanes();
+    drawBackboneLanes();
+    drawSignalPulses();
     drawDots();
+    ctx.globalAlpha = 1;
   }
 
   function loop() {
