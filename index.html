@@ -721,10 +721,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return row * CFG.COLS + col;
   }
 
-  function gidx(col, row) {
-    return row * CFG.GHOST_COLS + col;
-  }
-
   function updatePrimary() {
     const t = time * CFG.NOISE_SPEED;
 
@@ -755,7 +751,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dy += Math.cos(t * 215 + p.phase) * 2.9;
       }
 
-      // anchor mechanics on the right side
       if (p.anchor) {
         dx *= 0.35;
         dy *= 0.30;
@@ -763,6 +758,44 @@ document.addEventListener('DOMContentLoaded', () => {
       if (p.validationHub) {
         dx *= 0.22;
         dy *= 0.20;
+      }
+
+      // invisible intelligence on the right:
+      // local snapping toward structural axes and anchor basins
+      if (p.zone === 'governed') {
+        const laneA = Math.round((W * 0.73) / cellW) * cellW;
+        const laneB = Math.round((W * 0.82) / cellW) * cellW;
+        const laneWeightA = Math.exp(-Math.abs(p.ox - laneA) / 120);
+        const laneWeightB = Math.exp(-Math.abs(p.ox - laneB) / 120);
+        const snapTargetX = (laneA * laneWeightA + laneB * laneWeightB) / Math.max(0.0001, laneWeightA + laneWeightB);
+        dx += (snapTargetX - p.ox) * 0.012 * (laneWeightA + laneWeightB);
+
+        const rowSnap = Math.round(p.oy / (cellH * 1.0)) * cellH;
+        dy += (rowSnap - p.oy) * 0.010;
+      }
+
+      // anchor basins
+      if (p.zone === 'governed' && !p.anchor && !p.validationHub) {
+        let basinX = 0;
+        let basinY = 0;
+        let basinW = 0;
+
+        pts.forEach(a => {
+          if (!a.anchor) return;
+          const d = distance(p.ox, p.oy, a.ox, a.oy);
+          if (d > 180) return;
+          const w = 1 - d / 180;
+          basinX += a.ox * w;
+          basinY += a.oy * w;
+          basinW += w;
+        });
+
+        if (basinW > 0) {
+          const ax = basinX / basinW;
+          const ay = basinY / basinW;
+          dx += (ax - p.ox) * 0.010;
+          dy += (ay - p.oy) * 0.006;
+        }
       }
 
       let tx = p.ox + dx;
@@ -847,6 +880,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return 1.24;
   }
 
+  function edgeClass(a, b) {
+    if (a.validationHub || b.validationHub) return 'validated';
+    if (a.anchor || b.anchor) return 'anchored';
+    if (a.backbone || b.backbone) return 'backbone';
+    if (a.zone === 'governed' && b.zone === 'governed') return 'supporting';
+    if (a.zone === 'aligned' || b.zone === 'aligned') return 'reconcile';
+    return 'tentative';
+  }
+
   function drawPrimaryEdges() {
     for (let i = 0; i < pts.length; i++) {
       const a = pts[i];
@@ -887,25 +929,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (zone === 'fragmented') alpha *= 0.72;
         if (zone === 'governed') alpha *= 1.12;
 
-        const isBackbone = a.backbone || b.backbone;
-        const isAnchorLink = a.anchor || b.anchor;
-        const isValidationLink = a.validationHub || b.validationHub;
+        const kind = edgeClass(a, b);
 
-        if (isAnchorLink) {
-          alpha *= 1.14;
+        if (kind === 'backbone') {
+          alpha *= 1.12;
+        } else if (kind === 'anchored') {
+          alpha *= 1.16;
           rgb = lerpColor(CFG.INDIGO, CFG.SKY, 0.75);
-        }
-        if (isValidationLink) {
-          alpha *= 1.18;
+        } else if (kind === 'validated') {
+          alpha *= 1.22;
           rgb = CFG.VALID;
+        } else if (kind === 'supporting') {
+          alpha *= 0.92;
+        } else if (kind === 'tentative') {
+          alpha *= 0.82;
         }
 
         ctx.globalAlpha = alpha;
         ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
         ctx.lineWidth =
-          isValidationLink ? 0.96 :
-          isAnchorLink ? 0.82 :
-          isBackbone ? 0.72 :
+          kind === 'validated' ? 0.96 :
+          kind === 'anchored' ? 0.82 :
+          kind === 'backbone' ? 0.72 :
+          kind === 'supporting' ? 0.54 :
           (a.edge || b.edge ? 0.40 : 0.58);
 
         ctx.beginPath();
