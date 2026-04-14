@@ -8,11 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <script>
-    document.documentElement.classList.add('js');
-  </script>
-
+  <script>document.documentElement.classList.add('js');</script>
   <style>
     :root {
       --bg: #ffffff;
@@ -38,737 +34,133 @@
       --max: 1180px;
       --ease: cubic-bezier(.16,1,.3,1);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-sans);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      overflow-x: hidden;
-    }
-
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
     .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
 
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 120;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line-soft);
-      transition: box-shadow .25s;
-    }
-
+    nav { position: sticky; top: 0; z-index: 120; background: rgba(255,255,255,.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-soft); transition: box-shadow .25s; }
     nav.raised { box-shadow: 0 1px 18px rgba(55,48,163,.07); }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      gap: 32px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-sans);
-      font-size: 19px;
-      font-weight: 400;
-      color: var(--text);
-      letter-spacing: -.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--text-soft);
-      letter-spacing: .01em;
-      transition: color .18s;
-    }
-
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 32px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-size: 19px; font-weight: 400; color: var(--text); letter-spacing: -.02em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-soft); letter-spacing: .01em; transition: color .18s; }
     .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--indigo) !important; color: #fff !important; padding: 9px 20px; border-radius: 6px; font-size: 13px !important; font-weight: 500 !important; transition: background .18s, transform .18s !important; }
+    .nav-cta:hover { background: #312e81 !important; transform: translateY(-1px) !important; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-size: 19px; font-weight: 400; color: #fff; letter-spacing: -.02em; }
 
-    .nav-cta {
-      background: var(--indigo) !important;
-      color: #fff !important;
-      padding: 9px 20px;
-      border-radius: 6px;
-      font-size: 13px !important;
-      font-weight: 500 !important;
-      transition: background .18s, transform .18s !important;
-    }
+    .hero { position: relative; overflow: hidden; min-height: 96vh; display: flex; align-items: center; padding: 104px 0 94px; background: radial-gradient(circle at 18% 22%, rgba(79,70,229,.07), transparent 0 18%), radial-gradient(circle at 72% 54%, rgba(14,165,233,.05), transparent 0 22%), linear-gradient(180deg, #fbfcfe 0%, #f4f7fb 100%); isolation: isolate; }
+    #webgl-hero { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .hero-haze { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.18), rgba(255,255,255,.00) 36%), radial-gradient(circle at 70% 45%, rgba(255,255,255,.14), rgba(255,255,255,.00) 30%), linear-gradient(90deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.30) 34%, rgba(255,255,255,.12) 60%, rgba(255,255,255,.06) 100%); }
+    .hero-grid { position: absolute; inset: 0; z-index: 1; pointer-events: none; background-image: repeating-linear-gradient(180deg, transparent, transparent 31px, rgba(79,70,229,.014) 31px, rgba(79,70,229,.014) 32px); mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.28) 16%, rgba(0,0,0,.28) 84%, transparent 100%); }
+    .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 520px); gap: clamp(36px, 5vw, 72px); align-items: center; }
 
-    .nav-cta:hover {
-      background: #312e81 !important;
-      transform: translateY(-1px) !important;
-    }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo-mid); background: rgba(255,255,255,.76); border: 1px solid rgba(79,70,229,.10); backdrop-filter: blur(12px); padding: 6px 12px; border-radius: 999px; margin-bottom: 28px; box-shadow: 0 8px 28px rgba(13,20,36,.04); }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sky); box-shadow: 0 0 14px rgba(14,165,233,.34); }
+    .hero h1 { font-family: var(--font-serif); font-size: clamp(44px, 6vw, 84px); font-weight: 400; line-height: .96; letter-spacing: -.03em; color: var(--text); margin-bottom: 24px; max-width: 760px; text-wrap: balance; }
+    .hero h1 .accent { color: var(--indigo-mid); }
+    .hero-sub { font-size: 18px; line-height: 1.82; color: var(--text-soft); max-width: 580px; font-weight: 300; margin-bottom: 36px; }
+    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-sans);
-      font-size: 19px;
-      font-weight: 400;
-      color: #fff;
-      letter-spacing: -.02em;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 96vh;
-      display: flex;
-      align-items: center;
-      padding: 104px 0 94px;
-      background:
-        radial-gradient(circle at 18% 22%, rgba(79,70,229,.07), transparent 0 18%),
-        radial-gradient(circle at 72% 54%, rgba(14,165,233,.05), transparent 0 22%),
-        linear-gradient(180deg, #fbfcfe 0%, #f4f7fb 100%);
-      isolation: isolate;
-    }
-
-    #webgl-hero {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .hero-haze {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,.18), rgba(255,255,255,.00) 36%),
-        radial-gradient(circle at 70% 45%, rgba(255,255,255,.14), rgba(255,255,255,.00) 30%),
-        linear-gradient(90deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.30) 34%, rgba(255,255,255,.12) 60%, rgba(255,255,255,.06) 100%);
-    }
-
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background-image: repeating-linear-gradient(
-        180deg,
-        transparent,
-        transparent 31px,
-        rgba(79,70,229,.014) 31px,
-        rgba(79,70,229,.014) 32px
-      );
-      mask-image: linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(0,0,0,.28) 16%,
-        rgba(0,0,0,.28) 84%,
-        transparent 100%
-      );
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
-      gap: clamp(36px, 5vw, 72px);
-      align-items: center;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--indigo-mid);
-      background: rgba(255,255,255,.76);
-      border: 1px solid rgba(79,70,229,.10);
-      backdrop-filter: blur(12px);
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin-bottom: 28px;
-      box-shadow: 0 8px 28px rgba(13,20,36,.04);
-    }
-
-    .hero-tag::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--sky);
-      box-shadow: 0 0 14px rgba(14,165,233,.34);
-    }
-
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(44px, 6vw, 84px);
-      font-weight: 400;
-      line-height: .96;
-      letter-spacing: -.03em;
-      color: var(--text);
-      margin-bottom: 24px;
-      max-width: 760px;
-      text-wrap: balance;
-    }
-
-    .hero h1 .accent {
-      color: var(--indigo-mid);
-    }
-
-    .hero-sub {
-      font-size: 18px;
-      line-height: 1.82;
-      color: var(--text-soft);
-      max-width: 580px;
-      font-weight: 300;
-      margin-bottom: 36px;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 26px;
-      border-radius: 999px;
-      font-family: var(--font-sans);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: .01em;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: transform .2s var(--ease), box-shadow .2s, background .18s, border-color .18s;
-    }
-
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 999px; font-family: var(--font-sans); font-size: 14px; font-weight: 500; letter-spacing: .01em; cursor: pointer; border: 1px solid transparent; transition: transform .2s var(--ease), box-shadow .2s, background .18s, border-color .18s; }
     .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: #fff; border-color: rgba(255,255,255,.08); box-shadow: 0 10px 34px rgba(79,70,229,.22); }
+    .btn-primary:hover { box-shadow: 0 14px 42px rgba(79,70,229,.28); }
+    .btn-outline { background: rgba(255,255,255,.62); backdrop-filter: blur(12px); color: var(--text-mid); border-color: rgba(221,227,237,.92); box-shadow: 0 8px 28px rgba(13,20,36,.04); }
+    .btn-outline:hover { border-color: var(--text-dim); background: rgba(255,255,255,.84); }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
-      color: #fff;
-      border-color: rgba(255,255,255,.08);
-      box-shadow: 0 10px 34px rgba(79,70,229,.22);
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 14px 42px rgba(79,70,229,.28);
-    }
-
-    .btn-outline {
-      background: rgba(255,255,255,.62);
-      backdrop-filter: blur(12px);
-      color: var(--text-mid);
-      border-color: rgba(221,227,237,.92);
-      box-shadow: 0 8px 28px rgba(13,20,36,.04);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--text-dim);
-      background: rgba(255,255,255,.84);
-    }
-
-    .hero-aside {
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
-    }
-
-    .hero-shot {
-      width: 100%;
-      max-width: 540px;
-    }
-
-    .hero-shot-frame {
-      border: 1px solid rgba(198,208,224,.74);
-      border-radius: 20px;
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(245,248,252,.88) 100%);
-      box-shadow:
-        0 18px 50px rgba(15,28,58,.07),
-        inset 0 1px 0 rgba(255,255,255,.46);
-      backdrop-filter: blur(18px);
-      padding: 18px;
-    }
-
-    .hero-shot-frame.hero-no-img {
-      min-height: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(145deg, rgba(255,255,255,.84) 0%, rgba(241,245,251,.92) 100%);
-    }
-
-    .hero-shot-frame.hero-no-img::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px);
-      background-size: 32px 32px;
-    }
-
-    .hero-shot-frame.hero-no-img::after {
-      content: 'Interface fragment coming soon';
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .1em;
-      color: #8f9db2;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-shot-frame img {
-      width: 100%;
-      height: auto;
-      max-height: 640px;
-      object-fit: contain;
-      object-position: center center;
-      border-radius: 14px;
-      background: #fff;
-      border: 1px solid rgba(214,221,233,.8);
-    }
-
-    .hero-shot-caption {
-      margin-top: 12px;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: #8f9bb0;
-    }
+    .hero-aside { display: flex; justify-content: flex-end; width: 100%; }
+    .hero-shot { width: 100%; max-width: 540px; }
+    .hero-shot-frame { border: 1px solid rgba(198,208,224,.74); border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(245,248,252,.88) 100%); box-shadow: 0 18px 50px rgba(15,28,58,.07), inset 0 1px 0 rgba(255,255,255,.46); backdrop-filter: blur(18px); padding: 18px; }
+    .hero-shot-frame.hero-no-img { min-height: 360px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(145deg, rgba(255,255,255,.84) 0%, rgba(241,245,251,.92) 100%); }
+    .hero-shot-frame.hero-no-img::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px); background-size: 32px 32px; }
+    .hero-shot-frame.hero-no-img::after { content: 'Interface fragment coming soon'; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; color: #8f9db2; text-transform: uppercase; position: relative; z-index: 1; }
+    .hero-shot-frame img { width: 100%; height: auto; max-height: 640px; object-fit: contain; object-position: center center; border-radius: 14px; background: #fff; border: 1px solid rgba(214,221,233,.8); }
+    .hero-shot-caption { margin-top: 12px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #8f9bb0; }
 
     section { padding: 112px 0; }
     section + section { border-top: 1px solid var(--line-soft); }
-
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--indigo-mid);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(28px, 3.4vw, 46px);
-      font-weight: 400;
-      line-height: 1.08;
-      letter-spacing: -.02em;
-      color: var(--text);
-      margin-bottom: 18px;
-      max-width: 820px;
-    }
-
-    .section-sub {
-      font-size: 17px;
-      line-height: 1.82;
-      color: var(--text-soft);
-      max-width: 700px;
-      font-weight: 300;
-      margin-bottom: 52px;
-    }
+    .section-label { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--indigo-mid); margin-bottom: 16px; }
+    .section-title { font-family: var(--font-serif); font-size: clamp(28px, 3.4vw, 46px); font-weight: 400; line-height: 1.08; letter-spacing: -.02em; color: var(--text); margin-bottom: 18px; max-width: 820px; }
+    .section-sub { font-size: 17px; line-height: 1.82; color: var(--text-soft); max-width: 700px; font-weight: 300; margin-bottom: 52px; }
 
     #mission-vision { background: var(--bg-off); }
+    .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-radius: 12px; overflow: hidden; }
+    .mv-card { background: var(--bg); padding: 40px 36px 44px; border: 1px solid var(--line-soft); }
+    .mv-label { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 18px; }
+    .mv-card p { font-family: var(--font-serif); font-size: 22px; line-height: 1.42; letter-spacing: -.01em; color: var(--text); max-width: 480px; }
 
-    .mv-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .mv-card {
-      background: var(--bg);
-      padding: 40px 36px 44px;
-      border: 1px solid var(--line-soft);
-    }
-
-    .mv-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 18px;
-    }
-
-    .mv-card p {
-      font-family: var(--font-serif);
-      font-size: 22px;
-      line-height: 1.42;
-      letter-spacing: -.01em;
-      color: var(--text);
-      max-width: 480px;
-    }
-
-    .prob-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 24px;
-    }
-
-    .prob-card {
-      border-top: 2px solid var(--line);
-      padding: 28px 0 0;
-      position: relative;
-    }
-
-    .prob-card::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--indigo-mid);
-      transition: width .4s var(--ease);
-    }
-
+    .prob-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .prob-card { border-top: 2px solid var(--line); padding: 28px 0 0; position: relative; }
+    .prob-card::before { content: ''; position: absolute; top: -2px; left: 0; width: 0; height: 2px; background: var(--indigo-mid); transition: width .4s var(--ease); }
     .prob-card:hover::before { width: 100%; }
+    .prob-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; color: var(--text-dim); margin-bottom: 14px; }
+    .prob-card h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; letter-spacing: -.02em; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
+    .prob-card p { font-size: 15px; line-height: 1.82; color: var(--text-soft); font-weight: 300; }
 
-    .prob-num {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .12em;
-      color: var(--text-dim);
-      margin-bottom: 14px;
-    }
-
-    .prob-card h3 {
-      font-family: var(--font-serif);
-      font-size: 22px;
-      font-weight: 400;
-      letter-spacing: -.02em;
-      line-height: 1.2;
-      color: var(--text);
-      margin-bottom: 12px;
-    }
-
-    .prob-card p {
-      font-size: 15px;
-      line-height: 1.82;
-      color: var(--text-soft);
-      font-weight: 300;
-    }
-
-    .solution-layout {
-      display: grid;
-      grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr);
-      gap: 56px;
-      align-items: start;
-    }
-
-    .sol-copy p {
-      font-size: 17px;
-      line-height: 1.88;
-      color: var(--text-soft);
-      font-weight: 300;
-      margin-bottom: 20px;
-    }
-
+    .solution-layout { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr); gap: 56px; align-items: start; }
+    .sol-copy p { font-size: 17px; line-height: 1.88; color: var(--text-soft); font-weight: 300; margin-bottom: 20px; }
     .sol-copy p:last-child { margin-bottom: 0; }
-
     .sol-panels { display: grid; gap: 1px; }
-
-    .sol-panel {
-      padding: 22px 24px;
-      border-left: 2px solid var(--line);
-      transition: border-color .2s, background .2s;
-    }
-
-    .sol-panel:hover {
-      border-left-color: var(--indigo-mid);
-      background: var(--indigo-pale);
-    }
-
-    .sol-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 6px;
-    }
-
-    .sol-panel h3 {
-      font-family: var(--font-serif);
-      font-size: 17px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 6px;
-      letter-spacing: -.01em;
-    }
-
-    .sol-panel p {
-      font-size: 13.5px;
-      line-height: 1.7;
-      color: var(--text-soft);
-      font-weight: 300;
-    }
+    .sol-panel { padding: 22px 24px; border-left: 2px solid var(--line); transition: border-color .2s, background .2s; }
+    .sol-panel:hover { border-left-color: var(--indigo-mid); background: var(--indigo-pale); }
+    .sol-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+    .sol-panel h3 { font-family: var(--font-serif); font-size: 17px; font-weight: 400; color: var(--text); margin-bottom: 6px; letter-spacing: -.01em; }
+    .sol-panel p { font-size: 13.5px; line-height: 1.7; color: var(--text-soft); font-weight: 300; }
 
     #why { background: var(--bg-off); }
-
-    .strata {
-      display: grid;
-      gap: 1px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .strata-row {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      align-items: stretch;
-      transition: filter .18s;
-    }
-
+    .strata { display: grid; gap: 1px; border-radius: 10px; overflow: hidden; }
+    .strata-row { display: grid; grid-template-columns: 200px 1fr; align-items: stretch; transition: filter .18s; }
     .strata-row:hover { filter: brightness(.97); }
-
-    .strata-label {
-      padding: 24px 26px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      border-right: 1px solid rgba(255,255,255,.08);
-    }
-
-    .strata-body {
-      padding: 24px 32px;
-      font-size: 15px;
-      line-height: 1.75;
-      display: flex;
-      align-items: center;
-      font-weight: 300;
-    }
-
+    .strata-label { padding: 24px 26px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; display: flex; align-items: center; border-right: 1px solid rgba(255,255,255,.08); }
+    .strata-body { padding: 24px 32px; font-size: 15px; line-height: 1.75; display: flex; align-items: center; font-weight: 300; }
     .strata-row:nth-child(1) { background: #d1d9f0; color: #1e2650; }
     .strata-row:nth-child(2) { background: #b8c4e8; color: #1e2650; }
     .strata-row:nth-child(3) { background: #9baade; color: #1a224a; }
     .strata-row:nth-child(4) { background: #6e85cc; color: #111a3e; }
     .strata-row:nth-child(5) { background: #4f68bc; color: #ffffff; }
     .strata-row:nth-child(6) { background: #3730a3; color: #e0e7ff; }
+    .strata-row:nth-child(1) .strata-label, .strata-row:nth-child(2) .strata-label, .strata-row:nth-child(3) .strata-label, .strata-row:nth-child(4) .strata-label { border-right-color: rgba(0,0,0,.08); }
 
-    .strata-row:nth-child(1) .strata-label,
-    .strata-row:nth-child(2) .strata-label,
-    .strata-row:nth-child(3) .strata-label,
-    .strata-row:nth-child(4) .strata-label {
-      border-right-color: rgba(0,0,0,.08);
-    }
-
-    .use-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 24px;
-    }
-
-    .use-card {
-      border-top: 2px solid var(--line);
-      padding: 26px 0 0;
-      position: relative;
-    }
-
-    .use-card::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--indigo-mid);
-      transition: width .4s var(--ease);
-    }
-
+    .use-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .use-card { border-top: 2px solid var(--line); padding: 26px 0 0; position: relative; }
+    .use-card::before { content: ''; position: absolute; top: -2px; left: 0; width: 0; height: 2px; background: var(--indigo-mid); transition: width .4s var(--ease); }
     .use-card:hover::before { width: 100%; }
+    .use-card h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; letter-spacing: -.02em; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
+    .use-card p { font-size: 15px; line-height: 1.82; color: var(--text-soft); font-weight: 300; }
 
-    .use-card h3 {
-      font-family: var(--font-serif);
-      font-size: 22px;
-      font-weight: 400;
-      letter-spacing: -.02em;
-      line-height: 1.2;
-      color: var(--text);
-      margin-bottom: 12px;
-    }
+    .contact-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .contact-card { border-top: 1px solid var(--line); padding: 24px 0 0; }
+    .contact-card h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; letter-spacing: -.02em; color: var(--text); margin-bottom: 4px; }
+    .contact-role { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
+    .contact-email { font-size: 14px; color: var(--indigo-mid); transition: color .18s; }
+    .contact-email:hover { color: var(--indigo); text-decoration: underline; }
 
-    .use-card p {
-      font-size: 15px;
-      line-height: 1.82;
-      color: var(--text-soft);
-      font-weight: 300;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 24px;
-    }
-
-    .contact-card {
-      border-top: 1px solid var(--line);
-      padding: 24px 0 0;
-    }
-
-    .contact-card h3 {
-      font-family: var(--font-serif);
-      font-size: 22px;
-      font-weight: 400;
-      letter-spacing: -.02em;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .contact-role {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 14px;
-    }
-
-    .contact-email {
-      font-size: 14px;
-      color: var(--indigo-mid);
-      transition: color .18s;
-    }
-
-    .contact-email:hover {
-      color: var(--indigo);
-      text-decoration: underline;
-    }
-
-    footer {
-      background: #0f1c3a;
-      padding: 80px 0 60px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr .8fr 1fr;
-      gap: 48px;
-      margin-bottom: 56px;
-      align-items: start;
-    }
-
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .footer-brand p {
-      font-size: 14px;
-      line-height: 1.8;
-      font-weight: 300;
-      color: #7b8fad;
-      max-width: 280px;
-    }
-
-    .footer-col h4 {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: #4a5e7a;
-      margin-bottom: 18px;
-    }
-
-    .footer-col a,
-    .footer-col p {
-      display: block;
-      font-size: 14px;
-      line-height: 2.1;
-      font-weight: 300;
-      color: #8fa3be;
-      transition: color .18s;
-    }
-
+    footer { background: #0f1c3a; padding: 80px 0 60px; }
+    .footer-grid { display: grid; grid-template-columns: 1.2fr .8fr .8fr 1fr; gap: 48px; margin-bottom: 56px; align-items: start; }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-brand p { font-size: 14px; line-height: 1.8; font-weight: 300; color: #7b8fad; max-width: 280px; }
+    .footer-col h4 { font-family: var(--font-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #4a5e7a; margin-bottom: 18px; }
+    .footer-col a, .footer-col p { display: block; font-size: 14px; line-height: 2.1; font-weight: 300; color: #8fa3be; transition: color .18s; }
     .footer-col a:hover { color: #fff; }
+    .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,255,255,.06); font-size: 12px; color: #3d5070; display: flex; justify-content: space-between; align-items: center; }
 
-    .footer-bottom {
-      padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,.06);
-      font-size: 12px;
-      color: #3d5070;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .reveal {
-      opacity: 1;
-      transform: none;
-      transition: opacity .65s var(--ease), transform .65s var(--ease);
-    }
-
-    .js .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-    }
-
-    .js .reveal.in {
-      opacity: 1;
-      transform: none;
-    }
-
+    .reveal { opacity: 1; transform: none; transition: opacity .65s var(--ease), transform .65s var(--ease); }
+    .js .reveal { opacity: 0; transform: translateY(22px); }
+    .js .reveal.in { opacity: 1; transform: none; }
     .d1 { transition-delay: .08s; }
     .d2 { transition-delay: .16s; }
 
     @media (max-width: 1180px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .hero-aside {
-        justify-content: flex-start;
-      }
-
-      .hero-shot {
-        max-width: 680px;
-      }
-
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-aside { justify-content: flex-start; }
+      .hero-shot { max-width: 680px; }
       .solution-layout { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
-
     @media (max-width: 768px) {
       .wrap { width: calc(100% - 32px); }
       .nav-links { display: none; }
@@ -779,23 +171,10 @@
       .strata-body { padding: 0 20px 16px; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 8px; }
-
-      .hero-shot-frame {
-        padding: 12px;
-        border-radius: 16px;
-      }
-
-      .hero-shot-frame.hero-no-img {
-        min-height: 360px;
-      }
-
-      .hero-shot-frame img {
-        max-height: none;
-      }
-
-      .hero {
-        min-height: auto;
-      }
+      .hero-shot-frame { padding: 12px; border-radius: 16px; }
+      .hero-shot-frame.hero-no-img { min-height: 360px; }
+      .hero-shot-frame img { max-height: none; }
+      .hero { min-height: auto; }
     }
   </style>
 </head>
@@ -812,7 +191,6 @@
       </svg>
       Requivo
     </a>
-
     <div class="nav-links">
       <a href="#problem">Problem</a>
       <a href="#solution">Solution</a>
@@ -827,7 +205,6 @@
   <div id="webgl-hero"></div>
   <div class="hero-haze"></div>
   <div class="hero-grid"></div>
-
   <div class="wrap">
     <div class="hero-inner">
       <div>
@@ -839,14 +216,10 @@
           <a href="#contact" class="btn btn-outline">Contact the team</a>
         </div>
       </div>
-
       <div class="hero-aside">
         <div class="hero-shot">
           <div class="hero-shot-frame">
-            <img
-              src="requivo-fragment.png"
-              alt="Selected interface fragment from Requivo"
-              onerror="this.style.display='none';this.parentElement.classList.add('hero-no-img')" />
+            <img src="requivo-fragment.png" alt="Selected interface fragment from Requivo" onerror="this.style.display='none';this.parentElement.classList.add('hero-no-img')" />
           </div>
           <div class="hero-shot-caption">Selected interface fragment</div>
         </div>
@@ -858,14 +231,8 @@
 <section id="mission-vision">
   <div class="wrap">
     <div class="mv-grid">
-      <div class="mv-card reveal">
-        <div class="mv-label">Mission</div>
-        <p>To turn fragmented enterprise evidence into governed operational knowledge that organisations can trust, maintain, and reuse.</p>
-      </div>
-      <div class="mv-card reveal d1">
-        <div class="mv-label">Vision</div>
-        <p>A world in which organisations no longer rely on scattered documents and tacit memory, but operate on governed, validated, and evolving knowledge.</p>
-      </div>
+      <div class="mv-card reveal"><div class="mv-label">Mission</div><p>To turn fragmented enterprise evidence into governed operational knowledge that organisations can trust, maintain, and reuse.</p></div>
+      <div class="mv-card reveal d1"><div class="mv-label">Vision</div><p>A world in which organisations no longer rely on scattered documents and tacit memory, but operate on governed, validated, and evolving knowledge.</p></div>
     </div>
   </div>
 </section>
@@ -875,25 +242,10 @@
     <div class="section-label">Problem</div>
     <div class="section-title reveal">Critical operational knowledge is often scattered across systems, documents, workflows, and individual experts.</div>
     <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
-
     <div class="prob-grid">
-      <div class="prob-card reveal">
-        <div class="prob-num">01</div>
-        <h3>Expertise disappears</h3>
-        <p>Critical know-how often remains embedded in individual people, workarounds, and context that never become properly structured or reusable across the organisation.</p>
-      </div>
-
-      <div class="prob-card reveal d1">
-        <div class="prob-num">02</div>
-        <h3>Knowledge never fully transfers</h3>
-        <p>Teams may inherit documents, but not the reasoning, hierarchy, conflict resolution, and operational judgment behind them.</p>
-      </div>
-
-      <div class="prob-card reveal d2">
-        <div class="prob-num">03</div>
-        <h3>Answers remain fragmented</h3>
-        <p>Relevant signals are distributed across documents, enterprise systems, workflows, and expert input, making them difficult to trust, maintain, and act upon together.</p>
-      </div>
+      <div class="prob-card reveal"><div class="prob-num">01</div><h3>Expertise disappears</h3><p>Critical know-how often remains embedded in individual people, workarounds, and context that never become properly structured or reusable across the organisation.</p></div>
+      <div class="prob-card reveal d1"><div class="prob-num">02</div><h3>Knowledge never fully transfers</h3><p>Teams may inherit documents, but not the reasoning, hierarchy, conflict resolution, and operational judgment behind them.</p></div>
+      <div class="prob-card reveal d2"><div class="prob-num">03</div><h3>Answers remain fragmented</h3><p>Relevant signals are distributed across documents, enterprise systems, workflows, and expert input, making them difficult to trust, maintain, and act upon together.</p></div>
     </div>
   </div>
 </section>
@@ -902,32 +254,16 @@
   <div class="wrap">
     <div class="section-label">Solution</div>
     <div class="section-title reveal">Requivo is designed to create a governed operational knowledge layer from fragmented enterprise evidence.</div>
-
     <div class="solution-layout">
       <div class="sol-copy reveal">
         <p>Requivo is intended for environments where critical knowledge is spread across documents, systems, workflows, and expert memory.</p>
         <p>It is designed not only to retrieve information, but to support more structured, validated, and reusable operational clarity.</p>
         <p>The concept should be understood as an operational knowledge system rather than a documentation platform, search tool, or generic assistant.</p>
       </div>
-
       <div class="sol-panels reveal d1">
-        <div class="sol-panel">
-          <div class="sol-tag">Core flow</div>
-          <h3>Fragmented evidence → structure → governed layer</h3>
-          <p>From messy source material to reusable governed operational knowledge.</p>
-        </div>
-
-        <div class="sol-panel">
-          <div class="sol-tag">Positioning</div>
-          <h3>Beyond retrieval</h3>
-          <p>Designed to support more structured and maintained operational knowledge.</p>
-        </div>
-
-        <div class="sol-panel">
-          <div class="sol-tag">Applications</div>
-          <h3>One governed layer, multiple uses</h3>
-          <p>One governed knowledge layer, multiple applications.</p>
-        </div>
+        <div class="sol-panel"><div class="sol-tag">Core flow</div><h3>Fragmented evidence → structure → governed layer</h3><p>From messy source material to reusable governed operational knowledge.</p></div>
+        <div class="sol-panel"><div class="sol-tag">Positioning</div><h3>Beyond retrieval</h3><p>Designed to support more structured and maintained operational knowledge.</p></div>
+        <div class="sol-panel"><div class="sol-tag">Applications</div><h3>One governed layer, multiple uses</h3><p>One governed knowledge layer, multiple applications.</p></div>
       </div>
     </div>
   </div>
@@ -937,37 +273,13 @@
   <div class="wrap">
     <div class="section-label">Why this matters</div>
     <div class="section-title reveal">Organisations do not only need better retrieval. They need a way to turn fragmented operational evidence into governed clarity.</div>
-
     <div class="strata reveal d1">
-      <div class="strata-row">
-        <div class="strata-label">Fragmented</div>
-        <div class="strata-body">Critical knowledge often starts as disconnected evidence across documents, systems, workflows, and experts.</div>
-      </div>
-
-      <div class="strata-row">
-        <div class="strata-label">Weakly structured</div>
-        <div class="strata-body">Even when information exists, it is rarely organised in a way that reflects real operational hierarchy, currentness, and reliability.</div>
-      </div>
-
-      <div class="strata-row">
-        <div class="strata-label">Expert-dependent</div>
-        <div class="strata-body">Undocumented judgment, tacit knowledge, and edge-case reasoning stay concentrated in individuals and are hard to preserve.</div>
-      </div>
-
-      <div class="strata-row">
-        <div class="strata-label">Validated</div>
-        <div class="strata-body">Useful operational knowledge requires explicit verification and the ability to surface weak or conflicting areas.</div>
-      </div>
-
-      <div class="strata-row">
-        <div class="strata-label">Governed</div>
-        <div class="strata-body">The goal is not just a better answer, but a maintained operational knowledge layer with traceable structure and reusable logic.</div>
-      </div>
-
-      <div class="strata-row">
-        <div class="strata-label">Reusable</div>
-        <div class="strata-body">Once governed, operational knowledge can support multiple workflows across the organisation.</div>
-      </div>
+      <div class="strata-row"><div class="strata-label">Fragmented</div><div class="strata-body">Critical knowledge often starts as disconnected evidence across documents, systems, workflows, and experts.</div></div>
+      <div class="strata-row"><div class="strata-label">Weakly structured</div><div class="strata-body">Even when information exists, it is rarely organised in a way that reflects real operational hierarchy, currentness, and reliability.</div></div>
+      <div class="strata-row"><div class="strata-label">Expert-dependent</div><div class="strata-body">Undocumented judgment, tacit knowledge, and edge-case reasoning stay concentrated in individuals and are hard to preserve.</div></div>
+      <div class="strata-row"><div class="strata-label">Validated</div><div class="strata-body">Useful operational knowledge requires explicit verification and the ability to surface weak or conflicting areas.</div></div>
+      <div class="strata-row"><div class="strata-label">Governed</div><div class="strata-body">The goal is not just a better answer, but a maintained operational knowledge layer with traceable structure and reusable logic.</div></div>
+      <div class="strata-row"><div class="strata-label">Reusable</div><div class="strata-body">Once governed, operational knowledge can support multiple workflows across the organisation.</div></div>
     </div>
   </div>
 </section>
@@ -976,22 +288,10 @@
   <div class="wrap">
     <div class="section-label">Use cases</div>
     <div class="section-title reveal">Requivo is relevant wherever critical operational know-how is fragmented, weakly documented, difficult to validate, and at risk of being lost.</div>
-
     <div class="use-grid">
-      <div class="use-card reveal">
-        <h3>Operations &amp; manufacturing</h3>
-        <p>For environments where procedures, incidents, engineering context, and maintenance know-how need to remain usable beyond individual employees and disconnected systems.</p>
-      </div>
-
-      <div class="use-card reveal d1">
-        <h3>Engineering &amp; technical services</h3>
-        <p>For settings where documentation, configuration, and practical judgment must remain aligned and reusable across teams and over time.</p>
-      </div>
-
-      <div class="use-card reveal d2">
-        <h3>Regulated and process-heavy environments</h3>
-        <p>For organisations that need stronger traceability, better validation, and more maintainable operational knowledge than conventional tools can provide.</p>
-      </div>
+      <div class="use-card reveal"><h3>Operations &amp; manufacturing</h3><p>For environments where procedures, incidents, engineering context, and maintenance know-how need to remain usable beyond individual employees and disconnected systems.</p></div>
+      <div class="use-card reveal d1"><h3>Engineering &amp; technical services</h3><p>For settings where documentation, configuration, and practical judgment must remain aligned and reusable across teams and over time.</p></div>
+      <div class="use-card reveal d2"><h3>Regulated and process-heavy environments</h3><p>For organisations that need stronger traceability, better validation, and more maintainable operational knowledge than conventional tools can provide.</p></div>
     </div>
   </div>
 </section>
@@ -1000,25 +300,10 @@
   <div class="wrap">
     <div class="section-label">Contact</div>
     <div class="section-title reveal">Requivo is currently being developed as an early-stage concept. If governed operational knowledge is relevant to your organisation, we would be glad to hear from you.</div>
-
     <div class="contact-grid">
-      <div class="contact-card reveal">
-        <h3>Agnieszka Pisz-Weglarz</h3>
-        <div class="contact-role">Co-Founder</div>
-        <a class="contact-email" href="mailto:agnieszka.weglarz@requivo.at">agnieszka.weglarz@requivo.at</a>
-      </div>
-
-      <div class="contact-card reveal d1">
-        <h3>Patrick Pirchheim</h3>
-        <div class="contact-role">Co-Founder</div>
-        <a class="contact-email" href="mailto:patrick.pirchheim@requivo.at">patrick.pirchheim@requivo.at</a>
-      </div>
-
-      <div class="contact-card reveal d2">
-        <h3>Jakub Weglarz</h3>
-        <div class="contact-role">COO</div>
-        <a class="contact-email" href="mailto:jakub@requivo.at">jakub@requivo.at</a>
-      </div>
+      <div class="contact-card reveal"><h3>Agnieszka Pisz-Weglarz</h3><div class="contact-role">Co-Founder</div><a class="contact-email" href="mailto:agnieszka.weglarz@requivo.at">agnieszka.weglarz@requivo.at</a></div>
+      <div class="contact-card reveal d1"><h3>Patrick Pirchheim</h3><div class="contact-role">Co-Founder</div><a class="contact-email" href="mailto:patrick.pirchheim@requivo.at">patrick.pirchheim@requivo.at</a></div>
+      <div class="contact-card reveal d2"><h3>Jakub Weglarz</h3><div class="contact-role">COO</div><a class="contact-email" href="mailto:jakub@requivo.at">jakub@requivo.at</a></div>
     </div>
   </div>
 </section>
@@ -1036,37 +321,13 @@
           </svg>
           Requivo
         </a>
-
         <p>Governed operational knowledge from fragmented enterprise evidence.</p>
       </div>
-
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <a href="#problem">Problem</a>
-        <a href="#solution">Solution</a>
-        <a href="#why">Why this matters</a>
-        <a href="#use-cases">Use cases</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#mission-vision">Mission &amp; Vision</a>
-        <a href="#contact">Contact</a>
-        <a href="impressum.html">Impressum</a>
-        <a href="privacy.html">Privacy</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="mailto:agnieszka.weglarz@requivo.at">agnieszka.weglarz@requivo.at</a>
-        <a href="mailto:jakub@requivo.at">jakub@requivo.at</a>
-      </div>
+      <div class="footer-col"><h4>Navigation</h4><a href="#problem">Problem</a><a href="#solution">Solution</a><a href="#why">Why this matters</a><a href="#use-cases">Use cases</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#mission-vision">Mission &amp; Vision</a><a href="#contact">Contact</a><a href="impressum.html">Impressum</a><a href="privacy.html">Privacy</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="mailto:agnieszka.weglarz@requivo.at">agnieszka.weglarz@requivo.at</a><a href="mailto:jakub@requivo.at">jakub@requivo.at</a></div>
     </div>
-
-    <div class="footer-bottom">
-      <span>© 2026 Requivo</span>
-      <span>All rights reserved.</span>
-    </div>
+    <div class="footer-bottom"><span>© 2026 Requivo</span><span>All rights reserved.</span></div>
   </div>
 </footer>
 
@@ -1075,42 +336,33 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const mount = document.getElementById('webgl-hero');
-    const nav = document.getElementById('nav');
+    const nav   = document.getElementById('nav');
 
-    function updateNav() {
+    window.addEventListener('scroll', () => {
       nav.classList.toggle('raised', window.scrollY > 8);
-    }
-    updateNav();
-    window.addEventListener('scroll', updateNav, { passive: true });
+    }, { passive: true });
+    nav.classList.toggle('raised', window.scrollY > 8);
 
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            obs.unobserve(entry.target);
-          }
-        });
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      reveals.forEach(el => observer.observe(el));
+      reveals.forEach(el => io.observe(el));
     } else {
       reveals.forEach(el => el.classList.add('in'));
     }
 
     if (!mount) return;
 
+    // ── SCENE ────────────────────────────────────────────────────
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0xf4f7fb, 0.05);
 
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
     camera.position.set(0, 0, 12.5);
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setClearColor(0x000000, 0);
@@ -1119,17 +371,14 @@
     const root = new THREE.Group();
     scene.add(root);
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.88);
-    scene.add(ambient);
-
+    // ── LIGHTS ───────────────────────────────────────────────────
+    scene.add(new THREE.AmbientLight(0xffffff, 0.88));
     const keyLight = new THREE.DirectionalLight(0xffffff, 1.25);
     keyLight.position.set(2.2, 2.1, 8.2);
     scene.add(keyLight);
-
     const fillLight = new THREE.DirectionalLight(0xdbeafe, 0.82);
     fillLight.position.set(-3.4, -1.3, 5.0);
     scene.add(fillLight);
-
     const prismLight = new THREE.PointLight(0x818cf8, 1.2, 24, 2);
     prismLight.position.set(3.8, 0.4, 3.5);
     scene.add(prismLight);
@@ -1137,351 +386,219 @@
     const semanticGroup = new THREE.Group();
     root.add(semanticGroup);
 
+    // ── KNOWLEDGE PLANES (translucent layers) ────────────────────
     const planeMat = new THREE.MeshPhysicalMaterial({
-      color: 0xdbeafe,
-      metalness: 0.0,
-      roughness: 0.08,
-      transmission: 0.92,
-      transparent: true,
-      opacity: 0.16,
-      ior: 1.16,
-      thickness: 1.0,
-      depthWrite: false
+      color: 0xdbeafe, metalness: 0.0, roughness: 0.08,
+      transmission: 0.92, transparent: true, opacity: 0.16,
+      ior: 1.16, thickness: 1.0, depthWrite: false
     });
 
-    function makeKnowledgePlane(w, h, x, y, z, rx, ry, rz, color, opacity) {
+    function makePlane(w, h, x, y, z, rx, ry, rz, color, opacity) {
       const mat = planeMat.clone();
       mat.color = new THREE.Color(color);
       mat.opacity = opacity;
-      const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), mat);
-      mesh.position.set(x, y, z);
-      mesh.rotation.set(rx, ry, rz);
-      semanticGroup.add(mesh);
-      return mesh;
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), mat);
+      m.position.set(x, y, z);
+      m.rotation.set(rx, ry, rz);
+      semanticGroup.add(m);
+      return m;
     }
 
     const planes = [
-      makeKnowledgePlane(5.9, 3.3, 2.9, 0.1, -1.2, -0.22, -0.46, 0.02, 0xe0f2fe, 0.13),
-      makeKnowledgePlane(4.9, 2.7, 3.9, -1.1, -2.7, -0.16, -0.60, 0.06, 0xdbeafe, 0.10),
-      makeKnowledgePlane(3.5, 1.9, 1.6, -2.0, -0.7, -0.18, -0.30, -0.05, 0xe9efff, 0.08)
+      makePlane(5.9, 3.3,  2.9,  0.1, -1.2, -0.22, -0.46,  0.02, 0xe0f2fe, 0.13),
+      makePlane(4.9, 2.7,  3.9, -1.1, -2.7, -0.16, -0.60,  0.06, 0xdbeafe, 0.10),
+      makePlane(3.5, 1.9,  1.6, -2.0, -0.7, -0.18, -0.30, -0.05, 0xe9efff, 0.08)
     ];
 
+    // ── PRISM SHARDS ─────────────────────────────────────────────
     const prismMat = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff,
-      metalness: 0.0,
-      roughness: 0.03,
-      transmission: 0.96,
-      transparent: true,
-      opacity: 0.26,
-      ior: 1.24,
-      thickness: 2.4,
-      reflectivity: 0.9,
-      depthWrite: false
+      color: 0xffffff, metalness: 0.0, roughness: 0.03,
+      transmission: 0.96, transparent: true, opacity: 0.26,
+      ior: 1.24, thickness: 2.4, reflectivity: 0.9, depthWrite: false
     });
-
-    const prism = new THREE.Mesh(
-      new THREE.OctahedronGeometry(0.68, 0),
-      prismMat
-    );
+    const prism = new THREE.Mesh(new THREE.OctahedronGeometry(0.68, 0), prismMat);
     prism.position.set(3.15, 0.25, -1.0);
     prism.rotation.set(0.35, 0.72, 0.12);
     semanticGroup.add(prism);
-
-    const prismShard = new THREE.Mesh(
-      new THREE.TetrahedronGeometry(0.42, 0),
-      prismMat.clone()
-    );
+    const prismShard = new THREE.Mesh(new THREE.TetrahedronGeometry(0.42, 0), prismMat.clone());
     prismShard.position.set(4.2, -1.35, -2.2);
     prismShard.rotation.set(-0.22, 0.48, 0.10);
     prismShard.material.opacity = 0.16;
     semanticGroup.add(prismShard);
 
+    // ── KNOWLEDGE GRAPH NODES ────────────────────────────────────
     const nodesGroup = new THREE.Group();
     semanticGroup.add(nodesGroup);
 
     const nodePositions = [
-      [1.10,  1.15, -0.35],
-      [2.08,  0.72, -0.72],
-      [3.00,  0.35, -1.00],
-      [3.82,  0.72, -1.42],
-      [2.36, -0.28, -0.92],
-      [3.16, -0.18, -1.06],
-      [4.18, -0.46, -1.84],
-      [1.86, -1.04, -0.62],
-      [2.86, -1.22, -1.10],
+      [1.10,  1.15, -0.35], [2.08,  0.72, -0.72], [3.00,  0.35, -1.00],
+      [3.82,  0.72, -1.42], [2.36, -0.28, -0.92], [3.16, -0.18, -1.06],
+      [4.18, -0.46, -1.84], [1.86, -1.04, -0.62], [2.86, -1.22, -1.10],
       [4.78,  0.20, -2.36]
     ];
 
     const nodeMeshes = [];
     const nodeGeo = new THREE.SphereGeometry(0.046, 16, 16);
-
     nodePositions.forEach((p, i) => {
       const color = (i === 2 || i === 5 || i === 8) ? 0x4f46e5 : (i === 3 || i === 6) ? 0x0ea5e9 : 0x94a3b8;
-      const mat = new THREE.MeshBasicMaterial({
-        color,
-        transparent: true,
-        opacity: i === 5 ? 0.98 : 0.74
-      });
-      const mesh = new THREE.Mesh(nodeGeo, mat);
-      mesh.position.set(p[0], p[1], p[2]);
-      nodesGroup.add(mesh);
-      nodeMeshes.push(mesh);
+      const mat = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: i === 5 ? 0.98 : 0.74 });
+      const m = new THREE.Mesh(nodeGeo, mat);
+      m.position.set(p[0], p[1], p[2]);
+      nodesGroup.add(m);
+      nodeMeshes.push(m);
     });
 
-    const edgePairs = [
-      [0,1],[1,2],[2,3],[1,4],[4,5],[5,6],[0,7],[7,4],[4,8],[3,9],[5,3],[8,6]
-    ];
-
-    const linePositions = [];
-    edgePairs.forEach(([a, b]) => {
-      const pa = nodePositions[a];
-      const pb = nodePositions[b];
-      linePositions.push(pa[0], pa[1], pa[2], pb[0], pb[1], pb[2]);
+    // ── GRAPH EDGES ──────────────────────────────────────────────
+    const edgePairs = [[0,1],[1,2],[2,3],[1,4],[4,5],[5,6],[0,7],[7,4],[4,8],[3,9],[5,3],[8,6]];
+    const linePos = [];
+    edgePairs.forEach(([a,b]) => {
+      linePos.push(...nodePositions[a], ...nodePositions[b]);
     });
-
     const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-    const lineMat = new THREE.LineBasicMaterial({
-      color: 0x8ca0bb,
-      transparent: true,
-      opacity: 0.28
-    });
-    const graphLines = new THREE.LineSegments(lineGeo, lineMat);
+    lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePos, 3));
+    const graphLines = new THREE.LineSegments(lineGeo, new THREE.LineBasicMaterial({ color: 0x8ca0bb, transparent: true, opacity: 0.28 }));
     nodesGroup.add(graphLines);
 
-    function createThread(color, opacity, radius, points) {
-      const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(...p)));
-      const geometry = new THREE.TubeGeometry(curve, 72, radius, 8, false);
-      const material = new THREE.MeshBasicMaterial({
-        color,
-        transparent: true,
-        opacity
-      });
-      const mesh = new THREE.Mesh(geometry, material);
-      semanticGroup.add(mesh);
-      return { mesh, curve };
+    // ── THREADS (CatmullRom tubes) ───────────────────────────────
+    function makeThread(color, opacity, radius, pts) {
+      const curve = new THREE.CatmullRomCurve3(pts.map(p => new THREE.Vector3(...p)));
+      const m = new THREE.Mesh(
+        new THREE.TubeGeometry(curve, 72, radius, 8, false),
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity })
+      );
+      semanticGroup.add(m);
+      return { m, curve };
     }
 
     const threads = [
-      createThread(0x4f46e5, 0.24, 0.013, [
-        [0.9, 1.3, -0.2],
-        [1.8, 0.9, -0.5],
-        [2.6, 0.5, -0.8],
-        [3.2, 0.3, -1.0],
-        [4.2, 0.7, -1.7],
-        [5.0, 0.2, -2.3]
-      ]),
-      createThread(0x0ea5e9, 0.20, 0.012, [
-        [1.4, -1.2, -0.4],
-        [2.0, -0.7, -0.7],
-        [2.7, -0.4, -0.9],
-        [3.2, -0.2, -1.0],
-        [4.1, -0.5, -1.6],
-        [4.8,  0.0, -2.3]
-      ]),
-      createThread(0xa5b4fc, 0.16, 0.010, [
-        [1.2, 0.7, -0.1],
-        [2.0, 0.7, -0.5],
-        [2.8, 0.4, -0.9],
-        [3.5, 0.7, -1.3]
-      ])
+      makeThread(0x4f46e5, 0.24, 0.013, [[0.9,1.3,-0.2],[1.8,0.9,-0.5],[2.6,0.5,-0.8],[3.2,0.3,-1.0],[4.2,0.7,-1.7],[5.0,0.2,-2.3]]),
+      makeThread(0x0ea5e9, 0.20, 0.012, [[1.4,-1.2,-0.4],[2.0,-0.7,-0.7],[2.7,-0.4,-0.9],[3.2,-0.2,-1.0],[4.1,-0.5,-1.6],[4.8,0.0,-2.3]]),
+      makeThread(0xa5b4fc, 0.16, 0.010, [[1.2,0.7,-0.1],[2.0,0.7,-0.5],[2.8,0.4,-0.9],[3.5,0.7,-1.3]])
     ];
 
-    function createBeam(color, opacity, width, height, x, y, z, rotZ) {
-      const geo = new THREE.PlaneGeometry(width, height, 1, 1);
+    // ── BEAM SHADER ──────────────────────────────────────────────
+    const beamVS = `varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`;
+    const beamFS = `varying vec2 vUv;uniform vec3 uColor;uniform float uOpacity;void main(){float core=smoothstep(0.5,0.0,abs(vUv.x-0.5));float fadeY=smoothstep(0.0,0.22,vUv.y)*smoothstep(1.0,0.70,vUv.y);float bloom=pow(core,1.1)*fadeY;gl_FragColor=vec4(uColor,bloom*uOpacity);}`;
+
+    function makeBeam(color, opacity, w, h, x, y, z, rz) {
       const mat = new THREE.ShaderMaterial({
-        transparent: true,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-        uniforms: {
-          uColor: { value: new THREE.Color(color) },
-          uOpacity: { value: opacity }
-        },
-        vertexShader: `
-          varying vec2 vUv;
-          void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          }
-        `,
-        fragmentShader: `
-          varying vec2 vUv;
-          uniform vec3 uColor;
-          uniform float uOpacity;
-          void main() {
-            float core = smoothstep(0.5, 0.0, abs(vUv.x - 0.5));
-            float fadeY = smoothstep(0.0, 0.22, vUv.y) * smoothstep(1.0, 0.70, vUv.y);
-            float bloom = pow(core, 1.1) * fadeY;
-            gl_FragColor = vec4(uColor, bloom * uOpacity);
-          }
-        `
+        transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+        uniforms: { uColor: { value: new THREE.Color(color) }, uOpacity: { value: opacity } },
+        vertexShader: beamVS, fragmentShader: beamFS
       });
-      const mesh = new THREE.Mesh(geo, mat);
-      mesh.position.set(x, y, z);
-      mesh.rotation.z = rotZ;
-      semanticGroup.add(mesh);
-      return mesh;
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), mat);
+      m.position.set(x, y, z);
+      m.rotation.z = rz;
+      semanticGroup.add(m);
+      return m;
     }
 
-    const signalBeam = createBeam(0x4f46e5, 0.11, 1.1, 10.8, 2.9, 0.4, -1.35, -0.36);
-    const extractionBeam = createBeam(0x0ea5e9, 0.08, 0.88, 8.8, 3.8, -0.2, -1.95, 0.22);
-    const softWhiteBeam = createBeam(0xffffff, 0.05, 1.8, 12.5, 2.1, 0.0, -2.8, -0.06);
+    const signalBeam     = makeBeam(0x4f46e5, 0.11, 1.1, 10.8,  2.9,  0.4, -1.35, -0.36);
+    const extractionBeam = makeBeam(0x0ea5e9, 0.08, 0.88, 8.8,  3.8, -0.2, -1.95,  0.22);
+    const softWhiteBeam  = makeBeam(0xffffff, 0.05, 1.8, 12.5,  2.1,  0.0, -2.8,  -0.06);
 
-    function createPulse(color, radius) {
-      const geo = new THREE.PlaneGeometry(radius, radius, 1, 1);
-      const mat = new THREE.ShaderMaterial({
-        transparent: true,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending,
-        uniforms: {
-          uColor: { value: new THREE.Color(color) }
-        },
-        vertexShader: `
-          varying vec2 vUv;
-          void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          }
-        `,
-        fragmentShader: `
-          varying vec2 vUv;
-          uniform vec3 uColor;
-          void main() {
-            vec2 uv = vUv - 0.5;
-            float d = length(uv);
-            float a = smoothstep(0.5, 0.0, d) * 0.52;
-            gl_FragColor = vec4(uColor, a);
-          }
-        `
-      });
-      const mesh = new THREE.Mesh(geo, mat);
-      semanticGroup.add(mesh);
-      return mesh;
+    // ── TRAVELING PULSES ─────────────────────────────────────────
+    const pulseVS = `varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`;
+    const pulseFS = `varying vec2 vUv;uniform vec3 uColor;void main(){vec2 uv=vUv-0.5;float d=length(uv);float a=smoothstep(0.5,0.0,d)*0.52;gl_FragColor=vec4(uColor,a);}`;
+
+    function makePulse(color, radius) {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(radius, radius),
+        new THREE.ShaderMaterial({
+          transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+          uniforms: { uColor: { value: new THREE.Color(color) } },
+          vertexShader: pulseVS, fragmentShader: pulseFS
+        }));
+      semanticGroup.add(m);
+      return m;
     }
 
     const travelingPulses = [
-      { pulse: createPulse(0x4f46e5, 0.20), threadIndex: 0, speed: 0.10, offset: 0.02 },
-      { pulse: createPulse(0x0ea5e9, 0.18), threadIndex: 1, speed: 0.12, offset: 0.40 },
-      { pulse: createPulse(0xa5b4fc, 0.16), threadIndex: 2, speed: 0.08, offset: 0.66 }
+      { pulse: makePulse(0x4f46e5, 0.20), threadIndex: 0, speed: 0.10, offset: 0.02 },
+      { pulse: makePulse(0x0ea5e9, 0.18), threadIndex: 1, speed: 0.12, offset: 0.40 },
+      { pulse: makePulse(0xa5b4fc, 0.16), threadIndex: 2, speed: 0.08, offset: 0.66 }
     ];
 
+    // ── VALIDATION RING ──────────────────────────────────────────
     const validationRing = new THREE.Mesh(
       new THREE.RingGeometry(0.10, 0.13, 40),
-      new THREE.MeshBasicMaterial({
-        color: 0x0ea5e9,
-        transparent: true,
-        opacity: 0.56,
-        side: THREE.DoubleSide
-      })
+      new THREE.MeshBasicMaterial({ color: 0x0ea5e9, transparent: true, opacity: 0.56, side: THREE.DoubleSide })
     );
-    validationRing.position.set(nodePositions[5][0], nodePositions[5][1], nodePositions[5][2]);
+    validationRing.position.set(...nodePositions[5]);
     semanticGroup.add(validationRing);
 
-    const reconciliationZone = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.92, 0.38),
-      new THREE.MeshBasicMaterial({
-        color: 0x818cf8,
-        transparent: true,
-        opacity: 0.06,
-        side: THREE.DoubleSide
-      })
-    );
-    reconciliationZone.position.set(2.72, -0.48, -0.95);
-    reconciliationZone.rotation.set(-0.16, -0.44, 0.08);
-    semanticGroup.add(reconciliationZone);
-
-    const dustGeometry = new THREE.BufferGeometry();
+    // ── DUST PARTICLES ───────────────────────────────────────────
     const dustCount = 1150;
-    const positions = new Float32Array(dustCount * 3);
-    const sizes = new Float32Array(dustCount);
-    const offsets = new Float32Array(dustCount);
-
+    const dpos = new Float32Array(dustCount * 3);
+    const dsizes = new Float32Array(dustCount);
+    const doff = new Float32Array(dustCount);
     for (let i = 0; i < dustCount; i++) {
-      positions[i * 3 + 0] = (Math.random() - 0.15) * 18;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 11;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 14;
-      sizes[i] = Math.random() * 1.8 + 0.4;
-      offsets[i] = Math.random() * Math.PI * 2;
+      dpos[i*3]   = (Math.random() - 0.15) * 18;
+      dpos[i*3+1] = (Math.random() - 0.5) * 11;
+      dpos[i*3+2] = (Math.random() - 0.5) * 14;
+      dsizes[i] = Math.random() * 1.8 + 0.4;
+      doff[i]   = Math.random() * Math.PI * 2;
     }
+    const dustGeo = new THREE.BufferGeometry();
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(dpos, 3));
+    dustGeo.setAttribute('aSize',    new THREE.BufferAttribute(dsizes, 1));
+    dustGeo.setAttribute('aOffset',  new THREE.BufferAttribute(doff, 1));
 
-    dustGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    dustGeometry.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
-    dustGeometry.setAttribute('aOffset', new THREE.BufferAttribute(offsets, 1));
-
-    const dustMaterial = new THREE.ShaderMaterial({
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
+    const dustMat = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
       uniforms: {
-        uTime: { value: 0 },
-        uColorA: { value: new THREE.Color(0x94a3b8) },
-        uColorB: { value: new THREE.Color(0x818cf8) },
+        uTime:       { value: 0 },
+        uColorA:     { value: new THREE.Color(0x94a3b8) },
+        uColorB:     { value: new THREE.Color(0x818cf8) },
         uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 1.8) }
       },
       vertexShader: `
-        attribute float aSize;
-        attribute float aOffset;
-        uniform float uTime;
-        uniform float uPixelRatio;
+        attribute float aSize; attribute float aOffset;
+        uniform float uTime; uniform float uPixelRatio;
         varying float vMix;
         void main() {
           vec3 p = position;
           p.y += sin(uTime * 0.18 + aOffset + position.x * 0.12) * 0.08;
           p.x += cos(uTime * 0.10 + aOffset + position.y * 0.08) * 0.03;
-          vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
-          gl_Position = projectionMatrix * mvPosition;
-          gl_PointSize = aSize * uPixelRatio * (16.0 / -mvPosition.z);
+          vec4 mv = modelViewMatrix * vec4(p, 1.0);
+          gl_Position = projectionMatrix * mv;
+          gl_PointSize = aSize * uPixelRatio * (16.0 / -mv.z);
           vMix = clamp((position.z + 7.0) / 14.0, 0.0, 1.0);
-        }
-      `,
+        }`,
       fragmentShader: `
-        uniform vec3 uColorA;
-        uniform vec3 uColorB;
-        varying float vMix;
+        uniform vec3 uColorA; uniform vec3 uColorB; varying float vMix;
         void main() {
           vec2 uv = gl_PointCoord - 0.5;
-          float d = length(uv);
-          float alpha = smoothstep(0.5, 0.0, d);
-          vec3 color = mix(uColorA, uColorB, vMix * 0.45);
-          gl_FragColor = vec4(color, alpha * 0.14);
-        }
-      `
+          float a = smoothstep(0.5, 0.0, length(uv));
+          vec3 col = mix(uColorA, uColorB, vMix * 0.45);
+          gl_FragColor = vec4(col, a * 0.14);
+        }`
     });
 
-    const dust = new THREE.Points(dustGeometry, dustMaterial);
-    root.add(dust);
+    root.add(new THREE.Points(dustGeo, dustMat));
 
+    // ── MOUSE ────────────────────────────────────────────────────
     const mouse = { x: 0, y: 0 };
     const targetMouse = { x: 0, y: 0 };
 
-    function onPointerMove(e) {
-      const rect = mount.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      targetMouse.x = (x - 0.5) * 2;
-      targetMouse.y = (y - 0.5) * 2;
-    }
+    window.addEventListener('pointermove', e => {
+      const r = mount.getBoundingClientRect();
+      targetMouse.x = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+      targetMouse.y = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+    }, { passive: true });
+    window.addEventListener('pointerleave', () => { targetMouse.x = 0; targetMouse.y = 0; }, { passive: true });
 
-    function onPointerLeave() {
-      targetMouse.x = 0;
-      targetMouse.y = 0;
-    }
-
-    window.addEventListener('pointermove', onPointerMove, { passive: true });
-    window.addEventListener('pointerleave', onPointerLeave, { passive: true });
-
+    // ── RESIZE ───────────────────────────────────────────────────
     function resize() {
-      const rect = mount.getBoundingClientRect();
-      const width = Math.max(1, rect.width);
-      const height = Math.max(1, rect.height);
-      camera.aspect = width / height;
+      const r = mount.getBoundingClientRect();
+      const w = Math.max(1, r.width), h = Math.max(1, r.height);
+      camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      renderer.setSize(width, height, false);
+      renderer.setSize(w, h, false);
     }
-
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
+    // ── ANIMATION LOOP ───────────────────────────────────────────
     const clock = new THREE.Clock();
 
     function animate() {
@@ -1490,31 +607,26 @@
       mouse.x += (targetMouse.x - mouse.x) * 0.04;
       mouse.y += (targetMouse.y - mouse.y) * 0.04;
 
-      dustMaterial.uniforms.uTime.value = t;
+      dustMat.uniforms.uTime.value = t;
 
-      root.rotation.y = mouse.x * 0.08;
-      root.rotation.x = -mouse.y * 0.03;
-      root.position.x = mouse.x * 0.14;
-      root.position.y = -mouse.y * 0.07;
+      root.rotation.y  = mouse.x * 0.08;
+      root.rotation.x  = -mouse.y * 0.03;
+      root.position.x  = mouse.x * 0.14;
+      root.position.y  = -mouse.y * 0.07;
 
       planes[0].rotation.z = 0.02 + Math.sin(t * 0.20) * 0.008;
       planes[1].rotation.z = 0.06 + Math.sin(t * 0.15 + 1.4) * 0.010;
       planes[2].rotation.z = -0.05 + Math.sin(t * 0.18 + 2.1) * 0.006;
 
-      prism.rotation.x += 0.0012;
-      prism.rotation.y += 0.0018;
-      prismShard.rotation.x += 0.0009;
-      prismShard.rotation.y += 0.0013;
+      prism.rotation.x += 0.0012; prism.rotation.y += 0.0018;
+      prismShard.rotation.x += 0.0009; prismShard.rotation.y += 0.0013;
 
-      nodeMeshes.forEach((node, i) => {
-        node.scale.setScalar(1 + Math.sin(t * (0.8 + i * 0.04) + i) * 0.05);
-      });
-
+      nodeMeshes.forEach((n, i) => n.scale.setScalar(1 + Math.sin(t * (0.8 + i * 0.04) + i) * 0.05));
       graphLines.material.opacity = 0.24 + Math.sin(t * 0.45) * 0.02;
 
-      signalBeam.material.uniforms.uOpacity.value = 0.10 + Math.sin(t * 0.7) * 0.014;
+      signalBeam.material.uniforms.uOpacity.value     = 0.10 + Math.sin(t * 0.70) * 0.014;
       extractionBeam.material.uniforms.uOpacity.value = 0.07 + Math.sin(t * 0.95 + 0.8) * 0.010;
-      softWhiteBeam.material.uniforms.uOpacity.value = 0.045 + Math.sin(t * 0.52 + 2.2) * 0.006;
+      softWhiteBeam.material.uniforms.uOpacity.value  = 0.045 + Math.sin(t * 0.52 + 2.2) * 0.006;
 
       travelingPulses.forEach(item => {
         const u = (t * item.speed + item.offset) % 1;
@@ -1526,8 +638,6 @@
       validationRing.rotation.z = t * 0.9;
       validationRing.material.opacity = 0.46 + Math.sin(t * 1.7) * 0.10;
 
-      reconciliationZone.material.opacity = 0.05 + Math.sin(t * 0.85 + 0.5) * 0.014;
-
       camera.position.x += (mouse.x * 0.34 - camera.position.x) * 0.03;
       camera.position.y += (-mouse.y * 0.14 - camera.position.y) * 0.03;
       camera.lookAt(1.9, -0.1, -1.1);
@@ -1536,7 +646,7 @@
       requestAnimationFrame(animate);
     }
 
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
       renderer.render(scene, camera);
     } else {
       animate();
