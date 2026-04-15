@@ -691,32 +691,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const hero = document.getElementById('top');
 
   const CFG = {
-    COLS: 22,
-    ROWS: 14,
-    GHOST_COLS: 13,
-    GHOST_ROWS: 8,
+    COLS: 24,
+    ROWS: 15,
+    GHOST_COLS: 15,
+    GHOST_ROWS: 9,
 
-    NOISE_SCALE: 0.0094,
-    NOISE_SPEED: 0.00018,
+    NOISE_SCALE: 0.0102,
+    NOISE_SPEED: 0.00022,
 
-    AMP_LEFT: 38,
-    AMP_MID: 8,
-    AMP_RIGHT: 1.25,
+    AMP_LEFT: 52,
+    AMP_MID: 10,
+    AMP_RIGHT: 1.6,
 
-    SPRING_LEFT: 0.024,
-    SPRING_MID: 0.046,
-    SPRING_RIGHT: 0.094,
+    SPRING_LEFT: 0.026,
+    SPRING_MID: 0.052,
+    SPRING_RIGHT: 0.108,
 
-    FRICTION_LEFT: 0.88,
-    FRICTION_MID: 0.82,
-    FRICTION_RIGHT: 0.72,
+    FRICTION_LEFT: 0.86,
+    FRICTION_MID: 0.78,
+    FRICTION_RIGHT: 0.64,
 
-    MOUSE_RADIUS: 132,
-    MOUSE_PULL: 0.055,
-    REVEAL_RADIUS: 112,
+    MOUSE_RADIUS: 138,
+    MOUSE_PULL: 0.085,
+    REVEAL_RADIUS: 118,
 
-    DOT_R: 0.96,
-    DOT_R_ACTIVE: 1.56,
+    DOT_R: 1.02,
+    DOT_R_ACTIVE: 1.82,
 
     INDIGO: [55,48,163],
     SKY: [14,165,233],
@@ -727,8 +727,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let W, H, cellW, cellH, dpr;
   let pts = [];
   let ghostPts = [];
+  let memoryTrails = [];
   let time = 0;
-  let mouse = { x: -9999, y: -9999, active: false };
+  let mouse = { x: -9999, y: -9999, active: false, lastX: -9999, lastY: -9999 };
 
   function clamp(v, min, max) {
     return Math.max(min, Math.min(max, v));
@@ -813,8 +814,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const friction = lerp(lerp(CFG.FRICTION_LEFT, CFG.FRICTION_MID, toMid), CFG.FRICTION_RIGHT, toRight);
 
         const zone = xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed';
-        const anchor = zone === 'governed' && (col === CFG.COLS - 7 || col === CFG.COLS - 9) && (row === 4 || row === 9);
-        const validationHub = zone === 'governed' && (col === CFG.COLS - 6 || col === CFG.COLS - 10) && (row === 6 || row === 10);
+
+        const validationHub =
+          zone === 'governed' &&
+          (col === CFG.COLS - 5 || col === CFG.COLS - 8 || col === CFG.COLS - 11) &&
+          (row === 3 || row === 7 || row === 11);
+
+        const anchor =
+          zone === 'governed' &&
+          (col === CFG.COLS - 7 || col === CFG.COLS - 10) &&
+          (row === 4 || row === 10);
+
+        const backbone =
+          zone === 'governed' &&
+          (col === CFG.COLS - 8 || col === CFG.COLS - 6);
 
         pts.push({
           ox, oy,
@@ -827,8 +840,9 @@ document.addEventListener('DOMContentLoaded', () => {
           friction,
           phase: Math.random() * Math.PI * 2,
           edge: col === 0 || col === CFG.COLS - 1 || row === 0 || row === CFG.ROWS - 1,
+          validationHub,
           anchor,
-          validationHub
+          backbone
         });
       }
     }
@@ -841,8 +855,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (let row = 0; row < CFG.GHOST_ROWS; row++) {
       for (let col = 0; col < CFG.GHOST_COLS; col++) {
-        const ox = col * gw + (col % 2 ? gw * 0.08 : 0);
-        const oy = row * gh + ((row % 2) ? gh * 0.05 : 0);
+        const ox = col * gw + (col % 2 ? gw * 0.10 : 0);
+        const oy = row * gh + ((row % 2) ? gh * 0.06 : 0);
         const xn = clamp(ox / W, 0, 1);
 
         ghostPts.push({
@@ -856,8 +870,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function edgeClass(a, b) {
+    if (a.validationHub || b.validationHub) return 'validated';
+    if (a.anchor || b.anchor) return 'anchored';
+    if (a.backbone || b.backbone) return 'backbone';
+    if (a.zone === 'governed' && b.zone === 'governed') return 'supporting';
+    if (a.zone === 'aligned' || b.zone === 'aligned') return 'reconcile';
+    return 'tentative';
+  }
+
   function updatePrimary() {
     const t = time * CFG.NOISE_SPEED;
+    const anchors = pts.filter(p => p.anchor);
 
     pts.forEach(p => {
       const nx = p.ox * CFG.NOISE_SCALE;
@@ -866,32 +890,67 @@ document.addEventListener('DOMContentLoaded', () => {
       let dx = smoothNoise(nx, ny, t) * p.amp;
       let dy = smoothNoise(nx + 31, ny + 17, t) * p.amp;
 
-      dx += smoothNoise(nx * 1.65, ny * 1.65, t * 1.15) * p.amp * 0.09;
-      dy += smoothNoise(nx * 1.65 + 2, ny * 1.65 + 1, t * 1.1) * p.amp * 0.07;
+      dx += smoothNoise(nx * 1.8, ny * 1.8, t * 1.2) * p.amp * 0.11;
+      dy += smoothNoise(nx * 1.8 + 3, ny * 1.8 + 2, t * 1.16) * p.amp * 0.08;
 
       if (p.zone === 'aligned') {
-        dx *= 0.46;
-        dy *= 0.42;
+        dx *= 0.5;
+        dy *= 0.46;
       }
 
       if (p.zone === 'governed') {
-        dx *= 0.08;
-        dy *= 0.07;
+        dx *= 0.09;
+        dy *= 0.08;
+        dx += Math.sin(t * 82 + p.row * 0.18) * 0.12;
+        dy += Math.cos(t * 78 + p.col * 0.08) * 0.035;
       }
 
       if (p.zone === 'fragmented') {
-        dx += Math.sin(t * 120 + p.phase) * 1.6;
-        dy += Math.cos(t * 112 + p.phase) * 1.1;
+        dx += Math.sin(t * 150 + p.phase) * 2.4;
+        dy += Math.cos(t * 136 + p.phase) * 1.45;
       }
 
       if (p.anchor) {
-        dx *= 0.12;
-        dy *= 0.12;
+        dx *= 0.14;
+        dy *= 0.14;
+      }
+      if (p.validationHub) {
+        dx *= 0.16;
+        dy *= 0.14;
       }
 
-      if (p.validationHub) {
-        dx *= 0.18;
-        dy *= 0.16;
+      if (p.zone === 'governed') {
+        const laneA = Math.round((W * 0.73) / cellW) * cellW;
+        const laneB = Math.round((W * 0.82) / cellW) * cellW;
+        const laneWeightA = Math.exp(-Math.abs(p.ox - laneA) / 118);
+        const laneWeightB = Math.exp(-Math.abs(p.ox - laneB) / 118);
+        const laneMix = Math.max(0.0001, laneWeightA + laneWeightB);
+        const snapTargetX = (laneA * laneWeightA + laneB * laneWeightB) / laneMix;
+
+        dx += (snapTargetX - p.ox) * 0.01 * laneMix;
+
+        const rowSnap = Math.round(p.oy / cellH) * cellH;
+        dy += (rowSnap - p.oy) * 0.009;
+      }
+
+      if (p.zone === 'governed' && !p.anchor && !p.validationHub) {
+        let basinX = 0;
+        let basinY = 0;
+        let basinW = 0;
+
+        anchors.forEach(a => {
+          const d = distance(p.ox, p.oy, a.ox, a.oy);
+          if (d > 170) return;
+          const w = 1 - d / 170;
+          basinX += a.ox * w;
+          basinY += a.oy * w;
+          basinW += w;
+        });
+
+        if (basinW > 0) {
+          dx += ((basinX / basinW) - p.ox) * 0.008;
+          dy += ((basinY / basinW) - p.oy) * 0.005;
+        }
       }
 
       let tx = p.ox + dx;
@@ -902,8 +961,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const falloff = 1 - md / CFG.MOUSE_RADIUS;
         const pull =
           p.zone === 'fragmented' ? CFG.MOUSE_PULL :
-          p.zone === 'aligned' ? CFG.MOUSE_PULL * 0.55 :
-          CFG.MOUSE_PULL * 0.28;
+          p.zone === 'aligned' ? CFG.MOUSE_PULL * 0.48 :
+          CFG.MOUSE_PULL * 0.24;
 
         tx += (mouse.x - p.x) * falloff * pull;
         ty += (mouse.y - p.y) * falloff * pull;
@@ -919,18 +978,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateGhost() {
-    const tt = time * 0.00014;
+    const tt = time * 0.00011;
     ghostPts.forEach(p => {
-      const amp = p.zone === 'fragmented' ? 4.5 : p.zone === 'aligned' ? 2.2 : 0.9;
-      p.x = p.ox + Math.sin(tt * 150 + p.phase + p.row * 0.08) * amp;
-      p.y = p.oy + Math.cos(tt * 120 + p.phase + p.col * 0.05) * amp * 0.32;
+      const amp = p.zone === 'fragmented' ? 7 : p.zone === 'aligned' ? 3.4 : 1.2;
+      p.x = p.ox + Math.sin(tt * 160 + p.phase + p.row * 0.08) * amp;
+      p.y = p.oy + Math.cos(tt * 132 + p.phase + p.col * 0.05) * amp * 0.28;
     });
+  }
+
+  function updateMemoryTrails() {
+    memoryTrails = memoryTrails
+      .map(t => ({ ...t, life: t.life - 1 }))
+      .filter(t => t.life > 0);
   }
 
   function update() {
     time += 1;
     updatePrimary();
     updateGhost();
+    updateMemoryTrails();
   }
 
   function revealStrength(x, y) {
@@ -940,18 +1006,34 @@ document.addEventListener('DOMContentLoaded', () => {
     return 1 - d / CFG.REVEAL_RADIUS;
   }
 
+  function zoneThreshold(zone) {
+    if (zone === 'fragmented') return 1.00;
+    if (zone === 'aligned') return 1.12;
+    return 1.16;
+  }
+
   function drawAtmosphere() {
-    const leftGlow = ctx.createRadialGradient(W * 0.14, H * 0.48, 0, W * 0.14, H * 0.48, W * 0.28);
-    leftGlow.addColorStop(0, 'rgba(79,70,229,0.026)');
+    const leftGlow = ctx.createRadialGradient(W * 0.14, H * 0.48, 0, W * 0.14, H * 0.48, W * 0.32);
+    leftGlow.addColorStop(0, 'rgba(79,70,229,0.024)');
     leftGlow.addColorStop(1, 'rgba(79,70,229,0)');
     ctx.fillStyle = leftGlow;
     ctx.fillRect(0, 0, W, H);
 
-    const rightGlow = ctx.createRadialGradient(W * 0.82, H * 0.44, 0, W * 0.82, H * 0.44, W * 0.18);
-    rightGlow.addColorStop(0, 'rgba(14,165,233,0.015)');
+    const rightGlow = ctx.createRadialGradient(W * 0.82, H * 0.44, 0, W * 0.82, H * 0.44, W * 0.22);
+    rightGlow.addColorStop(0, 'rgba(14,165,233,0.014)');
     rightGlow.addColorStop(1, 'rgba(14,165,233,0)');
     ctx.fillStyle = rightGlow;
     ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawGovernanceField() {
+    const x = W * 0.72;
+    const grad = ctx.createLinearGradient(x - 24, 0, x + 24, 0);
+    grad.addColorStop(0, 'rgba(255,255,255,0)');
+    grad.addColorStop(0.5, 'rgba(79,70,229,0.016)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x - 24, 0, 48, H);
   }
 
   function drawPrimaryEdges() {
@@ -969,33 +1051,57 @@ document.addEventListener('DOMContentLoaded', () => {
         const dx = b.x - a.x;
         const dy = b.y - a.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const expected = Math.max(cellW, cellH) * 1.12;
-        if (dist > expected) continue;
+        const expected = Math.max(cellW, cellH) * 1.16;
+
+        const zone =
+          a.zone === b.zone ? a.zone :
+          (a.zone === 'governed' || b.zone === 'governed') ? 'aligned' : 'fragmented';
+
+        if (dist > expected * zoneThreshold(zone)) continue;
+        if (zone === 'fragmented' && dist > expected * 0.84) continue;
 
         const mx = (a.x + b.x) * 0.5;
         const my = (a.y + b.y) * 0.5;
         const xNorm = clamp(mx / W, 0, 1);
-        const blend = smoothstep(0.44, 0.92, xNorm);
-        let rgb = lerpColor(CFG.SLATE, CFG.SKY, blend);
+        const wGov = smoothstep(0.46, 0.92, xNorm);
+
+        let rgb = lerpColor(CFG.INDIGO, CFG.SKY, wGov);
+        const kind = edgeClass(a, b);
+
         const md = distance(mx, my, mouse.x, mouse.y);
-        const mouseBoost = mouse.active && md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) * 0.025 : 0;
+        const mouseBoost = mouse.active && md < CFG.MOUSE_RADIUS
+          ? (1 - md / CFG.MOUSE_RADIUS) * 0.026
+          : 0;
 
-        let alpha = 0.014 + blend * 0.05 + mouseBoost;
+        const tension = clamp(Math.abs(dist - expected) / expected, 0, 1);
+        let alpha = (0.012 + wGov * 0.05 + mouseBoost) * (1 - tension * 0.54);
 
-        if (a.zone === 'fragmented' && b.zone === 'fragmented') alpha *= 0.72;
-        if (a.zone === 'governed' && b.zone === 'governed') alpha *= 1.08;
-        if (a.anchor || b.anchor) {
-          alpha *= 1.06;
-          rgb = CFG.INDIGO;
-        }
-        if (a.validationHub || b.validationHub) {
+        if (zone === 'fragmented') alpha *= 0.74;
+        if (zone === 'governed') alpha *= 0.98;
+
+        if (kind === 'backbone') {
           alpha *= 1.08;
+        } else if (kind === 'anchored') {
+          alpha *= 1.08;
+          rgb = lerpColor(CFG.INDIGO, CFG.SKY, 0.62);
+        } else if (kind === 'validated') {
+          alpha *= 1.12;
           rgb = CFG.VALID;
+        } else if (kind === 'supporting') {
+          alpha *= 0.88;
+        } else if (kind === 'tentative') {
+          alpha *= 0.7;
         }
 
         ctx.globalAlpha = alpha;
         ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-        ctx.lineWidth = (a.anchor || b.anchor || a.validationHub || b.validationHub) ? 0.64 : 0.42;
+        ctx.lineWidth =
+          kind === 'validated' ? 0.74 :
+          kind === 'anchored' ? 0.64 :
+          kind === 'backbone' ? 0.56 :
+          kind === 'supporting' ? 0.42 :
+          (a.edge || b.edge ? 0.3 : 0.4);
+
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
@@ -1013,12 +1119,25 @@ document.addEventListener('DOMContentLoaded', () => {
       if (a.row < CFG.GHOST_ROWS - 1) neighbours.push(ghostPts[i + CFG.GHOST_COLS]);
 
       for (const b of neighbours) {
-        const reveal = revealStrength((a.x + b.x) * 0.5, (a.y + b.y) * 0.5);
-        if (reveal < 0.18) continue;
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const expected = Math.max(W / (CFG.GHOST_COLS - 1), H / (CFG.GHOST_ROWS - 1)) * 1.10;
+        if (dist > expected * 1.03) continue;
+        if (a.zone === 'fragmented' && dist > expected * 0.88) continue;
 
-        ctx.globalAlpha = 0.014 * reveal;
-        ctx.strokeStyle = 'rgb(148,163,184)';
-        ctx.lineWidth = 0.3;
+        const mx = (a.x + b.x) * 0.5;
+        const my = (a.y + b.y) * 0.5;
+        const reveal = revealStrength(mx, my);
+        if (reveal < 0.16) continue;
+
+        const xNorm = clamp(mx / W, 0, 1);
+        const wGov = smoothstep(0.44, 0.94, xNorm);
+        const rgb = lerpColor(CFG.SLATE, CFG.SKY, wGov);
+
+        ctx.globalAlpha = (0.008 + wGov * 0.01) * reveal;
+        ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+        ctx.lineWidth = 0.32;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
@@ -1027,108 +1146,109 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function drawBackboneLanes() {
+    const cols = [CFG.COLS - 8, CFG.COLS - 6];
+    cols.forEach((col, i) => {
+      ctx.beginPath();
+      for (let row = 1; row < CFG.ROWS - 1; row++) {
+        const p = pts[row * CFG.COLS + col];
+        if (row === 1) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+      ctx.globalAlpha = 0.028 + Math.sin(time * 0.004 + i) * 0.004;
+      ctx.strokeStyle = i === 0 ? 'rgb(79,70,229)' : 'rgb(14,165,233)';
+      ctx.lineWidth = 0.58;
+      ctx.stroke();
+    });
+  }
+
+  function addMemoryTrail() {
+    if (!mouse.active) return;
+    if (mouse.x < W * 0.66) return;
+
+    const moved = distance(mouse.x, mouse.y, mouse.lastX, mouse.lastY);
+    if (moved < 34) return;
+
+    const nearby = pts.filter(p => p.zone === 'governed' && distance(p.x, p.y, mouse.x, mouse.y) < 58).slice(0, 5);
+    if (nearby.length < 2) return;
+
+    for (let i = 0; i < nearby.length - 1; i++) {
+      const a = nearby[i];
+      const b = nearby[i + 1];
+      memoryTrails.push({
+        x1:a.x, y1:a.y,
+        x2:b.x, y2:b.y,
+        life:16
+      });
+    }
+
+    mouse.lastX = mouse.x;
+    mouse.lastY = mouse.y;
+  }
+
+  function drawMemoryTrails() {
+    memoryTrails.forEach(t => {
+      const alpha = (t.life / 16) * 0.026;
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = 'rgb(79,70,229)';
+      ctx.lineWidth = 0.36;
+      ctx.beginPath();
+      ctx.moveTo(t.x1, t.y1);
+      ctx.lineTo(t.x2, t.y2);
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  function drawInteractionField() {
+    if (!mouse.active) return;
+    if (mouse.x < W * 0.58) return;
+
+    const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, CFG.REVEAL_RADIUS);
+    grad.addColorStop(0, 'rgba(79,70,229,0.010)');
+    grad.addColorStop(0.55, 'rgba(14,165,233,0.006)');
+    grad.addColorStop(1, 'rgba(14,165,233,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, CFG.REVEAL_RADIUS, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
   function drawNodes() {
     pts.forEach(p => {
       const md = distance(p.x, p.y, mouse.x, mouse.y);
       const mouseGlow = mouse.active && md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) : 0;
 
       let rgb = CFG.SLATE;
-      let alpha = p.edge ? 0.04 : 0.12;
-      let radius = p.edge ? CFG.DOT_R * 0.74 : CFG.DOT_R;
+      let alpha = p.edge ? 0.04 : 0.11;
+      let radius = p.edge ? CFG.DOT_R * 0.72 : CFG.DOT_R;
 
       if (p.zone === 'fragmented') {
         rgb = CFG.INDIGO;
-        alpha *= 0.75;
+        alpha *= 0.78;
       } else if (p.zone === 'governed') {
         rgb = CFG.SKY;
-        alpha *= 0.9;
+        alpha *= 0.92;
+      }
+
+      if (p.backbone) {
+        rgb = CFG.SKY;
+        alpha *= 1.02;
       }
 
       if (p.anchor) {
         rgb = CFG.INDIGO;
         alpha = 0.22;
-        radius = 1.6;
+        radius = 1.58;
       }
 
       if (p.validationHub) {
         rgb = CFG.VALID;
-        alpha = 0.34;
-        radius = 1.82;
+        alpha = 0.34 + Math.sin(time * 0.009 + p.row) * 0.018;
+        radius = 1.9;
       }
 
-      alpha += mouseGlow * 0.11;
+      alpha += mouseGlow * 0.1;
       radius += mouseGlow * (CFG.DOT_R_ACTIVE - CFG.DOT_R);
-
-      if (mouseGlow > 0.16 && p.zone === 'governed') {
-        const haloR = radius * 2.6;
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
-        grad.addColorStop(0, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${mouseGlow * 0.035})`);
-        grad.addColorStop(1, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, haloR, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      ctx.globalAlpha = Math.min(1, alpha);
-      ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-      ctx.fill();
-    });
-
-    ghostPts.forEach(p => {
-      const reveal = revealStrength(p.x, p.y);
-      if (reveal < 0.18) return;
-
-      ctx.globalAlpha = 0.016 * reveal;
-      ctx.fillStyle = 'rgb(148,163,184)';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 0.58, 0, Math.PI * 2);
-      ctx.fill();
-    });
-
-    ctx.globalAlpha = 1;
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    drawAtmosphere();
-    drawGhostEdges();
-    drawPrimaryEdges();
-    drawNodes();
-    ctx.globalAlpha = 1;
-  }
-
-  function loop() {
-    update();
-    draw();
-    requestAnimationFrame(loop);
-  }
-
-  hero.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left;
-    mouse.y = e.clientY - r.top;
-    mouse.active = true;
-  }, { passive: true });
-
-  hero.addEventListener('mouseleave', () => {
-    mouse.x = -9999;
-    mouse.y = -9999;
-    mouse.active = false;
-  });
-
-  window.addEventListener('resize', resize, { passive: true });
-
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    resize();
-    draw();
-  } else {
-    resize();
-    loop();
-  }
-})();
-</script>
 </body>
 </html>
