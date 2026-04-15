@@ -12,24 +12,25 @@
 
   <style>
     :root {
-      --bg:#f7f5f1;
-      --bg-soft:#f2efe8;
-      --panel:#fbfaf7;
-      --panel-2:#f4f1ea;
-      --ink:#171717;
-      --ink-soft:#4c4a45;
-      --ink-dim:#7b766d;
-      --line:#ddd7cb;
-      --line-soft:#e8e2d7;
-      --accent:#5b5a78;
-      --accent-soft:#ece9f4;
-      --accent-deep:#3f3e56;
+      --bg:#ffffff;
+      --bg-off:#f8f9fc;
+      --bg-deep:#0f1c3a;
+      --line:#dde3ed;
+      --line-soft:#eaecf2;
+      --text:#0d1424;
+      --text-mid:#374259;
+      --text-soft:#677390;
+      --text-dim:#98a3b8;
+      --indigo:#3730a3;
+      --indigo-mid:#4f46e5;
+      --indigo-soft:#eef2ff;
+      --indigo-pale:#f5f6ff;
+      --sky:#0ea5e9;
       --serif:'Instrument Serif', Georgia, serif;
       --sans:'IBM Plex Sans', system-ui, sans-serif;
       --mono:'IBM Plex Mono', monospace;
-      --max:1120px;
+      --max:1180px;
       --ease:cubic-bezier(.16,1,.3,1);
-      --shadow:0 10px 30px rgba(23,23,23,.04);
     }
 
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -37,8 +38,8 @@
     body{
       font-family:var(--sans);
       background:var(--bg);
-      color:var(--ink);
-      line-height:1.7;
+      color:var(--text);
+      line-height:1.65;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
       overflow-x:hidden;
@@ -51,53 +52,50 @@
       position:sticky;
       top:0;
       z-index:120;
-      background:rgba(247,245,241,.78);
-      backdrop-filter:blur(16px);
-      border-bottom:1px solid rgba(123,118,109,.08);
-      transition:box-shadow .25s,border-color .25s,background .25s;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line-soft);
+      transition:box-shadow .25s;
     }
-    nav.raised{
-      box-shadow:0 6px 24px rgba(23,23,23,.04);
-      border-color:rgba(123,118,109,.14);
-      background:rgba(247,245,241,.9);
-    }
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:32px;}
+    nav.raised{box-shadow:0 1px 18px rgba(55,48,163,.07);}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:32px;}
     .logo{
       display:flex;align-items:center;gap:10px;
-      font-size:18px;font-weight:400;letter-spacing:-.02em;color:var(--ink);
+      font-family:var(--sans);font-size:19px;font-weight:400;
+      color:var(--text);letter-spacing:-.02em;transition:color .2s;
     }
+    .logo:hover{color:var(--indigo);}
     .nav-links{display:flex;align-items:center;gap:28px;}
     .nav-links a{
-      font-size:14px;font-weight:400;color:var(--ink-dim);
-      transition:color .18s ease;
+      font-size:14px;font-weight:400;color:var(--text-soft);
+      letter-spacing:.01em;transition:color .18s;
     }
-    .nav-links a:hover{color:var(--ink);}
+    .nav-links a:hover{color:var(--text);}
     .nav-cta{
-      padding:9px 18px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.4);
-      color:var(--ink)!important;
+      background:var(--indigo)!important;
+      color:#fff!important;
+      padding:9px 20px;
+      border-radius:6px;
+      font-size:13px!important;
       font-weight:500!important;
-      transition:background .18s,border-color .18s,transform .18s!important;
+      transition:background .18s,transform .18s!important;
     }
     .nav-cta:hover{
-      background:#fff;
-      border-color:#c9c2b5;
-      transform:translateY(-1px);
+      background:#312e81!important;
+      transform:translateY(-1px)!important;
     }
 
     .hero{
       position:relative;
       overflow:hidden;
-      min-height:94vh;
+      min-height:96vh;
       display:flex;
       align-items:center;
-      padding:112px 0 88px;
+      padding:104px 0 94px;
       background:
-        radial-gradient(circle at 18% 22%, rgba(91,90,120,.06), transparent 0 24%),
-        radial-gradient(circle at 78% 34%, rgba(91,90,120,.035), transparent 0 20%),
-        linear-gradient(180deg,#f8f6f2 0%,#f4f1ea 100%);
+        radial-gradient(circle at 12% 28%, rgba(79,70,229,.038), transparent 0 20%),
+        radial-gradient(circle at 76% 42%, rgba(14,165,233,.025), transparent 0 20%),
+        linear-gradient(160deg,#fcfdff 0%,#f7f9fc 56%,#f1f5fa 100%);
       isolation:isolate;
     }
 
@@ -108,7 +106,6 @@
       height:100%;
       pointer-events:none;
       z-index:0;
-      opacity:.45;
     }
 
     .hero-vignette{
@@ -116,19 +113,21 @@
       inset:0;
       z-index:1;
       pointer-events:none;
-      background:linear-gradient(90deg,
-        rgba(248,246,242,.96) 0%,
-        rgba(248,246,242,.90) 28%,
-        rgba(248,246,242,.7) 52%,
-        rgba(248,246,242,.36) 74%,
-        transparent 100%);
+      background:
+        linear-gradient(90deg,
+          rgba(250,251,255,.97) 0%,
+          rgba(250,251,255,.90) 25%,
+          rgba(250,251,255,.54) 50%,
+          rgba(250,251,255,.18) 72%,
+          transparent 100%
+        );
     }
 
     .hero-inner{
       position:relative;
       z-index:2;
       display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(320px,500px);
+      grid-template-columns:minmax(0,1fr) minmax(320px,520px);
       gap:clamp(36px,5vw,72px);
       align-items:center;
     }
@@ -140,14 +139,16 @@
       font-family:var(--mono);
       font-size:11px;
       font-weight:500;
-      letter-spacing:.12em;
+      letter-spacing:.14em;
       text-transform:uppercase;
-      color:var(--accent-deep);
-      background:rgba(255,255,255,.45);
-      border:1px solid rgba(91,90,120,.12);
-      padding:7px 12px;
+      color:var(--indigo-mid);
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(79,70,229,.10);
+      backdrop-filter:blur(10px);
+      padding:6px 12px;
       border-radius:999px;
-      margin-bottom:30px;
+      margin-bottom:28px;
+      box-shadow:0 4px 14px rgba(55,48,163,.04);
       opacity:0;
       animation:fadeUp .7s var(--ease) .05s forwards;
     }
@@ -156,29 +157,29 @@
       width:6px;
       height:6px;
       border-radius:50%;
-      background:var(--accent);
-      opacity:.8;
+      background:var(--sky);
+      opacity:.9;
     }
 
     .hero h1{
       font-family:var(--serif);
-      font-size:clamp(46px,6vw,82px);
+      font-size:clamp(44px,6vw,84px);
       font-weight:400;
-      line-height:.98;
-      letter-spacing:-.035em;
-      color:var(--ink);
+      line-height:.96;
+      letter-spacing:-.03em;
+      color:var(--text);
       margin-bottom:24px;
-      max-width:720px;
+      max-width:680px;
       opacity:0;
       animation:fadeUp .85s var(--ease) .15s forwards;
       text-wrap:balance;
     }
-    .hero h1 .accent{color:var(--accent-deep);}
+    .hero h1 .accent{color:var(--indigo-mid);}
     .hero-sub{
-      font-size:19px;
-      line-height:1.9;
-      color:var(--ink-soft);
-      max-width:560px;
+      font-size:18px;
+      line-height:1.82;
+      color:var(--text-soft);
+      max-width:520px;
       font-weight:300;
       margin-bottom:36px;
       opacity:0;
@@ -194,41 +195,45 @@
     }
 
     @keyframes fadeUp{
-      from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:none;}
+      from{opacity:0;transform:translateY(18px);}
+      to{opacity:1;transform:none;}
     }
     @keyframes fadeIn{
-      from{opacity:0;transform:translateX(14px);} to{opacity:1;transform:none;}
+      from{opacity:0;transform:translateX(16px);}
+      to{opacity:1;transform:none;}
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding:13px 24px;
+      padding:13px 26px;
       border-radius:999px;
+      font-family:var(--sans);
       font-size:14px;
       font-weight:500;
       letter-spacing:.01em;
       cursor:pointer;
       border:1px solid transparent;
-      transition:transform .2s var(--ease),box-shadow .2s,background .18s,border-color .18s,color .18s;
+      transition:transform .2s var(--ease),box-shadow .2s,background .18s,border-color .18s;
     }
-    .btn:hover{transform:translateY(-1px);}
+    .btn:hover{transform:translateY(-2px);}
     .btn-primary{
-      background:var(--ink);
-      color:#f8f6f2;
-      box-shadow:0 8px 24px rgba(23,23,23,.08);
+      background:linear-gradient(135deg,#4f46e5 0%,#3730a3 100%);
+      color:#fff;
+      box-shadow:0 8px 24px rgba(79,70,229,.16);
     }
-    .btn-primary:hover{box-shadow:0 10px 28px rgba(23,23,23,.11);}
+    .btn-primary:hover{box-shadow:0 10px 30px rgba(79,70,229,.22);}
     .btn-outline{
-      background:rgba(255,255,255,.35);
-      color:var(--ink-soft);
-      border-color:var(--line);
+      background:rgba(255,255,255,.80);
+      backdrop-filter:blur(12px);
+      color:var(--text-mid);
+      border-color:rgba(221,227,237,.92);
+      box-shadow:0 3px 12px rgba(13,20,36,.03);
     }
     .btn-outline:hover{
-      border-color:#c8c1b4;
-      background:rgba(255,255,255,.62);
-      color:var(--ink);
+      border-color:var(--text-dim);
+      background:rgba(255,255,255,.95);
     }
 
     .hero-aside{
@@ -238,14 +243,14 @@
       opacity:0;
       animation:fadeIn .9s var(--ease) .3s forwards;
     }
-    .hero-shot{width:100%;max-width:520px;}
+    .hero-shot{width:100%;max-width:540px;}
     .hero-shot-frame{
-      border:1px solid rgba(123,118,109,.14);
-      border-radius:24px;
+      border:1px solid rgba(198,208,224,.72);
+      border-radius:20px;
       overflow:hidden;
-      background:rgba(255,255,255,.42);
-      backdrop-filter:blur(14px);
-      box-shadow:var(--shadow);
+      background:rgba(255,255,255,.84);
+      backdrop-filter:blur(20px) saturate(150%);
+      box-shadow:0 18px 48px rgba(15,28,58,.06), inset 0 1px 0 rgba(255,255,255,.62);
       padding:18px;
     }
     .hero-shot-frame.hero-no-img{
@@ -255,23 +260,23 @@
       justify-content:center;
       position:relative;
       overflow:hidden;
-      background:linear-gradient(145deg,rgba(255,255,255,.55) 0%,rgba(244,241,234,.9) 100%);
+      background:linear-gradient(145deg,rgba(255,255,255,.90) 0%,rgba(241,245,251,.94) 100%);
     }
     .hero-shot-frame.hero-no-img::before{
       content:'';
       position:absolute;
       inset:0;
       background-image:
-        linear-gradient(rgba(123,118,109,.06) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(123,118,109,.06) 1px,transparent 1px);
-      background-size:34px 34px;
+        linear-gradient(rgba(148,163,184,.06) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(148,163,184,.06) 1px,transparent 1px);
+      background-size:32px 32px;
     }
     .hero-shot-frame.hero-no-img::after{
       content:'Interface fragment coming soon';
       font-family:var(--mono);
       font-size:11px;
       letter-spacing:.1em;
-      color:#8f887d;
+      color:#8f9db2;
       text-transform:uppercase;
       position:relative;
       z-index:1;
@@ -281,9 +286,9 @@
       height:auto;
       max-height:640px;
       object-fit:contain;
-      border-radius:16px;
+      border-radius:14px;
       background:#fff;
-      border:1px solid rgba(123,118,109,.1);
+      border:1px solid rgba(214,221,233,.8);
     }
     .hero-shot-caption{
       margin-top:12px;
@@ -291,157 +296,128 @@
       font-size:10px;
       letter-spacing:.12em;
       text-transform:uppercase;
-      color:#8f887d;
+      color:#8f9bb0;
     }
 
-    section{padding:108px 0;}
-    section+section{border-top:1px solid rgba(123,118,109,.08);}
+    section{padding:112px 0;}
+    section+section{border-top:1px solid var(--line-soft);}
     .section-label{
       font-family:var(--mono);
       font-size:11px;
       font-weight:500;
       letter-spacing:.16em;
       text-transform:uppercase;
-      color:var(--accent-deep);
+      color:var(--indigo-mid);
       margin-bottom:16px;
     }
     .section-title{
       font-family:var(--serif);
-      font-size:clamp(30px,3.5vw,48px);
+      font-size:clamp(28px,3.4vw,46px);
       font-weight:400;
-      line-height:1.1;
-      letter-spacing:-.025em;
-      color:var(--ink);
+      line-height:1.08;
+      letter-spacing:-.02em;
+      color:var(--text);
       margin-bottom:18px;
       max-width:820px;
-      text-wrap:balance;
     }
     .section-sub{
       font-size:17px;
-      line-height:1.92;
-      color:var(--ink-soft);
-      max-width:720px;
+      line-height:1.82;
+      color:var(--text-soft);
+      max-width:700px;
       font-weight:300;
       margin-bottom:52px;
     }
 
-    #mission-vision{background:var(--bg-soft);}
-    .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+    #mission-vision{background:var(--bg-off);}
+    .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:12px;overflow:hidden;}
     .mv-card{
-      background:rgba(255,255,255,.42);
+      background:var(--bg);
       padding:40px 36px 44px;
-      border:1px solid rgba(123,118,109,.12);
-      border-radius:22px;
+      border:1px solid var(--line-soft);
       position:relative;
       overflow:hidden;
-      transition:transform .25s var(--ease),border-color .25s,background .25s;
-      box-shadow:0 4px 18px rgba(23,23,23,.025);
+      transition:background .25s;
     }
-    .mv-card:hover{
-      transform:translateY(-2px);
-      border-color:rgba(91,90,120,.18);
-      background:rgba(255,255,255,.55);
+    .mv-card:hover{background:var(--indigo-pale);}
+    .mv-card::after{
+      content:'';
+      position:absolute;
+      bottom:0;
+      left:0;
+      right:0;
+      height:2px;
+      background:linear-gradient(90deg,var(--indigo),var(--sky));
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .4s var(--ease);
     }
+    .mv-card:hover::after{transform:scaleX(1);}
     .mv-label{
       font-family:var(--mono);
       font-size:10px;
       font-weight:500;
       letter-spacing:.18em;
       text-transform:uppercase;
-      color:var(--ink-dim);
+      color:var(--text-dim);
       margin-bottom:18px;
     }
     .mv-card p{
       font-family:var(--serif);
-      font-size:24px;
+      font-size:22px;
       line-height:1.42;
-      letter-spacing:-.015em;
-      color:var(--ink);
-      max-width:500px;
+      letter-spacing:-.01em;
+      color:var(--text);
+      max-width:480px;
     }
 
-    .prob-grid,.use-grid,.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-    .prob-card,.use-card,.contact-card{
-      position:relative;
-      padding:28px 0 0;
-      border-top:1px solid var(--line);
-    }
-    .prob-card::before,.use-card::before{
+    .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .prob-card{border-top:2px solid var(--line);padding:28px 0 0;position:relative;}
+    .prob-card::before{
       content:'';
       position:absolute;
-      top:-1px;
+      top:-2px;
       left:0;
       width:0;
-      height:1px;
-      background:var(--accent);
-      transition:width .36s var(--ease);
+      height:2px;
+      background:linear-gradient(90deg,var(--sky),var(--indigo-mid));
+      transition:width .4s var(--ease);
     }
-    .prob-card:hover::before,.use-card:hover::before{width:100%;}
+    .prob-card:hover::before{width:100%;}
     .prob-num{
       font-family:var(--mono);
       font-size:11px;
       letter-spacing:.12em;
-      color:var(--ink-dim);
+      color:var(--text-dim);
       margin-bottom:14px;
     }
-    .prob-card h3,.use-card h3,.contact-card h3{
+    .prob-card h3{
       font-family:var(--serif);
-      font-size:24px;
+      font-size:22px;
       font-weight:400;
       letter-spacing:-.02em;
-      line-height:1.18;
-      color:var(--ink);
+      line-height:1.2;
+      color:var(--text);
       margin-bottom:12px;
     }
-    .prob-card p,.use-card p{
-      font-size:15px;
-      line-height:1.88;
-      color:var(--ink-soft);
-      font-weight:300;
-    }
+    .prob-card p{font-size:15px;line-height:1.82;color:var(--text-soft);font-weight:300;}
 
-    .solution-layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);gap:60px;align-items:start;}
-    .sol-copy p{font-size:17px;line-height:1.94;color:var(--ink-soft);font-weight:300;margin-bottom:20px;max-width:640px;}
+    .solution-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:56px;align-items:start;}
+    .sol-copy p{font-size:17px;line-height:1.88;color:var(--text-soft);font-weight:300;margin-bottom:20px;}
     .sol-copy p:last-child{margin-bottom:0;}
-    .sol-panels{display:grid;gap:12px;}
-    .sol-panel{
-      padding:22px 24px;
-      border:1px solid rgba(123,118,109,.12);
-      border-radius:18px;
-      background:rgba(255,255,255,.36);
-      transition:transform .22s var(--ease),border-color .22s,background .22s;
-    }
-    .sol-panel:hover{
-      transform:translateY(-2px);
-      border-color:rgba(91,90,120,.18);
-      background:rgba(255,255,255,.55);
-    }
-    .sol-tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px;}
-    .sol-panel h3{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em;}
-    .sol-panel p{font-size:13.5px;line-height:1.8;color:var(--ink-soft);font-weight:300;}
+    .sol-panels{display:grid;gap:1px;}
+    .sol-panel{padding:22px 24px;border-left:2px solid var(--line);transition:border-color .2s,background .2s,transform .2s var(--ease);}
+    .sol-panel:hover{border-left-color:var(--indigo-mid);background:var(--indigo-pale);transform:translateX(4px);}
+    .sol-tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;}
+    .sol-panel h3{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);margin-bottom:6px;letter-spacing:-.01em;}
+    .sol-panel p{font-size:13.5px;line-height:1.7;color:var(--text-soft);font-weight:300;}
 
-    #why{background:var(--bg-soft);}
-    .strata{
-      display:grid;
-      gap:10px;
-    }
-    .strata-row{
-      display:grid;
-      grid-template-columns:220px 1fr;
-      align-items:stretch;
-      border:1px solid rgba(123,118,109,.12);
-      border-radius:20px;
-      overflow:hidden;
-      background:rgba(255,255,255,.36);
-      transition:border-color .2s,background .2s,transform .2s var(--ease);
-    }
-    .strata-row:hover{
-      border-color:rgba(91,90,120,.18);
-      background:rgba(255,255,255,.52);
-      transform:translateY(-1px);
-    }
+    #why{background:var(--bg-off);}
+    .strata{display:grid;gap:1px;border-radius:10px;overflow:hidden;}
+    .strata-row{display:grid;grid-template-columns:200px 1fr;align-items:stretch;transition:filter .18s;}
+    .strata-row:hover{filter:brightness(.97);}
     .strata-label{
-      padding:22px 24px;
+      padding:24px 26px;
       font-family:var(--mono);
       font-size:11px;
       font-weight:500;
@@ -449,43 +425,70 @@
       text-transform:uppercase;
       display:flex;
       align-items:center;
-      color:var(--accent-deep);
-      background:rgba(91,90,120,.05);
-      border-right:1px solid rgba(123,118,109,.09);
+      border-right:1px solid rgba(255,255,255,.08);
     }
     .strata-body{
-      padding:22px 28px;
+      padding:24px 32px;
       font-size:15px;
-      line-height:1.84;
+      line-height:1.75;
       display:flex;
       align-items:center;
       font-weight:300;
-      color:var(--ink-soft);
     }
+    .strata-row:nth-child(1){background:#d1d9f0;color:#1e2650;}
+    .strata-row:nth-child(2){background:#b8c4e8;color:#1e2650;}
+    .strata-row:nth-child(3){background:#9baade;color:#1a224a;}
+    .strata-row:nth-child(4){background:#6e85cc;color:#111a3e;}
+    .strata-row:nth-child(5){background:#4f68bc;color:#fff;}
+    .strata-row:nth-child(6){background:#3730a3;color:#e0e7ff;}
+    .strata-row:nth-child(1) .strata-label,
+    .strata-row:nth-child(2) .strata-label,
+    .strata-row:nth-child(3) .strata-label,
+    .strata-row:nth-child(4) .strata-label{border-right-color:rgba(0,0,0,.08);}
 
-    .contact-role{
-      font-family:var(--mono);
-      font-size:11px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--ink-dim);
-      margin-bottom:14px;
+    .use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .use-card{border-top:2px solid var(--line);padding:26px 0 0;position:relative;}
+    .use-card::before{
+      content:'';
+      position:absolute;
+      top:-2px;
+      left:0;
+      width:0;
+      height:2px;
+      background:var(--indigo-mid);
+      transition:width .4s var(--ease);
     }
-    .contact-email{font-size:14px;color:var(--accent-deep);transition:color .18s;}
-    .contact-email:hover{color:var(--ink);text-decoration:underline;}
+    .use-card:hover::before{width:100%;}
+    .use-card h3{
+      font-family:var(--serif);
+      font-size:22px;
+      font-weight:400;
+      letter-spacing:-.02em;
+      line-height:1.2;
+      color:var(--text);
+      margin-bottom:12px;
+    }
+    .use-card p{font-size:15px;line-height:1.82;color:var(--text-soft);font-weight:300;}
 
-    footer{background:#1f1e1c;padding:84px 0 60px;}
+    .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .contact-card{border-top:1px solid var(--line);padding:24px 0 0;}
+    .contact-card h3{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.02em;color:var(--text);margin-bottom:4px;}
+    .contact-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:14px;}
+    .contact-email{font-size:14px;color:var(--indigo-mid);transition:color .18s;}
+    .contact-email:hover{color:var(--indigo);text-decoration:underline;}
+
+    footer{background:var(--bg-deep);padding:80px 0 60px;}
     .footer-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr 1fr;gap:48px;margin-bottom:56px;align-items:start;}
     .footer-brand{display:flex;flex-direction:column;gap:16px;}
-    .footer-brand p{font-size:14px;line-height:1.85;font-weight:300;color:#b1aa9d;max-width:280px;}
-    .footer-logo{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:400;color:#f7f5f1;letter-spacing:-.02em;}
-    .footer-col h4{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#857d72;margin-bottom:18px;}
-    .footer-col a,.footer-col p{display:block;font-size:14px;line-height:2.1;font-weight:300;color:#c1b9aa;transition:color .18s;}
+    .footer-brand p{font-size:14px;line-height:1.8;font-weight:300;color:#7b8fad;max-width:280px;}
+    .footer-logo{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-size:19px;font-weight:400;color:#fff;letter-spacing:-.02em;}
+    .footer-col h4{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#4a5e7a;margin-bottom:18px;}
+    .footer-col a,.footer-col p{display:block;font-size:14px;line-height:2.1;font-weight:300;color:#8fa3be;transition:color .18s;}
     .footer-col a:hover{color:#fff;}
-    .footer-bottom{padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:#8a8175;display:flex;justify-content:space-between;align-items:center;}
+    .footer-bottom{padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font-size:12px;color:#3d5070;display:flex;justify-content:space-between;align-items:center;}
 
-    .reveal{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease);}
-    .js .reveal{opacity:0;transform:translateY(20px);}
+    .reveal{opacity:1;transform:none;transition:opacity .65s var(--ease),transform .65s var(--ease);}
+    .js .reveal{opacity:0;transform:translateY(22px);}
     .js .reveal.in{opacity:1;transform:none;}
     .d1{transition-delay:.08s;}
     .d2{transition-delay:.16s;}
@@ -501,14 +504,14 @@
     @media (max-width:768px){
       .wrap{width:calc(100% - 32px);}
       .nav-links{display:none;}
-      section{padding:82px 0;}
+      section{padding:80px 0;}
       .prob-grid,.mv-grid,.use-grid,.contact-grid{grid-template-columns:1fr;}
       .strata-row{grid-template-columns:1fr;}
       .strata-label{padding:16px 20px 6px;border-right:none;}
-      .strata-body{padding:0 20px 18px;}
+      .strata-body{padding:0 20px 16px;}
       .footer-grid{grid-template-columns:1fr;}
       .footer-bottom{flex-direction:column;gap:8px;}
-      .hero-shot-frame{padding:12px;border-radius:18px;}
+      .hero-shot-frame{padding:12px;border-radius:16px;}
       .hero{min-height:auto;}
     }
   </style>
@@ -519,9 +522,9 @@
   <div class="wrap nav-inner">
     <a href="#top" class="logo" aria-label="Requivo home">
       <svg viewBox="0 0 44 44" width="26" height="26" fill="none" aria-hidden="true">
-        <path d="M 19 5 L 4 5 L 4 39 L 19 39" stroke="#5b5a78" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-        <path d="M 25 5 L 40 5 L 40 39 L 25 39" stroke="#5b5a78" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-        <polygon points="22,16 29,22 22,28 15,22" fill="#8e8cb3"/>
+        <path d="M 19 5 L 4 5 L 4 39 L 19 39" stroke="#3730a3" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+        <path d="M 25 5 L 40 5 L 40 39 L 25 39" stroke="#3730a3" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+        <polygon points="22,16 29,22 22,28 15,22" fill="#0ea5e9"/>
       </svg>
       Requivo
     </a>
@@ -543,8 +546,8 @@
     <div class="hero-inner">
       <div>
         <div class="hero-tag">Operational knowledge system</div>
-        <h1>Critical knowledge already exists. <span class="accent">Most organisations simply cannot hold it well.</span></h1>
-        <p class="hero-sub">Requivo turns fragmented enterprise evidence into governed operational knowledge — calm enough to trust, structured enough to maintain, and durable enough to reuse.</p>
+        <h1>Critical knowledge exists. <span class="accent">Your organisation just can't use it.</span></h1>
+        <p class="hero-sub">Requivo turns fragmented enterprise evidence into governed operational knowledge.</p>
         <div class="hero-actions">
           <a href="#solution" class="btn btn-primary">Read the concept</a>
           <a href="#contact" class="btn btn-outline">Contact the team</a>
@@ -567,7 +570,7 @@
   <div class="wrap">
     <div class="mv-grid">
       <div class="mv-card reveal"><div class="mv-label">Mission</div><p>To turn fragmented enterprise evidence into governed operational knowledge that organisations can trust, maintain, and reuse.</p></div>
-      <div class="mv-card reveal d1"><div class="mv-label">Vision</div><p>A world in which organisations no longer depend on scattered documents and tacit memory, but operate on validated, evolving, and reusable knowledge.</p></div>
+      <div class="mv-card reveal d1"><div class="mv-label">Vision</div><p>A world in which organisations no longer rely on scattered documents and tacit memory, but operate on governed, validated, and evolving knowledge.</p></div>
     </div>
   </div>
 </section>
@@ -575,12 +578,12 @@
 <section id="problem">
   <div class="wrap">
     <div class="section-label">Problem</div>
-    <div class="section-title reveal">Critical operational knowledge is usually not missing. It is dispersed across systems, documents, workflows, and individual experts.</div>
-    <div class="section-sub reveal d1">Most organisations do not struggle because information is absent. They struggle because the knowledge they rely on is fragmented, hard to validate, and often concentrated in a few individuals.</div>
+    <div class="section-title reveal">Critical operational knowledge is often scattered across systems, documents, workflows, and individual experts.</div>
+    <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
     <div class="prob-grid">
-      <div class="prob-card reveal"><div class="prob-num">01</div><h3>Expertise disappears</h3><p>Critical know-how remains embedded in individuals, workarounds, and tacit context instead of becoming structured and reusable across the organisation.</p></div>
-      <div class="prob-card reveal d1"><div class="prob-num">02</div><h3>Knowledge does not truly transfer</h3><p>Teams may inherit documentation, but rarely the reasoning, hierarchy, conflict resolution, and judgment that make it operationally useful.</p></div>
-      <div class="prob-card reveal d2"><div class="prob-num">03</div><h3>Answers stay fractured</h3><p>Relevant signals are distributed across documents, systems, workflows, and expert input, making them difficult to trust, maintain, and act on together.</p></div>
+      <div class="prob-card reveal"><div class="prob-num">01</div><h3>Expertise disappears</h3><p>Critical know-how often remains embedded in individual people, workarounds, and context that never become properly structured or reusable across the organisation.</p></div>
+      <div class="prob-card reveal d1"><div class="prob-num">02</div><h3>Knowledge never fully transfers</h3><p>Teams may inherit documents, but not the reasoning, hierarchy, conflict resolution, and operational judgment behind them.</p></div>
+      <div class="prob-card reveal d2"><div class="prob-num">03</div><h3>Answers remain fragmented</h3><p>Relevant signals are distributed across documents, enterprise systems, workflows, and expert input, making them difficult to trust, maintain, and act upon together.</p></div>
     </div>
   </div>
 </section>
@@ -588,17 +591,17 @@
 <section id="solution">
   <div class="wrap">
     <div class="section-label">Solution</div>
-    <div class="section-title reveal">Requivo is designed to form a governed operational knowledge layer from fragmented enterprise evidence.</div>
+    <div class="section-title reveal">Requivo is designed to create a governed operational knowledge layer from fragmented enterprise evidence.</div>
     <div class="solution-layout">
       <div class="sol-copy reveal">
         <p>Requivo is intended for environments where critical knowledge is spread across documents, systems, workflows, and expert memory.</p>
-        <p>Its role is not merely to retrieve information, but to support clearer, more validated, and more reusable operational understanding.</p>
-        <p>It should be understood as an operational knowledge system rather than a documentation platform, search interface, or generic assistant.</p>
+        <p>It is designed not only to retrieve information, but to support more structured, validated, and reusable operational clarity.</p>
+        <p>The concept should be understood as an operational knowledge system rather than a documentation platform, search tool, or generic assistant.</p>
       </div>
       <div class="sol-panels reveal d1">
-        <div class="sol-panel"><div class="sol-tag">Core flow</div><h3>Fragmented evidence → structure → governed layer</h3><p>From messy source material to reusable operational knowledge with explicit structure and traceability.</p></div>
-        <div class="sol-panel"><div class="sol-tag">Positioning</div><h3>Beyond retrieval</h3><p>Designed to support maintained and governed clarity, not only faster access to scattered information.</p></div>
-        <div class="sol-panel"><div class="sol-tag">Applications</div><h3>One governed layer, multiple uses</h3><p>A single knowledge layer can support onboarding, operations, validation, and cross-functional decision-making.</p></div>
+        <div class="sol-panel"><div class="sol-tag">Core flow</div><h3>Fragmented evidence → structure → governed layer</h3><p>From messy source material to reusable governed operational knowledge.</p></div>
+        <div class="sol-panel"><div class="sol-tag">Positioning</div><h3>Beyond retrieval</h3><p>Designed to support more structured and maintained operational knowledge.</p></div>
+        <div class="sol-panel"><div class="sol-tag">Applications</div><h3>One governed layer, multiple uses</h3><p>One governed knowledge layer, multiple applications.</p></div>
       </div>
     </div>
   </div>
@@ -611,10 +614,10 @@
     <div class="strata reveal d1">
       <div class="strata-row"><div class="strata-label">Fragmented</div><div class="strata-body">Critical knowledge often starts as disconnected evidence across documents, systems, workflows, and experts.</div></div>
       <div class="strata-row"><div class="strata-label">Weakly structured</div><div class="strata-body">Even when information exists, it is rarely organised in a way that reflects real operational hierarchy, currentness, and reliability.</div></div>
-      <div class="strata-row"><div class="strata-label">Expert-dependent</div><div class="strata-body">Undocumented judgment, tacit knowledge, and edge-case reasoning stay concentrated in individuals and are difficult to preserve.</div></div>
-      <div class="strata-row"><div class="strata-label">Validated</div><div class="strata-body">Useful operational knowledge requires explicit verification and the ability to surface weak, ambiguous, or conflicting areas.</div></div>
-      <div class="strata-row"><div class="strata-label">Governed</div><div class="strata-body">The goal is not merely a better answer, but a maintained knowledge layer with traceable structure and reusable logic.</div></div>
-      <div class="strata-row"><div class="strata-label">Reusable</div><div class="strata-body">Once governed, operational knowledge can support multiple workflows across the organisation without depending on a few people.</div></div>
+      <div class="strata-row"><div class="strata-label">Expert-dependent</div><div class="strata-body">Undocumented judgment, tacit knowledge, and edge-case reasoning stay concentrated in individuals and are hard to preserve.</div></div>
+      <div class="strata-row"><div class="strata-label">Validated</div><div class="strata-body">Useful operational knowledge requires explicit verification and the ability to surface weak or conflicting areas.</div></div>
+      <div class="strata-row"><div class="strata-label">Governed</div><div class="strata-body">The goal is not just a better answer, but a maintained operational knowledge layer with traceable structure and reusable logic.</div></div>
+      <div class="strata-row"><div class="strata-label">Reusable</div><div class="strata-body">Once governed, operational knowledge can support multiple workflows across the organisation.</div></div>
     </div>
   </div>
 </section>
@@ -626,7 +629,7 @@
     <div class="use-grid">
       <div class="use-card reveal"><h3>Operations &amp; manufacturing</h3><p>For environments where procedures, incidents, engineering context, and maintenance know-how need to remain usable beyond individual employees and disconnected systems.</p></div>
       <div class="use-card reveal d1"><h3>Engineering &amp; technical services</h3><p>For settings where documentation, configuration, and practical judgment must remain aligned and reusable across teams and over time.</p></div>
-      <div class="use-card reveal d2"><h3>Regulated and process-heavy environments</h3><p>For organisations that require stronger traceability, better validation, and more maintainable operational knowledge than conventional tools can provide.</p></div>
+      <div class="use-card reveal d2"><h3>Regulated and process-heavy environments</h3><p>For organisations that need stronger traceability, better validation, and more maintainable operational knowledge than conventional tools can provide.</p></div>
     </div>
   </div>
 </section>
@@ -649,9 +652,9 @@
       <div class="footer-brand">
         <a href="#top" class="footer-logo" aria-label="Requivo home">
           <svg viewBox="0 0 44 44" width="22" height="22" fill="none" aria-hidden="true">
-            <path d="M 19 5 L 4 5 L 4 39 L 19 39" stroke="#f7f5f1" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-            <path d="M 25 5 L 40 5 L 40 39 L 25 39" stroke="#f7f5f1" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
-            <polygon points="22,16 29,22 22,28 15,22" fill="#b7b4d1"/>
+            <path d="M 19 5 L 4 5 L 4 39 L 19 39" stroke="#ffffff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+            <path d="M 25 5 L 40 5 L 40 39 L 25 39" stroke="#ffffff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+            <polygon points="22,16 29,22 22,28 15,22" fill="#38bdf8"/>
           </svg>
           Requivo
         </a>
@@ -692,26 +695,33 @@ document.addEventListener('DOMContentLoaded', () => {
     ROWS: 14,
     GHOST_COLS: 13,
     GHOST_ROWS: 8,
-    NOISE_SCALE: 0.0098,
-    NOISE_SPEED: 0.00024,
-    AMP_LEFT: 44,
-    AMP_MID: 10,
-    AMP_RIGHT: 1.4,
-    SPRING_LEFT: 0.028,
-    SPRING_MID: 0.054,
-    SPRING_RIGHT: 0.11,
-    FRICTION_LEFT: 0.84,
-    FRICTION_MID: 0.78,
-    FRICTION_RIGHT: 0.62,
-    MOUSE_RADIUS: 140,
-    MOUSE_PULL: 0.09,
-    REVEAL_RADIUS: 110,
-    DOT_R: 1,
-    DOT_R_ACTIVE: 1.75,
-    INK: [91,90,120],
-    SOFT: [154,149,139],
-    LIGHT: [181,176,209],
-    VALID: [63,62,86]
+
+    NOISE_SCALE: 0.0094,
+    NOISE_SPEED: 0.00018,
+
+    AMP_LEFT: 38,
+    AMP_MID: 8,
+    AMP_RIGHT: 1.25,
+
+    SPRING_LEFT: 0.024,
+    SPRING_MID: 0.046,
+    SPRING_RIGHT: 0.094,
+
+    FRICTION_LEFT: 0.88,
+    FRICTION_MID: 0.82,
+    FRICTION_RIGHT: 0.72,
+
+    MOUSE_RADIUS: 132,
+    MOUSE_PULL: 0.055,
+    REVEAL_RADIUS: 112,
+
+    DOT_R: 0.96,
+    DOT_R_ACTIVE: 1.56,
+
+    INDIGO: [55,48,163],
+    SKY: [14,165,233],
+    SLATE: [132,147,169],
+    VALID: [79,70,229]
   };
 
   let W, H, cellW, cellH, dpr;
@@ -720,29 +730,44 @@ document.addEventListener('DOMContentLoaded', () => {
   let time = 0;
   let mouse = { x: -9999, y: -9999, active: false };
 
-  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-  function lerp(a, b, t) { return a + (b - a) * t; }
-  function lerpColor(a, b, t) {
-    return [Math.round(lerp(a[0], b[0], t)), Math.round(lerp(a[1], b[1], t)), Math.round(lerp(a[2], b[2], t))];
+  function clamp(v, min, max) {
+    return Math.max(min, Math.min(max, v));
   }
+
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
+
+  function lerpColor(a, b, t) {
+    return [
+      Math.round(lerp(a[0], b[0], t)),
+      Math.round(lerp(a[1], b[1], t)),
+      Math.round(lerp(a[2], b[2], t))
+    ];
+  }
+
   function smoothstep(a, b, x) {
     const t = clamp((x - a) / (b - a), 0, 1);
     return t * t * (3 - 2 * t);
   }
+
   function distance(x1, y1, x2, y2) {
     const dx = x1 - x2;
     const dy = y1 - y2;
     return Math.sqrt(dx * dx + dy * dy);
   }
+
   function noise(x, y, t) {
     const n = Math.sin(x * 127.1 + y * 311.7 + t * 74.3) * 43758.5453;
     return (n - Math.floor(n)) * 2 - 1;
   }
+
   function smoothNoise(x, y, t) {
     const ix = Math.floor(x), iy = Math.floor(y);
     const fx = x - ix, fy = y - iy;
     const ux = fx * fx * (3 - 2 * fx);
     const uy = fy * fy * (3 - 2 * fy);
+
     return (
       noise(ix, iy, t) * (1 - ux) * (1 - uy) +
       noise(ix + 1, iy, t) * ux * (1 - uy) +
@@ -755,33 +780,56 @@ document.addEventListener('DOMContentLoaded', () => {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = hero.offsetWidth;
     H = hero.offsetHeight;
+
     canvas.width = W * dpr;
     canvas.height = H * dpr;
     canvas.style.width = W + 'px';
     canvas.style.height = H + 'px';
+
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
+
     cellW = W / (CFG.COLS - 1);
     cellH = H / (CFG.ROWS - 1);
+
     buildGrid();
     buildGhostGrid();
   }
 
   function buildGrid() {
     pts = [];
+
     for (let row = 0; row < CFG.ROWS; row++) {
       for (let col = 0; col < CFG.COLS; col++) {
         const ox = col * cellW;
         const oy = row * cellH;
         const xn = ox / W;
+
         const toMid = smoothstep(0.18, 0.52, xn);
-        const toRight = smoothstep(0.56, 0.9, xn);
+        const toRight = smoothstep(0.56, 0.90, xn);
+
         const amp = lerp(lerp(CFG.AMP_LEFT, CFG.AMP_MID, toMid), CFG.AMP_RIGHT, toRight);
         const spring = lerp(lerp(CFG.SPRING_LEFT, CFG.SPRING_MID, toMid), CFG.SPRING_RIGHT, toRight);
         const friction = lerp(lerp(CFG.FRICTION_LEFT, CFG.FRICTION_MID, toMid), CFG.FRICTION_RIGHT, toRight);
+
         const zone = xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed';
         const anchor = zone === 'governed' && (col === CFG.COLS - 7 || col === CFG.COLS - 9) && (row === 4 || row === 9);
-        pts.push({ ox, oy, x: ox, y: oy, vx: 0, vy: 0, col, row, zone, amp, spring, friction, phase: Math.random() * Math.PI * 2, anchor, edge: col === 0 || col === CFG.COLS - 1 || row === 0 || row === CFG.ROWS - 1 });
+        const validationHub = zone === 'governed' && (col === CFG.COLS - 6 || col === CFG.COLS - 10) && (row === 6 || row === 10);
+
+        pts.push({
+          ox, oy,
+          x: ox, y: oy,
+          vx: 0, vy: 0,
+          col, row,
+          zone,
+          amp,
+          spring,
+          friction,
+          phase: Math.random() * Math.PI * 2,
+          edge: col === 0 || col === CFG.COLS - 1 || row === 0 || row === CFG.ROWS - 1,
+          anchor,
+          validationHub
+        });
       }
     }
   }
@@ -790,39 +838,77 @@ document.addEventListener('DOMContentLoaded', () => {
     ghostPts = [];
     const gw = W / (CFG.GHOST_COLS - 1);
     const gh = H / (CFG.GHOST_ROWS - 1);
+
     for (let row = 0; row < CFG.GHOST_ROWS; row++) {
       for (let col = 0; col < CFG.GHOST_COLS; col++) {
         const ox = col * gw + (col % 2 ? gw * 0.08 : 0);
-        const oy = row * gh + (row % 2 ? gh * 0.04 : 0);
+        const oy = row * gh + ((row % 2) ? gh * 0.05 : 0);
         const xn = clamp(ox / W, 0, 1);
-        ghostPts.push({ ox, oy, x: ox, y: oy, zone: xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed', phase: Math.random() * Math.PI * 2, col, row });
+
+        ghostPts.push({
+          ox, oy,
+          x: ox, y: oy,
+          zone: xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed',
+          phase: Math.random() * Math.PI * 2,
+          col, row
+        });
       }
     }
   }
 
   function updatePrimary() {
     const t = time * CFG.NOISE_SPEED;
+
     pts.forEach(p => {
       const nx = p.ox * CFG.NOISE_SCALE;
       const ny = p.oy * CFG.NOISE_SCALE;
+
       let dx = smoothNoise(nx, ny, t) * p.amp;
       let dy = smoothNoise(nx + 31, ny + 17, t) * p.amp;
-      if (p.zone === 'aligned') { dx *= 0.52; dy *= 0.48; }
-      if (p.zone === 'governed') { dx *= 0.08; dy *= 0.08; }
-      if (p.zone === 'fragmented') {
-        dx += Math.sin(t * 170 + p.phase) * 2.2;
-        dy += Math.cos(t * 150 + p.phase) * 1.6;
+
+      dx += smoothNoise(nx * 1.65, ny * 1.65, t * 1.15) * p.amp * 0.09;
+      dy += smoothNoise(nx * 1.65 + 2, ny * 1.65 + 1, t * 1.1) * p.amp * 0.07;
+
+      if (p.zone === 'aligned') {
+        dx *= 0.46;
+        dy *= 0.42;
       }
-      if (p.anchor) { dx *= 0.18; dy *= 0.18; }
+
+      if (p.zone === 'governed') {
+        dx *= 0.08;
+        dy *= 0.07;
+      }
+
+      if (p.zone === 'fragmented') {
+        dx += Math.sin(t * 120 + p.phase) * 1.6;
+        dy += Math.cos(t * 112 + p.phase) * 1.1;
+      }
+
+      if (p.anchor) {
+        dx *= 0.12;
+        dy *= 0.12;
+      }
+
+      if (p.validationHub) {
+        dx *= 0.18;
+        dy *= 0.16;
+      }
+
       let tx = p.ox + dx;
       let ty = p.oy + dy;
+
       const md = distance(p.x, p.y, mouse.x, mouse.y);
       if (mouse.active && md < CFG.MOUSE_RADIUS && md > 0) {
         const falloff = 1 - md / CFG.MOUSE_RADIUS;
-        const pull = p.zone === 'fragmented' ? CFG.MOUSE_PULL : p.zone === 'aligned' ? CFG.MOUSE_PULL * 0.58 : CFG.MOUSE_PULL * 0.3;
+        const pull =
+          p.zone === 'fragmented' ? CFG.MOUSE_PULL :
+          p.zone === 'aligned' ? CFG.MOUSE_PULL * 0.55 :
+          CFG.MOUSE_PULL * 0.28;
+
         tx += (mouse.x - p.x) * falloff * pull;
         ty += (mouse.y - p.y) * falloff * pull;
       }
+
       p.vx += (tx - p.x) * p.spring;
       p.vy += (ty - p.y) * p.spring;
       p.vx *= p.friction;
@@ -833,11 +919,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateGhost() {
-    const tt = time * 0.00018;
+    const tt = time * 0.00014;
     ghostPts.forEach(p => {
-      const amp = p.zone === 'fragmented' ? 6 : p.zone === 'aligned' ? 3 : 1.2;
-      p.x = p.ox + Math.sin(tt * 170 + p.phase + p.row * 0.08) * amp;
-      p.y = p.oy + Math.cos(tt * 130 + p.phase + p.col * 0.05) * amp * 0.34;
+      const amp = p.zone === 'fragmented' ? 4.5 : p.zone === 'aligned' ? 2.2 : 0.9;
+      p.x = p.ox + Math.sin(tt * 150 + p.phase + p.row * 0.08) * amp;
+      p.y = p.oy + Math.cos(tt * 120 + p.phase + p.col * 0.05) * amp * 0.32;
     });
   }
 
@@ -855,86 +941,161 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function drawAtmosphere() {
-    const leftGlow = ctx.createRadialGradient(W * 0.18, H * 0.42, 0, W * 0.18, H * 0.42, W * 0.26);
-    leftGlow.addColorStop(0, 'rgba(91,90,120,0.03)');
-    leftGlow.addColorStop(1, 'rgba(91,90,120,0)');
+    const leftGlow = ctx.createRadialGradient(W * 0.14, H * 0.48, 0, W * 0.14, H * 0.48, W * 0.28);
+    leftGlow.addColorStop(0, 'rgba(79,70,229,0.026)');
+    leftGlow.addColorStop(1, 'rgba(79,70,229,0)');
     ctx.fillStyle = leftGlow;
+    ctx.fillRect(0, 0, W, H);
+
+    const rightGlow = ctx.createRadialGradient(W * 0.82, H * 0.44, 0, W * 0.82, H * 0.44, W * 0.18);
+    rightGlow.addColorStop(0, 'rgba(14,165,233,0.015)');
+    rightGlow.addColorStop(1, 'rgba(14,165,233,0)');
+    ctx.fillStyle = rightGlow;
     ctx.fillRect(0, 0, W, H);
   }
 
-  function drawEdges() {
+  function drawPrimaryEdges() {
     for (let i = 0; i < pts.length; i++) {
       const a = pts[i];
       const neighbours = [];
+
       if (a.col < CFG.COLS - 1) neighbours.push(pts[i + 1]);
       if (a.row < CFG.ROWS - 1) neighbours.push(pts[i + CFG.COLS]);
-      if (a.zone !== 'fragmented' && a.col < CFG.COLS - 1 && a.row < CFG.ROWS - 1) neighbours.push(pts[i + CFG.COLS + 1]);
+      if (a.zone !== 'fragmented' && a.col < CFG.COLS - 1 && a.row < CFG.ROWS - 1) {
+        neighbours.push(pts[i + CFG.COLS + 1]);
+      }
+
       for (const b of neighbours) {
         const dx = b.x - a.x;
         const dy = b.y - a.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const expected = Math.max(cellW, cellH) * 1.12;
         if (dist > expected) continue;
+
         const mx = (a.x + b.x) * 0.5;
         const my = (a.y + b.y) * 0.5;
         const xNorm = clamp(mx / W, 0, 1);
-        const blend = smoothstep(0.42, 0.92, xNorm);
-        const rgb = lerpColor(CFG.SOFT, CFG.INK, blend);
+        const blend = smoothstep(0.44, 0.92, xNorm);
+        let rgb = lerpColor(CFG.SLATE, CFG.SKY, blend);
         const md = distance(mx, my, mouse.x, mouse.y);
-        const mouseBoost = mouse.active && md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) * 0.035 : 0;
-        let alpha = 0.025 + blend * 0.045 + mouseBoost;
+        const mouseBoost = mouse.active && md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) * 0.025 : 0;
+
+        let alpha = 0.014 + blend * 0.05 + mouseBoost;
+
         if (a.zone === 'fragmented' && b.zone === 'fragmented') alpha *= 0.72;
         if (a.zone === 'governed' && b.zone === 'governed') alpha *= 1.08;
+        if (a.anchor || b.anchor) {
+          alpha *= 1.06;
+          rgb = CFG.INDIGO;
+        }
+        if (a.validationHub || b.validationHub) {
+          alpha *= 1.08;
+          rgb = CFG.VALID;
+        }
+
         ctx.globalAlpha = alpha;
         ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-        ctx.lineWidth = a.anchor || b.anchor ? 0.72 : 0.44;
+        ctx.lineWidth = (a.anchor || b.anchor || a.validationHub || b.validationHub) ? 0.64 : 0.42;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
         ctx.stroke();
       }
     }
+  }
 
-    ghostPts.forEach((a, i) => {
+  function drawGhostEdges() {
+    for (let i = 0; i < ghostPts.length; i++) {
+      const a = ghostPts[i];
       const neighbours = [];
+
       if (a.col < CFG.GHOST_COLS - 1) neighbours.push(ghostPts[i + 1]);
       if (a.row < CFG.GHOST_ROWS - 1) neighbours.push(ghostPts[i + CFG.GHOST_COLS]);
+
       for (const b of neighbours) {
         const reveal = revealStrength((a.x + b.x) * 0.5, (a.y + b.y) * 0.5);
         if (reveal < 0.18) continue;
-        ctx.globalAlpha = 0.018 * reveal;
-        ctx.strokeStyle = 'rgb(154,149,139)';
-        ctx.lineWidth = 0.34;
+
+        ctx.globalAlpha = 0.014 * reveal;
+        ctx.strokeStyle = 'rgb(148,163,184)';
+        ctx.lineWidth = 0.3;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
         ctx.stroke();
       }
-    });
+    }
   }
 
   function drawNodes() {
     pts.forEach(p => {
       const md = distance(p.x, p.y, mouse.x, mouse.y);
-      const glow = mouse.active && md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) : 0;
-      let rgb = p.zone === 'fragmented' ? CFG.SOFT : p.zone === 'governed' ? CFG.INK : CFG.LIGHT;
-      let alpha = p.edge ? 0.06 : 0.16;
-      let radius = p.anchor ? 1.8 : 1.0;
-      alpha += glow * 0.12;
-      radius += glow * 0.5;
-      ctx.globalAlpha = alpha;
+      const mouseGlow = mouse.active && md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) : 0;
+
+      let rgb = CFG.SLATE;
+      let alpha = p.edge ? 0.04 : 0.12;
+      let radius = p.edge ? CFG.DOT_R * 0.74 : CFG.DOT_R;
+
+      if (p.zone === 'fragmented') {
+        rgb = CFG.INDIGO;
+        alpha *= 0.75;
+      } else if (p.zone === 'governed') {
+        rgb = CFG.SKY;
+        alpha *= 0.9;
+      }
+
+      if (p.anchor) {
+        rgb = CFG.INDIGO;
+        alpha = 0.22;
+        radius = 1.6;
+      }
+
+      if (p.validationHub) {
+        rgb = CFG.VALID;
+        alpha = 0.34;
+        radius = 1.82;
+      }
+
+      alpha += mouseGlow * 0.11;
+      radius += mouseGlow * (CFG.DOT_R_ACTIVE - CFG.DOT_R);
+
+      if (mouseGlow > 0.16 && p.zone === 'governed') {
+        const haloR = radius * 2.6;
+        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
+        grad.addColorStop(0, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${mouseGlow * 0.035})`);
+        grad.addColorStop(1, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, haloR, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.globalAlpha = Math.min(1, alpha);
       ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
       ctx.fill();
     });
+
+    ghostPts.forEach(p => {
+      const reveal = revealStrength(p.x, p.y);
+      if (reveal < 0.18) return;
+
+      ctx.globalAlpha = 0.016 * reveal;
+      ctx.fillStyle = 'rgb(148,163,184)';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 0.58, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
     ctx.globalAlpha = 1;
   }
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
     drawAtmosphere();
-    drawEdges();
+    drawGhostEdges();
+    drawPrimaryEdges();
     drawNodes();
     ctx.globalAlpha = 1;
   }
