@@ -1041,6 +1041,321 @@ footer {
   align-items: center;
 }
 
+/* PLATFORM LAYER */
+#platform { background: var(--bg-off); }
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.platform-hub {
+  background: var(--indigo-pale);
+  border: 1px solid rgba(55,48,163,.16);
+  border-radius: 14px;
+  padding: 28px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: sticky;
+  top: 96px;
+}
+
+.platform-hub-title {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -.01em;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.platform-hub-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  opacity: .7;
+}
+
+.platform-spokes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.platform-spoke {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: box-shadow .22s var(--ease), border-color .22s var(--ease);
+}
+
+.platform-spoke:hover {
+  border-color: rgba(55,48,163,.2);
+  box-shadow: 0 4px 20px rgba(55,48,163,.07);
+}
+
+.platform-spoke-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--indigo-mid);
+}
+
+.platform-spoke-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-soft);
+  font-weight: 300;
+}
+
+@media (max-width: 860px) {
+  .platform-grid { grid-template-columns: 1fr; }
+  .platform-hub  { position: static; }
+}
+
+@media (max-width: 600px) {
+  .platform-spokes { grid-template-columns: 1fr; }
+}
+
+/* WHY THIS MATTERS */
+#why-matters {
+  background: var(--bg-deep);
+  padding: 112px 0;
+  border-top: none !important;
+}
+
+#why-matters + section { border-top: none; }
+
+.wm-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(165,180,252,.75);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.wm-title {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  color: #e8edf8;
+  margin-bottom: 14px;
+  max-width: 700px;
+}
+
+.wm-sub {
+  font-size: 16px;
+  line-height: 1.82;
+  color: #5c6e88;
+  max-width: 580px;
+  font-weight: 300;
+  margin-bottom: 52px;
+}
+
+.wm-rows {
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.wm-row {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 21px 32px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+
+.wm-row:last-child { border-bottom: none; }
+
+.wm-row--1 { background: rgba(239,68,68,.085); }
+.wm-row--2 { background: rgba(245,158,11,.07); }
+.wm-row--3 { background: rgba(245,158,11,.04); }
+.wm-row--4 { background: rgba(16,185,129,.055); }
+.wm-row--5 { background: rgba(79,70,229,.09); }
+.wm-row--6 { background: rgba(79,70,229,.16); }
+
+.wm-state {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.wm-row--1 .wm-state { color: #f87171; }
+.wm-row--2 .wm-state { color: #fbbf24; }
+.wm-row--3 .wm-state { color: #d97706; }
+.wm-row--4 .wm-state { color: #34d399; }
+.wm-row--5 .wm-state { color: #a5b4fc; }
+.wm-row--6 .wm-state { color: #818cf8; }
+
+.wm-desc {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #4f6075;
+  font-weight: 300;
+}
+
+.wm-row--4 .wm-desc,
+.wm-row--5 .wm-desc,
+.wm-row--6 .wm-desc { color: #8fa3be; }
+
+.js .wm-row {
+  opacity: 0;
+  transform: translateY(7px);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+
+.js .wm-row.in { opacity: 1; transform: none; }
+
+@media (max-width: 768px) {
+  #why-matters { padding: 80px 0; }
+  .wm-row { grid-template-columns: 1fr; gap: 6px; padding: 16px 20px; }
+}
+
+/* ANIMATION KEYFRAMES */
+@keyframes badgePop {
+  0%   { transform: scale(.86); opacity: 0; }
+  65%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes pipelineTravel {
+  0%   { transform: scaleX(0); opacity: 0; }
+  12%  { opacity: 1; }
+  78%  { opacity: .65; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+@keyframes heroStepGlow {
+  0%   { background-color: transparent; }
+  20%  { background-color: rgba(55,48,163,.035); }
+  80%  { background-color: rgba(55,48,163,.035); }
+  100% { background-color: transparent; }
+}
+
+/* Hero composition step highlight */
+.comp-section {
+  transition: background-color .7s ease;
+}
+
+.comp-section.hero-active {
+  background-color: rgba(55,48,163,.035) !important;
+}
+
+.comp-section--governed.hero-active {
+  background-color: rgba(79,70,229,.14) !important;
+}
+
+/* Pipeline connector bar */
+.steps-pipeline { position: relative; }
+
+.pipeline-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: linear-gradient(90deg,
+    var(--indigo-mid) 0%,
+    var(--sky) 70%,
+    rgba(14,165,233,0) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pipeline-bar.run {
+  animation: pipelineTravel 1.8s cubic-bezier(.4,0,.2,1) .15s forwards;
+}
+
+/* Delay helpers */
+.d4 { transition-delay: .32s; }
+.d5 { transition-delay: .40s; }
+
+/* Solution screen: state items stagger in when screen enters view */
+.js .sol-state-stack .sol-state {
+  opacity: 0;
+  transform: translateX(-7px);
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+
+.js .sol-screen.in .sol-state-stack .sol-state         { opacity: 1; transform: none; }
+.js .sol-screen.in .sol-state-stack .sol-state:nth-child(1) { transition-delay: .20s; }
+.js .sol-screen.in .sol-state-stack .sol-state:nth-child(2) { transition-delay: .33s; }
+.js .sol-screen.in .sol-state-stack .sol-state:nth-child(3) { transition-delay: .46s; }
+
+.js .sol-screen .sol-output {
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity .4s var(--ease) .60s, transform .4s var(--ease) .60s;
+}
+
+.js .sol-screen.in .sol-output { opacity: 1; transform: none; }
+
+/* Output card badge pop-in after card reveal */
+.js .output-card .badge {
+  opacity: 0;
+  transform: scale(.84);
+  transition: opacity .3s var(--ease) .18s, transform .3s var(--ease) .18s;
+}
+
+.js .output-card.in .badge { opacity: 1; transform: scale(1); }
+
+/* Action columns sequential reveal */
+.js .action-col {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .52s var(--ease), transform .52s var(--ease);
+}
+
+.js .action-col.in              { opacity: 1; transform: none; }
+.js .action-col--with.in        { transition-delay: .14s; }
+.js .action-col--after.in       { transition-delay: .28s; }
+
+/* Platform spokes stagger */
+.js .platform-spoke {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .42s var(--ease), transform .42s var(--ease);
+}
+
+.js .platform-spoke.in { opacity: 1; transform: none; }
+
+/* Where-it-fits cards stagger */
+.js .for-card {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .42s var(--ease), transform .42s var(--ease);
+}
+
+.js .for-card.in { opacity: 1; transform: none; }
+
 /* REVEAL */
 .reveal {
   opacity: 1;
@@ -1130,6 +1445,7 @@ footer {
       <a href="#problem">Problem</a>
       <a href="#solution">Solution</a>
       <a href="#outputs">What it produces</a>
+      <a href="#platform">Platform</a>
       <a href="#contact" class="nav-cta">Contact</a>
     </div>
   </div>
@@ -1160,13 +1476,13 @@ footer {
             </div>
 
             <!-- Step 1: Evidence -->
-            <div class="comp-section">
+            <div class="comp-section" id="hero-step-1">
               <div class="comp-label">Source evidence</div>
               <div class="comp-chips">
-                <span class="comp-chip">SOP-Rev4.pdf</span>
-                <span class="comp-chip">Incident #4821</span>
-                <span class="comp-chip">Expert notes</span>
-                <span class="comp-chip">Config log</span>
+                <span class="comp-chip">operating_procedure_v3.pdf</span>
+                <span class="comp-chip">workflow_update_ticket</span>
+                <span class="comp-chip">team_wiki_page</span>
+                <span class="comp-chip">incident_log_entry</span>
               </div>
             </div>
 
@@ -1176,12 +1492,12 @@ footer {
             </div>
 
             <!-- Step 2: Draft -->
-            <div class="comp-section">
+            <div class="comp-section" id="hero-step-2">
               <div class="comp-section-top">
                 <div class="comp-label" style="margin-bottom:0">Structured draft</div>
                 <span class="badge badge-draft">Draft</span>
               </div>
-              <div class="comp-title" style="margin-top:7px">Maintenance Procedure 7.3 — Pump seal replacement</div>
+              <div class="comp-title" style="margin-top:7px">Internal Process: Approval &amp; Review Workflow</div>
               <div class="comp-lines" aria-hidden="true">
                 <div class="comp-line"></div>
                 <div class="comp-line comp-line--short"></div>
@@ -1194,14 +1510,14 @@ footer {
             </div>
 
             <!-- Step 3: Findings -->
-            <div class="comp-section">
+            <div class="comp-section" id="hero-step-3">
               <div class="comp-finding">
                 <span class="badge badge-conflict">Conflict</span>
-                <span class="comp-finding-text">Pressure threshold: SOP 2.4 bar vs Ticket 2.1 bar</span>
+                <span class="comp-finding-text">Approval rule: three sources define different requirements</span>
               </div>
               <div class="comp-finding">
                 <span class="badge badge-gap">Gap</span>
-                <span class="comp-finding-text">Sign-off procedure not found in source material</span>
+                <span class="comp-finding-text">Final validation step not defined in source material</span>
               </div>
             </div>
 
@@ -1211,10 +1527,10 @@ footer {
             </div>
 
             <!-- Step 4: Routing -->
-            <div class="comp-section">
+            <div class="comp-section" id="hero-step-4">
               <div class="comp-route">
                 <span class="badge badge-routed">Routed</span>
-                <span class="comp-route-text">J. Kowalski — confirm threshold for Step 3</span>
+                <span class="comp-route-text">S. Mehta — confirm approval sequence for Step 4</span>
               </div>
             </div>
 
@@ -1224,9 +1540,9 @@ footer {
             </div>
 
             <!-- Step 5: Governed output -->
-            <div class="comp-section comp-section--governed">
+            <div class="comp-section comp-section--governed" id="hero-step-5">
               <div class="comp-section-top">
-                <div class="comp-title">Procedure 7.3 — Pump Seal Replacement</div>
+                <div class="comp-title">Approval &amp; Review Workflow — Validated</div>
                 <span class="badge badge-governed">Governed</span>
               </div>
               <div class="comp-meta">Validated · Traceable · Reusable</div>
@@ -1247,11 +1563,12 @@ footer {
     <h2 class="section-title reveal">From fragmented evidence to governed operational knowledge</h2>
     <p class="section-sub reveal d1">Requivo connects operational evidence, structures it into draft knowledge, surfaces conflicts and gaps, routes unresolved points to the right expert, and publishes a governed output teams can trust.</p>
 
-    <div class="steps-pipeline">
+    <div class="steps-pipeline" id="steps-pipeline">
+      <div class="pipeline-bar" id="pipeline-bar" aria-hidden="true"></div>
       <div class="step-card reveal">
         <div class="step-num">01</div>
         <h3>Connect what you already have</h3>
-        <p>Docs, tickets, configs, logs, wikis, exports, and expert inputs. Requivo works from your existing evidence — not from blank prompts.</p>
+        <p>Documents, tickets, notes, wikis, logs, and internal process material. Requivo works from your existing evidence — not from blank prompts.</p>
       </div>
 
       <div class="step-card reveal d1">
@@ -1316,6 +1633,42 @@ footer {
   </div>
 </section>
 
+<!-- SECTION 3b: WHY THIS MATTERS -->
+<section id="why-matters">
+  <div class="wrap">
+    <div class="wm-label reveal">Why this matters</div>
+    <h2 class="wm-title reveal d1">Not just documented. Not just searchable. Governed.</h2>
+    <p class="wm-sub reveal d2">Most operational knowledge exists somewhere. The problem is not absence — it is state. Knowledge that is fragmented, unvalidated, or expert-dependent cannot be trusted, reused, or depended on at scale. Requivo moves knowledge through these states.</p>
+
+    <div class="wm-rows">
+      <div class="wm-row wm-row--1">
+        <div class="wm-state">Fragmented</div>
+        <div class="wm-desc">Scattered across documents, tickets, notes, and individual memory. No shared view exists.</div>
+      </div>
+      <div class="wm-row wm-row--2">
+        <div class="wm-state">Weakly structured</div>
+        <div class="wm-desc">Documented in some form, but inconsistent, out of date, or contradicted by other sources.</div>
+      </div>
+      <div class="wm-row wm-row--3">
+        <div class="wm-state">Expert-dependent</div>
+        <div class="wm-desc">Understood only by the people who created it. Inaccessible to the wider team without them.</div>
+      </div>
+      <div class="wm-row wm-row--4">
+        <div class="wm-state">Validated</div>
+        <div class="wm-desc">Reviewed and confirmed against source evidence. Conflicts resolved. Gaps closed.</div>
+      </div>
+      <div class="wm-row wm-row--5">
+        <div class="wm-state">Governed</div>
+        <div class="wm-desc">Traceable, authoritative, and maintained. One trusted version the organisation can depend on.</div>
+      </div>
+      <div class="wm-row wm-row--6">
+        <div class="wm-state">Reusable</div>
+        <div class="wm-desc">Available across workflows, teams, tools, and AI systems. Knowledge that survives and compounds.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SECTION 4: SOLUTION -->
 <section id="solution">
   <div class="wrap">
@@ -1346,10 +1699,10 @@ footer {
           <div>
             <div class="sol-input-label">Input sources</div>
             <div class="sol-input-items">
-              <span class="sol-input-item">Engineering docs</span>
-              <span class="sol-input-item">Incident tickets</span>
-              <span class="sol-input-item">Expert sessions</span>
-              <span class="sol-input-item sol-input-item--more">+4 more</span>
+              <span class="sol-input-item">Internal procedures</span>
+              <span class="sol-input-item">Workflow tickets</span>
+              <span class="sol-input-item">Policy notes</span>
+              <span class="sol-input-item sol-input-item--more">+3 more</span>
             </div>
           </div>
 
@@ -1361,15 +1714,15 @@ footer {
           <div class="sol-state-stack">
             <div class="sol-state">
               <span class="badge badge-conflict">Conflict</span>
-              <span class="sol-state-text">Threshold values: SOP vs Incident</span>
+              <span class="sol-state-text">Approval rule: conflicting guidance</span>
             </div>
             <div class="sol-state">
               <span class="badge badge-gap">Gap</span>
-              <span class="sol-state-text">Sign-off step missing</span>
+              <span class="sol-state-text">Final validation step missing</span>
             </div>
             <div class="sol-state">
               <span class="badge badge-routed">Routed</span>
-              <span class="sol-state-text">Expert clarification requested</span>
+              <span class="sol-state-text">Reviewer clarification requested</span>
             </div>
           </div>
 
@@ -1381,7 +1734,7 @@ footer {
             <div class="sol-output-badge">
               <span class="badge badge-governed">Governed</span>
             </div>
-            <div class="sol-output-title">Procedure 7.3 — Validated</div>
+            <div class="sol-output-title">Approval Workflow — Validated</div>
             <div class="sol-output-meta">Traceable · Reusable · Maintained</div>
           </div>
         </div>
@@ -1408,10 +1761,10 @@ footer {
 
       <div class="output-card reveal d1">
         <div class="output-top">
-          <h3>Validated wiki articles</h3>
+          <h3>Structured draft articles</h3>
           <span class="badge badge-verified">Verified</span>
         </div>
-        <p>Structured knowledge built from evidence and expert clarification — not generated from AI memory alone.</p>
+        <p>Internal knowledge assembled from source material and expert clarification — not generated from AI memory alone.</p>
       </div>
 
       <div class="output-card reveal d2">
@@ -1432,10 +1785,10 @@ footer {
 
       <div class="output-card reveal d1">
         <div class="output-top">
-          <h3>Expert verification tasks</h3>
+          <h3>Reviewer tasks</h3>
           <span class="badge badge-routed">Routed</span>
         </div>
-        <p>Targeted requests sent only where evidence is insufficient. The right question to the right person — nothing more.</p>
+        <p>Targeted clarification requests sent only where evidence is insufficient. The right question to the right reviewer — nothing more.</p>
       </div>
 
       <div class="output-card reveal d2">
@@ -1454,18 +1807,18 @@ footer {
   <div class="wrap">
     <div class="section-label">Product in action</div>
     <h2 class="section-title reveal">What one expert knows becomes what the team owns</h2>
-    <p class="section-sub reveal d1">A representative operational scenario: fragmented maintenance knowledge, conflicting source documents, and a key expert at retirement risk — resolved into a governed operational procedure.</p>
+    <p class="section-sub reveal d1">A critical internal procedure is spread across documents, tickets, notes, and team memory. Different sources describe different rules. One validation step is missing. Requivo structures the evidence, surfaces the conflict, routes one targeted clarification, and publishes a governed version the team can trust.</p>
 
-    <div class="action-grid reveal d1">
+    <div class="action-grid" id="action-grid">
       <div class="action-col action-col--before">
         <div class="action-header">
           <span class="action-label">Before Requivo</span>
         </div>
         <ul class="action-list">
-          <li>Knowledge scattered across SOPs, tickets, logs, and documents</li>
-          <li>Conflict between procedure versions — unresolved</li>
-          <li>Missing validation logic nobody has mapped</li>
-          <li>One expert holds the answer — and is retiring</li>
+          <li>Knowledge scattered across procedures, tickets, notes, and team memory</li>
+          <li>Conflicting guidance across sources — unresolved</li>
+          <li>Missing validation step nobody has documented</li>
+          <li>Critical knowledge held by individuals, not the organisation</li>
         </ul>
       </div>
 
@@ -1501,14 +1854,60 @@ footer {
   </div>
 </section>
 
-<!-- SECTION 7: WHO IT'S FOR -->
+<!-- SECTION 7: PLATFORM LAYER -->
+<section id="platform">
+  <div class="wrap">
+    <div class="section-label">Platform layer</div>
+    <h2 class="section-title reveal">Build once. Use everywhere.</h2>
+    <p class="section-sub reveal d1">Governed knowledge is not locked to a single workflow. One verified, traceable output becomes a reusable layer that powers every team, tool, and process that depends on it.</p>
+
+    <div class="platform-grid" id="platform-grid">
+      <div class="platform-hub reveal">
+        <div class="platform-hub-inner">
+          <div class="badge badge-governed" style="margin-bottom:10px">Governed knowledge layer</div>
+          <div class="platform-hub-title">One trusted, reusable knowledge object</div>
+          <div class="platform-hub-meta">Validated · Traceable · Maintained</div>
+        </div>
+      </div>
+
+      <div class="platform-spokes" id="platform-spokes">
+        <div class="platform-spoke">
+          <span class="platform-spoke-label">Knowledge writing</span>
+          <span class="platform-spoke-desc">Draft and update internal procedures from governed evidence</span>
+        </div>
+        <div class="platform-spoke">
+          <span class="platform-spoke-label">Knowledge management</span>
+          <span class="platform-spoke-desc">Maintain a single authoritative version across the organisation</span>
+        </div>
+        <div class="platform-spoke">
+          <span class="platform-spoke-label">Verification</span>
+          <span class="platform-spoke-desc">Run compliance and quality checks against governed procedures</span>
+        </div>
+        <div class="platform-spoke">
+          <span class="platform-spoke-label">Onboarding</span>
+          <span class="platform-spoke-desc">Give new team members validated operating guidance from day one</span>
+        </div>
+        <div class="platform-spoke">
+          <span class="platform-spoke-label">Search &amp; retrieval</span>
+          <span class="platform-spoke-desc">Surface the right procedure — not just a document list</span>
+        </div>
+        <div class="platform-spoke">
+          <span class="platform-spoke-label">AI workflow access</span>
+          <span class="platform-spoke-desc">Ground downstream AI tools in governed, traceable knowledge</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: WHO IT'S FOR -->
 <section id="for">
   <div class="wrap">
     <div class="section-label">Where it fits</div>
     <h2 class="section-title reveal">Built for operationally critical knowledge</h2>
     <p class="section-sub reveal d1">Requivo is built for environments where knowledge must be validated, preserved, and reused — not just retrieved.</p>
 
-    <div class="for-grid reveal d1">
+    <div class="for-grid" id="for-grid">
       <div class="for-card">
         <h3>Resolve conflicting SOPs</h3>
         <p>When multiple versions of the same procedure exist across systems, Requivo surfaces the conflict and resolves it into one governed view.</p>
@@ -1525,8 +1924,8 @@ footer {
       </div>
 
       <div class="for-card">
-        <h3>Validate engineering and maintenance procedures</h3>
-        <p>Verify that procedures reflect current operational reality, surface gaps, and produce outputs teams can act on with confidence.</p>
+        <h3>Validate internal procedures and operating processes</h3>
+        <p>Verify that documented processes reflect current operational reality, surface gaps, and produce outputs teams can act on with confidence.</p>
       </div>
 
       <div class="for-card">
@@ -1541,10 +1940,14 @@ footer {
     </div>
 
     <div class="sector-tags reveal">
-      <span class="sector-tag">Manufacturing</span>
+      <span class="sector-tag">Operations</span>
       <span class="sector-tag">Engineering</span>
       <span class="sector-tag">Technical services</span>
+      <span class="sector-tag">Quality &amp; compliance</span>
       <span class="sector-tag">Regulated environments</span>
+      <span class="sector-tag">Universities</span>
+      <span class="sector-tag">Professional services</span>
+      <span class="sector-tag">Knowledge-heavy organisations</span>
     </div>
   </div>
 </section>
@@ -1599,6 +2002,7 @@ footer {
         <a href="#problem">Problem</a>
         <a href="#solution">Solution</a>
         <a href="#outputs">What it produces</a>
+        <a href="#platform">Platform</a>
       </div>
 
       <div class="footer-col">
@@ -1626,6 +2030,8 @@ footer {
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const nav = document.getElementById('nav');
   const reveals = document.querySelectorAll('.reveal');
 
@@ -1640,6 +2046,36 @@ document.addEventListener('DOMContentLoaded', function () {
   updateNav();
   window.addEventListener('scroll', updateNav, { passive: true });
 
+  // ── HERO MICRO-ANIMATION ──────────────────────────────────────────────
+  // Gently cycles a highlight through each product comp step in sequence.
+  // Disabled for reduced-motion users.
+  if (!prefersReducedMotion) {
+    const heroSteps = [
+      document.getElementById('hero-step-1'),
+      document.getElementById('hero-step-2'),
+      document.getElementById('hero-step-3'),
+      document.getElementById('hero-step-4'),
+      document.getElementById('hero-step-5'),
+    ].filter(Boolean);
+
+    if (heroSteps.length) {
+      let heroStep = 0;
+      let heroPrev = null;
+
+      function heroTick() {
+        if (heroPrev) heroPrev.classList.remove('hero-active');
+        heroSteps[heroStep].classList.add('hero-active');
+        heroPrev = heroSteps[heroStep];
+        heroStep = (heroStep + 1) % heroSteps.length;
+        setTimeout(heroTick, heroStep === 0 ? 3200 : 2200);
+      }
+
+      // Start after a brief pause so page paint settles
+      setTimeout(heroTick, 1200);
+    }
+  }
+
+  // ── MAIN SCROLL REVEAL ───────────────────────────────────────────────
   if (!('IntersectionObserver' in window)) {
     reveals.forEach(el => el.classList.add('in'));
   } else {
@@ -1657,6 +2093,116 @@ document.addEventListener('DOMContentLoaded', function () {
 
     reveals.forEach(el => observer.observe(el));
   }
+
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: immediately show everything
+    document.querySelectorAll(
+      '.wm-row,.action-col,.platform-spoke,.for-card'
+    ).forEach(el => el.classList.add('in'));
+    const solScreen = document.querySelector('.sol-screen');
+    if (solScreen) solScreen.classList.add('in');
+  } else {
+
+    // ── GRADIENT ROWS (Why this matters) ─────────────────────────────
+    const wmRows = document.querySelectorAll('.wm-row');
+    if (wmRows.length) {
+      const wmObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const rows = entry.target.querySelectorAll('.wm-row');
+            rows.forEach((row, i) => {
+              setTimeout(() => row.classList.add('in'), i * 80);
+            });
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+      const wmContainer = document.querySelector('.wm-rows');
+      if (wmContainer) wmObs.observe(wmContainer);
+    }
+
+    // ── PIPELINE BAR ─────────────────────────────────────────────────
+    const pipelineBar = document.getElementById('pipeline-bar');
+    const stepsSection = document.getElementById('steps-pipeline');
+    if (pipelineBar && stepsSection && !prefersReducedMotion) {
+      const pipeObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            pipelineBar.classList.add('run');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      pipeObs.observe(stepsSection);
+    }
+
+    // ── SOLUTION SCREEN STAGGER ──────────────────────────────────────
+    const solScreen = document.querySelector('.sol-screen');
+    if (solScreen) {
+      const solObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      solObs.observe(solScreen);
+    }
+
+    // ── ACTION COLUMNS ────────────────────────────────────────────────
+    const actionGrid = document.getElementById('action-grid');
+    if (actionGrid) {
+      const actionObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const cols = entry.target.querySelectorAll('.action-col');
+            cols.forEach((col, i) => {
+              setTimeout(() => col.classList.add('in'), i * 120);
+            });
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      actionObs.observe(actionGrid);
+    }
+
+    // ── PLATFORM SPOKES ───────────────────────────────────────────────
+    const spokesContainer = document.getElementById('platform-spokes');
+    if (spokesContainer) {
+      const spokesObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const spokes = entry.target.querySelectorAll('.platform-spoke');
+            spokes.forEach((spoke, i) => {
+              setTimeout(() => spoke.classList.add('in'), i * 75);
+            });
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      spokesObs.observe(spokesContainer);
+    }
+
+    // ── WHERE IT FITS CARDS ───────────────────────────────────────────
+    const forGrid = document.getElementById('for-grid');
+    if (forGrid) {
+      const forObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const cards = entry.target.querySelectorAll('.for-card');
+            cards.forEach((card, i) => {
+              setTimeout(() => card.classList.add('in'), i * 70);
+            });
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      forObs.observe(forGrid);
+    }
+
+  } // end IntersectionObserver block
 
   (function () {
     const canvas = document.getElementById('topo-canvas');
