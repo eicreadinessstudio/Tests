@@ -57,7 +57,7 @@ a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
 
-/* NAV */
+/* ── NAV ────────────────────────────────────────────────────────────── */
 nav {
   position: sticky;
   top: 0;
@@ -130,7 +130,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
   letter-spacing: -.02em;
 }
 
-/* HERO */
+/* ── HERO ───────────────────────────────────────────────────────────── */
 .hero {
   padding: 96px 0 92px;
   position: relative;
@@ -191,7 +191,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 490px);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
   gap: clamp(32px, 5vw, 64px);
   align-items: center;
 }
@@ -223,9 +223,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
   max-width: 720px;
 }
 
-.hero h1 .accent {
-  color: var(--indigo-mid);
-}
+.hero h1 .accent { color: var(--indigo-mid); }
 
 .hero-sub {
   font-size: 18px;
@@ -235,19 +233,225 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
   font-weight: 300;
 }
 
-/* HERO PRODUCT COMPOSITION */
 .hero-aside {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
 
-.hero-shot {
+/* ── RESOLUTION SPINE — hero + solution shared motif ────────────────── */
+.rspine-wrap {
   width: 100%;
-  max-width: 490px;
+  max-width: 460px;
 }
 
-.hero-shot-caption {
+.rspine-comp {
+  width: 100%;
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 26px 22px 22px;
+  box-shadow:
+    0 1px 3px rgba(15,28,58,.05),
+    0 6px 24px rgba(15,28,58,.08),
+    0 22px 60px rgba(15,28,58,.07);
+  overflow: hidden;
+}
+
+/* Subtle top accent stripe */
+.rspine-comp::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 32px; right: 32px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--indigo-mid), transparent);
+  opacity: .3;
+}
+
+.rspine-axis-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+
+/* Steps column with left-side spine track */
+.rspine-steps {
+  position: relative;
+}
+
+/* The vertical spine line */
+.rspine-steps::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 16px;
+  width: 1px;
+  background: linear-gradient(180deg,
+    var(--line-soft) 0%,
+    var(--line) 30%,
+    var(--line) 70%,
+    rgba(55,48,163,.28) 100%
+  );
+  z-index: 0;
+}
+
+.rspine-step {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.rspine-step + .rspine-step { margin-top: 2px; }
+
+/* Node column */
+.rspine-node-col {
+  width: 16px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3px;
+}
+
+.rspine-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--line);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transition: background .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease);
+}
+
+.rspine-dot--issue  { background: #fef9ee; border-color: #fbbf24; }
+.rspine-dot--routed { background: #f0f9ff; border-color: #0ea5e9; }
+.rspine-dot--governed {
+  background: var(--indigo-mid);
+  border-color: var(--indigo-mid);
+  box-shadow: 0 0 0 3px rgba(79,70,229,.16);
+}
+
+/* Content area */
+.rspine-body {
+  flex: 1;
+  padding-bottom: 20px;
+  transition: background-color .6s ease;
+}
+
+.rspine-step:last-child .rspine-body { padding-bottom: 0; }
+
+.rspine-step-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 7px;
+}
+
+.rspine-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.rspine-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-mid);
+  background: var(--bg-off);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+
+.rspine-draft-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.rspine-draft-title {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+
+.rspine-text-lines { display: flex; flex-direction: column; gap: 4px; }
+.rspine-text-line { height: 5px; background: var(--line-soft); border-radius: 2px; }
+.rspine-text-line--short { width: 62%; }
+
+.rspine-finding {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 4px 0;
+}
+
+.rspine-finding + .rspine-finding { border-top: 1px solid var(--line-soft); }
+
+.rspine-finding-text {
+  font-size: 10.5px;
+  color: var(--text-soft);
+  line-height: 1.45;
+}
+
+.rspine-route {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rspine-route-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-mid);
+}
+
+.rspine-governed-block {
+  background: var(--indigo-pale);
+  border: 1px solid rgba(55,48,163,.14);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.rspine-governed-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.rspine-governed-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+
+.rspine-governed-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  opacity: .7;
+}
+
+.rspine-caption {
   margin-top: 10px;
   font-family: var(--font-mono);
   font-size: 10px;
@@ -256,179 +460,17 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
   color: var(--text-dim);
 }
 
-.product-comp {
-  width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow:
-    0 1px 3px rgba(15,28,58,.05),
-    0 6px 20px rgba(15,28,58,.08),
-    0 20px 56px rgba(15,28,58,.07);
+/* Step active highlight */
+.rspine-body.spine-active {
+  background-color: rgba(55,48,163,.025);
+  border-radius: 6px;
 }
 
-.comp-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 11px 16px;
-  background: var(--bg-panel);
-  border-bottom: 1px solid var(--line);
+.rspine-body.spine-active-governed {
+  background-color: transparent;
 }
 
-.comp-header-title {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.comp-header-dots {
-  display: flex;
-  gap: 5px;
-}
-
-.comp-header-dots span {
-  display: block;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--line);
-}
-
-.comp-section {
-  padding: 13px 16px;
-  border-bottom: 1px solid var(--line-soft);
-}
-
-.comp-section:last-child { border-bottom: none; }
-
-.comp-section--governed {
-  background: var(--indigo-pale);
-}
-
-.comp-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 8px;
-}
-
-.comp-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.comp-chip {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-mid);
-  background: var(--bg-off);
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  padding: 2px 8px;
-  white-space: nowrap;
-}
-
-.comp-arrow {
-  padding: 5px 16px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .10em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  background: var(--bg-off);
-  border-bottom: 1px solid var(--line-soft);
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.comp-arrow-icon {
-  color: var(--indigo-mid);
-  font-size: 11px;
-  line-height: 1;
-}
-
-.comp-section-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 7px;
-}
-
-.comp-title {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text);
-  letter-spacing: -.01em;
-}
-
-.comp-lines {
-  margin-top: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.comp-line {
-  height: 6px;
-  background: var(--line-soft);
-  border-radius: 2px;
-  width: 100%;
-}
-
-.comp-line--short { width: 58%; }
-
-.comp-finding {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 5px 0;
-}
-
-.comp-finding + .comp-finding {
-  border-top: 1px solid var(--line-soft);
-}
-
-.comp-finding-text {
-  font-size: 11px;
-  color: var(--text-soft);
-  line-height: 1.45;
-}
-
-.comp-route {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.comp-route-text {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: var(--text-mid);
-}
-
-.comp-meta {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  color: var(--indigo);
-  margin-top: 5px;
-  opacity: .7;
-}
-
-/* BADGE SYSTEM */
+/* ── BADGE SYSTEM ────────────────────────────────────────────────────── */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -451,7 +493,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
 .badge-verified { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
 .badge-governed { background: var(--indigo-soft); color: var(--indigo); border: 1px solid #c7d2fe; }
 
-/* SECTIONS */
+/* ── SECTIONS ───────────────────────────────────────────────────────── */
 section { padding: 112px 0; }
 section + section { border-top: 1px solid var(--line-soft); }
 
@@ -488,50 +530,119 @@ section + section { border-top: 1px solid var(--line-soft); }
   margin-bottom: 52px;
 }
 
-/* HOW IT WORKS */
+/* ── HOW IT WORKS — horizontal resolution spine ─────────────────────── */
 #how-it-works { background: var(--bg-off); }
 
-.steps-pipeline {
+.pipe-outer {
+  position: relative;
+  padding-top: 16px;
+}
+
+/* The horizontal track line */
+.pipe-track {
+  position: absolute;
+  top: 20px;
+  left: calc(100% / 10);
+  right: calc(100% / 10);
+  height: 1.5px;
+  background: var(--line-soft);
+  overflow: hidden;
+  border-radius: 1px;
+}
+
+.pipe-fill {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--indigo-mid) 0%, var(--sky) 60%, var(--indigo) 100%);
+  opacity: 0;
+}
+
+.pipe-fill.run {
+  animation: pipeFill 1.8s var(--ease) .1s forwards;
+}
+
+@keyframes pipeFill {
+  0%   { width: 0%;  opacity: 0; }
+  5%   { opacity: 1; }
+  80%  { opacity: .7; }
+  100% { width: 100%; opacity: 0; }
+}
+
+.pipe-steps {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 28px;
-}
-
-.step-card {
-  border-top: 2px solid var(--line);
-  padding: 26px 0 0;
+  gap: 24px;
   position: relative;
-  transition: border-top-color .22s var(--ease);
+  z-index: 1;
 }
 
-.step-card:hover { border-top-color: var(--indigo-mid); }
+.pipe-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
-.step-num {
+.pipe-node {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-off);
+  border: 1.5px solid var(--line);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+  transition: background .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+}
+
+.pipe-outer.run .pipe-step:nth-child(1) .pipe-node { transition-delay: .05s; }
+.pipe-outer.run .pipe-step:nth-child(2) .pipe-node { transition-delay: .38s; }
+.pipe-outer.run .pipe-step:nth-child(3) .pipe-node { transition-delay: .72s; }
+.pipe-outer.run .pipe-step:nth-child(4) .pipe-node { transition-delay: 1.05s; }
+.pipe-outer.run .pipe-step:nth-child(5) .pipe-node { transition-delay: 1.38s; }
+
+.pipe-outer.run .pipe-step .pipe-node {
+  background: var(--indigo-mid);
+  border-color: var(--indigo-mid);
+  box-shadow: 0 0 0 3px rgba(79,70,229,.14);
+}
+
+.pipe-num {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .12em;
+  font-size: 10px;
+  letter-spacing: .10em;
   color: var(--text-dim);
-  margin-bottom: 14px;
-}
-
-.step-card h3 {
-  font-family: var(--font-serif);
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: -.02em;
-  line-height: 1.22;
-  color: var(--text);
   margin-bottom: 10px;
 }
 
-.step-card p {
-  font-size: 14px;
-  line-height: 1.76;
+.pipe-step h3 {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  color: var(--text);
+  margin-bottom: 9px;
+  line-height: 1.2;
+}
+
+.pipe-step p {
+  font-size: 13px;
+  line-height: 1.72;
   color: var(--text-soft);
   font-weight: 300;
 }
 
-/* PROBLEM */
+.pipe-cue {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* ── PROBLEM ────────────────────────────────────────────────────────── */
 .prob-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -582,7 +693,118 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-weight: 300;
 }
 
-/* SOLUTION */
+.prob-signal {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: .09em;
+  color: var(--text-dim);
+  background: var(--bg-off);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 3px 8px;
+}
+
+/* ── WHY THIS MATTERS — light gradient section ───────────────────────── */
+#why-matters {
+  background: var(--bg-off);
+  padding: 112px 0;
+  border-top: 1px solid var(--line-soft) !important;
+}
+
+.wm-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--indigo-mid);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.wm-title {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  color: var(--text);
+  margin-bottom: 14px;
+  max-width: 700px;
+}
+
+.wm-sub {
+  font-size: 16px;
+  line-height: 1.82;
+  color: var(--text-soft);
+  max-width: 580px;
+  font-weight: 300;
+  margin-bottom: 52px;
+}
+
+.wm-rows {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.wm-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 22px 32px;
+  border-bottom: 1px solid var(--line-soft);
+  border-left: 3px solid transparent;
+  transition: background-color .2s;
+}
+
+.wm-row:last-child { border-bottom: none; }
+
+.wm-row--1 { background: rgba(239,68,68,.025);    border-left-color: #fca5a5; }
+.wm-row--2 { background: rgba(245,158,11,.025);   border-left-color: #fbbf24; }
+.wm-row--3 { background: rgba(217,119,6,.02);     border-left-color: #fcd34d; }
+.wm-row--4 { background: rgba(16,185,129,.028);   border-left-color: #6ee7b7; }
+.wm-row--5 { background: rgba(79,70,229,.03);     border-left-color: #a5b4fc; }
+.wm-row--6 { background: rgba(55,48,163,.045);    border-left-color: var(--indigo-mid); }
+
+.wm-state {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.wm-row--1 .wm-state { color: #dc2626; }
+.wm-row--2 .wm-state { color: #b45309; }
+.wm-row--3 .wm-state { color: #92400e; }
+.wm-row--4 .wm-state { color: #15803d; }
+.wm-row--5 .wm-state { color: var(--indigo); }
+.wm-row--6 .wm-state { color: var(--indigo-mid); }
+
+.wm-desc {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-soft);
+  font-weight: 300;
+}
+
+.js .wm-row {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .48s var(--ease), transform .48s var(--ease);
+}
+
+.js .wm-row.in { opacity: 1; transform: none; }
+
+/* ── SOLUTION ────────────────────────────────────────────────────────── */
 .solution-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
@@ -626,120 +848,188 @@ section + section { border-top: 1px solid var(--line-soft); }
   margin-right: 5px;
 }
 
-.sol-screen {
+/* Solution spine (right side) — uses rspine-comp */
+.sol-spine { }
+
+/* State sequence animation */
+.js .sol-spine .rspine-step {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity .38s var(--ease), transform .38s var(--ease);
+}
+
+.js .sol-spine.in .rspine-step              { opacity: 1; transform: none; }
+.js .sol-spine.in .rspine-step:nth-child(1) { transition-delay: .10s; }
+.js .sol-spine.in .rspine-step:nth-child(2) { transition-delay: .22s; }
+.js .sol-spine.in .rspine-step:nth-child(3) { transition-delay: .34s; }
+.js .sol-spine.in .rspine-step:nth-child(4) { transition-delay: .46s; }
+.js .sol-spine.in .rspine-step:nth-child(5) { transition-delay: .58s; }
+
+/* ── OUTPUTS — governed object gallery ───────────────────────────────── */
+#outputs { background: var(--bg-off); }
+
+.object-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.object-card {
   background: var(--bg);
   border: 1px solid var(--line);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow:
-    0 1px 3px rgba(15,28,58,.04),
-    0 8px 28px rgba(15,28,58,.07);
-}
-
-.sol-screen-header {
-  padding: 11px 16px;
-  background: var(--bg-panel);
-  border-bottom: 1px solid var(--line);
-}
-
-.sol-screen-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.sol-screen-body {
-  padding: 18px;
+  border-radius: 10px;
+  padding: 22px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0;
+  transition: box-shadow .22s var(--ease), border-color .22s var(--ease);
 }
 
-.sol-input-label {
+.object-card:hover {
+  box-shadow: 0 4px 24px rgba(55,48,163,.07);
+  border-color: rgba(55,48,163,.16);
+}
+
+.object-badge { margin-bottom: 12px; }
+
+.object-title {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  line-height: 1.18;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.object-meta {
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .12em;
+  font-size: 9.5px;
+  letter-spacing: .09em;
   text-transform: uppercase;
   color: var(--text-dim);
-  margin-bottom: 7px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-soft);
 }
 
-.sol-input-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.sol-input-item {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-mid);
-  background: var(--bg-off);
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  padding: 2px 8px;
-}
-
-.sol-input-item--more { color: var(--text-dim); }
-
-.sol-divider {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sol-divider-arrow {
-  font-size: 11px;
-  color: var(--text-dim);
-}
-
-.sol-divider-text {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.sol-state-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.sol-state {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sol-state-text {
-  font-size: 11px;
+.object-desc {
+  font-size: 13.5px;
+  line-height: 1.76;
   color: var(--text-soft);
   font-weight: 300;
 }
 
-.sol-output {
-  background: var(--indigo-pale);
-  border: 1px solid rgba(55,48,163,.14);
-  border-radius: 8px;
-  padding: 13px 14px;
+/* ── PRODUCT IN ACTION — transformation layout ────────────────────────── */
+.transform-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.sol-output-badge { margin-bottom: 7px; }
+.transform-phase {
+  padding: 30px 28px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
 
-.sol-output-title {
-  font-family: var(--font-sans);
-  font-size: 13px;
+.transform-phase + .transform-phase { border-left: 1px solid var(--line); }
+
+.transform-phase--fragmented { background: var(--bg-off); }
+.transform-phase--resolution { background: var(--indigo-pale); }
+.transform-phase--governed   { background: var(--bg); }
+
+.transform-phase-header {
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.transform-phase--resolution .transform-phase-header {
+  border-bottom-color: rgba(55,48,163,.12);
+}
+
+.transform-phase-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.transform-phase--resolution .transform-phase-label { color: var(--indigo-mid); }
+.transform-phase--governed   .transform-phase-label { color: #166534; }
+
+.transform-phase-caption {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.transform-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.transform-item {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-soft);
+  font-weight: 300;
+  padding-left: 16px;
+  position: relative;
+}
+
+.transform-item::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.transform-phase--resolution .transform-item::before {
+  content: '→';
+  color: var(--indigo-mid);
+}
+
+.transform-phase--governed .transform-item::before {
+  content: '✓';
+  color: #15803d;
+  font-size: 10px;
+}
+
+.transform-governed-obj {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.transform-governed-obj-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.transform-governed-obj-title {
+  font-size: 12.5px;
   font-weight: 500;
   color: var(--text);
   letter-spacing: -.01em;
-  margin-bottom: 3px;
 }
 
-.sol-output-meta {
+.transform-governed-obj-meta {
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: .09em;
@@ -748,134 +1038,119 @@ section + section { border-top: 1px solid var(--line-soft); }
   opacity: .7;
 }
 
-/* OUTPUTS */
-#outputs { background: var(--bg-off); }
-
-.outputs-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.output-card {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 22px 20px;
-  transition: box-shadow .22s var(--ease), border-color .22s var(--ease);
-}
-
-.output-card:hover {
-  box-shadow: 0 4px 24px rgba(55,48,163,.07);
-}
-
-.output-top {
+.transform-route-badge {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.output-card h3 {
-  font-family: var(--font-serif);
-  font-size: 19px;
-  font-weight: 400;
-  letter-spacing: -.01em;
-  line-height: 1.18;
-  color: var(--text);
-}
-
-.output-card p {
-  font-size: 14px;
-  line-height: 1.76;
-  color: var(--text-soft);
-  font-weight: 300;
-}
-
-/* PRODUCT IN ACTION */
-.action-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.action-col {
-  padding: 28px 28px 32px;
-}
-
-.action-col + .action-col {
-  border-left: 1px solid var(--line);
-}
-
-.action-col--before { background: var(--bg-off); }
-.action-col--with   { background: var(--indigo-pale); }
-.action-col--after  { background: var(--bg); }
-
-.action-header {
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--line-soft);
-}
-
-.action-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.action-col--with  .action-label { color: var(--indigo-mid); }
-.action-col--after .action-label { color: #166534; }
-
-.action-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-
-.action-list li {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text-soft);
-  font-weight: 300;
-  padding-left: 16px;
-  position: relative;
-}
-
-.action-list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--text-dim);
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.action-col--with .action-list li::before {
-  content: '→';
-  color: var(--indigo-mid);
-}
-
-.action-col--after .action-list li::before {
-  content: '✓';
-  color: #15803d;
-  font-size: 10px;
-}
-
-.action-badge-row {
-  display: flex;
-  gap: 6px;
-  margin-top: 18px;
-  padding-top: 16px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
   border-top: 1px solid rgba(55,48,163,.10);
 }
 
-/* WHO IT'S FOR */
+.transform-route-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-mid);
+}
+
+/* Action columns sequential reveal */
+.js .transform-phase {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .52s var(--ease), transform .52s var(--ease);
+}
+
+.js .transform-phase.in { opacity: 1; transform: none; }
+.js .transform-phase--resolution.in { transition-delay: .14s; }
+.js .transform-phase--governed.in   { transition-delay: .28s; }
+
+/* ── PLATFORM LAYER — governed core, product surfaces ────────────────── */
+#platform { background: var(--bg-off); }
+
+.platform-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 300px) 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.plat-core {
+  background: var(--indigo-pale);
+  border: 1px solid rgba(55,48,163,.18);
+  border-radius: 14px;
+  padding: 30px 24px;
+  text-align: center;
+  position: sticky;
+  top: 96px;
+}
+
+.plat-core-badge { margin-bottom: 14px; }
+
+.plat-core-title {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -.01em;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.plat-core-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--indigo);
+  opacity: .7;
+}
+
+.plat-connector {
+  width: 1px;
+  height: 24px;
+  background: linear-gradient(180deg, rgba(55,48,163,.2), transparent);
+  margin: 10px auto 0;
+}
+
+.plat-surfaces {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.plat-surface {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: box-shadow .22s var(--ease), border-color .22s var(--ease);
+}
+
+.plat-surface:hover {
+  border-color: rgba(55,48,163,.2);
+  box-shadow: 0 4px 20px rgba(55,48,163,.07);
+}
+
+.plat-surface-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--indigo-mid);
+}
+
+.plat-surface-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-soft);
+  font-weight: 300;
+}
+
+/* ── WHERE IT FITS ────────────────────────────────────────────────────── */
 .for-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -891,6 +1166,15 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 
 .for-card:hover { border-top-color: var(--sky); }
+
+.for-sublabel {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
 
 .for-card h3 {
   font-family: var(--font-serif);
@@ -927,7 +1211,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   padding: 5px 12px;
 }
 
-/* CONTACT */
+/* ── CONTACT ─────────────────────────────────────────────────────────── */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -982,7 +1266,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   text-decoration: underline;
 }
 
-/* FOOTER */
+/* ── FOOTER ──────────────────────────────────────────────────────────── */
 footer {
   background: var(--bg-deep);
   padding: 80px 0 60px;
@@ -996,11 +1280,7 @@ footer {
   align-items: start;
 }
 
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.footer-brand { display: flex; flex-direction: column; gap: 16px; }
 
 .footer-brand p {
   font-size: 14px;
@@ -1041,311 +1321,38 @@ footer {
   align-items: center;
 }
 
-/* PLATFORM LAYER */
-#platform { background: var(--bg-off); }
-
-.platform-grid {
-  display: grid;
-  grid-template-columns: minmax(220px, 300px) 1fr;
-  gap: 48px;
-  align-items: start;
-}
-
-.platform-hub {
-  background: var(--indigo-pale);
-  border: 1px solid rgba(55,48,163,.16);
-  border-radius: 14px;
-  padding: 28px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: sticky;
-  top: 96px;
-}
-
-.platform-hub-title {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text);
-  letter-spacing: -.01em;
-  line-height: 1.4;
-  margin-bottom: 6px;
-}
-
-.platform-hub-meta {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  color: var(--indigo);
-  opacity: .7;
-}
-
-.platform-spokes {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.platform-spoke {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 18px 18px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  transition: box-shadow .22s var(--ease), border-color .22s var(--ease);
-}
-
-.platform-spoke:hover {
-  border-color: rgba(55,48,163,.2);
-  box-shadow: 0 4px 20px rgba(55,48,163,.07);
-}
-
-.platform-spoke-label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--indigo-mid);
-}
-
-.platform-spoke-desc {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: var(--text-soft);
-  font-weight: 300;
-}
-
-@media (max-width: 860px) {
-  .platform-grid { grid-template-columns: 1fr; }
-  .platform-hub  { position: static; }
-}
-
-@media (max-width: 600px) {
-  .platform-spokes { grid-template-columns: 1fr; }
-}
-
-/* WHY THIS MATTERS */
-#why-matters {
-  background: var(--bg-deep);
-  padding: 112px 0;
-  border-top: none !important;
-}
-
-#why-matters + section { border-top: none; }
-
-.wm-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: rgba(165,180,252,.75);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.wm-title {
-  font-family: var(--font-serif);
-  font-size: clamp(26px, 3.2vw, 44px);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -.02em;
-  color: #e8edf8;
-  margin-bottom: 14px;
-  max-width: 700px;
-}
-
-.wm-sub {
-  font-size: 16px;
-  line-height: 1.82;
-  color: #5c6e88;
-  max-width: 580px;
-  font-weight: 300;
-  margin-bottom: 52px;
-}
-
-.wm-rows {
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.wm-row {
-  display: grid;
-  grid-template-columns: 190px 1fr;
-  align-items: center;
-  gap: 40px;
-  padding: 21px 32px;
-  border-bottom: 1px solid rgba(255,255,255,.04);
-}
-
-.wm-row:last-child { border-bottom: none; }
-
-.wm-row--1 { background: rgba(239,68,68,.085); }
-.wm-row--2 { background: rgba(245,158,11,.07); }
-.wm-row--3 { background: rgba(245,158,11,.04); }
-.wm-row--4 { background: rgba(16,185,129,.055); }
-.wm-row--5 { background: rgba(79,70,229,.09); }
-.wm-row--6 { background: rgba(79,70,229,.16); }
-
-.wm-state {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-}
-
-.wm-row--1 .wm-state { color: #f87171; }
-.wm-row--2 .wm-state { color: #fbbf24; }
-.wm-row--3 .wm-state { color: #d97706; }
-.wm-row--4 .wm-state { color: #34d399; }
-.wm-row--5 .wm-state { color: #a5b4fc; }
-.wm-row--6 .wm-state { color: #818cf8; }
-
-.wm-desc {
-  font-size: 14.5px;
-  line-height: 1.65;
-  color: #4f6075;
-  font-weight: 300;
-}
-
-.wm-row--4 .wm-desc,
-.wm-row--5 .wm-desc,
-.wm-row--6 .wm-desc { color: #8fa3be; }
-
-.js .wm-row {
-  opacity: 0;
-  transform: translateY(7px);
-  transition: opacity .5s var(--ease), transform .5s var(--ease);
-}
-
-.js .wm-row.in { opacity: 1; transform: none; }
-
-@media (max-width: 768px) {
-  #why-matters { padding: 80px 0; }
-  .wm-row { grid-template-columns: 1fr; gap: 6px; padding: 16px 20px; }
-}
-
-/* ANIMATION KEYFRAMES */
+/* ── ANIMATIONS ──────────────────────────────────────────────────────── */
 @keyframes badgePop {
   0%   { transform: scale(.86); opacity: 0; }
   65%  { transform: scale(1.05); opacity: 1; }
   100% { transform: scale(1);   opacity: 1; }
 }
 
-@keyframes pipelineTravel {
-  0%   { transform: scaleX(0); opacity: 0; }
-  12%  { opacity: 1; }
-  78%  { opacity: .65; }
-  100% { transform: scaleX(1); opacity: 0; }
-}
-
-@keyframes heroStepGlow {
-  0%   { background-color: transparent; }
-  20%  { background-color: rgba(55,48,163,.035); }
-  80%  { background-color: rgba(55,48,163,.035); }
-  100% { background-color: transparent; }
-}
-
-/* Hero composition step highlight */
-.comp-section {
-  transition: background-color .7s ease;
-}
-
-.comp-section.hero-active {
-  background-color: rgba(55,48,163,.035) !important;
-}
-
-.comp-section--governed.hero-active {
-  background-color: rgba(79,70,229,.14) !important;
-}
-
-/* Pipeline connector bar */
-.steps-pipeline { position: relative; }
-
-.pipeline-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  transform-origin: left center;
-  transform: scaleX(0);
-  background: linear-gradient(90deg,
-    var(--indigo-mid) 0%,
-    var(--sky) 70%,
-    rgba(14,165,233,0) 100%
-  );
-  opacity: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.pipeline-bar.run {
-  animation: pipelineTravel 1.8s cubic-bezier(.4,0,.2,1) .15s forwards;
-}
-
-/* Delay helpers */
-.d4 { transition-delay: .32s; }
-.d5 { transition-delay: .40s; }
-
-/* Solution screen: state items stagger in when screen enters view */
-.js .sol-state-stack .sol-state {
-  opacity: 0;
-  transform: translateX(-7px);
-  transition: opacity .35s var(--ease), transform .35s var(--ease);
-}
-
-.js .sol-screen.in .sol-state-stack .sol-state         { opacity: 1; transform: none; }
-.js .sol-screen.in .sol-state-stack .sol-state:nth-child(1) { transition-delay: .20s; }
-.js .sol-screen.in .sol-state-stack .sol-state:nth-child(2) { transition-delay: .33s; }
-.js .sol-screen.in .sol-state-stack .sol-state:nth-child(3) { transition-delay: .46s; }
-
-.js .sol-screen .sol-output {
-  opacity: 0;
-  transform: translateY(5px);
-  transition: opacity .4s var(--ease) .60s, transform .4s var(--ease) .60s;
-}
-
-.js .sol-screen.in .sol-output { opacity: 1; transform: none; }
-
-/* Output card badge pop-in after card reveal */
-.js .output-card .badge {
+/* Object card badge pop-in */
+.js .object-card .badge {
   opacity: 0;
   transform: scale(.84);
-  transition: opacity .3s var(--ease) .18s, transform .3s var(--ease) .18s;
+  transition: opacity .3s var(--ease) .14s, transform .3s var(--ease) .14s;
 }
 
-.js .output-card.in .badge { opacity: 1; transform: scale(1); }
+.js .object-card.in .badge { opacity: 1; transform: scale(1); }
 
-/* Action columns sequential reveal */
-.js .action-col {
+/* Object meta reveal after badge */
+.js .object-card .object-meta {
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity .52s var(--ease), transform .52s var(--ease);
+  transition: opacity .3s var(--ease) .28s;
 }
 
-.js .action-col.in              { opacity: 1; transform: none; }
-.js .action-col--with.in        { transition-delay: .14s; }
-.js .action-col--after.in       { transition-delay: .28s; }
+.js .object-card.in .object-meta { opacity: 1; }
 
-/* Platform spokes stagger */
-.js .platform-spoke {
+/* Platform surfaces stagger */
+.js .plat-surface {
   opacity: 0;
   transform: translateY(8px);
   transition: opacity .42s var(--ease), transform .42s var(--ease);
 }
 
-.js .platform-spoke.in { opacity: 1; transform: none; }
+.js .plat-surface.in { opacity: 1; transform: none; }
 
 /* Where-it-fits cards stagger */
 .js .for-card {
@@ -1363,49 +1370,38 @@ footer {
   transition: opacity .65s var(--ease), transform .65s var(--ease);
 }
 
-.js .reveal {
-  opacity: 0;
-  transform: translateY(22px);
-}
-
-.js .reveal.in {
-  opacity: 1;
-  transform: none;
-}
+.js .reveal { opacity: 0; transform: translateY(22px); }
+.js .reveal.in { opacity: 1; transform: none; }
 
 .d1 { transition-delay: .08s; }
 .d2 { transition-delay: .16s; }
 .d3 { transition-delay: .24s; }
+.d4 { transition-delay: .32s; }
+.d5 { transition-delay: .40s; }
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ──────────────────────────────────────────────────────── */
 @media (max-width: 1180px) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
   .hero-aside { justify-content: flex-start; }
-  .hero-shot  { max-width: 560px; }
+  .rspine-wrap { max-width: 560px; }
   .solution-layout { grid-template-columns: 1fr; }
+  .platform-layout { grid-template-columns: 1fr; }
+  .plat-core { position: static; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 1060px) {
-  .steps-pipeline  { grid-template-columns: repeat(3, 1fr); }
-  .prob-grid       { grid-template-columns: repeat(2, 1fr); }
-  .for-grid        { grid-template-columns: repeat(2, 1fr); }
-  .outputs-grid    { grid-template-columns: repeat(2, 1fr); }
+  .pipe-steps { grid-template-columns: repeat(3, 1fr); }
+  .pipe-track  { display: none; }
+  .prob-grid   { grid-template-columns: repeat(2, 1fr); }
+  .for-grid    { grid-template-columns: repeat(2, 1fr); }
+  .object-gallery { grid-template-columns: repeat(2, 1fr); }
+  .transform-wrap { grid-template-columns: 1fr; }
+  .transform-phase + .transform-phase { border-left: none; border-top: 1px solid var(--line); }
 }
 
 @media (max-width: 860px) {
-  .action-grid { grid-template-columns: 1fr; }
-  .action-col + .action-col {
-    border-left: none;
-    border-top: 1px solid var(--line);
-  }
-  .action-col--with .action-header {
-    border-bottom-color: rgba(55,48,163,.14);
-  }
+  .plat-surfaces { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -1413,16 +1409,20 @@ footer {
   .nav-links { display: none; }
   section { padding: 80px 0; }
 
-  .steps-pipeline  { grid-template-columns: 1fr; }
-  .prob-grid       { grid-template-columns: 1fr; }
-  .outputs-grid    { grid-template-columns: 1fr; }
-  .for-grid        { grid-template-columns: 1fr; }
-  .contact-grid    { grid-template-columns: 1fr; }
-  .footer-grid     { grid-template-columns: 1fr; }
-  .footer-bottom   { flex-direction: column; gap: 8px; }
+  .pipe-steps    { grid-template-columns: 1fr; }
+  .pipe-track    { display: none; }
+  .prob-grid     { grid-template-columns: 1fr; }
+  .object-gallery { grid-template-columns: 1fr; }
+  .for-grid      { grid-template-columns: 1fr; }
+  .contact-grid  { grid-template-columns: 1fr; }
+  .footer-grid   { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
 
   .hero { min-height: auto; }
-  .hero-shot { max-width: 100%; }
+  .rspine-wrap { max-width: 100%; }
+  .wm-row { grid-template-columns: 1fr; gap: 6px; padding: 16px 20px; }
+
+  #why-matters { padding: 80px 0; }
 }
 </style>
 </head>
@@ -1465,91 +1465,95 @@ footer {
       </div>
 
       <div class="hero-aside">
-        <div class="hero-shot">
-          <div class="product-comp" role="img" aria-label="Requivo product workflow: evidence to governed operational knowledge">
+        <div class="rspine-wrap">
+          <div class="rspine-comp" role="img" aria-label="Requivo Resolution Spine: evidence to governed operational knowledge">
 
-            <div class="comp-header">
-              <span class="comp-header-title">Requivo — knowledge workflow</span>
-              <div class="comp-header-dots" aria-hidden="true">
-                <span></span><span></span><span></span>
+            <div class="rspine-axis-label">Evidence → Resolution → Governed knowledge</div>
+
+            <div class="rspine-steps">
+
+              <!-- Step 1: Evidence -->
+              <div class="rspine-step" id="rspine-1">
+                <div class="rspine-node-col">
+                  <div class="rspine-dot"></div>
+                </div>
+                <div class="rspine-body" id="rspine-body-1">
+                  <div class="rspine-step-label">Source evidence</div>
+                  <div class="rspine-chips">
+                    <span class="rspine-chip">procedure_v3.pdf</span>
+                    <span class="rspine-chip">workflow_ticket</span>
+                    <span class="rspine-chip">team_wiki</span>
+                    <span class="rspine-chip">incident_log</span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <!-- Step 1: Evidence -->
-            <div class="comp-section" id="hero-step-1">
-              <div class="comp-label">Source evidence</div>
-              <div class="comp-chips">
-                <span class="comp-chip">operating_procedure_v3.pdf</span>
-                <span class="comp-chip">workflow_update_ticket</span>
-                <span class="comp-chip">team_wiki_page</span>
-                <span class="comp-chip">incident_log_entry</span>
+              <!-- Step 2: Draft -->
+              <div class="rspine-step" id="rspine-2">
+                <div class="rspine-node-col">
+                  <div class="rspine-dot"></div>
+                </div>
+                <div class="rspine-body" id="rspine-body-2">
+                  <div class="rspine-draft-row">
+                    <span class="rspine-draft-title">Internal Process: Approval Workflow</span>
+                    <span class="badge badge-draft">Draft</span>
+                  </div>
+                  <div class="rspine-text-lines" aria-hidden="true">
+                    <div class="rspine-text-line"></div>
+                    <div class="rspine-text-line rspine-text-line--short"></div>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="comp-arrow">
-              <span class="comp-arrow-icon" aria-hidden="true">↓</span>
-              Generates structured draft from evidence
-            </div>
-
-            <!-- Step 2: Draft -->
-            <div class="comp-section" id="hero-step-2">
-              <div class="comp-section-top">
-                <div class="comp-label" style="margin-bottom:0">Structured draft</div>
-                <span class="badge badge-draft">Draft</span>
+              <!-- Step 3: Conflict / Gap -->
+              <div class="rspine-step" id="rspine-3">
+                <div class="rspine-node-col">
+                  <div class="rspine-dot rspine-dot--issue"></div>
+                </div>
+                <div class="rspine-body" id="rspine-body-3">
+                  <div class="rspine-finding">
+                    <span class="badge badge-conflict">Conflict</span>
+                    <span class="rspine-finding-text">Three sources define different approval rules</span>
+                  </div>
+                  <div class="rspine-finding">
+                    <span class="badge badge-gap">Gap</span>
+                    <span class="rspine-finding-text">Final validation step not documented</span>
+                  </div>
+                </div>
               </div>
-              <div class="comp-title" style="margin-top:7px">Internal Process: Approval &amp; Review Workflow</div>
-              <div class="comp-lines" aria-hidden="true">
-                <div class="comp-line"></div>
-                <div class="comp-line comp-line--short"></div>
+
+              <!-- Step 4: Routed -->
+              <div class="rspine-step" id="rspine-4">
+                <div class="rspine-node-col">
+                  <div class="rspine-dot rspine-dot--routed"></div>
+                </div>
+                <div class="rspine-body" id="rspine-body-4">
+                  <div class="rspine-route">
+                    <span class="badge badge-routed">Routed</span>
+                    <span class="rspine-route-text">S. Mehta — confirm approval sequence</span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="comp-arrow">
-              <span class="comp-arrow-icon" aria-hidden="true">↓</span>
-              Surfaces conflicts and gaps
-            </div>
-
-            <!-- Step 3: Findings -->
-            <div class="comp-section" id="hero-step-3">
-              <div class="comp-finding">
-                <span class="badge badge-conflict">Conflict</span>
-                <span class="comp-finding-text">Approval rule: three sources define different requirements</span>
+              <!-- Step 5: Governed -->
+              <div class="rspine-step" id="rspine-5">
+                <div class="rspine-node-col">
+                  <div class="rspine-dot rspine-dot--governed"></div>
+                </div>
+                <div class="rspine-body" id="rspine-body-5">
+                  <div class="rspine-governed-block">
+                    <div class="rspine-governed-row">
+                      <span class="rspine-governed-title">Approval Workflow — Validated</span>
+                      <span class="badge badge-governed">Governed</span>
+                    </div>
+                    <div class="rspine-governed-meta">Validated · Traceable · Reusable</div>
+                  </div>
+                </div>
               </div>
-              <div class="comp-finding">
-                <span class="badge badge-gap">Gap</span>
-                <span class="comp-finding-text">Final validation step not defined in source material</span>
-              </div>
-            </div>
 
-            <div class="comp-arrow">
-              <span class="comp-arrow-icon" aria-hidden="true">↓</span>
-              Routes to the right expert
             </div>
-
-            <!-- Step 4: Routing -->
-            <div class="comp-section" id="hero-step-4">
-              <div class="comp-route">
-                <span class="badge badge-routed">Routed</span>
-                <span class="comp-route-text">S. Mehta — confirm approval sequence for Step 4</span>
-              </div>
-            </div>
-
-            <div class="comp-arrow">
-              <span class="comp-arrow-icon" aria-hidden="true">↓</span>
-              Expert verified — published
-            </div>
-
-            <!-- Step 5: Governed output -->
-            <div class="comp-section comp-section--governed" id="hero-step-5">
-              <div class="comp-section-top">
-                <div class="comp-title">Approval &amp; Review Workflow — Validated</div>
-                <span class="badge badge-governed">Governed</span>
-              </div>
-              <div class="comp-meta">Validated · Traceable · Reusable</div>
-            </div>
-
           </div>
-          <div class="hero-shot-caption">Evidence → Resolution → Governed knowledge</div>
+          <div class="rspine-caption">Resolution Spine — evidence to governed knowledge</div>
         </div>
       </div>
     </div>
@@ -1561,38 +1565,67 @@ footer {
   <div class="wrap">
     <div class="section-label">How it works</div>
     <h2 class="section-title reveal">From fragmented evidence to governed operational knowledge</h2>
-    <p class="section-sub reveal d1">Requivo connects operational evidence, structures it into draft knowledge, surfaces conflicts and gaps, routes unresolved points to the right expert, and publishes a governed output teams can trust.</p>
+    <p class="section-sub reveal d1">Five steps along a single resolution spine — from the sources you already have to knowledge your organisation can depend on.</p>
 
-    <div class="steps-pipeline" id="steps-pipeline">
-      <div class="pipeline-bar" id="pipeline-bar" aria-hidden="true"></div>
-      <div class="step-card reveal">
-        <div class="step-num">01</div>
-        <h3>Connect what you already have</h3>
-        <p>Documents, tickets, notes, wikis, logs, and internal process material. Requivo works from your existing evidence — not from blank prompts.</p>
+    <div class="pipe-outer" id="pipe-outer">
+      <div class="pipe-track">
+        <div class="pipe-fill" id="pipe-fill"></div>
       </div>
 
-      <div class="step-card reveal d1">
-        <div class="step-num">02</div>
-        <h3>Generate a structured draft from evidence</h3>
-        <p>Requivo creates structured operational knowledge from source material — not from memory, and not from generic AI prompts.</p>
-      </div>
+      <div class="pipe-steps">
 
-      <div class="step-card reveal d2">
-        <div class="step-num">03</div>
-        <h3>Find what others miss</h3>
-        <p>Requivo surfaces conflicts, gaps, stale logic, and unresolved knowledge — before they become operational failures.</p>
-      </div>
+        <div class="pipe-step reveal">
+          <div class="pipe-node"></div>
+          <div class="pipe-num">01</div>
+          <h3>Connect</h3>
+          <p>Documents, tickets, wikis, notes, and logs. Requivo works from your existing evidence — not blank prompts.</p>
+          <div class="pipe-cue" aria-hidden="true">
+            <span class="rspine-chip">procedure.pdf</span>
+            <span class="rspine-chip">ticket_42</span>
+          </div>
+        </div>
 
-      <div class="step-card reveal d3">
-        <div class="step-num">04</div>
-        <h3>Ask the right expert only when needed</h3>
-        <p>Requivo routes unresolved points to the most relevant person for targeted clarification — not a general query broadcast to everyone.</p>
-      </div>
+        <div class="pipe-step reveal d1">
+          <div class="pipe-node"></div>
+          <div class="pipe-num">02</div>
+          <h3>Generate</h3>
+          <p>Requivo builds a structured draft from source material — not from AI memory, not from generic prompts.</p>
+          <div class="pipe-cue" aria-hidden="true">
+            <span class="badge badge-draft">Draft</span>
+          </div>
+        </div>
 
-      <div class="step-card reveal" style="transition-delay:.32s">
-        <div class="step-num">05</div>
-        <h3>Publish governed knowledge</h3>
-        <p>The output becomes validated, traceable, reusable operational knowledge — ready for workflows across the organisation.</p>
+        <div class="pipe-step reveal d2">
+          <div class="pipe-node"></div>
+          <div class="pipe-num">03</div>
+          <h3>Detect</h3>
+          <p>Conflicts, gaps, and stale logic are surfaced before they become operational failures in the field.</p>
+          <div class="pipe-cue" aria-hidden="true">
+            <span class="badge badge-conflict">Conflict</span>
+            <span class="badge badge-gap">Gap</span>
+          </div>
+        </div>
+
+        <div class="pipe-step reveal d3">
+          <div class="pipe-node"></div>
+          <div class="pipe-num">04</div>
+          <h3>Route</h3>
+          <p>Unresolved points go only to the most relevant expert — targeted clarification, not broadcast queries.</p>
+          <div class="pipe-cue" aria-hidden="true">
+            <span class="badge badge-routed">Routed</span>
+          </div>
+        </div>
+
+        <div class="pipe-step reveal d4">
+          <div class="pipe-node"></div>
+          <div class="pipe-num">05</div>
+          <h3>Govern</h3>
+          <p>The output becomes validated, traceable, reusable knowledge — ready for workflows across the organisation.</p>
+          <div class="pipe-cue" aria-hidden="true">
+            <span class="badge badge-governed">Governed</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1606,29 +1639,35 @@ footer {
     <p class="section-sub reveal d1">Critical operational knowledge often remains fragmented across documents, systems, workflows, and individuals. The issue is not that information is missing. The issue is that it never becomes one trusted, governed operational view.</p>
 
     <div class="prob-grid">
+
       <div class="prob-card reveal">
         <div class="prob-num">01</div>
         <h3>The expert leaves</h3>
-        <p>The documents remain, but the judgment behind them does not. Critical operational logic disappears with the person who held it.</p>
+        <p>The documents remain, but the judgment behind them does not. Critical logic disappears with the person who held it.</p>
+        <span class="prob-signal" aria-hidden="true">step_4_procedure — undocumented</span>
       </div>
 
       <div class="prob-card reveal d1">
         <div class="prob-num">02</div>
         <h3>Sources conflict</h3>
         <p>Procedures, tickets, notes, and systems describe the same reality differently. Nobody has mapped the contradiction.</p>
+        <span class="prob-signal" aria-hidden="true">approval_rule — 3 versions, unresolved</span>
       </div>
 
       <div class="prob-card reveal d2">
         <div class="prob-num">03</div>
         <h3>Validation is missing</h3>
-        <p>Teams know something is incomplete, but not what, where, or who should confirm it. The gap stays invisible until it fails.</p>
+        <p>Teams know something is incomplete, but not what, where, or who should confirm it. The gap stays hidden.</p>
+        <span class="prob-signal" aria-hidden="true">review_step — no reviewer defined</span>
       </div>
 
       <div class="prob-card reveal d3">
         <div class="prob-num">04</div>
         <h3>Knowledge stays siloed</h3>
-        <p>Critical know-how never becomes a trusted shared asset. It stays locked in the system, person, or team that originally created it.</p>
+        <p>Critical know-how never becomes a shared asset. It stays locked in the system or team that originally created it.</p>
+        <span class="prob-signal" aria-hidden="true">operating_logic — access: 1 person</span>
       </div>
+
     </div>
   </div>
 </section>
@@ -1683,59 +1722,68 @@ footer {
 
         <div class="sol-mechanisms">
           <div class="sol-mech"><span class="sol-verb">Connects</span> fragmented documents, systems, and expert knowledge</div>
-          <div class="sol-mech"><span class="sol-verb">Generates</span> structured draft knowledge from source evidence</div>
           <div class="sol-mech"><span class="sol-verb">Detects</span> conflicts, gaps, and stale operational logic</div>
           <div class="sol-mech"><span class="sol-verb">Routes</span> unresolved points to the right expert</div>
-          <div class="sol-mech"><span class="sol-verb">Publishes</span> governed knowledge that workflows can depend on</div>
+          <div class="sol-mech"><span class="sol-verb">Verifies</span> against source evidence and expert confirmation</div>
+          <div class="sol-mech"><span class="sol-verb">Publishes</span> governed knowledge workflows can depend on</div>
         </div>
       </div>
 
-      <div class="sol-screen reveal d1">
-        <div class="sol-screen-header">
-          <span class="sol-screen-label">Knowledge resolution layer</span>
-        </div>
+      <div class="rspine-wrap sol-spine" id="sol-spine">
+        <div class="rspine-comp">
+          <div class="rspine-axis-label">Knowledge resolution engine</div>
+          <div class="rspine-steps">
 
-        <div class="sol-screen-body">
-          <div>
-            <div class="sol-input-label">Input sources</div>
-            <div class="sol-input-items">
-              <span class="sol-input-item">Internal procedures</span>
-              <span class="sol-input-item">Workflow tickets</span>
-              <span class="sol-input-item">Policy notes</span>
-              <span class="sol-input-item sol-input-item--more">+3 more</span>
+            <div class="rspine-step">
+              <div class="rspine-node-col"><div class="rspine-dot"></div></div>
+              <div class="rspine-body">
+                <div class="rspine-step-label">Input sources</div>
+                <div class="rspine-chips">
+                  <span class="rspine-chip">Procedures</span>
+                  <span class="rspine-chip">Tickets</span>
+                  <span class="rspine-chip">Policy notes</span>
+                  <span class="rspine-chip" style="color:var(--text-dim)">+3 more</span>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="sol-divider">
-            <span class="sol-divider-arrow">↓</span>
-            <span class="sol-divider-text">Resolution engine</span>
-          </div>
+            <div class="rspine-step">
+              <div class="rspine-node-col"><div class="rspine-dot rspine-dot--issue"></div></div>
+              <div class="rspine-body">
+                <div class="rspine-finding">
+                  <span class="badge badge-conflict">Conflict</span>
+                  <span class="rspine-finding-text">Approval rule: conflicting guidance</span>
+                </div>
+                <div class="rspine-finding">
+                  <span class="badge badge-gap">Gap</span>
+                  <span class="rspine-finding-text">Final validation step missing</span>
+                </div>
+              </div>
+            </div>
 
-          <div class="sol-state-stack">
-            <div class="sol-state">
-              <span class="badge badge-conflict">Conflict</span>
-              <span class="sol-state-text">Approval rule: conflicting guidance</span>
+            <div class="rspine-step">
+              <div class="rspine-node-col"><div class="rspine-dot rspine-dot--routed"></div></div>
+              <div class="rspine-body">
+                <div class="rspine-route">
+                  <span class="badge badge-routed">Routed</span>
+                  <span class="rspine-route-text">Expert clarification requested</span>
+                </div>
+              </div>
             </div>
-            <div class="sol-state">
-              <span class="badge badge-gap">Gap</span>
-              <span class="sol-state-text">Final validation step missing</span>
-            </div>
-            <div class="sol-state">
-              <span class="badge badge-routed">Routed</span>
-              <span class="sol-state-text">Reviewer clarification requested</span>
-            </div>
-          </div>
 
-          <div class="sol-divider">
-            <span class="sol-divider-text">Governed output</span>
-          </div>
-
-          <div class="sol-output">
-            <div class="sol-output-badge">
-              <span class="badge badge-governed">Governed</span>
+            <div class="rspine-step">
+              <div class="rspine-node-col"><div class="rspine-dot rspine-dot--governed"></div></div>
+              <div class="rspine-body">
+                <div class="rspine-governed-block">
+                  <div class="rspine-governed-row">
+                    <span class="rspine-governed-title">Approval Workflow — Validated</span>
+                    <span class="badge badge-governed">Governed</span>
+                  </div>
+                  <div class="rspine-governed-meta">Traceable · Reusable · Maintained</div>
+                </div>
+              </div>
             </div>
-            <div class="sol-output-title">Approval Workflow — Validated</div>
-            <div class="sol-output-meta">Traceable · Reusable · Maintained</div>
+
           </div>
         </div>
       </div>
@@ -1747,57 +1795,53 @@ footer {
 <section id="outputs">
   <div class="wrap">
     <div class="section-label">What Requivo produces</div>
-    <h2 class="section-title reveal">Not just answers. Governed operational knowledge.</h2>
-    <p class="section-sub reveal d1">Requivo generates specific, traceable outputs — each in a defined knowledge state that reflects its verification status.</p>
+    <h2 class="section-title reveal">Not just answers. Governed operational knowledge objects.</h2>
+    <p class="section-sub reveal d1">Requivo generates specific, traceable outputs — each in a defined knowledge state that reflects its verification status and source provenance.</p>
 
-    <div class="outputs-grid">
-      <div class="output-card reveal">
-        <div class="output-top">
-          <h3>Governed procedures</h3>
-          <span class="badge badge-governed">Governed</span>
-        </div>
-        <p>Operational steps teams can trust, review, and reuse. Verified against source evidence and expert confirmation.</p>
+    <div class="object-gallery" id="object-gallery">
+
+      <div class="object-card reveal">
+        <div class="object-badge"><span class="badge badge-governed">Governed</span></div>
+        <div class="object-title">Governed procedure</div>
+        <div class="object-meta">verified by 2 experts · traceable to 4 sources</div>
+        <div class="object-desc">Operational steps teams can trust, review, and reuse. Verified against source evidence and expert confirmation.</div>
       </div>
 
-      <div class="output-card reveal d1">
-        <div class="output-top">
-          <h3>Structured draft articles</h3>
-          <span class="badge badge-verified">Verified</span>
-        </div>
-        <p>Internal knowledge assembled from source material and expert clarification — not generated from AI memory alone.</p>
+      <div class="object-card reveal d1">
+        <div class="object-badge"><span class="badge badge-verified">Verified</span></div>
+        <div class="object-title">Structured draft article</div>
+        <div class="object-meta">generated from 6 evidence items · pending review</div>
+        <div class="object-desc">Internal knowledge assembled from source material and expert clarification — not from AI memory alone.</div>
       </div>
 
-      <div class="output-card reveal d2">
-        <div class="output-top">
-          <h3>Conflict alerts</h3>
-          <span class="badge badge-conflict">Conflict</span>
-        </div>
-        <p>Contradictions surfaced before they become operational failures. Source-attributed, explicit, and actionable.</p>
+      <div class="object-card reveal d2">
+        <div class="object-badge"><span class="badge badge-conflict">Conflict</span></div>
+        <div class="object-title">Conflict alert</div>
+        <div class="object-meta">3 sources in contradiction · action required</div>
+        <div class="object-desc">Contradictions surfaced before they become operational failures. Source-attributed, explicit, and actionable.</div>
       </div>
 
-      <div class="output-card reveal">
-        <div class="output-top">
-          <h3>Knowledge gaps</h3>
-          <span class="badge badge-gap">Gap</span>
-        </div>
-        <p>Missing logic identified explicitly — not remaining hidden until something goes wrong in the field.</p>
+      <div class="object-card reveal">
+        <div class="object-badge"><span class="badge badge-gap">Gap</span></div>
+        <div class="object-title">Knowledge gap</div>
+        <div class="object-meta">step 4 validation · no source found</div>
+        <div class="object-desc">Missing logic identified explicitly — not remaining hidden until something goes wrong in the field.</div>
       </div>
 
-      <div class="output-card reveal d1">
-        <div class="output-top">
-          <h3>Reviewer tasks</h3>
-          <span class="badge badge-routed">Routed</span>
-        </div>
-        <p>Targeted clarification requests sent only where evidence is insufficient. The right question to the right reviewer — nothing more.</p>
+      <div class="object-card reveal d1">
+        <div class="object-badge"><span class="badge badge-routed">Routed</span></div>
+        <div class="object-title">Reviewer task</div>
+        <div class="object-meta">routed to domain expert · awaiting confirmation</div>
+        <div class="object-desc">Targeted clarification sent only where evidence is insufficient. The right question to the right reviewer — nothing more.</div>
       </div>
 
-      <div class="output-card reveal d2">
-        <div class="output-top">
-          <h3>Reusable knowledge objects</h3>
-          <span class="badge badge-draft">Draft → Governed</span>
-        </div>
-        <p>Governed outputs that support downstream workflows, tools, and AI agents across the organisation.</p>
+      <div class="object-card reveal d2">
+        <div class="object-badge"><span class="badge badge-governed">Governed</span></div>
+        <div class="object-title">Reusable knowledge object</div>
+        <div class="object-meta">available across workflows · governed layer</div>
+        <div class="object-desc">Governed outputs that support downstream workflows, tools, and AI agents across the organisation.</div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1806,50 +1850,65 @@ footer {
 <section id="in-action">
   <div class="wrap">
     <div class="section-label">Product in action</div>
-    <h2 class="section-title reveal">What one expert knows becomes what the team owns</h2>
-    <p class="section-sub reveal d1">A critical internal procedure is spread across documents, tickets, notes, and team memory. Different sources describe different rules. One validation step is missing. Requivo structures the evidence, surfaces the conflict, routes one targeted clarification, and publishes a governed version the team can trust.</p>
+    <h2 class="section-title reveal">Fragmented → Resolved → Governed</h2>
+    <p class="section-sub reveal d1">A critical internal procedure is spread across documents, tickets, notes, and team memory. Sources conflict. One validation step is missing. Requivo structures the evidence, surfaces the issue, routes one targeted clarification, and publishes a governed version the team can trust.</p>
 
-    <div class="action-grid" id="action-grid">
-      <div class="action-col action-col--before">
-        <div class="action-header">
-          <span class="action-label">Before Requivo</span>
+    <div class="transform-wrap" id="transform-wrap">
+
+      <!-- Phase 1: Fragmented state -->
+      <div class="transform-phase transform-phase--fragmented">
+        <div class="transform-phase-header">
+          <div class="transform-phase-label">Fragmented state</div>
+          <div class="transform-phase-caption">Before Requivo</div>
         </div>
-        <ul class="action-list">
-          <li>Knowledge scattered across procedures, tickets, notes, and team memory</li>
-          <li>Conflicting guidance across sources — unresolved</li>
-          <li>Missing validation step nobody has documented</li>
-          <li>Critical knowledge held by individuals, not the organisation</li>
+        <ul class="transform-items">
+          <li class="transform-item">Knowledge scattered across procedures, tickets, notes, and team memory</li>
+          <li class="transform-item">Conflicting guidance across sources — unresolved</li>
+          <li class="transform-item">Missing validation step nobody has documented</li>
+          <li class="transform-item">Critical knowledge held by individuals, not the organisation</li>
         </ul>
       </div>
 
-      <div class="action-col action-col--with">
-        <div class="action-header">
-          <span class="action-label">With Requivo</span>
+      <!-- Phase 2: Resolution -->
+      <div class="transform-phase transform-phase--resolution">
+        <div class="transform-phase-header">
+          <div class="transform-phase-label">Resolution process</div>
+          <div class="transform-phase-caption">Requivo at work</div>
         </div>
-        <ul class="action-list">
-          <li>Evidence connected and structured automatically</li>
-          <li>Draft procedure generated from source material</li>
-          <li>Conflicts and gaps surfaced explicitly</li>
-          <li>One targeted expert clarification routed</li>
-          <li>Knowledge updated into governed layer</li>
+        <ul class="transform-items">
+          <li class="transform-item">Evidence connected and structured automatically</li>
+          <li class="transform-item">Draft procedure generated from source material</li>
+          <li class="transform-item">Conflicts and gaps surfaced explicitly</li>
+          <li class="transform-item">One targeted expert clarification routed</li>
+          <li class="transform-item">Knowledge updated into governed layer</li>
         </ul>
+        <div class="transform-route-badge">
+          <span class="badge badge-routed">Routed</span>
+          <span class="transform-route-text">S. Mehta — confirm approval sequence</span>
+        </div>
       </div>
 
-      <div class="action-col action-col--after">
-        <div class="action-header">
-          <span class="action-label">After Requivo</span>
+      <!-- Phase 3: Governed outcome -->
+      <div class="transform-phase transform-phase--governed">
+        <div class="transform-phase-header">
+          <div class="transform-phase-label">Governed outcome</div>
+          <div class="transform-phase-caption">After Requivo</div>
         </div>
-        <ul class="action-list">
-          <li>One trusted operational procedure — validated</li>
-          <li>Traceable to source evidence</li>
-          <li>Reviewable and reusable across the team</li>
-          <li>Knowledge survives beyond the expert</li>
+        <ul class="transform-items">
+          <li class="transform-item">One trusted operational procedure — validated</li>
+          <li class="transform-item">Traceable to source evidence</li>
+          <li class="transform-item">Reviewable and reusable across the team</li>
+          <li class="transform-item">Knowledge survives beyond the expert</li>
         </ul>
-        <div class="action-badge-row">
-          <span class="badge badge-governed">Governed</span>
-          <span class="badge badge-verified">Verified</span>
+        <div class="transform-governed-obj">
+          <div class="transform-governed-obj-header">
+            <span class="transform-governed-obj-title">Approval &amp; Review Workflow</span>
+            <span class="badge badge-governed">Governed</span>
+          </div>
+          <div class="transform-governed-obj-meta">Validated · Traceable · Reusable</div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1858,49 +1917,50 @@ footer {
 <section id="platform">
   <div class="wrap">
     <div class="section-label">Platform layer</div>
-    <h2 class="section-title reveal">Build once. Use everywhere.</h2>
-    <p class="section-sub reveal d1">Governed knowledge is not locked to a single workflow. One verified, traceable output becomes a reusable layer that powers every team, tool, and process that depends on it.</p>
+    <h2 class="section-title reveal">One governed core. Many uses.</h2>
+    <p class="section-sub reveal d1">A single verified, traceable knowledge object becomes a reusable layer that powers every team, tool, and process that depends on it.</p>
 
-    <div class="platform-grid" id="platform-grid">
-      <div class="platform-hub reveal">
-        <div class="platform-hub-inner">
-          <div class="badge badge-governed" style="margin-bottom:10px">Governed knowledge layer</div>
-          <div class="platform-hub-title">One trusted, reusable knowledge object</div>
-          <div class="platform-hub-meta">Validated · Traceable · Maintained</div>
+    <div class="platform-layout" id="platform-layout">
+
+      <div class="plat-core reveal">
+        <div class="plat-core-badge"><span class="badge badge-governed">Governed knowledge layer</span></div>
+        <div class="plat-core-title">One reusable governed object</div>
+        <div class="plat-core-meta">Validated · Traceable · Maintained</div>
+        <div class="plat-connector" aria-hidden="true"></div>
+      </div>
+
+      <div class="plat-surfaces" id="plat-surfaces">
+        <div class="plat-surface">
+          <span class="plat-surface-label">Knowledge Writer</span>
+          <span class="plat-surface-desc">Draft and update procedures from governed evidence</span>
+        </div>
+        <div class="plat-surface">
+          <span class="plat-surface-label">Knowledge Manager</span>
+          <span class="plat-surface-desc">Maintain one authoritative version across the organisation</span>
+        </div>
+        <div class="plat-surface">
+          <span class="plat-surface-label">Verification</span>
+          <span class="plat-surface-desc">Run compliance and quality checks against governed procedures</span>
+        </div>
+        <div class="plat-surface">
+          <span class="plat-surface-label">Search</span>
+          <span class="plat-surface-desc">Surface the right procedure — not just a document list</span>
+        </div>
+        <div class="plat-surface">
+          <span class="plat-surface-label">Onboarding</span>
+          <span class="plat-surface-desc">Give new team members validated operating guidance from day one</span>
+        </div>
+        <div class="plat-surface">
+          <span class="plat-surface-label">AI workflow access</span>
+          <span class="plat-surface-desc">Ground downstream AI tools in governed, traceable knowledge</span>
         </div>
       </div>
 
-      <div class="platform-spokes" id="platform-spokes">
-        <div class="platform-spoke">
-          <span class="platform-spoke-label">Knowledge writing</span>
-          <span class="platform-spoke-desc">Draft and update internal procedures from governed evidence</span>
-        </div>
-        <div class="platform-spoke">
-          <span class="platform-spoke-label">Knowledge management</span>
-          <span class="platform-spoke-desc">Maintain a single authoritative version across the organisation</span>
-        </div>
-        <div class="platform-spoke">
-          <span class="platform-spoke-label">Verification</span>
-          <span class="platform-spoke-desc">Run compliance and quality checks against governed procedures</span>
-        </div>
-        <div class="platform-spoke">
-          <span class="platform-spoke-label">Onboarding</span>
-          <span class="platform-spoke-desc">Give new team members validated operating guidance from day one</span>
-        </div>
-        <div class="platform-spoke">
-          <span class="platform-spoke-label">Search &amp; retrieval</span>
-          <span class="platform-spoke-desc">Surface the right procedure — not just a document list</span>
-        </div>
-        <div class="platform-spoke">
-          <span class="platform-spoke-label">AI workflow access</span>
-          <span class="platform-spoke-desc">Ground downstream AI tools in governed, traceable knowledge</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 8: WHO IT'S FOR -->
+<!-- SECTION 8: WHERE IT FITS -->
 <section id="for">
   <div class="wrap">
     <div class="section-label">Where it fits</div>
@@ -1908,35 +1968,43 @@ footer {
     <p class="section-sub reveal d1">Requivo is built for environments where knowledge must be validated, preserved, and reused — not just retrieved.</p>
 
     <div class="for-grid" id="for-grid">
+
       <div class="for-card">
+        <div class="for-sublabel">Risk reduction</div>
         <h3>Resolve conflicting SOPs</h3>
         <p>When multiple versions of the same procedure exist across systems, Requivo surfaces the conflict and resolves it into one governed view.</p>
       </div>
 
       <div class="for-card">
+        <div class="for-sublabel">Continuity</div>
         <h3>Preserve retiring expert knowledge</h3>
         <p>Capture and validate the judgment, workarounds, and operational reasoning that experts carry — before they leave the organisation.</p>
       </div>
 
       <div class="for-card">
+        <div class="for-sublabel">Governance</div>
         <h3>Improve handovers and onboarding</h3>
         <p>Give new team members governed procedures grounded in real evidence — not documents that haven't been updated in years.</p>
       </div>
 
       <div class="for-card">
-        <h3>Validate internal procedures and operating processes</h3>
+        <div class="for-sublabel">Compliance</div>
+        <h3>Validate internal procedures</h3>
         <p>Verify that documented processes reflect current operational reality, surface gaps, and produce outputs teams can act on with confidence.</p>
       </div>
 
       <div class="for-card">
+        <div class="for-sublabel">Quality</div>
         <h3>Surface stale operational knowledge</h3>
         <p>Identify where documented knowledge no longer matches system reality — before it causes operational failures.</p>
       </div>
 
       <div class="for-card">
+        <div class="for-sublabel">AI readiness</div>
         <h3>Prepare knowledge for AI workflows</h3>
         <p>Produce governed, structured operational knowledge that downstream AI tools and agents can use reliably.</p>
       </div>
+
     </div>
 
     <div class="sector-tags reveal">
@@ -1952,7 +2020,7 @@ footer {
   </div>
 </section>
 
-<!-- SECTION 8: CONTACT -->
+<!-- SECTION 9: CONTACT -->
 <section id="contact">
   <div class="wrap">
     <div class="section-label">Contact</div>
@@ -2030,977 +2098,469 @@ footer {
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const nav = document.getElementById('nav');
   const reveals = document.querySelectorAll('.reveal');
 
+  // ── NAV SCROLL ────────────────────────────────────────────────────────
   function updateNav() {
-    if (window.scrollY > 8) {
-      nav.classList.add('raised');
-    } else {
-      nav.classList.remove('raised');
-    }
+    nav.classList.toggle('raised', window.scrollY > 8);
   }
-
   updateNav();
   window.addEventListener('scroll', updateNav, { passive: true });
 
-  // ── HERO MICRO-ANIMATION ──────────────────────────────────────────────
-  // Gently cycles a highlight through each product comp step in sequence.
-  // Disabled for reduced-motion users.
+  // ── HERO RESOLUTION SPINE ANIMATION ──────────────────────────────────
   if (!prefersReducedMotion) {
-    const heroSteps = [
-      document.getElementById('hero-step-1'),
-      document.getElementById('hero-step-2'),
-      document.getElementById('hero-step-3'),
-      document.getElementById('hero-step-4'),
-      document.getElementById('hero-step-5'),
+    const spineBodies = [
+      document.getElementById('rspine-body-1'),
+      document.getElementById('rspine-body-2'),
+      document.getElementById('rspine-body-3'),
+      document.getElementById('rspine-body-4'),
+      document.getElementById('rspine-body-5'),
     ].filter(Boolean);
 
-    if (heroSteps.length) {
-      let heroStep = 0;
-      let heroPrev = null;
+    if (spineBodies.length) {
+      let step = 0;
+      let prev = null;
 
-      function heroTick() {
-        if (heroPrev) heroPrev.classList.remove('hero-active');
-        heroSteps[heroStep].classList.add('hero-active');
-        heroPrev = heroSteps[heroStep];
-        heroStep = (heroStep + 1) % heroSteps.length;
-        setTimeout(heroTick, heroStep === 0 ? 3200 : 2200);
+      function spineTick() {
+        if (prev) {
+          prev.classList.remove('spine-active');
+          prev.classList.remove('spine-active-governed');
+        }
+        const current = spineBodies[step];
+        if (step === spineBodies.length - 1) {
+          current.classList.add('spine-active-governed');
+        } else {
+          current.classList.add('spine-active');
+        }
+        prev = current;
+        const isLast = (step === spineBodies.length - 1);
+        step = (step + 1) % spineBodies.length;
+        setTimeout(spineTick, isLast ? 3400 : 2100);
       }
 
-      // Start after a brief pause so page paint settles
-      setTimeout(heroTick, 1200);
+      setTimeout(spineTick, 1400);
     }
   }
 
-  // ── MAIN SCROLL REVEAL ───────────────────────────────────────────────
+  // ── MAIN SCROLL REVEAL ────────────────────────────────────────────────
   if (!('IntersectionObserver' in window)) {
     reveals.forEach(el => el.classList.add('in'));
-  } else {
-    const observer = new IntersectionObserver((entries, obs) => {
+    document.querySelectorAll(
+      '.wm-row,.transform-phase,.plat-surface,.for-card,.object-card'
+    ).forEach(el => el.classList.add('in'));
+    const solSpine = document.getElementById('sol-spine');
+    if (solSpine) solSpine.classList.add('in');
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // ── GRADIENT ROWS (Why this matters) ─────────────────────────────────
+  const wmContainer = document.querySelector('.wm-rows');
+  if (wmContainer) {
+    const wmObs = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.wm-row').forEach((row, i) => {
+            setTimeout(() => row.classList.add('in'), i * 80);
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+    wmObs.observe(wmContainer);
+  }
+
+  // ── HORIZONTAL PIPELINE SPINE ─────────────────────────────────────────
+  const pipeOuter = document.getElementById('pipe-outer');
+  const pipeFill  = document.getElementById('pipe-fill');
+  if (pipeOuter && pipeFill && !prefersReducedMotion) {
+    const pipeObs = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          pipeFill.classList.add('run');
+          pipeOuter.classList.add('run');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    pipeObs.observe(pipeOuter);
+  }
+
+  // ── SOLUTION SPINE STAGGER ────────────────────────────────────────────
+  const solSpine = document.getElementById('sol-spine');
+  if (solSpine) {
+    const solObs = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in');
           obs.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
-    });
-
-    reveals.forEach(el => observer.observe(el));
+    }, { threshold: 0.15 });
+    solObs.observe(solSpine);
   }
 
-  if (!('IntersectionObserver' in window)) {
-    // Fallback: immediately show everything
-    document.querySelectorAll(
-      '.wm-row,.action-col,.platform-spoke,.for-card'
-    ).forEach(el => el.classList.add('in'));
-    const solScreen = document.querySelector('.sol-screen');
-    if (solScreen) solScreen.classList.add('in');
-  } else {
+  // ── OBJECT GALLERY ───────────────────────────────────────────────────
+  const objectGallery = document.getElementById('object-gallery');
+  if (objectGallery) {
+    const objObs = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.object-card').forEach((card, i) => {
+            setTimeout(() => card.classList.add('in'), i * 65);
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    objObs.observe(objectGallery);
+  }
 
-    // ── GRADIENT ROWS (Why this matters) ─────────────────────────────
-    const wmRows = document.querySelectorAll('.wm-row');
-    if (wmRows.length) {
-      const wmObs = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const rows = entry.target.querySelectorAll('.wm-row');
-            rows.forEach((row, i) => {
-              setTimeout(() => row.classList.add('in'), i * 80);
-            });
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+  // ── TRANSFORM PHASES ─────────────────────────────────────────────────
+  const transformWrap = document.getElementById('transform-wrap');
+  if (transformWrap) {
+    const txObs = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.transform-phase').forEach((phase, i) => {
+            setTimeout(() => phase.classList.add('in'), i * 130);
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.10 });
+    txObs.observe(transformWrap);
+  }
 
-      const wmContainer = document.querySelector('.wm-rows');
-      if (wmContainer) wmObs.observe(wmContainer);
-    }
+  // ── PLATFORM SURFACES ─────────────────────────────────────────────────
+  const platSurfaces = document.getElementById('plat-surfaces');
+  if (platSurfaces) {
+    const platObs = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.plat-surface').forEach((s, i) => {
+            setTimeout(() => s.classList.add('in'), i * 70);
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    platObs.observe(platSurfaces);
+  }
 
-    // ── PIPELINE BAR ─────────────────────────────────────────────────
-    const pipelineBar = document.getElementById('pipeline-bar');
-    const stepsSection = document.getElementById('steps-pipeline');
-    if (pipelineBar && stepsSection && !prefersReducedMotion) {
-      const pipeObs = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            pipelineBar.classList.add('run');
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.25 });
-      pipeObs.observe(stepsSection);
-    }
+  // ── WHERE IT FITS ────────────────────────────────────────────────────
+  const forGrid = document.getElementById('for-grid');
+  if (forGrid) {
+    const forObs = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.for-card').forEach((card, i) => {
+            setTimeout(() => card.classList.add('in'), i * 70);
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    forObs.observe(forGrid);
+  }
 
-    // ── SOLUTION SCREEN STAGGER ──────────────────────────────────────
-    const solScreen = document.querySelector('.sol-screen');
-    if (solScreen) {
-      const solObs = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      solObs.observe(solScreen);
-    }
-
-    // ── ACTION COLUMNS ────────────────────────────────────────────────
-    const actionGrid = document.getElementById('action-grid');
-    if (actionGrid) {
-      const actionObs = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const cols = entry.target.querySelectorAll('.action-col');
-            cols.forEach((col, i) => {
-              setTimeout(() => col.classList.add('in'), i * 120);
-            });
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      actionObs.observe(actionGrid);
-    }
-
-    // ── PLATFORM SPOKES ───────────────────────────────────────────────
-    const spokesContainer = document.getElementById('platform-spokes');
-    if (spokesContainer) {
-      const spokesObs = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const spokes = entry.target.querySelectorAll('.platform-spoke');
-            spokes.forEach((spoke, i) => {
-              setTimeout(() => spoke.classList.add('in'), i * 75);
-            });
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      spokesObs.observe(spokesContainer);
-    }
-
-    // ── WHERE IT FITS CARDS ───────────────────────────────────────────
-    const forGrid = document.getElementById('for-grid');
-    if (forGrid) {
-      const forObs = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const cards = entry.target.querySelectorAll('.for-card');
-            cards.forEach((card, i) => {
-              setTimeout(() => card.classList.add('in'), i * 70);
-            });
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      forObs.observe(forGrid);
-    }
-
-  } // end IntersectionObserver block
-
+  // ── TOPO CANVAS ───────────────────────────────────────────────────────
   (function () {
     const canvas = document.getElementById('topo-canvas');
     const ctx = canvas.getContext('2d', { alpha: true });
     const hero = document.getElementById('top');
-    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let profile = null;
-    let CFG = null;
-
+    let profile = null, CFG = null;
     let W = 0, H = 0, cellW = 0, cellH = 0, dpr = 1;
-    let pts = [];
-    let ghostPts = [];
-    let anchors = [];
-    let memoryTrails = [];
-    let time = 0;
-    let running = false;
-    let rafId = null;
-    let lastFrameTime = 0;
+    let pts = [], ghostPts = [], anchors = [], memoryTrails = [];
+    let time = 0, running = false, rafId = null, lastFrameTime = 0;
 
-    let mouse = {
-      x: -9999,
-      y: -9999,
-      active: false,
-      lastX: -9999,
-      lastY: -9999
-    };
+    let mouse = { x: -9999, y: -9999, active: false, lastX: -9999, lastY: -9999 };
 
     function getProfile() {
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const isTouch = window.matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window);
       const lowPowerMode = isMobile || isTouch;
-
-      return {
-        isMobile,
-        isTouch,
-        lowPowerMode,
-        targetFPS: lowPowerMode ? 30 : 60
-      };
+      return { isMobile, isTouch, lowPowerMode, targetFPS: lowPowerMode ? 30 : 60 };
     }
 
-    function buildConfig(currentProfile) {
-      const low = currentProfile.lowPowerMode;
-
+    function buildConfig(p) {
+      const low = p.lowPowerMode;
       return {
-        COLS: low ? 14 : 24,
-        ROWS: low ? 9 : 15,
-        GHOST_COLS: low ? 8 : 15,
-        GHOST_ROWS: low ? 5 : 9,
-
-        NOISE_SCALE: low ? 0.0092 : 0.0102,
-        NOISE_SPEED: low ? 0.00022 : 0.00034,
-
-        AMP_LEFT: low ? 42 : 74,
-        AMP_MID: low ? 9 : 14,
-        AMP_RIGHT: low ? 1.5 : 2.1,
-
-        SPRING_LEFT: 0.036,
-        SPRING_MID: 0.068,
-        SPRING_RIGHT: 0.128,
-
-        FRICTION_LEFT: 0.80,
-        FRICTION_MID: 0.72,
-        FRICTION_RIGHT: 0.56,
-
-        MOUSE_RADIUS: low ? 80 : 140,
-        MOUSE_PULL: low ? 0.06 : 0.10,
+        COLS: low ? 14 : 24, ROWS: low ? 9 : 15,
+        GHOST_COLS: low ? 8 : 15, GHOST_ROWS: low ? 5 : 9,
+        NOISE_SCALE: low ? 0.0092 : 0.0102, NOISE_SPEED: low ? 0.00022 : 0.00034,
+        AMP_LEFT: low ? 42 : 74, AMP_MID: low ? 9 : 14, AMP_RIGHT: low ? 1.5 : 2.1,
+        SPRING_LEFT: 0.036, SPRING_MID: 0.068, SPRING_RIGHT: 0.128,
+        FRICTION_LEFT: 0.80, FRICTION_MID: 0.72, FRICTION_RIGHT: 0.56,
+        MOUSE_RADIUS: low ? 80 : 140, MOUSE_PULL: low ? 0.06 : 0.10,
         REVEAL_RADIUS: low ? 70 : 130,
-
-        DOT_R: low ? 0.92 : 1.12,
-        DOT_R_ACTIVE: low ? 1.55 : 2.15,
-
-        INDIGO: [55,48,163],
-        SKY: [14,165,233],
-        SLATE: [132,147,169],
-        VALID: [79,70,229]
+        DOT_R: low ? 0.92 : 1.12, DOT_R_ACTIVE: low ? 1.55 : 2.15,
+        INDIGO: [55,48,163], SKY: [14,165,233], SLATE: [132,147,169], VALID: [79,70,229]
       };
     }
 
-    function clamp(v, min, max) {
-      return Math.max(min, Math.min(max, v));
-    }
-
-    function lerp(a, b, t) {
-      return a + (b - a) * t;
-    }
-
+    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+    function lerp(a, b, t) { return a + (b - a) * t; }
     function lerpColor(a, b, t) {
-      return [
-        Math.round(lerp(a[0], b[0], t)),
-        Math.round(lerp(a[1], b[1], t)),
-        Math.round(lerp(a[2], b[2], t))
-      ];
+      return [Math.round(lerp(a[0],b[0],t)), Math.round(lerp(a[1],b[1],t)), Math.round(lerp(a[2],b[2],t))];
     }
-
     function smoothstep(a, b, x) {
       const t = clamp((x - a) / (b - a), 0, 1);
       return t * t * (3 - 2 * t);
     }
-
     function distance(x1, y1, x2, y2) {
-      const dx = x1 - x2;
-      const dy = y1 - y2;
-      return Math.sqrt(dx * dx + dy * dy);
+      const dx = x1-x2, dy = y1-y2;
+      return Math.sqrt(dx*dx + dy*dy);
     }
-
     function noise(x, y, t) {
       const n = Math.sin(x * 127.1 + y * 311.7 + t * 74.3) * 43758.5453;
       return (n - Math.floor(n)) * 2 - 1;
     }
-
     function smoothNoise(x, y, t) {
       const ix = Math.floor(x), iy = Math.floor(y);
       const fx = x - ix, fy = y - iy;
-      const ux = fx * fx * (3 - 2 * fx);
-      const uy = fy * fy * (3 - 2 * fy);
-
+      const ux = fx*fx*(3-2*fx), uy = fy*fy*(3-2*fy);
       return (
-        noise(ix, iy, t) * (1 - ux) * (1 - uy) +
-        noise(ix + 1, iy, t) * ux * (1 - uy) +
-        noise(ix, iy + 1, t) * (1 - ux) * uy +
-        noise(ix + 1, iy + 1, t) * ux * uy
+        noise(ix,iy,t)*(1-ux)*(1-uy) + noise(ix+1,iy,t)*ux*(1-uy) +
+        noise(ix,iy+1,t)*(1-ux)*uy   + noise(ix+1,iy+1,t)*ux*uy
       );
     }
 
     function resize() {
       profile = getProfile();
       CFG = buildConfig(profile);
-
       dpr = Math.min(window.devicePixelRatio || 1, profile.lowPowerMode ? 1.5 : 2);
-
-      W = hero.offsetWidth;
-      H = hero.offsetHeight;
-
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      canvas.style.width = W + 'px';
-      canvas.style.height = H + 'px';
-
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      W = hero.offsetWidth; H = hero.offsetHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+      ctx.setTransform(1,0,0,1,0,0);
       ctx.scale(dpr, dpr);
-
       cellW = W / (CFG.COLS - 1);
       cellH = H / (CFG.ROWS - 1);
-
       buildGrid();
-      buildGhostGrid();
-      memoryTrails = [];
     }
 
     function buildGrid() {
       pts = [];
-      anchors = [];
-
       for (let row = 0; row < CFG.ROWS; row++) {
         for (let col = 0; col < CFG.COLS; col++) {
-          const ox = col * cellW;
-          const oy = row * cellH;
-          const xn = ox / W;
-
-          const toMid = smoothstep(0.18, 0.52, xn);
-          const toRight = smoothstep(0.56, 0.90, xn);
-
-          const amp = lerp(lerp(CFG.AMP_LEFT, CFG.AMP_MID, toMid), CFG.AMP_RIGHT, toRight);
-          const spring = lerp(lerp(CFG.SPRING_LEFT, CFG.SPRING_MID, toMid), CFG.SPRING_RIGHT, toRight);
-          const friction = lerp(lerp(CFG.FRICTION_LEFT, CFG.FRICTION_MID, toMid), CFG.FRICTION_RIGHT, toRight);
-
-          const zone = xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed';
-
-          const validationHub =
-            !profile.lowPowerMode &&
-            zone === 'governed' &&
-            (col === CFG.COLS - 5 || col === CFG.COLS - 8 || col === CFG.COLS - 11) &&
-            (row === 3 || row === 7 || row === 11);
-
-          const anchor =
-            zone === 'governed' &&
-            (col === CFG.COLS - 7 || col === CFG.COLS - 10) &&
-            (row === Math.max(2, Math.floor(CFG.ROWS * 0.3)) || row === Math.max(4, Math.floor(CFG.ROWS * 0.7)));
-
-          const backbone =
-            zone === 'governed' &&
-            !profile.lowPowerMode &&
-            (col === CFG.COLS - 8 || col === CFG.COLS - 6);
-
-          const point = {
-            ox, oy,
-            x: ox, y: oy,
-            vx: 0, vy: 0,
-            col, row,
-            zone,
-            amp,
-            spring,
-            friction,
-            phase: Math.random() * Math.PI * 2,
-            edge: col === 0 || col === CFG.COLS - 1 || row === 0 || row === CFG.ROWS - 1,
-            validationHub,
-            anchor,
-            backbone
-          };
-
-          if (anchor) anchors.push(point);
-          pts.push(point);
+          const bx = col * cellW, by = row * cellH;
+          const xFrac = col / (CFG.COLS - 1);
+          pts.push({ bx, by, x: bx, y: by, vx: 0, vy: 0, xFrac, col, row });
         }
       }
-    }
-
-    function buildGhostGrid() {
       ghostPts = [];
-
-      if (profile.lowPowerMode) return;
-
-      const gw = W / (CFG.GHOST_COLS - 1);
-      const gh = H / (CFG.GHOST_ROWS - 1);
-
+      const gcW = W / (CFG.GHOST_COLS - 1), gcH = H / (CFG.GHOST_ROWS - 1);
       for (let row = 0; row < CFG.GHOST_ROWS; row++) {
         for (let col = 0; col < CFG.GHOST_COLS; col++) {
-          const ox = col * gw + (col % 2 ? gw * 0.10 : 0);
-          const oy = row * gh + ((row % 2) ? gh * 0.06 : 0);
-          const xn = clamp(ox / W, 0, 1);
-
-          ghostPts.push({
-            ox, oy,
-            x: ox, y: oy,
-            zone: xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed',
-            phase: Math.random() * Math.PI * 2,
-            col, row
-          });
+          const bx = col * gcW, by = row * gcH;
+          const xFrac = col / (CFG.GHOST_COLS - 1);
+          ghostPts.push({ bx, by, x: bx, y: by, vx: 0, vy: 0, xFrac });
         }
       }
+      anchors = [];
+      memoryTrails = [];
     }
 
-    function edgeClass(a, b) {
-      if (a.validationHub || b.validationHub) return 'validated';
-      if (a.anchor || b.anchor) return 'anchored';
-      if (a.backbone || b.backbone) return 'backbone';
-      if (a.zone === 'governed' && b.zone === 'governed') return 'supporting';
-      if (a.zone === 'aligned' || b.zone === 'aligned') return 'reconcile';
-      return 'tentative';
-    }
-
-    function updatePrimary() {
-      const t = time * CFG.NOISE_SPEED;
-
-      pts.forEach(p => {
-        const nx = p.ox * CFG.NOISE_SCALE;
-        const ny = p.oy * CFG.NOISE_SCALE;
-
-        let dx = smoothNoise(nx, ny, t) * p.amp;
-        let dy = smoothNoise(nx + 31, ny + 17, t) * p.amp;
-
-        dx += smoothNoise(nx * 2.05, ny * 2.05, t * 1.5) * p.amp * (profile.lowPowerMode ? 0.10 : 0.18);
-        dy += smoothNoise(nx * 2.05 + 3, ny * 2.05 + 2, t * 1.35) * p.amp * (profile.lowPowerMode ? 0.08 : 0.14);
-
-        if (p.zone === 'aligned') {
-          dx *= 0.58;
-          dy *= 0.50;
-        }
-
-        if (p.zone === 'governed') {
-          dx *= 0.10;
-          dy *= 0.09;
-          dx += Math.sin(t * 130 + p.row * 0.18) * (profile.lowPowerMode ? 0.12 : 0.22);
-          dy += Math.cos(t * 118 + p.col * 0.08) * (profile.lowPowerMode ? 0.03 : 0.06);
-        }
-
-        if (p.zone === 'fragmented') {
-          dx += Math.sin(t * 230 + p.phase) * (profile.lowPowerMode ? 2.0 : 3.2);
-          dy += Math.cos(t * 205 + p.phase) * (profile.lowPowerMode ? 1.2 : 2.0);
-        }
-
-        if (p.anchor) {
-          dx *= 0.18;
-          dy *= 0.16;
-        }
-        if (p.validationHub) {
-          dx *= 0.14;
-          dy *= 0.12;
-        }
-
-        if (p.zone === 'governed') {
-          const laneA = Math.round((W * 0.73) / cellW) * cellW;
-          const laneB = Math.round((W * 0.82) / cellW) * cellW;
-          const laneWeightA = Math.exp(-Math.abs(p.ox - laneA) / 118);
-          const laneWeightB = Math.exp(-Math.abs(p.ox - laneB) / 118);
-          const laneMix = Math.max(0.0001, laneWeightA + laneWeightB);
-          const snapTargetX = (laneA * laneWeightA + laneB * laneWeightB) / laneMix;
-
-          dx += (snapTargetX - p.ox) * 0.016 * laneMix;
-
-          const rowSnap = Math.round(p.oy / cellH) * cellH;
-          dy += (rowSnap - p.oy) * 0.014;
-        }
-
-        if (p.zone === 'governed' && !p.anchor && !p.validationHub && anchors.length) {
-          let basinX = 0;
-          let basinY = 0;
-          let basinW = 0;
-
-          for (let i = 0; i < anchors.length; i++) {
-            const a = anchors[i];
-            const d = distance(p.ox, p.oy, a.ox, a.oy);
-            if (d > 170) continue;
-            const w = 1 - d / 170;
-            basinX += a.ox * w;
-            basinY += a.oy * w;
-            basinW += w;
-          }
-
-          if (basinW > 0) {
-            dx += ((basinX / basinW) - p.ox) * 0.012;
-            dy += ((basinY / basinW) - p.oy) * 0.008;
-          }
-        }
-
-        let tx = p.ox + dx;
-        let ty = p.oy + dy;
-
-        const md = distance(p.x, p.y, mouse.x, mouse.y);
-        if (mouse.active && md < CFG.MOUSE_RADIUS && md > 0) {
-          const falloff = 1 - md / CFG.MOUSE_RADIUS;
-          const pull =
-            p.zone === 'fragmented' ? CFG.MOUSE_PULL :
-            p.zone === 'aligned' ? CFG.MOUSE_PULL * 0.62 :
-            CFG.MOUSE_PULL * 0.34;
-
-          tx += (mouse.x - p.x) * falloff * pull;
-          ty += (mouse.y - p.y) * falloff * pull;
-        }
-
-        p.vx += (tx - p.x) * p.spring;
-        p.vy += (ty - p.y) * p.spring;
-        p.vx *= p.friction;
-        p.vy *= p.friction;
-        p.x += p.vx;
-        p.y += p.vy;
-      });
-    }
-
-    function updateGhost() {
-      if (profile.lowPowerMode || ghostPts.length === 0) return;
-
-      const tt = time * 0.00022;
-      ghostPts.forEach(p => {
-        const amp = p.zone === 'fragmented' ? 10 : p.zone === 'aligned' ? 5 : 1.8;
-        p.x = p.ox + Math.sin(tt * 180 + p.phase + p.row * 0.08) * amp;
-        p.y = p.oy + Math.cos(tt * 145 + p.phase + p.col * 0.05) * amp * 0.38;
-      });
-    }
-
-    function updateMemoryTrails() {
-      if (profile.lowPowerMode) {
-        memoryTrails.length = 0;
-        return;
-      }
-
-      memoryTrails = memoryTrails
-        .map(t => ({ ...t, life: t.life - 1 }))
-        .filter(t => t.life > 0);
-    }
-
-    function update() {
-      time += 1;
-      updatePrimary();
-      updateGhost();
-      updateMemoryTrails();
-    }
-
-    function revealStrength(x, y) {
-      if (!mouse.active) return 0;
-      const d = distance(x, y, mouse.x, mouse.y);
-      if (d > CFG.REVEAL_RADIUS) return 0;
-      return 1 - d / CFG.REVEAL_RADIUS;
-    }
-
-    function zoneThreshold(zone) {
-      if (zone === 'fragmented') return 1.00;
-      if (zone === 'aligned') return 1.13;
-      return 1.18;
-    }
-
-    function drawAtmosphere() {
-      const leftGlow = ctx.createRadialGradient(W * 0.14, H * 0.48, 0, W * 0.14, H * 0.48, W * 0.32);
-      leftGlow.addColorStop(0, 'rgba(79,70,229,0.032)');
-      leftGlow.addColorStop(1, 'rgba(79,70,229,0)');
-      ctx.fillStyle = leftGlow;
-      ctx.fillRect(0, 0, W, H);
-
-      const rightGlow = ctx.createRadialGradient(W * 0.82, H * 0.44, 0, W * 0.82, H * 0.44, W * 0.22);
-      rightGlow.addColorStop(0, 'rgba(14,165,233,0.022)');
-      rightGlow.addColorStop(1, 'rgba(14,165,233,0)');
-      ctx.fillStyle = rightGlow;
-      ctx.fillRect(0, 0, W, H);
-    }
-
-    function drawGovernanceField() {
-      const x = W * 0.72;
-      const grad = ctx.createLinearGradient(x - 26, 0, x + 26, 0);
-      grad.addColorStop(0, 'rgba(255,255,255,0)');
-      grad.addColorStop(0.5, 'rgba(79,70,229,0.028)');
-      grad.addColorStop(1, 'rgba(255,255,255,0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(x - 26, 0, 52, H);
-    }
-
-    function drawPrimaryEdges() {
+    function updatePts(dt) {
+      const t = time * CFG.NOISE_SCALE;
       for (let i = 0; i < pts.length; i++) {
-        const a = pts[i];
-        const neighbours = [];
-
-        if (a.col < CFG.COLS - 1) neighbours.push(pts[i + 1]);
-        if (a.row < CFG.ROWS - 1) neighbours.push(pts[i + CFG.COLS]);
-        if (!profile.lowPowerMode && a.zone !== 'fragmented' && a.col < CFG.COLS - 1 && a.row < CFG.ROWS - 1) {
-          neighbours.push(pts[i + CFG.COLS + 1]);
-        }
-
-        for (let n = 0; n < neighbours.length; n++) {
-          const b = neighbours[n];
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const expected = Math.max(cellW, cellH) * 1.16;
-
-          const zone =
-            a.zone === b.zone ? a.zone :
-            (a.zone === 'governed' || b.zone === 'governed') ? 'aligned' : 'fragmented';
-
-          if (dist > expected * zoneThreshold(zone)) continue;
-          if (zone === 'fragmented' && dist > expected * 0.84) continue;
-
-          const mx = (a.x + b.x) * 0.5;
-          const my = (a.y + b.y) * 0.5;
-          const xNorm = clamp(mx / W, 0, 1);
-          const wGov = smoothstep(0.46, 0.92, xNorm);
-
-          let rgb = lerpColor(CFG.INDIGO, CFG.SKY, wGov);
-          const kind = edgeClass(a, b);
-
-          const md = distance(mx, my, mouse.x, mouse.y);
-          const mouseBoost = mouse.active && md < CFG.MOUSE_RADIUS
-            ? (1 - md / CFG.MOUSE_RADIUS) * 0.045
-            : 0;
-
-          const tension = clamp(Math.abs(dist - expected) / expected, 0, 1);
-          let alpha = (0.016 + wGov * 0.065 + mouseBoost) * (1 - tension * 0.58);
-
-          if (zone === 'fragmented') alpha *= 0.78;
-          if (zone === 'governed') alpha *= 1.02;
-
-          if (kind === 'backbone') {
-            alpha *= 1.10;
-          } else if (kind === 'anchored') {
-            alpha *= 1.08;
-            rgb = lerpColor(CFG.INDIGO, CFG.SKY, 0.68);
-          } else if (kind === 'validated') {
-            alpha *= 1.14;
-            rgb = CFG.VALID;
-          } else if (kind === 'supporting') {
-            alpha *= 0.88;
-          } else if (kind === 'tentative') {
-            alpha *= 0.72;
+        const p = pts[i];
+        const xf = p.xFrac;
+        const amp = xf < 0.45
+          ? lerp(CFG.AMP_LEFT, CFG.AMP_MID, xf / 0.45)
+          : lerp(CFG.AMP_MID, CFG.AMP_RIGHT, (xf - 0.45) / 0.55);
+        const spring = xf < 0.45
+          ? lerp(CFG.SPRING_LEFT, CFG.SPRING_MID, xf / 0.45)
+          : lerp(CFG.SPRING_MID, CFG.SPRING_RIGHT, (xf - 0.45) / 0.55);
+        const friction = xf < 0.45
+          ? lerp(CFG.FRICTION_LEFT, CFG.FRICTION_MID, xf / 0.45)
+          : lerp(CFG.FRICTION_MID, CFG.FRICTION_RIGHT, (xf - 0.45) / 0.55);
+        const nx = smoothNoise(p.col * 0.42, p.row * 0.38, time * CFG.NOISE_SPEED);
+        const ny = smoothNoise(p.col * 0.38 + 17.3, p.row * 0.42 + 5.1, time * CFG.NOISE_SPEED + 0.2);
+        const tx = p.bx + nx * amp;
+        const ty = p.by + ny * amp * 0.55;
+        let fx = (tx - p.x) * spring;
+        let fy = (ty - p.y) * spring;
+        if (mouse.active && xf > 0.35) {
+          const dist = distance(mouse.x, mouse.y, p.x, p.y);
+          if (dist < CFG.MOUSE_RADIUS) {
+            const pull = smoothstep(CFG.MOUSE_RADIUS, 0, dist) * CFG.MOUSE_PULL * xf;
+            fx += (mouse.x - p.x) * pull;
+            fy += (mouse.y - p.y) * pull;
           }
-
-          if (profile.lowPowerMode) alpha *= 0.88;
-
-          ctx.globalAlpha = alpha;
-          ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-          ctx.lineWidth =
-            kind === 'validated' ? 0.82 :
-            kind === 'anchored' ? 0.70 :
-            kind === 'backbone' ? 0.62 :
-            kind === 'supporting' ? 0.46 :
-            (a.edge || b.edge ? 0.34 : 0.46);
-
-          if (profile.lowPowerMode) {
-            ctx.lineWidth *= 0.92;
-          }
-
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
         }
+        for (const a of anchors) {
+          const dist = distance(a.x, a.y, p.x, p.y);
+          if (dist < CFG.REVEAL_RADIUS) {
+            const pull = smoothstep(CFG.REVEAL_RADIUS, 0, dist) * 0.08 * a.strength * xf;
+            fx += (a.x - p.x) * pull;
+            fy += (a.y - p.y) * pull;
+          }
+        }
+        p.vx = p.vx * friction + fx * dt;
+        p.vy = p.vy * friction + fy * dt;
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
       }
-    }
-
-    function drawGhostEdges() {
-      if (profile.lowPowerMode || ghostPts.length === 0) return;
-
       for (let i = 0; i < ghostPts.length; i++) {
-        const a = ghostPts[i];
-        const neighbours = [];
-
-        if (a.col < CFG.GHOST_COLS - 1) neighbours.push(ghostPts[i + 1]);
-        if (a.row < CFG.GHOST_ROWS - 1) neighbours.push(ghostPts[i + CFG.GHOST_COLS]);
-
-        for (let n = 0; n < neighbours.length; n++) {
-          const b = neighbours[n];
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const expected = Math.max(W / (CFG.GHOST_COLS - 1), H / (CFG.GHOST_ROWS - 1)) * 1.10;
-          if (dist > expected * 1.03) continue;
-          if (a.zone === 'fragmented' && dist > expected * 0.88) continue;
-
-          const mx = (a.x + b.x) * 0.5;
-          const my = (a.y + b.y) * 0.5;
-          const reveal = revealStrength(mx, my);
-          if (reveal < 0.09) continue;
-
-          const xNorm = clamp(mx / W, 0, 1);
-          const wGov = smoothstep(0.44, 0.94, xNorm);
-          const rgb = lerpColor(CFG.SLATE, CFG.SKY, wGov);
-
-          ctx.globalAlpha = (0.010 + wGov * 0.012) * reveal;
-          ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-          ctx.lineWidth = 0.36;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
+        const p = ghostPts[i];
+        const xf = p.xFrac;
+        const amp = lerp(CFG.AMP_LEFT * 0.7, CFG.AMP_RIGHT * 0.4, xf);
+        const nx = smoothNoise(p.bx * 0.003 + 50, p.by * 0.003, time * CFG.NOISE_SPEED * 0.6);
+        const ny = smoothNoise(p.bx * 0.003 + 70, p.by * 0.003 + 30, time * CFG.NOISE_SPEED * 0.6);
+        p.x = p.bx + nx * amp;
+        p.y = p.by + ny * amp * 0.5;
       }
-    }
-
-    function drawBackboneLanes() {
-      if (profile.lowPowerMode) return;
-
-      const cols = [CFG.COLS - 8, CFG.COLS - 6];
-      cols.forEach((col, i) => {
-        ctx.beginPath();
-        for (let row = 1; row < CFG.ROWS - 1; row++) {
-          const p = pts[row * CFG.COLS + col];
-          if (!p) continue;
-          if (row === 1) ctx.moveTo(p.x, p.y);
-          else ctx.lineTo(p.x, p.y);
-        }
-        ctx.globalAlpha = 0.036 + Math.sin(time * 0.008 + i) * 0.004;
-        ctx.strokeStyle = i === 0 ? 'rgb(79,70,229)' : 'rgb(14,165,233)';
-        ctx.lineWidth = 0.52;
-        ctx.stroke();
-      });
-    }
-
-    function addMemoryTrail() {
-      if (profile.lowPowerMode || !mouse.active) return;
-      if (mouse.x < W * 0.64) return;
-
-      const moved = distance(mouse.x, mouse.y, mouse.lastX, mouse.lastY);
-      if (moved < 24) return;
-
-      const nearby = pts.filter(p => p.zone === 'governed' && distance(p.x, p.y, mouse.x, mouse.y) < 62).slice(0, 6);
-      if (nearby.length < 2) return;
-
-      for (let i = 0; i < nearby.length - 1; i++) {
-        const a = nearby[i];
-        const b = nearby[i + 1];
-        memoryTrails.push({
-          x1: a.x, y1: a.y,
-          x2: b.x, y2: b.y,
-          life: 14
-        });
-      }
-
-      mouse.lastX = mouse.x;
-      mouse.lastY = mouse.y;
-    }
-
-    function drawMemoryTrails() {
-      if (profile.lowPowerMode) return;
-
-      memoryTrails.forEach(t => {
-        const alpha = (t.life / 14) * 0.040;
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = 'rgb(79,70,229)';
-        ctx.lineWidth = 0.50;
-        ctx.beginPath();
-        ctx.moveTo(t.x1, t.y1);
-        ctx.lineTo(t.x2, t.y2);
-        ctx.stroke();
-      });
-      ctx.globalAlpha = 1;
-    }
-
-    function drawInteractionField() {
-      if (!mouse.active) return;
-      if (mouse.x < W * 0.55) return;
-
-      const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, CFG.REVEAL_RADIUS);
-      grad.addColorStop(0, 'rgba(79,70,229,0.016)');
-      grad.addColorStop(0.55, 'rgba(14,165,233,0.010)');
-      grad.addColorStop(1, 'rgba(14,165,233,0)');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, CFG.REVEAL_RADIUS, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    function drawNodes() {
-      pts.forEach(p => {
-        const md = distance(p.x, p.y, mouse.x, mouse.y);
-        const mouseGlow = mouse.active && md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) : 0;
-
-        let rgb = CFG.SLATE;
-        let alpha = p.edge ? 0.05 : 0.13;
-        let radius = p.edge ? CFG.DOT_R * 0.72 : CFG.DOT_R;
-
-        if (p.zone === 'fragmented') {
-          rgb = CFG.INDIGO;
-          alpha *= 0.82;
-        } else if (p.zone === 'governed') {
-          rgb = CFG.SKY;
-          alpha *= 0.98;
-        }
-
-        if (p.backbone) {
-          rgb = CFG.SKY;
-          alpha *= 1.04;
-        }
-
-        if (p.anchor) {
-          rgb = CFG.INDIGO;
-          alpha = 0.28;
-          radius = profile.lowPowerMode ? 1.35 : 1.75;
-        }
-
-        if (p.validationHub) {
-          rgb = CFG.VALID;
-          alpha = 0.34 + Math.sin(time * 0.018 + p.row) * 0.014;
-          radius = profile.lowPowerMode ? 1.5 : 1.9;
-        }
-
-        alpha += mouseGlow * 0.18;
-        radius += mouseGlow * (CFG.DOT_R_ACTIVE - CFG.DOT_R);
-
-        if (!profile.lowPowerMode && ((mouseGlow > 0.14 && p.zone === 'governed') || p.validationHub)) {
-          const haloR = p.validationHub ? radius * 2.8 : radius * 2.8;
-          const haloA = p.validationHub ? 0.055 : mouseGlow * 0.05;
-          const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
-          grad.addColorStop(0, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${haloA})`);
-          grad.addColorStop(1, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, haloR, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.globalAlpha = Math.min(1, alpha);
-        ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-        ctx.fill();
-
-        if (!profile.lowPowerMode && p.validationHub) {
-          const ring = 3.6 + Math.sin(time * 0.014 + p.col) * 0.10;
-          ctx.globalAlpha = 0.055;
-          ctx.strokeStyle = 'rgb(79,70,229)';
-          ctx.lineWidth = 0.50;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, ring, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-      });
-
-      if (!profile.lowPowerMode) {
-        ghostPts.forEach(p => {
-          const reveal = revealStrength(p.x, p.y);
-          if (reveal < 0.10) return;
-
-          const xNorm = clamp(p.x / W, 0, 1);
-          const wGov = smoothstep(0.46, 0.94, xNorm);
-          const rgb = lerpColor(CFG.SLATE, CFG.SKY, wGov);
-
-          ctx.globalAlpha = (0.018 + wGov * 0.012) * reveal;
-          ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 0.62, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      }
-
-      ctx.globalAlpha = 1;
     }
 
     function draw() {
       ctx.clearRect(0, 0, W, H);
-      drawAtmosphere();
-      drawGovernanceField();
 
-      if (!profile.lowPowerMode) {
-        drawGhostEdges();
+      // Ghost layer
+      for (let row = 0; row < CFG.GHOST_ROWS; row++) {
+        ctx.beginPath();
+        for (let col = 0; col < CFG.GHOST_COLS; col++) {
+          const p = ghostPts[row * CFG.GHOST_COLS + col];
+          if (col === 0) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
+        }
+        ctx.strokeStyle = 'rgba(132,147,169,.05)';
+        ctx.lineWidth = 0.7;
+        ctx.stroke();
       }
 
-      drawPrimaryEdges();
-
-      if (!profile.lowPowerMode) {
-        drawBackboneLanes();
-        drawMemoryTrails();
+      // Main grid curves
+      for (let row = 0; row < CFG.ROWS; row++) {
+        ctx.beginPath();
+        for (let col = 0; col < CFG.COLS; col++) {
+          const p = pts[row * CFG.COLS + col];
+          if (col === 0) {
+            ctx.moveTo(p.x, p.y);
+          } else {
+            const prev = pts[row * CFG.COLS + col - 1];
+            const mx = (prev.x + p.x) / 2, my = (prev.y + p.y) / 2;
+            ctx.quadraticCurveTo(prev.x, prev.y, mx, my);
+          }
+        }
+        const rowFrac = row / (CFG.ROWS - 1);
+        const alpha = lerp(0.06, 0.19, smoothstep(0.1, 0.7, 1 - rowFrac));
+        ctx.strokeStyle = `rgba(55,48,163,${alpha})`;
+        ctx.lineWidth = 0.85;
+        ctx.stroke();
       }
 
-      drawInteractionField();
-      drawNodes();
-      ctx.globalAlpha = 1;
+      // Dots
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i];
+        const xf = p.xFrac;
+        let r = CFG.DOT_R;
+        let alpha = lerp(0.18, 0.08, xf);
+        const dist = mouse.active ? distance(mouse.x, mouse.y, p.x, p.y) : 9999;
+        if (dist < CFG.MOUSE_RADIUS) {
+          const t = smoothstep(CFG.MOUSE_RADIUS, 0, dist);
+          r = lerp(CFG.DOT_R, CFG.DOT_R_ACTIVE, t);
+          alpha = lerp(alpha, 0.55, t * xf);
+        }
+        let baseColor = CFG.SLATE;
+        if (xf > 0.6) {
+          const t = smoothstep(0.6, 0.9, xf);
+          baseColor = lerpColor(CFG.SLATE, CFG.INDIGO, t);
+        }
+        if (dist < CFG.MOUSE_RADIUS * 0.6) {
+          const t = smoothstep(CFG.MOUSE_RADIUS * 0.6, 0, dist);
+          baseColor = lerpColor(baseColor, CFG.VALID, t);
+        }
+        const [rr,gg,bb] = baseColor;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${rr},${gg},${bb},${alpha})`;
+        ctx.fill();
+      }
+
+      // Memory trails
+      memoryTrails = memoryTrails.filter(t => t.age < t.maxAge);
+      for (const trail of memoryTrails) {
+        trail.age += 1;
+        const progress = trail.age / trail.maxAge;
+        const alpha = (1 - progress) * 0.18;
+        ctx.beginPath();
+        ctx.arc(trail.x, trail.y, trail.r * (1 + progress * 0.5), 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(55,48,163,${alpha})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
     }
 
-    function stopLoop() {
-      running = false;
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-    }
-
-    function loop(timestamp = 0) {
+    function loop(timestamp) {
       if (!running) return;
-
-      const interval = 1000 / profile.targetFPS;
-      if (!lastFrameTime || timestamp - lastFrameTime >= interval) {
-        lastFrameTime = timestamp;
-        update();
-        addMemoryTrail();
-        draw();
-      }
-
+      const rawDt = (timestamp - lastFrameTime) / 16.67;
+      lastFrameTime = timestamp;
+      const dt = clamp(rawDt, 0.1, 3.0);
+      const targetInterval = 1000 / profile.targetFPS;
+      time += dt;
+      updatePts(dt);
+      draw();
       rafId = requestAnimationFrame(loop);
     }
 
-    function startLoop() {
-      if (prefersReducedMotion) return;
+    function start() {
       if (running) return;
       running = true;
-      lastFrameTime = 0;
+      lastFrameTime = performance.now();
       rafId = requestAnimationFrame(loop);
     }
 
-    function handlePointerMove(clientX, clientY) {
-      const r = canvas.getBoundingClientRect();
-      mouse.x = clientX - r.left;
-      mouse.y = clientY - r.top;
-      mouse.active = true;
+    function stop() {
+      running = false;
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
     }
 
-    function resetMouse() {
-      mouse.x = -9999;
-      mouse.y = -9999;
-      mouse.active = false;
-      mouse.lastX = -9999;
-      mouse.lastY = -9999;
-    }
+    if (!prefersReducedMotion) {
+      resize();
+      start();
 
-    if (!profile) {
-      profile = getProfile();
-    }
+      const resizeObs = new ResizeObserver(() => { resize(); });
+      resizeObs.observe(hero);
 
-    if (!profile.isTouch) {
       hero.addEventListener('mousemove', e => {
-        handlePointerMove(e.clientX, e.clientY);
+        const rect = canvas.getBoundingClientRect();
+        const nx = e.clientX - rect.left, ny = e.clientY - rect.top;
+        if (mouse.active && (Math.abs(nx - mouse.lastX) > 1.5 || Math.abs(ny - mouse.lastY) > 1.5)) {
+          memoryTrails.push({ x: mouse.x, y: mouse.y, r: CFG.DOT_R_ACTIVE * 0.9, age: 0, maxAge: 22 });
+        }
+        mouse.x = nx; mouse.y = ny;
+        mouse.lastX = nx; mouse.lastY = ny;
+        mouse.active = true;
       }, { passive: true });
 
-      hero.addEventListener('mouseleave', resetMouse, { passive: true });
-    }
+      hero.addEventListener('mouseleave', () => {
+        mouse.active = false; mouse.x = -9999; mouse.y = -9999;
+      }, { passive: true });
 
-    window.addEventListener('resize', () => {
-      const prevLowPower = profile ? profile.lowPowerMode : null;
-      resize();
-
-      if (prevLowPower !== null && prevLowPower !== profile.lowPowerMode) {
-        resetMouse();
-      }
-
-      if (prefersReducedMotion) {
-        draw();
-      }
-    }, { passive: true });
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stopLoop();
-      } else if (!prefersReducedMotion) {
-        startLoop();
-      }
-    });
-
-    window.addEventListener('pagehide', stopLoop);
-    window.addEventListener('pageshow', () => {
-      if (!prefersReducedMotion) startLoop();
-    });
-
-    resize();
-
-    if (prefersReducedMotion) {
-      draw();
-    } else {
-      startLoop();
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) start(); else stop(); });
+      }, { threshold: 0.01 });
+      io.observe(hero);
     }
   })();
-});
-</script>
 
+}); // end DOMContentLoaded
+</script>
 </body>
 </html>
