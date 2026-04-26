@@ -6,7 +6,7 @@
 ============================================================ */
 
 .rq-mechanism {
-  --rq-bg: oklch(98.2% 0.006 80);
+  --rq-bg: oklch(98.6% 0.006 275);
   --rq-ink: oklch(24% 0.025 275);
   --rq-ink-2: oklch(42% 0.02 275);
   --rq-ink-3: oklch(62% 0.015 275);
@@ -200,14 +200,14 @@
   letter-spacing: 0.26em; text-transform: uppercase; color: oklch(40% 0.1 282);
 }
 .rq-mechanism-engine-rule { height: 1px; background: oklch(72% 0.06 282 / 0.32); margin-bottom: 18px; }
-.rq-mechanism-engine-rows { display: flex; flex-direction: column; gap: 14px; }
+.rq-mechanism-engine-rows { display: grid; grid-auto-rows: minmax(28px, auto); row-gap: 14px; }
 .rq-mechanism-engine-row {
   display: grid;
-  grid-template-columns: 14px 22px 1fr;
-  align-items: baseline;
-  column-gap: 12px;
+  grid-template-columns: 10px 28px 92px 1fr;
+  align-items: center;
+  column-gap: 14px;
   opacity: 0.45;
-  transition: opacity 700ms ease;
+  transition: opacity 500ms ease;
 }
 .rq-mechanism-engine.is-detect .rq-mechanism-engine-row { opacity: 1; }
 .rq-mechanism-engine-statusdot {
@@ -222,19 +222,21 @@
 .rq-mechanism-engine-row.is-lit[data-key="verified"] .rq-mechanism-engine-statusdot { background: var(--rq-verified); box-shadow: 0 0 0 3px oklch(64% 0.10 160 / 0.18); }
 .rq-mechanism-engine-num {
   font-family: var(--rq-mono); font-size: 10px; color: oklch(50% 0.05 282);
-  letter-spacing: 0.04em; align-self: center;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
 }
-.rq-mechanism-engine-cell { display: flex; flex-direction: column; gap: 2px; }
 .rq-mechanism-engine-label {
   font-family: var(--rq-sans); font-size: 13.5px; font-weight: 500;
-  color: oklch(46% 0.04 282); letter-spacing: -0.01em;
+  color: oklch(46% 0.04 282); letter-spacing: -0.005em;
   text-transform: lowercase;
+  white-space: nowrap;
   transition: color 500ms ease;
 }
 .rq-mechanism-engine-row.is-lit .rq-mechanism-engine-label { color: oklch(24% 0.08 282); }
-.rq-mechanism-engine-note {
-  font-family: var(--rq-serif); font-style: italic; font-size: 12px;
+.rq-mechanism-engine-detail {
+  font-family: var(--rq-serif); font-style: italic; font-size: 12.5px;
   font-weight: 300; color: oklch(48% 0.05 282); letter-spacing: 0.005em;
+  white-space: nowrap;
 }
 
 /* Anchors */
