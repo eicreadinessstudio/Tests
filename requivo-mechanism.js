@@ -193,7 +193,11 @@
       el.style.top  = (r.y - 13) + 'px';
       el.style.transitionDelay = (i * 110) + 'ms';
       el.innerHTML =
-        '<svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.3 5.8L6.5 2.2" stroke="oklch(50% 0.16 282)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '<span class="rq-mechanism-return-check">' +
+          '<svg viewBox="0 0 8 8" fill="none" aria-hidden="true">' +
+            '<path d="M1.5 4L3.3 5.8L6.5 2.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '</svg>' +
+        '</span>' +
         '<span>' + r.text + '</span>';
       returnsWrap.appendChild(el);
     });
