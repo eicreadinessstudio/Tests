@@ -65,7 +65,7 @@
     { title: 'Power applications',    desc: 'Writer, Manager, Verifier, and MCP all read from the same governed layer.' }
   ];
 
-  const STEP_DURATIONS = [3000, 3200, 3400, 4200, 4400, 5000];
+  const STEP_DURATIONS = [1800, 2000, 2200, 2600, 2700, 3200];
 
   // Layout
   const L = {
@@ -146,16 +146,14 @@
     // Engine rows
     ENGINE_ROWS.forEach(function (r, i) {
       const row = document.createElement('div');
-      row.className = 'rq-mechanism-engine-row';
+      row.className = 'rq-mechanism-engine-row rq-mechanism-engine-row--' + r.key;
       row.dataset.key = r.key;
-      row.style.transitionDelay = (i * 90) + 'ms';
+      row.style.transitionDelay = (i * 70) + 'ms';
       row.innerHTML =
         '<span class="rq-mechanism-engine-statusdot"></span>' +
         '<span class="rq-mechanism-engine-num">' + r.n + '</span>' +
-        '<span class="rq-mechanism-engine-cell">' +
-          '<span class="rq-mechanism-engine-label">' + r.label + '</span>' +
-          '<span class="rq-mechanism-engine-note">' + r.note + '</span>' +
-        '</span>';
+        '<span class="rq-mechanism-engine-label">' + r.label + '</span>' +
+        '<span class="rq-mechanism-engine-detail">' + r.note + '</span>';
       engineRows.appendChild(row);
     });
 
