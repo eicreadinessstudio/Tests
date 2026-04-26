@@ -373,172 +373,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
   color: var(--text-dim);
 }
 
-<<<<<<< HEAD
 /* SECTIONS */
-=======
-/* Step active highlight */
-.rspine-body.spine-active {
-  background-color: rgba(55,48,163,.025);
-  border-radius: 6px;
-}
-
-.rspine-body.spine-active-governed {
-  background-color: transparent;
-}
-
-/* ── BADGE SYSTEM ────────────────────────────────────────────────────── */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  border-radius: 3px;
-  padding: 2px 6px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  line-height: 1.5;
-}
-
-.badge-draft    { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
-.badge-conflict { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-.badge-gap      { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
-.badge-routed   { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-.badge-verified { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
-.badge-governed { background: var(--indigo-soft); color: var(--indigo); border: 1px solid #c7d2fe; }
-
-/* ── RESOLUTION CORE (bowtie signature motif) ───────────────────────── */
-.rc-wrap {
-  width: 100%;
-  max-width: 510px;
-}
-
-.rc-card {
-  width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 22px 20px 18px;
-  box-shadow:
-    0 1px 3px rgba(15,28,58,.05),
-    0 6px 24px rgba(15,28,58,.08),
-    0 22px 60px rgba(15,28,58,.07);
-  overflow: hidden;
-  position: relative;
-}
-
-.rc-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 32px; right: 32px;
-  height: 1.5px;
-  background: linear-gradient(90deg, transparent, var(--indigo-mid), transparent);
-  opacity: .25;
-}
-
-.rc-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.rc-label-text {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.rc-label-sub {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .10em;
-  color: var(--text-dim);
-  opacity: .6;
-}
-
-.rc-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-  overflow: visible;
-}
-
-.rc-caption {
-  margin-top: 11px;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: .10em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  text-align: center;
-}
-
-/* ── SOLUTION SCENARIOS (resolution-in-action rows) ─────────────────── */
-.sol-scenarios {
-  background: var(--bg-off);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 24px 22px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.sol-sc-head {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 20px;
-}
-
-.sol-sc {
-  padding: 14px 0;
-  border-top: 1px solid var(--line-soft);
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.sol-sc:first-of-type {
-  border-top: none;
-  padding-top: 0;
-}
-
-.sol-sc-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-}
-
-.sol-sc-arrow {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--indigo-mid);
-  padding-left: 3px;
-  opacity: .5;
-  line-height: 1.6;
-  flex-shrink: 0;
-  width: 12px;
-  text-align: center;
-}
-
-.sol-sc-text {
-  font-size: 12.5px;
-  line-height: 1.55;
-  color: var(--text-soft);
-  font-weight: 300;
-  padding-top: 1px;
-}
-
-/* ── SECTIONS ───────────────────────────────────────────────────────── */
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
 section { padding: 112px 0; }
 section + section { border-top: 1px solid var(--line-soft); }
 
@@ -960,7 +795,6 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 1180px) {
-<<<<<<< HEAD
   .hero-inner {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -974,12 +808,6 @@ footer {
     max-width: 680px;
   }
 
-=======
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-aside { justify-content: flex-start; }
-  .rc-wrap { max-width: 560px; }
-  .rspine-wrap { max-width: 560px; }
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
   .solution-layout { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -995,17 +823,10 @@ footer {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 8px; }
 
-<<<<<<< HEAD
   .hero-shot-frame {
     padding: 12px;
     border-radius: 16px;
   }
-=======
-  .hero { min-height: auto; }
-  .rc-wrap { max-width: 100%; }
-  .rspine-wrap { max-width: 100%; }
-  .wm-row { grid-template-columns: 1fr; gap: 6px; padding: 16px 20px; }
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
 
   .hero-shot-frame.hero-no-img {
     min-height: 360px;
@@ -1064,13 +885,8 @@ footer {
     <div class="nav-links">
       <a href="#problem">Problem</a>
       <a href="#solution">Solution</a>
-<<<<<<< HEAD
       <a href="#why">Why this matters</a>
       <a href="#use-cases">Use cases</a>
-=======
-      <a href="#for">Use cases</a>
-      <a href="#platform">Platform</a>
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
       <a href="#contact" class="nav-cta">Contact</a>
     </div>
   </div>
@@ -1093,7 +909,6 @@ footer {
       </div>
 
       <div class="hero-aside">
-<<<<<<< HEAD
         <div class="hero-shot">
           <div class="hero-shot-frame">
             <img
@@ -1102,122 +917,6 @@ footer {
               onerror="this.style.display='none';this.parentElement.classList.add('hero-no-img')" />
           </div>
           <div class="hero-shot-caption">Selected interface fragment</div>
-=======
-        <div class="rc-wrap">
-          <div class="rc-card" role="img" aria-label="Resolution Core: fragmented evidence sources converge into one governed core object, then distribute to multiple trusted outputs">
-            <div class="rc-card-header">
-              <span class="rc-label-text">Resolution Core</span>
-              <span class="rc-label-sub">Evidence · Core · Governed outputs</span>
-            </div>
-
-            <!-- Bowtie SVG: many inputs → narrow core → many outputs -->
-            <svg class="rc-svg" viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="rcGIn" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="rgb(55,48,163)" stop-opacity="0.05"/>
-                  <stop offset="100%" stop-color="rgb(55,48,163)" stop-opacity="0.20"/>
-                </linearGradient>
-                <linearGradient id="rcGOut" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="rgb(55,48,163)" stop-opacity="0.22"/>
-                  <stop offset="100%" stop-color="rgb(55,48,163)" stop-opacity="0.06"/>
-                </linearGradient>
-              </defs>
-
-              <!-- ═══ FAN-IN PATHS (fragmented inputs → core left) ═══ -->
-              <!-- Each input converges to core left edge (208, 107) -->
-              <path d="M 128,22 C 165,22 203,107 208,107" fill="none" stroke="url(#rcGIn)" stroke-width="1.2"/>
-              <path d="M 150,60 C 180,60 203,107 208,107" fill="none" stroke="url(#rcGIn)" stroke-width="1.2"/>
-              <path d="M 112,97 C 158,97 203,107 208,107" fill="none" stroke="url(#rcGIn)" stroke-width="1.2"/>
-              <path d="M 138,134 C 175,134 203,107 208,107" fill="none" stroke="url(#rcGIn)" stroke-width="1.2"/>
-              <path d="M 108,170 C 155,170 203,107 208,107" fill="none" stroke="url(#rcGIn)" stroke-width="1.2"/>
-
-              <!-- Dots at input right edges -->
-              <circle cx="128" cy="22"  r="2.2" fill="rgba(55,48,163,0.20)"/>
-              <circle cx="150" cy="60"  r="2.2" fill="rgba(55,48,163,0.20)"/>
-              <circle cx="112" cy="97"  r="2.2" fill="rgba(55,48,163,0.20)"/>
-              <circle cx="138" cy="134" r="2.2" fill="rgba(55,48,163,0.20)"/>
-              <circle cx="108" cy="170" r="2.2" fill="rgba(55,48,163,0.20)"/>
-
-              <!-- ═══ INPUT CHIPS (left side — staggered, ragged, fragmented feel) ═══ -->
-              <!-- Chip 0 — procedure_v3.pdf (narrow) -->
-              <rect x="6"  y="11"  width="122" height="22" rx="3" fill="#f8f9fc" stroke="#dde3ed" stroke-width="1"/>
-              <text x="67"  y="26.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#374259">procedure_v3.pdf</text>
-
-              <!-- Chip 1 — internal_wiki · notes (wider) -->
-              <rect x="0"  y="49"  width="150" height="22" rx="3" fill="#f8f9fc" stroke="#dde3ed" stroke-width="1"/>
-              <text x="75"  y="64.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#374259">internal_wiki · notes</text>
-
-              <!-- Chip 2 — incident_log (narrower, offset right) -->
-              <rect x="12" y="86"  width="100" height="22" rx="3" fill="#f8f9fc" stroke="#dde3ed" stroke-width="1"/>
-              <text x="62"  y="101.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#374259">incident_log</text>
-
-              <!-- Chip 3 — workflow_ticket_042 (medium) -->
-              <rect x="4"  y="123" width="134" height="22" rx="3" fill="#f8f9fc" stroke="#dde3ed" stroke-width="1"/>
-              <text x="71"  y="138.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#374259">workflow_ticket_042</text>
-
-              <!-- Chip 4 — team_notes.docx (narrow, offset) -->
-              <rect x="8"  y="159" width="100" height="22" rx="3" fill="#f8f9fc" stroke="#dde3ed" stroke-width="1"/>
-              <text x="58"  y="174.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#374259">team_notes.docx</text>
-
-              <!-- ═══ RESOLUTION CORE (center bottleneck) ═══ -->
-              <rect x="208" y="69" width="64" height="76" rx="6"
-                    fill="#f5f6ff" stroke="rgba(55,48,163,0.24)" stroke-width="1"/>
-
-              <!-- Core label -->
-              <text x="240" y="83"  text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="0.10em" fill="rgba(55,48,163,0.50)">RESOLUTION</text>
-              <text x="240" y="92"  text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="0.10em" fill="rgba(55,48,163,0.50)">CORE</text>
-
-              <!-- Core divider -->
-              <line x1="216" y1="97" x2="264" y2="97" stroke="rgba(55,48,163,0.14)" stroke-width="0.5"/>
-
-              <!-- State chips inside core (4 states, stacked) -->
-              <!-- Conflict -->
-              <rect x="212" y="101" width="56" height="11" rx="2" fill="#fef3c7" stroke="#fde68a" stroke-width="0.6"/>
-              <text x="240" y="109.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#92400e">Conflict</text>
-              <!-- Gap -->
-              <rect x="212" y="114" width="56" height="11" rx="2" fill="#fef2f2" stroke="#fecaca" stroke-width="0.6"/>
-              <text x="240" y="122.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#991b1b">Gap</text>
-              <!-- Routed -->
-              <rect x="212" y="127" width="56" height="11" rx="2" fill="#e0f2fe" stroke="#bae6fd" stroke-width="0.6"/>
-              <text x="240" y="135.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#0369a1">Routed</text>
-              <!-- Governed -->
-              <rect x="212" y="140" width="56" height="11" rx="2" fill="#eef2ff" stroke="#c7d2fe" stroke-width="0.6"/>
-              <text x="240" y="148.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#3730a3">Governed</text>
-
-              <!-- ═══ FAN-OUT PATHS (core right → governed outputs) ═══ -->
-              <!-- Each path from core right edge (272, 107) diverges to ordered output left edges -->
-              <path d="M 272,107 C 286,107 312,50 320,50"   fill="none" stroke="url(#rcGOut)" stroke-width="1.2"/>
-              <path d="M 272,107 C 286,107 312,84 320,84"   fill="none" stroke="url(#rcGOut)" stroke-width="1.2"/>
-              <path d="M 272,107 C 286,107 312,120 320,120" fill="none" stroke="url(#rcGOut)" stroke-width="1.2"/>
-              <path d="M 272,107 C 286,107 312,156 320,156" fill="none" stroke="url(#rcGOut)" stroke-width="1.2"/>
-
-              <!-- Dots at output left edges -->
-              <circle cx="320" cy="50"  r="2.2" fill="rgba(55,48,163,0.28)"/>
-              <circle cx="320" cy="84"  r="2.2" fill="rgba(55,48,163,0.28)"/>
-              <circle cx="320" cy="120" r="2.2" fill="rgba(55,48,163,0.28)"/>
-              <circle cx="320" cy="156" r="2.2" fill="rgba(55,48,163,0.28)"/>
-
-              <!-- ═══ OUTPUT CHIPS (right side — ordered, uniform, calmer) ═══ -->
-              <!-- Output 0 — Governed procedure -->
-              <rect x="320" y="39"  width="150" height="22" rx="3" fill="#f5f6ff" stroke="rgba(55,48,163,0.18)" stroke-width="1"/>
-              <text x="395" y="54.5" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="9.5" fill="#374259">Governed procedure</text>
-
-              <!-- Output 1 — Compliance SOP -->
-              <rect x="320" y="73"  width="150" height="22" rx="3" fill="#f5f6ff" stroke="rgba(55,48,163,0.18)" stroke-width="1"/>
-              <text x="395" y="88.5" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="9.5" fill="#374259">Compliance SOP</text>
-
-              <!-- Output 2 — Team handbook -->
-              <rect x="320" y="109" width="150" height="22" rx="3" fill="#f5f6ff" stroke="rgba(55,48,163,0.18)" stroke-width="1"/>
-              <text x="395" y="124.5" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="9.5" fill="#374259">Team handbook entry</text>
-
-              <!-- Output 3 — AI knowledge feed -->
-              <rect x="320" y="145" width="150" height="22" rx="3" fill="#f5f6ff" stroke="rgba(55,48,163,0.18)" stroke-width="1"/>
-              <text x="395" y="160.5" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="9.5" fill="#374259">AI knowledge feed</text>
-            </svg>
-
-            <div class="rc-caption">Many evidence sources &middot; one governed core &middot; many trusted outputs</div>
-          </div>
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
         </div>
       </div>
     </div>
@@ -1226,20 +925,10 @@ footer {
 
 <section id="mission-vision">
   <div class="wrap">
-<<<<<<< HEAD
     <div class="mv-grid">
       <div class="mv-card reveal">
         <div class="mv-label">Mission</div>
         <p>To turn fragmented enterprise evidence into governed operational knowledge that organisations can trust, maintain, and reuse.</p>
-=======
-    <div class="section-label">How it works</div>
-    <h2 class="section-title reveal">From fragmented evidence to governed operational knowledge</h2>
-    <p class="section-sub reveal d1">Fragmented sources converge into one governed core — then distribute as trusted, reusable knowledge across every team and tool that depends on it.</p>
-
-    <div class="pipe-outer" id="pipe-outer">
-      <div class="pipe-track">
-        <div class="pipe-fill" id="pipe-fill"></div>
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
       </div>
       <div class="mv-card reveal d1">
         <div class="mv-label">Vision</div>
@@ -1252,13 +941,8 @@ footer {
 <section id="problem">
   <div class="wrap">
     <div class="section-label">Problem</div>
-<<<<<<< HEAD
     <div class="section-title reveal">Critical operational knowledge is often scattered across systems, documents, workflows, and individual experts.</div>
     <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
-=======
-    <h2 class="section-title reveal">The knowledge is there. It just never becomes one trusted view.</h2>
-    <p class="section-sub reveal d1">Critical operational knowledge remains scattered across documents, systems, workflows, and individuals. Organisations fail not because information is absent — but because it never converges into a single governed, reusable layer they can depend on.</p>
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
 
     <div class="prob-grid">
       <div class="prob-card reveal">
@@ -1289,7 +973,6 @@ footer {
 
     <div class="solution-layout">
       <div class="sol-copy reveal">
-<<<<<<< HEAD
         <p>Requivo is intended for environments where critical knowledge is spread across documents, systems, workflows, and expert memory.</p>
         <p>It is designed not only to retrieve information, but to support more structured, validated, and reusable operational clarity.</p>
         <p>The concept should be understood as an operational knowledge system rather than a documentation platform, search tool, or generic assistant.</p>
@@ -1312,70 +995,6 @@ footer {
           <div class="sol-tag">Applications</div>
           <h3>One governed layer, multiple uses</h3>
           <p>One governed knowledge layer, multiple applications.</p>
-=======
-        <p>Requivo takes fragmented operational evidence from across your organisation — documents, tickets, notes, expert knowledge — and converges it into one governed core object. That core is validated, traceable, and reusable.</p>
-        <p>It does not retrieve documents. It does not generate answers from memory. It does not replace your existing systems.</p>
-        <p>Requivo resolves knowledge — surfacing conflicts, closing gaps, routing targeted clarifications to the right expert — and publishes governed outputs that every downstream team and tool can depend on.</p>
-
-        <div class="sol-mechanisms">
-          <div class="sol-mech"><span class="sol-verb">Connects</span> fragmented documents, systems, and expert knowledge</div>
-          <div class="sol-mech"><span class="sol-verb">Detects</span> conflicts, gaps, and stale operational logic</div>
-          <div class="sol-mech"><span class="sol-verb">Routes</span> unresolved points to the right expert</div>
-          <div class="sol-mech"><span class="sol-verb">Verifies</span> against source evidence and expert confirmation</div>
-          <div class="sol-mech"><span class="sol-verb">Publishes</span> governed knowledge every workflow can depend on</div>
-        </div>
-      </div>
-
-      <div class="sol-scenarios reveal d2" id="sol-spine">
-        <div class="sol-sc-head">Resolution in action</div>
-
-        <!-- Scenario 1: Conflicting sources → one governed SOP -->
-        <div class="sol-sc">
-          <div class="sol-sc-row">
-            <span class="badge badge-conflict">Conflict</span>
-            <span class="sol-sc-text">Three procedure drafts contradict each other — no authoritative version</span>
-          </div>
-          <div class="sol-sc-row">
-            <span class="sol-sc-arrow">→</span>
-            <span class="sol-sc-text" style="color:var(--text-dim)">Conflict surfaced · routed to process owner · resolved</span>
-          </div>
-          <div class="sol-sc-row">
-            <span class="badge badge-governed">Governed</span>
-            <span class="sol-sc-text">One validated compliance SOP, traceable to source</span>
-          </div>
-        </div>
-
-        <!-- Scenario 2: Undocumented expert logic → governed procedure -->
-        <div class="sol-sc">
-          <div class="sol-sc-row">
-            <span class="badge badge-gap">Gap</span>
-            <span class="sol-sc-text">Critical validation step exists only in one expert's memory</span>
-          </div>
-          <div class="sol-sc-row">
-            <span class="sol-sc-arrow">→</span>
-            <span class="sol-sc-text" style="color:var(--text-dim)">Gap detected · targeted clarification sent · knowledge captured</span>
-          </div>
-          <div class="sol-sc-row">
-            <span class="badge badge-governed">Governed</span>
-            <span class="sol-sc-text">Procedure complete — survives beyond the individual</span>
-          </div>
-        </div>
-
-        <!-- Scenario 3: Expert-dependent → reusable governed layer -->
-        <div class="sol-sc">
-          <div class="sol-sc-row">
-            <span class="badge badge-routed">Expert-dependent</span>
-            <span class="sol-sc-text">Operating logic held by one person, inaccessible to the team</span>
-          </div>
-          <div class="sol-sc-row">
-            <span class="sol-sc-arrow">→</span>
-            <span class="sol-sc-text" style="color:var(--text-dim)">Evidence structured · reviewed · validated by domain expert</span>
-          </div>
-          <div class="sol-sc-row">
-            <span class="badge badge-governed">Governed</span>
-            <span class="sol-sc-text">Reusable knowledge object available across workflows and AI tools</span>
-          </div>
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
         </div>
       </div>
     </div>
@@ -1384,14 +1003,8 @@ footer {
 
 <section id="why">
   <div class="wrap">
-<<<<<<< HEAD
     <div class="section-label">Why this matters</div>
     <div class="section-title reveal">Organisations do not only need better retrieval. They need a way to turn fragmented operational evidence into governed clarity.</div>
-=======
-    <div class="section-label">What Requivo produces</div>
-    <h2 class="section-title reveal">Not just answers. Governed operational knowledge objects.</h2>
-    <p class="section-sub reveal d1">The Resolution Core produces specific, traceable outputs — each in a defined knowledge state that reflects its verification status and source provenance. These governed objects become the reusable layer downstream workflows depend on.</p>
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
 
     <div class="strata reveal d1">
       <div class="strata-row">
@@ -1429,14 +1042,8 @@ footer {
 
 <section id="use-cases">
   <div class="wrap">
-<<<<<<< HEAD
     <div class="section-label">Use cases</div>
     <div class="section-title reveal">Requivo is relevant wherever critical operational know-how is fragmented, weakly documented, difficult to validate, and at risk of being lost.</div>
-=======
-    <div class="section-label">Before &amp; after</div>
-    <h2 class="section-title reveal">Fragmented state → Resolution Core → Governed outcome</h2>
-    <p class="section-sub reveal d1">A critical internal procedure is spread across documents, tickets, notes, and team memory. Sources conflict. One validation step is missing. Requivo converges the evidence into a resolution core, surfaces the issue, routes one targeted clarification, and produces a governed output the team can trust.</p>
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
 
     <div class="use-grid">
       <div class="use-card reveal">
@@ -1444,29 +1051,9 @@ footer {
         <p>For environments where procedures, incidents, engineering context, and maintenance know-how need to remain usable beyond individual employees and disconnected systems.</p>
       </div>
 
-<<<<<<< HEAD
       <div class="use-card reveal d1">
         <h3>Engineering &amp; technical services</h3>
         <p>For settings where documentation, configuration, and practical judgment must remain aligned and reusable across teams and over time.</p>
-=======
-      <!-- Phase 2: Resolution -->
-      <div class="transform-phase transform-phase--resolution">
-        <div class="transform-phase-header">
-          <div class="transform-phase-label">Resolution process</div>
-          <div class="transform-phase-caption">Requivo at work</div>
-        </div>
-        <ul class="transform-items">
-          <li class="transform-item">Evidence connected and structured automatically</li>
-          <li class="transform-item">Draft procedure generated from source material</li>
-          <li class="transform-item">Conflicts and gaps surfaced explicitly</li>
-          <li class="transform-item">One targeted expert clarification routed</li>
-          <li class="transform-item">Knowledge updated into governed layer</li>
-        </ul>
-        <div class="transform-route-badge">
-          <span class="badge badge-routed">Routed</span>
-          <span class="transform-route-text">A. Leitner — confirm approval sequence</span>
-        </div>
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
       </div>
 
       <div class="use-card reveal d2">
@@ -1477,117 +1064,6 @@ footer {
   </div>
 </section>
 
-<<<<<<< HEAD
-=======
-<!-- SECTION 7: PLATFORM LAYER -->
-<section id="platform">
-  <div class="wrap">
-    <div class="section-label">Governed layer</div>
-    <h2 class="section-title reveal">One governed core. Every surface that depends on it.</h2>
-    <p class="section-sub reveal d1">The Resolution Core produces one verified, traceable knowledge object. That single governed output becomes the trusted layer powering every team, workflow, tool, and AI agent that needs it.</p>
-
-    <div class="platform-layout" id="platform-layout">
-
-      <div class="plat-core reveal">
-        <div class="plat-core-badge"><span class="badge badge-governed">Governed knowledge layer</span></div>
-        <div class="plat-core-title">One reusable governed object</div>
-        <div class="plat-core-meta">Validated · Traceable · Maintained</div>
-        <div class="plat-connector" aria-hidden="true"></div>
-      </div>
-
-      <div class="plat-surfaces" id="plat-surfaces">
-        <div class="plat-surface">
-          <span class="plat-surface-label">Knowledge Writer</span>
-          <span class="plat-surface-desc">Draft and update procedures from governed evidence</span>
-        </div>
-        <div class="plat-surface">
-          <span class="plat-surface-label">Knowledge Manager</span>
-          <span class="plat-surface-desc">Maintain one authoritative version across the organisation</span>
-        </div>
-        <div class="plat-surface">
-          <span class="plat-surface-label">Verification</span>
-          <span class="plat-surface-desc">Run compliance and quality checks against governed procedures</span>
-        </div>
-        <div class="plat-surface">
-          <span class="plat-surface-label">Search</span>
-          <span class="plat-surface-desc">Surface the right procedure — not just a document list</span>
-        </div>
-        <div class="plat-surface">
-          <span class="plat-surface-label">Onboarding</span>
-          <span class="plat-surface-desc">Give new team members validated operating guidance from day one</span>
-        </div>
-        <div class="plat-surface">
-          <span class="plat-surface-label">AI workflow access</span>
-          <span class="plat-surface-desc">Ground downstream AI tools in governed, traceable knowledge</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 8: WHERE IT FITS -->
-<section id="for">
-  <div class="wrap">
-    <div class="section-label">Use cases</div>
-    <h2 class="section-title reveal">Built for operationally critical knowledge</h2>
-    <p class="section-sub reveal d1">Requivo is built for environments where knowledge must be validated, preserved, and reused — not just retrieved. Where the gap between what is documented and what is true carries real operational risk.</p>
-
-    <div class="for-grid" id="for-grid">
-
-      <div class="for-card">
-        <div class="for-sublabel">Risk reduction</div>
-        <h3>Resolve conflicting SOPs</h3>
-        <p>When multiple versions of the same procedure exist across systems, Requivo surfaces the conflict and resolves it into one governed view.</p>
-      </div>
-
-      <div class="for-card">
-        <div class="for-sublabel">Continuity</div>
-        <h3>Preserve retiring expert knowledge</h3>
-        <p>Capture and validate the judgment, workarounds, and operational reasoning that experts carry — before they leave the organisation.</p>
-      </div>
-
-      <div class="for-card">
-        <div class="for-sublabel">Governance</div>
-        <h3>Improve handovers and onboarding</h3>
-        <p>Give new team members governed procedures grounded in real evidence — not documents that haven't been updated in years.</p>
-      </div>
-
-      <div class="for-card">
-        <div class="for-sublabel">Compliance</div>
-        <h3>Validate internal procedures</h3>
-        <p>Verify that documented processes reflect current operational reality, surface gaps, and produce outputs teams can act on with confidence.</p>
-      </div>
-
-      <div class="for-card">
-        <div class="for-sublabel">Quality</div>
-        <h3>Surface stale operational knowledge</h3>
-        <p>Identify where documented knowledge no longer matches system reality — before it causes operational failures.</p>
-      </div>
-
-      <div class="for-card">
-        <div class="for-sublabel">AI readiness</div>
-        <h3>Prepare knowledge for AI workflows</h3>
-        <p>Produce governed, structured operational knowledge that downstream AI tools and agents can use reliably.</p>
-      </div>
-
-    </div>
-
-    <div class="sector-tags reveal">
-      <span class="sector-tag">Operations</span>
-      <span class="sector-tag">Engineering</span>
-      <span class="sector-tag">Technical services</span>
-      <span class="sector-tag">Quality &amp; compliance</span>
-      <span class="sector-tag">Regulated environments</span>
-      <span class="sector-tag">Universities</span>
-      <span class="sector-tag">Professional services</span>
-      <span class="sector-tag">Knowledge-heavy organisations</span>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 9: CONTACT -->
->>>>>>> 6e4538c (Refine homepage redesign with bowtie resolution core)
 <section id="contact">
   <div class="wrap">
     <div class="section-label">Contact</div>
