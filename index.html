@@ -154,10 +154,8 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   padding: 92px 0 100px;
   position: relative;
   overflow: hidden;
-  min-height: 96vh;
-  display: flex;
-  align-items: center;
-  isolation: isolate;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line-soft);
 }
 
 #hero-ambient {
@@ -815,17 +813,6 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 .contact-email:hover { color: var(--cobalt-dark); text-decoration: underline; }
 
-.contact-email {
-  font-size: 14px;
-  color: var(--indigo-mid);
-  transition: color .18s;
-}
-
-.contact-email:hover {
-  color: var(--indigo);
-  text-decoration: underline;
-}
-
 /* FOOTER */
 footer {
   background: var(--bg-deep);
@@ -911,35 +898,9 @@ footer {
   .sol-right { padding-left: 0; padding-top: 52px; }
   .why-layout { grid-template-columns: 1fr; gap: 48px; }
   .contact-layout { grid-template-columns: 1fr; gap: 44px; }
-  .footer-top { grid-template-columns: 1fr 1fr; }
-}
-
-.js .reveal.in {
-  opacity: 1;
-  transform: none;
-}
-
-.d1 { transition-delay: .08s; }
-.d2 { transition-delay: .16s; }
-
-/* RESPONSIVE */
-@media (max-width: 1180px) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .hero-aside {
-    justify-content: flex-start;
-  }
-
-  .hero-shot {
-    max-width: 680px;
-  }
-
-  .solution-layout { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
+
 
 @media (max-width: 768px) {
   .wrap { width: calc(100% - 32px); }
@@ -963,7 +924,7 @@ footer {
   .mech-steps { grid-template-columns: 1fr; }
   .mstep { border-right: none; padding: 22px 0; border-top: 1px solid var(--line-soft); }
   .mstep:not(:first-child) { padding-left: 0; }
-  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
 }
 </style>
@@ -1000,19 +961,19 @@ footer {
 
       <div class="hero-text">
         <div class="hero-tag">Operational knowledge system</div>
-        <h1 class="hero-h1 reveal">
+        <h1 class="hero-h1">
           Critical knowledge<br>
           exists. Requivo<br>
           makes it usable.
         </h1>
-        <p class="hero-sub reveal d1">
+        <p class="hero-sub">
           Requivo turns scattered documents, systems, workflows, and expert know-how into a governed operational knowledge layer that teams and AI systems can use.
         </p>
-        <div class="hero-actions reveal d2">
+        <div class="hero-actions">
           <a href="#how-it-works" class="btn btn-primary">Explore how it works</a>
           <a href="#contact" class="btn btn-ghost">Contact the team</a>
         </div>
-        <div class="hero-attrs reveal d3" aria-hidden="true">
+        <div class="hero-attrs" aria-hidden="true">
           <span class="hero-attr"><span class="hero-attr-pip"></span>Evidence ingestion</span>
           <span class="hero-attr"><span class="hero-attr-pip"></span>Resolution engine</span>
           <span class="hero-attr"><span class="hero-attr-pip"></span>Governance layer</span>
@@ -1020,7 +981,7 @@ footer {
         </div>
       </div>
 
-      <div class="hero-panel reveal d1" role="img" aria-label="Resolution Core: fragmented evidence sources converge into one governed core, then distribute to multiple trusted outputs">
+      <div class="hero-panel" role="img" aria-label="Resolution Core: fragmented evidence sources converge into one governed core, then distribute to multiple trusted outputs">
         <div class="hp-header">
           <span class="hp-label">Resolution Core</span>
           <div class="hp-live">
@@ -1124,15 +1085,7 @@ footer {
     </div>
   </div>
 
-    <div class="mechanism-frame" id="mechanism-frame" role="img" aria-label="System visualization: data flows from fragmented evidence on the left through a processing zone to a governed knowledge layer on the right">
-      <canvas id="stream-canvas"></canvas>
-      <div class="mframe-label" aria-hidden="true">Knowledge flow — live</div>
-      <div class="mframe-zones" aria-hidden="true">
-        <span class="mzone">Fragmented evidence</span>
-        <span class="mzone">Processing</span>
-        <span class="mzone mzone-gov">Governed layer</span>
-      </div>
-
+    <div class="mechanism-frame" id="mechanism-frame" role="img" aria-label="System visualization: evidence flows through the Requivo resolution engine into a governed knowledge layer">
       <div class="rq-mechanism-stage-wrap">
         <div class="rq-mechanism-stage" data-stage>
           <svg class="rq-mechanism-bg" viewBox="0 0 1660 860" preserveAspectRatio="none" aria-hidden="true">
@@ -1228,8 +1181,7 @@ footer {
         </div>
         <p class="rq-mechanism-caption-desc" data-caption-desc></p>
       </div>
-    </section>
-  </div>
+    </div>
 </section>
 
 <section id="problem">
@@ -1429,17 +1381,26 @@ footer {
         <span class="sec-tag-rule"></span>
         <span class="sec-tag-name">Contact</span>
       </div>
-
-      <div class="contact-card reveal d1">
-        <h3>Patrick Pirchheim</h3>
-        <div class="contact-role">CTO / Co-Founder</div>
-        <a class="contact-email" href="mailto:patrick.pirchheim@requivo.at">patrick.pirchheim@requivo.at</a>
-      </div>
-
-      <div class="contact-card reveal d2">
-        <h3>Jakub Weglarz</h3>
-        <div class="contact-role">COO / Delivery Lead</div>
-        <a class="contact-email" href="mailto:jakub@requivo.at">jakub@requivo.at</a>
+      <h2 class="sec-title reveal">Work with the team building Requivo.</h2>
+    </div>
+    <div class="contact-layout">
+      <p class="contact-intro reveal">We are working with a small number of organisations to pilot Requivo. If operational knowledge is a challenge you are facing, we would like to hear from you.</p>
+      <div class="contact-grid">
+        <div class="contact-card reveal">
+          <div class="contact-name">Agnieszka Weglarz</div>
+          <div class="contact-role">CEO / Co-Founder</div>
+          <a class="contact-email" href="mailto:agnieszka.weglarz@requivo.at">agnieszka.weglarz@requivo.at</a>
+        </div>
+        <div class="contact-card reveal d1">
+          <div class="contact-name">Patrick Pirchheim</div>
+          <div class="contact-role">CTO / Co-Founder</div>
+          <a class="contact-email" href="mailto:patrick.pirchheim@requivo.at">patrick.pirchheim@requivo.at</a>
+        </div>
+        <div class="contact-card reveal d2">
+          <div class="contact-name">Jakub Weglarz</div>
+          <div class="contact-role">COO / Delivery Lead</div>
+          <a class="contact-email" href="mailto:jakub@requivo.at">jakub@requivo.at</a>
+        </div>
       </div>
     </div>
   </div>
