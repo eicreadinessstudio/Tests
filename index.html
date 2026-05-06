@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="requivo-mechanism.css" />
 <script>document.documentElement.classList.add('js');</script>
 
 <style>
@@ -27,8 +28,8 @@
   --cobalt-pale:  #EBF0FF;
   --cobalt-mid:   #4474F7;
   --cobalt-dark:  #0E3FCA;
-  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
   --max:          1200px;
   --ease:         cubic-bezier(.16,1,.3,1);
 }
@@ -61,7 +62,10 @@ nav {
   border-bottom: 1px solid var(--line-soft);
   transition: box-shadow .25s;
 }
-nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06); }
+
+nav.raised {
+  box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
+}
 
 .nav-inner {
   display: flex;
@@ -72,7 +76,8 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
 }
 
 /* LOGO */
-.logo {
+.logo,
+.nav-logo {
   display: flex;
   align-items: center;
   gap: 9px;
@@ -83,7 +88,11 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   flex-shrink: 0;
   transition: opacity .15s;
 }
-.nav-logo:hover { opacity: .68; }
+
+.logo:hover,
+.nav-logo:hover {
+  opacity: .68;
+}
 
 .nav-links {
   display: flex;
@@ -111,13 +120,14 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   border-radius: 2px;
   transition: background .15s, color .15s, border-color .15s !important;
 }
+
 .nav-cta:hover {
   background: var(--cobalt) !important;
   color: #fff !important;
   border-color: var(--cobalt) !important;
 }
 
-/* ── BUTTONS ────────────────────────────────────────────────────────── */
+/* BUTTONS */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -132,6 +142,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   border: 1px solid transparent;
   transition: transform .18s var(--ease), box-shadow .18s, background .15s, border-color .15s, color .15s;
 }
+
 .btn:hover { transform: translateY(-1px); }
 
 .btn-primary {
@@ -140,22 +151,33 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   border-color: var(--cobalt);
   box-shadow: 0 1px 6px rgba(22,82,240,.18);
 }
-.btn-primary:hover { background: var(--cobalt-dark); box-shadow: 0 4px 18px rgba(22,82,240,.28); }
+
+.btn-primary:hover {
+  background: var(--cobalt-dark);
+  box-shadow: 0 4px 18px rgba(22,82,240,.28);
+}
 
 .btn-ghost {
   background: transparent;
   color: var(--text-mid);
   border-color: var(--line);
 }
-.btn-ghost:hover { border-color: var(--text-dim); background: var(--bg-off); }
+
+.btn-ghost:hover {
+  border-color: var(--text-dim);
+  background: var(--bg-off);
+}
 
 /* HERO */
 .hero {
-  padding: 92px 0 100px;
+  min-height: calc(100vh - 56px);
+  padding: 72px 0 88px;
   position: relative;
   overflow: hidden;
   background: var(--bg);
   border-bottom: 1px solid var(--line-soft);
+  display: flex;
+  align-items: center;
 }
 
 #hero-ambient {
@@ -164,47 +186,66 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   z-index: 0;
   pointer-events: none;
   display: block;
-  z-index: 0;
+}
+
+.hero .wrap {
+  position: relative;
+  z-index: 2;
+  width: min(var(--max), calc(100% - 48px));
 }
 
 .hero-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0,1fr) minmax(300px,460px);
   gap: clamp(48px, 7vw, 100px);
   align-items: center;
 }
 
+.hero-text,
+.hero-text > *,
+.hero-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
 .hero-tag {
   display: block;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-mid);
-  opacity: 0.72;
-  margin-bottom: 28px;
+  opacity: 0.78;
+  margin-bottom: 24px;
+  background: none;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
 }
 
 .hero-h1 {
-  font-size: clamp(36px, 4.4vw, 62px);
+  display: block;
+  font-size: clamp(42px, 5.2vw, 76px);
   font-weight: 700;
-  line-height: 1.04;
-  letter-spacing: -0.032em;
+  line-height: 0.98;
+  letter-spacing: -0.042em;
   color: var(--text);
   margin-bottom: 28px;
+  max-width: 740px;
 }
 
 .hero-sub {
-  font-size: 15.5px;
-  line-height: 1.86;
+  display: block;
+  font-size: 16px;
+  line-height: 1.78;
   color: var(--text-soft);
-  max-width: 560px;
+  max-width: 520px;
   font-weight: 300;
-  margin-bottom: 40px;
-  max-width: 450px;
+  margin-bottom: 36px;
 }
 
 .hero-actions {
@@ -212,7 +253,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 48px;
+  margin-bottom: 44px;
 }
 
 .hero-attrs {
@@ -220,9 +261,10 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   flex-wrap: wrap;
   align-items: center;
   gap: 22px;
-  padding-top: 28px;
+  padding-top: 24px;
   border-top: 1px solid var(--line-soft);
 }
+
 .hero-attr {
   display: flex;
   align-items: center;
@@ -233,6 +275,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   text-transform: uppercase;
   color: var(--text-dim);
 }
+
 .hero-attr-pip {
   width: 3px;
   height: 3px;
@@ -242,7 +285,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   flex-shrink: 0;
 }
 
-/* Hero panel */
+/* HERO PANEL */
 .hero-panel {
   background: var(--bg);
   border: 1px solid var(--line);
@@ -262,6 +305,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   border-bottom: 1px solid var(--line-soft);
   background: var(--bg-off);
 }
+
 .hp-label {
   font-family: var(--font-mono);
   font-size: 8.5px;
@@ -269,6 +313,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   text-transform: uppercase;
   color: var(--text-dim);
 }
+
 .hp-live {
   display: flex;
   align-items: center;
@@ -278,6 +323,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   color: var(--text-dim);
   letter-spacing: .08em;
 }
+
 .hp-live-dot {
   width: 5px;
   height: 5px;
@@ -305,7 +351,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(8,16,30,.06);
   text-align: center;
 }
 
-/* ── SECTIONS ───────────────────────────────────────────────────────── */
+/* SECTIONS */
 section { padding: 96px 0; }
 section + section { border-top: 1px solid var(--line-soft); }
 .sec-head { margin-bottom: 56px; }
@@ -321,6 +367,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   color: var(--text-dim);
   margin-bottom: 20px;
 }
+
 .sec-tag-num { color: var(--cobalt); opacity: .65; }
 .sec-tag-rule { width: 18px; height: 1px; background: var(--line); flex-shrink: 0; }
 .sec-tag-name { color: var(--cobalt); font-weight: 500; }
@@ -343,18 +390,18 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-weight: 300;
 }
 
-/* ── HOW IT WORKS ───────────────────────────────────────────────────── */
+/* HOW IT WORKS */
 #how-it-works { background: var(--bg); }
 
 .mechanism-frame {
   position: relative;
-  width: 100%;
-  height: 400px;
+  width: min(var(--max), calc(100% - 48px));
+  height: 520px;
   border: 1px solid var(--line);
   border-radius: 3px;
   overflow: hidden;
   background: var(--bg-off);
-  margin: 44px 0 0;
+  margin: 44px auto 0;
 }
 
 #stream-canvas {
@@ -362,11 +409,19 @@ section + section { border-top: 1px solid var(--line-soft); }
   inset: 0;
   pointer-events: none;
   display: block;
+  z-index: 0;
+}
+
+.mechanism-frame .rq-mechanism-stage-wrap,
+.mechanism-frame .rq-mechanism-caption {
+  position: relative;
+  z-index: 1;
 }
 
 .mframe-label {
   position: absolute;
-  top: 14px; left: 14px;
+  top: 14px;
+  left: 14px;
   font-family: var(--font-mono);
   font-size: 8.5px;
   letter-spacing: .12em;
@@ -382,13 +437,16 @@ section + section { border-top: 1px solid var(--line-soft); }
 
 .mframe-zones {
   position: absolute;
-  bottom: 14px; left: 0; right: 0;
+  bottom: 14px;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   padding: 0 16px;
   pointer-events: none;
   z-index: 2;
 }
+
 .mzone {
   font-family: var(--font-mono);
   font-size: 8.5px;
@@ -400,6 +458,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   border-radius: 2px;
   border: 1px solid var(--line-soft);
 }
+
 .mzone-gov {
   color: var(--cobalt);
   background: rgba(235,240,255,.92);
@@ -411,10 +470,12 @@ section + section { border-top: 1px solid var(--line-soft); }
   grid-template-columns: repeat(4,1fr);
   border-top: 1px solid var(--line-soft);
 }
+
 .mstep {
   padding: 28px 28px 28px 0;
   border-right: 1px solid var(--line-soft);
 }
+
 .mstep:last-child { border-right: none; padding-right: 0; }
 .mstep:not(:first-child) { padding-left: 28px; }
 
@@ -428,6 +489,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   align-items: center;
   gap: 10px;
 }
+
 .mstep-num::after {
   content: '';
   display: block;
@@ -443,6 +505,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   margin-bottom: 9px;
   letter-spacing: -0.012em;
 }
+
 .mstep p {
   font-size: 13px;
   line-height: 1.75;
@@ -450,8 +513,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-weight: 300;
 }
 
-.btn:hover { transform: translateY(-2px); }
-
+/* PROBLEM */
 .prob-list { margin-top: 4px; }
 
 .prob-row {
@@ -463,14 +525,18 @@ section + section { border-top: 1px solid var(--line-soft); }
   position: relative;
   overflow: hidden;
 }
+
 .prob-row::after {
   content: '';
   position: absolute;
-  top: -1px; left: 0;
-  width: 0; height: 1px;
+  top: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
   background: var(--cobalt);
   transition: width .6s var(--ease);
 }
+
 .prob-row:hover::after { width: 100%; }
 
 .prob-num {
@@ -488,6 +554,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   letter-spacing: -0.016em;
   line-height: 1.28;
 }
+
 .prob-row p {
   font-size: 14px;
   line-height: 1.82;
@@ -495,7 +562,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-weight: 300;
 }
 
-/* ── SOLUTION ───────────────────────────────────────────────────────── */
+/* SOLUTION */
 #solution { background: var(--bg); }
 
 .sol-layout {
@@ -510,6 +577,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   padding-right: 60px;
   border-right: 1px solid var(--line-soft);
 }
+
 .sol-prose p {
   font-size: 15px;
   line-height: 1.88;
@@ -517,12 +585,14 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-weight: 300;
   margin-bottom: 18px;
 }
+
 .sol-prose p:last-of-type { margin-bottom: 0; }
 
 .sol-list {
   margin-top: 32px;
   border-top: 1px solid var(--line-soft);
 }
+
 .sol-item {
   display: flex;
   align-items: baseline;
@@ -530,6 +600,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   padding: 12px 0;
   border-bottom: 1px solid var(--line-soft);
 }
+
 .sol-verb {
   font-family: var(--font-mono);
   font-size: 9px;
@@ -540,6 +611,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   min-width: 60px;
   flex-shrink: 0;
 }
+
 .sol-desc {
   font-size: 13px;
   line-height: 1.65;
@@ -572,6 +644,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   flex-shrink: 0;
   line-height: 1.55;
 }
+
 .badge-conflict { background: #FFF4D4; color: #7A4800; border: 1px solid #F0D280; }
 .badge-gap      { background: #FEECEC; color: #8A1818; border: 1px solid #F4AEAE; }
 .badge-routed   { background: #E1EFFD; color: #0C5291; border: 1px solid #A6D0F7; }
@@ -584,12 +657,18 @@ section + section { border-top: 1px solid var(--line-soft); }
   flex-direction: column;
   gap: 9px;
 }
-.scenario:first-of-type { border-top: none; padding-top: 0; }
+
+.scenario:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
 .scenario-row {
   display: flex;
   align-items: flex-start;
   gap: 10px;
 }
+
 .scenario-arrow {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -599,6 +678,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   flex-shrink: 0;
   width: 12px;
 }
+
 .scenario-text {
   font-size: 12.5px;
   line-height: 1.62;
@@ -606,12 +686,42 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-weight: 300;
 }
 
-/* SOLUTION */
-.solution-layout {
+.sol-panel {
+  padding: 18px 0;
+  border-top: 1px solid var(--line-soft);
+}
+
+.sol-tag {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 7px;
+}
+
+.sol-panel h3 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--text);
+  margin-bottom: 7px;
+}
+
+.sol-panel p {
+  font-size: 13px;
+  line-height: 1.72;
+  color: var(--text-soft);
+  font-weight: 300;
+}
+
+/* WHY */
+#why { background: var(--bg-off); }
+
+.why-layout {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
+  grid-template-columns: minmax(260px,.82fr) minmax(0,1.18fr);
   gap: 72px;
-  margin-top: 52px;
   align-items: start;
 }
 
@@ -623,6 +733,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   margin-bottom: 22px;
   letter-spacing: -0.01em;
 }
+
 .why-body p {
   font-size: 14.5px;
   line-height: 1.88;
@@ -630,9 +741,10 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-weight: 300;
   margin-bottom: 20px;
 }
+
 .why-body p:last-child { margin-bottom: 0; }
 
-/* Strata — precision progression table */
+/* STRATA */
 .strata {
   display: flex;
   flex-direction: column;
@@ -649,16 +761,19 @@ section + section { border-top: 1px solid var(--line-soft); }
   position: relative;
   transition: background .15s;
 }
+
 .strata-row:last-child { border-bottom: none; }
 .strata-row:hover { background: var(--bg-off); }
 
-/* Left-edge progression indicator */
 .strata-row::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
   width: 3px;
 }
+
 .strata-row:nth-child(1)::before { background: #C0C8DC; }
 .strata-row:nth-child(2)::before { background: #A8B4CC; }
 .strata-row:nth-child(3)::before { background: #8E9DC0; }
@@ -678,6 +793,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   align-items: center;
   border-right: 1px solid var(--line-soft);
 }
+
 .strata-row:nth-child(4) .strata-label { color: var(--text-mid); }
 .strata-row:nth-child(5) .strata-label,
 .strata-row:nth-child(6) .strata-label { color: var(--cobalt); }
@@ -692,10 +808,9 @@ section + section { border-top: 1px solid var(--line-soft); }
   align-items: center;
 }
 
-/* ── USE CASES ──────────────────────────────────────────────────────── */
+/* USE CASES */
 #use-cases { background: var(--bg); }
 
-/* USE CASES */
 .use-grid {
   display: grid;
   grid-template-columns: repeat(3,1fr);
@@ -709,20 +824,28 @@ section + section { border-top: 1px solid var(--line-soft); }
   border-right: 1px solid var(--line-soft);
   position: relative;
 }
-.use-cell:last-child { border-right: none; padding-right: 0; }
+
+.use-cell:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
 .use-cell:not(:first-child) { padding-left: 36px; }
+
 .use-cell::before {
   content: '';
   position: absolute;
   top: -2px;
   left: 0;
-  width: 0;
+  width: 100%;
   height: 2px;
   background: var(--cobalt);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform .45s var(--ease);
 }
+
+.use-cell:hover::before { transform: scaleX(1); }
 
 .use-cell-tag {
   font-family: var(--font-mono);
@@ -732,6 +855,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   color: var(--text-dim);
   margin-bottom: 18px;
 }
+
 .use-cell h3 {
   font-size: 15px;
   font-weight: 600;
@@ -740,6 +864,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   line-height: 1.3;
   margin-bottom: 12px;
 }
+
 .use-cell p {
   font-size: 13.5px;
   line-height: 1.80;
@@ -747,7 +872,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-weight: 300;
 }
 
-/* ── CONTACT ────────────────────────────────────────────────────────── */
+/* CONTACT */
 #contact { background: var(--bg-off); }
 
 .contact-layout {
@@ -757,6 +882,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   margin-top: 52px;
   align-items: start;
 }
+
 .contact-intro {
   font-size: 15px;
   line-height: 1.88;
@@ -773,8 +899,13 @@ section + section { border-top: 1px solid var(--line-soft); }
 
 .contact-card {
   border-top: 1px solid var(--line);
-  padding: 24px 0 0;
+  padding: 24px 24px 0 0;
   position: relative;
+}
+
+.contact-card:not(:first-child) {
+  padding-left: 24px;
+  border-left: 1px solid var(--line-soft);
 }
 
 .contact-card::before {
@@ -782,13 +913,15 @@ section + section { border-top: 1px solid var(--line-soft); }
   position: absolute;
   top: -1px;
   left: 0;
-  width: 0;
+  width: 100%;
   height: 1px;
   background: var(--cobalt);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform .45s var(--ease);
 }
+
+.contact-card:hover::before { transform: scaleX(1); }
 
 .contact-name {
   font-size: 14px;
@@ -806,12 +939,17 @@ section + section { border-top: 1px solid var(--line-soft); }
   color: var(--text-dim);
   margin-bottom: 14px;
 }
+
 .contact-email {
   font-size: 12.5px;
   color: var(--cobalt);
   transition: color .15s;
 }
-.contact-email:hover { color: var(--cobalt-dark); text-decoration: underline; }
+
+.contact-email:hover {
+  color: var(--cobalt-dark);
+  text-decoration: underline;
+}
 
 /* FOOTER */
 footer {
@@ -828,6 +966,12 @@ footer {
   margin-bottom: 28px;
 }
 
+.footer-brand-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 .footer-brand {
   display: flex;
   align-items: center;
@@ -836,11 +980,16 @@ footer {
   font-weight: 600;
   color: #fff;
   letter-spacing: -0.024em;
-  margin-bottom: 14px;
   transition: opacity .15s;
 }
-.footer-logo:hover { opacity: .68; }
-.footer-tagline {
+
+.footer-logo:hover,
+.footer-brand:hover {
+  opacity: .68;
+}
+
+.footer-tagline,
+.footer-brand-wrap p {
   font-size: 13px;
   line-height: 1.82;
   font-weight: 300;
@@ -856,7 +1005,9 @@ footer {
   color: #293E56;
   margin-bottom: 16px;
 }
-.footer-col a, .footer-col p {
+
+.footer-col a,
+.footer-col p {
   display: block;
   font-size: 13px;
   line-height: 2.1;
@@ -864,12 +1015,12 @@ footer {
   color: #4A6582;
   transition: color .15s;
 }
+
 .footer-col a:hover { color: #8BBAD6; }
+
 .footer-bottom {
   padding-top: 24px;
   border-top: 1px solid rgba(255,255,255,.08);
-  font-size: 12px;
-  color: #506078;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -879,56 +1030,132 @@ footer {
   color: #283D52;
 }
 
-/* ── REVEAL ─────────────────────────────────────────────────────────── */
-.reveal { opacity: 1; transform: none; transition: opacity .65s var(--ease), transform .65s var(--ease); }
-.js .reveal { opacity: 0; transform: translateY(14px); }
-.js .reveal.in { opacity: 1; transform: none; }
+/* REVEAL */
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity .65s var(--ease), transform .65s var(--ease);
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
 .d1 { transition-delay: .10s; }
 .d2 { transition-delay: .20s; }
 .d3 { transition-delay: .30s; }
 
-/* ── RESPONSIVE ─────────────────────────────────────────────────────── */
+/* RESPONSIVE */
 @media (max-width: 1080px) {
   .hero-inner { grid-template-columns: 1fr; gap: 52px; }
   .hero-panel { max-width: 480px; }
   .prob-row { grid-template-columns: 52px 1fr; }
   .prob-row p { display: none; }
   .sol-layout { grid-template-columns: 1fr; }
-  .sol-prose { border-right: none; padding-right: 0; border-bottom: 1px solid var(--line-soft); padding-bottom: 52px; margin-bottom: 0; }
+  .sol-prose {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 52px;
+    margin-bottom: 0;
+  }
   .sol-right { padding-left: 0; padding-top: 52px; }
   .why-layout { grid-template-columns: 1fr; gap: 48px; }
   .contact-layout { grid-template-columns: 1fr; gap: 44px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
-
 @media (max-width: 768px) {
-  .wrap { width: calc(100% - 32px); }
+  .wrap,
+  .hero .wrap {
+    width: calc(100% - 32px);
+  }
+
   .nav-links { display: none; }
+
   section { padding: 72px 0; }
-  .hero { padding: 64px 0 80px; }
-  .prob-row { grid-template-columns: 1fr; gap: 10px; }
+
+  .hero {
+    min-height: auto;
+    padding: 64px 0 80px;
+  }
+
+  .hero-h1 {
+    font-size: clamp(40px, 13vw, 64px);
+  }
+
+  .prob-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
   .prob-num { display: none; }
   .prob-row p { display: block; }
-  .mech-steps { grid-template-columns: 1fr 1fr; }
-  .mechanism-frame { height: 280px; }
-  .use-grid { grid-template-columns: 1fr; border-top: none; }
-  .use-cell { border-right: none; border-top: 1px solid var(--line-soft); padding: 28px 0; }
+
+  .mechanism-frame {
+    width: calc(100% - 32px);
+    height: 360px;
+  }
+
+  .use-grid {
+    grid-template-columns: 1fr;
+    border-top: none;
+  }
+
+  .use-cell {
+    border-right: none;
+    border-top: 1px solid var(--line-soft);
+    padding: 28px 0;
+  }
+
   .use-cell:not(:first-child) { padding-left: 0; }
-  .contact-grid { grid-template-columns: 1fr; border-top: none; }
-  .contact-card { border-right: none; border-top: 1px solid var(--line-soft); padding: 20px 0; }
-  .contact-card:not(:first-child) { padding-left: 0; }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    border-top: none;
+  }
+
+  .contact-card {
+    border-left: none !important;
+    border-top: 1px solid var(--line-soft);
+    padding: 20px 0;
+  }
+
+  .contact-card:not(:first-child) {
+    padding-left: 0;
+  }
+
   .strata-row { grid-template-columns: 1fr; }
-  .strata-label { padding: 12px 16px 5px 22px; border-right: none; }
-  .strata-body { padding: 0 16px 14px 22px; }
-  .mech-steps { grid-template-columns: 1fr; }
-  .mstep { border-right: none; padding: 22px 0; border-top: 1px solid var(--line-soft); }
-  .mstep:not(:first-child) { padding-left: 0; }
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-  .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+
+  .strata-label {
+    padding: 12px 16px 5px 22px;
+    border-right: none;
+  }
+
+  .strata-body {
+    padding: 0 16px 14px 22px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <nav id="nav">
@@ -953,26 +1180,30 @@ footer {
   </div>
 </nav>
 
-<!-- ── HERO ─────────────────────────────────────────────────────────── -->
 <section class="hero" id="top" aria-label="Introduction">
   <canvas id="hero-ambient" aria-hidden="true"></canvas>
+
   <div class="wrap">
     <div class="hero-inner">
 
       <div class="hero-text">
         <div class="hero-tag">Operational knowledge system</div>
+
         <h1 class="hero-h1">
           Critical knowledge<br>
           exists. Requivo<br>
           makes it usable.
         </h1>
+
         <p class="hero-sub">
           Requivo turns scattered documents, systems, workflows, and expert know-how into a governed operational knowledge layer that teams and AI systems can use.
         </p>
+
         <div class="hero-actions">
           <a href="#how-it-works" class="btn btn-primary">Explore how it works</a>
           <a href="#contact" class="btn btn-ghost">Contact the team</a>
         </div>
+
         <div class="hero-attrs" aria-hidden="true">
           <span class="hero-attr"><span class="hero-attr-pip"></span>Evidence ingestion</span>
           <span class="hero-attr"><span class="hero-attr-pip"></span>Resolution engine</span>
@@ -1002,21 +1233,18 @@ footer {
             </linearGradient>
           </defs>
 
-          <!-- Fan-in paths -->
           <path d="M 116,18  C 150,18  183,96 188,96"  fill="none" stroke="url(#gIn)" stroke-width="1.1"/>
           <path d="M 122,54  C 154,54  183,96 188,96"  fill="none" stroke="url(#gIn)" stroke-width="1.1"/>
           <path d="M 104,90  C 150,90  183,96 188,96"  fill="none" stroke="url(#gIn)" stroke-width="1.1"/>
           <path d="M 120,126 C 152,126 183,96 188,96"  fill="none" stroke="url(#gIn)" stroke-width="1.1"/>
           <path d="M 100,162 C 150,162 183,96 188,96"  fill="none" stroke="url(#gIn)" stroke-width="1.1"/>
 
-          <!-- Input dots -->
           <circle cx="116" cy="18"  r="2" fill="rgba(22,82,240,.18)"/>
           <circle cx="122" cy="54"  r="2" fill="rgba(22,82,240,.18)"/>
           <circle cx="104" cy="90"  r="2" fill="rgba(22,82,240,.18)"/>
           <circle cx="120" cy="126" r="2" fill="rgba(22,82,240,.18)"/>
           <circle cx="100" cy="162" r="2" fill="rgba(22,82,240,.18)"/>
 
-          <!-- Input chips -->
           <rect x="0"  y="7"   width="116" height="22" rx="2" fill="#F2F4F9" stroke="#D3D9E8" stroke-width=".8"/>
           <text x="58"  y="22"  text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#4D5E7C">procedure_v3.pdf</text>
           <rect x="0"  y="43"  width="122" height="22" rx="2" fill="#F2F4F9" stroke="#D3D9E8" stroke-width=".8"/>
@@ -1028,7 +1256,6 @@ footer {
           <rect x="0"  y="151" width="100" height="22" rx="2" fill="#F2F4F9" stroke="#D3D9E8" stroke-width=".8"/>
           <text x="50"  y="166" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#4D5E7C">team_notes.docx</text>
 
-          <!-- Resolution Core -->
           <rect x="188" y="60" width="60" height="72" rx="3" fill="#EBF0FF" stroke="rgba(22,82,240,.24)" stroke-width=".8"/>
           <text x="218" y="75" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6.5" letter-spacing=".12em" fill="rgba(22,82,240,.55)">CORE</text>
           <line x1="194" y1="80" x2="242" y2="80" stroke="rgba(22,82,240,.12)" stroke-width=".5"/>
@@ -1041,19 +1268,16 @@ footer {
           <rect x="192" y="120" width="52" height="10" rx="1.5" fill="#EBF0FF" stroke="rgba(22,82,240,.22)" stroke-width=".6"/>
           <text x="218" y="127.5" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="#1652F0">Governed</text>
 
-          <!-- Fan-out paths -->
           <path d="M 248,96 C 266,96 286,44  294,44"  fill="none" stroke="url(#gOut)" stroke-width="1.1"/>
           <path d="M 248,96 C 266,96 286,76  294,76"  fill="none" stroke="url(#gOut)" stroke-width="1.1"/>
           <path d="M 248,96 C 266,96 286,116 294,116" fill="none" stroke="url(#gOut)" stroke-width="1.1"/>
           <path d="M 248,96 C 266,96 286,148 294,148" fill="none" stroke="url(#gOut)" stroke-width="1.1"/>
 
-          <!-- Output dots -->
           <circle cx="294" cy="44"  r="2" fill="rgba(22,82,240,.26)"/>
           <circle cx="294" cy="76"  r="2" fill="rgba(22,82,240,.26)"/>
           <circle cx="294" cy="116" r="2" fill="rgba(22,82,240,.26)"/>
           <circle cx="294" cy="148" r="2" fill="rgba(22,82,240,.26)"/>
 
-          <!-- Output chips -->
           <rect x="294" y="33"  width="138" height="22" rx="2" fill="#EBF0FF" stroke="rgba(22,82,240,.16)" stroke-width=".8"/>
           <text x="363" y="48"  text-anchor="middle" font-family="Hanken Grotesk,system-ui,sans-serif" font-size="9" fill="#243152">Governed procedure</text>
           <rect x="294" y="65"  width="138" height="22" rx="2" fill="#EBF0FF" stroke="rgba(22,82,240,.16)" stroke-width=".8"/>
@@ -1068,6 +1292,7 @@ footer {
           Many evidence sources &nbsp;·&nbsp; one governed core &nbsp;·&nbsp; multiple trusted outputs
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1085,103 +1310,103 @@ footer {
     </div>
   </div>
 
-    <div class="mechanism-frame" id="mechanism-frame" role="img" aria-label="System visualization: evidence flows through the Requivo resolution engine into a governed knowledge layer">
-      <div class="rq-mechanism-stage-wrap">
-        <div class="rq-mechanism-stage" data-stage>
-          <svg class="rq-mechanism-bg" viewBox="0 0 1660 860" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <pattern id="rqMechGrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-                <circle cx="0.5" cy="0.5" r="0.5" fill="oklch(72% 0.025 275 / 0.20)"/>
-              </pattern>
-              <radialGradient id="rqMechWash" cx="50%" cy="50%" r="42%">
-                <stop offset="0%" stop-color="oklch(94% 0.035 275 / 0.45)"/>
-                <stop offset="100%" stop-color="oklch(98.6% 0.006 275 / 0)"/>
-              </radialGradient>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#rqMechGrid)"/>
-            <rect width="100%" height="100%" fill="url(#rqMechWash)"/>
-          </svg>
+  <div class="mechanism-frame" id="mechanism-frame" role="img" aria-label="System visualization: evidence flows through the Requivo resolution engine into a governed knowledge layer">
+    <canvas id="stream-canvas" aria-hidden="true"></canvas>
 
-          <div class="rq-mechanism-label" style="left:70px;top:92px">FRAGMENTED EVIDENCE</div>
-          <div class="rq-mechanism-label rq-mechanism-label--center" style="left:350px;top:92px;width:340px">REQUIVO RESOLUTION ENGINE</div>
-          <div class="rq-mechanism-label rq-mechanism-label--center" style="left:706px;top:92px;width:309px">EXPERT CAPTURE LOOP</div>
-          <div class="rq-mechanism-label rq-mechanism-label--center" style="left:1156px;top:92px;width:276px">GOVERNED KNOWLEDGE LAYER</div>
-          <div class="rq-mechanism-label" style="left:1462px;top:92px">REQUIVO APPLICATIONS</div>
+    <div class="rq-mechanism-stage-wrap">
+      <div class="rq-mechanism-stage" data-stage>
+        <svg class="rq-mechanism-bg" viewBox="0 0 1660 860" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <pattern id="rqMechGrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+              <circle cx="0.5" cy="0.5" r="0.5" fill="oklch(72% 0.025 275 / 0.20)"/>
+            </pattern>
+            <radialGradient id="rqMechWash" cx="50%" cy="50%" r="42%">
+              <stop offset="0%" stop-color="oklch(94% 0.035 275 / 0.45)"/>
+              <stop offset="100%" stop-color="oklch(98.6% 0.006 275 / 0)"/>
+            </radialGradient>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#rqMechGrid)"/>
+          <rect width="100%" height="100%" fill="url(#rqMechWash)"/>
+        </svg>
 
-          <svg class="rq-mechanism-connectors" viewBox="0 0 1660 860" data-connectors aria-hidden="true">
-            <defs>
-              <linearGradient id="rqMechAccent" x1="0" x2="1">
-                <stop offset="0%" stop-color="oklch(78% 0.08 282)"/>
-                <stop offset="100%" stop-color="oklch(58% 0.16 282)"/>
-              </linearGradient>
-              <linearGradient id="rqMechAccentBack" x1="1" x2="0">
-                <stop offset="0%" stop-color="oklch(58% 0.16 282)"/>
-                <stop offset="100%" stop-color="oklch(78% 0.08 282)"/>
-              </linearGradient>
-            </defs>
-          </svg>
+        <div class="rq-mechanism-label" style="left:70px;top:92px">FRAGMENTED EVIDENCE</div>
+        <div class="rq-mechanism-label rq-mechanism-label--center" style="left:350px;top:92px;width:340px">REQUIVO RESOLUTION ENGINE</div>
+        <div class="rq-mechanism-label rq-mechanism-label--center" style="left:706px;top:92px;width:309px">EXPERT CAPTURE LOOP</div>
+        <div class="rq-mechanism-label rq-mechanism-label--center" style="left:1156px;top:92px;width:276px">GOVERNED KNOWLEDGE LAYER</div>
+        <div class="rq-mechanism-label" style="left:1462px;top:92px">REQUIVO APPLICATIONS</div>
 
-          <div class="rq-mechanism-evidence" data-evidence></div>
+        <svg class="rq-mechanism-connectors" viewBox="0 0 1660 860" data-connectors aria-hidden="true">
+          <defs>
+            <linearGradient id="rqMechAccent" x1="0" x2="1">
+              <stop offset="0%" stop-color="oklch(78% 0.08 282)"/>
+              <stop offset="100%" stop-color="oklch(58% 0.16 282)"/>
+            </linearGradient>
+            <linearGradient id="rqMechAccentBack" x1="1" x2="0">
+              <stop offset="0%" stop-color="oklch(58% 0.16 282)"/>
+              <stop offset="100%" stop-color="oklch(78% 0.08 282)"/>
+            </linearGradient>
+          </defs>
+        </svg>
 
-          <div class="rq-mechanism-mark" data-mark>Requivo</div>
+        <div class="rq-mechanism-evidence" data-evidence></div>
+        <div class="rq-mechanism-mark" data-mark>Requivo</div>
 
-          <div class="rq-mechanism-engine" data-engine>
-            <div class="rq-mechanism-engine-header">
-              <span>Resolution Engine</span>
-            </div>
-            <div class="rq-mechanism-engine-rule"></div>
-            <div class="rq-mechanism-engine-rows" data-engine-rows></div>
-            <div class="rq-mechanism-anchor rq-mechanism-anchor--right"></div>
+        <div class="rq-mechanism-engine" data-engine>
+          <div class="rq-mechanism-engine-header">
+            <span>Resolution Engine</span>
           </div>
-
-          <svg class="rq-mechanism-loop" viewBox="0 0 350 420" preserveAspectRatio="none" aria-hidden="true"
-               style="left:702px;top:170px;width:350px;height:420px">
-            <path d="M 12 30 C 12 8, 50 6, 175 6 C 300 6, 338 8, 338 30 L 338 390 C 338 412, 300 414, 175 414 C 50 414, 12 412, 12 390 Z"
-                  fill="none" stroke="oklch(72% 0.08 282 / 0.28)" stroke-width="1" stroke-dasharray="2 4"/>
-          </svg>
-
-          <div class="rq-mechanism-zone-label" style="left:720px;top:188px" data-zone-out>
-            <span class="rq-mechanism-zone-tick"></span>
-            <span>Routed → selected experts</span>
-          </div>
-          <div class="rq-mechanism-zone-label" style="left:720px;top:402px" data-zone-in>
-            <span class="rq-mechanism-zone-tick"></span>
-            <span>Captured ← retained</span>
-          </div>
-
-          <div class="rq-mechanism-questions" data-questions></div>
-          <div class="rq-mechanism-experts" data-experts></div>
-          <div class="rq-mechanism-returns" data-returns></div>
-
-          <div class="rq-mechanism-kl" data-kl>
-            <div class="rq-mechanism-kl-header"><span>Knowledge Layer</span></div>
-            <div class="rq-mechanism-kl-rule"></div>
-            <div class="rq-mechanism-kl-rows" data-kl-rows></div>
-            <div class="rq-mechanism-anchor rq-mechanism-anchor--left"></div>
-            <div class="rq-mechanism-density" data-density>
-              <span data-density-1>validated</span>
-              <span class="rq-mechanism-density-dot"></span>
-              <span data-density-2>retained</span>
-              <span class="rq-mechanism-density-dot"></span>
-              <span data-density-3>reusable</span>
-            </div>
-          </div>
-
-          <div class="rq-mechanism-apps" data-apps></div>
-
-          <div class="rq-mechanism-rail" data-rail></div>
+          <div class="rq-mechanism-engine-rule"></div>
+          <div class="rq-mechanism-engine-rows" data-engine-rows></div>
+          <div class="rq-mechanism-anchor rq-mechanism-anchor--right"></div>
         </div>
-      </div>
 
-      <div class="rq-mechanism-caption" data-caption>
-        <div class="rq-mechanism-caption-meta">
-          <span class="rq-mechanism-caption-step" data-caption-step>Step 01 / 06</span>
-          <span class="rq-mechanism-divider"></span>
-          <span class="rq-mechanism-caption-title" data-caption-title></span>
+        <svg class="rq-mechanism-loop" viewBox="0 0 350 420" preserveAspectRatio="none" aria-hidden="true"
+             style="left:702px;top:170px;width:350px;height:420px">
+          <path d="M 12 30 C 12 8, 50 6, 175 6 C 300 6, 338 8, 338 30 L 338 390 C 338 412, 300 414, 175 414 C 50 414, 12 412, 12 390 Z"
+                fill="none" stroke="oklch(72% 0.08 282 / 0.28)" stroke-width="1" stroke-dasharray="2 4"/>
+        </svg>
+
+        <div class="rq-mechanism-zone-label" style="left:720px;top:188px" data-zone-out>
+          <span class="rq-mechanism-zone-tick"></span>
+          <span>Routed → selected experts</span>
         </div>
-        <p class="rq-mechanism-caption-desc" data-caption-desc></p>
+        <div class="rq-mechanism-zone-label" style="left:720px;top:402px" data-zone-in>
+          <span class="rq-mechanism-zone-tick"></span>
+          <span>Captured ← retained</span>
+        </div>
+
+        <div class="rq-mechanism-questions" data-questions></div>
+        <div class="rq-mechanism-experts" data-experts></div>
+        <div class="rq-mechanism-returns" data-returns></div>
+
+        <div class="rq-mechanism-kl" data-kl>
+          <div class="rq-mechanism-kl-header"><span>Knowledge Layer</span></div>
+          <div class="rq-mechanism-kl-rule"></div>
+          <div class="rq-mechanism-kl-rows" data-kl-rows></div>
+          <div class="rq-mechanism-anchor rq-mechanism-anchor--left"></div>
+          <div class="rq-mechanism-density" data-density>
+            <span data-density-1>validated</span>
+            <span class="rq-mechanism-density-dot"></span>
+            <span data-density-2>retained</span>
+            <span class="rq-mechanism-density-dot"></span>
+            <span data-density-3>reusable</span>
+          </div>
+        </div>
+
+        <div class="rq-mechanism-apps" data-apps></div>
+        <div class="rq-mechanism-rail" data-rail></div>
       </div>
     </div>
+
+    <div class="rq-mechanism-caption" data-caption>
+      <div class="rq-mechanism-caption-meta">
+        <span class="rq-mechanism-caption-step" data-caption-step>Step 01 / 06</span>
+        <span class="rq-mechanism-divider"></span>
+        <span class="rq-mechanism-caption-title" data-caption-title></span>
+      </div>
+      <p class="rq-mechanism-caption-desc" data-caption-desc></p>
+    </div>
+  </div>
 </section>
 
 <section id="problem">
@@ -1383,11 +1608,13 @@ footer {
       </div>
       <h2 class="sec-title reveal">Work with the team building Requivo.</h2>
     </div>
+
     <div class="contact-layout">
       <p class="contact-intro reveal">We are working with a small number of organisations to pilot Requivo. If operational knowledge is a challenge you are facing, we would like to hear from you.</p>
+
       <div class="contact-grid">
         <div class="contact-card reveal">
-          <div class="contact-name">Agnieszka Weglarz</div>
+          <div class="contact-name">Agnieszka Pisz-Weglarz</div>
           <div class="contact-role">CEO / Co-Founder</div>
           <a class="contact-email" href="mailto:agnieszka.weglarz@requivo.at">agnieszka.weglarz@requivo.at</a>
         </div>
@@ -1409,8 +1636,8 @@ footer {
 <footer>
   <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#top" class="footer-logo" aria-label="Requivo home">
+      <div class="footer-brand-wrap">
+        <a href="#top" class="footer-brand footer-logo" aria-label="Requivo home">
           <svg viewBox="0 0 44 36" width="28" height="23" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M15 3.5 C7.5 3.5,3 8,3 14 L3 22 C3 28,7.5 32.5,15 32.5" stroke="#E2E8F0" stroke-width="3" stroke-linecap="round"/>
             <path d="M29 3.5 C36.5 3.5,41 8,41 14 L41 22 C41 28,36.5 32.5,29 32.5" stroke="#E2E8F0" stroke-width="3" stroke-linecap="round"/>
@@ -1458,50 +1685,69 @@ footer {
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-
-  /* ── Nav scroll ─────────────────────────────────────────────────── */
   var nav = document.getElementById('nav');
-  function syncNav() { nav.classList.toggle('raised', window.scrollY > 8); }
+
+  function syncNav() {
+    if (!nav) return;
+    nav.classList.toggle('raised', window.scrollY > 8);
+  }
+
   syncNav();
   window.addEventListener('scroll', syncNav, { passive: true });
 
-  /* ── Reveal on scroll ───────────────────────────────────────────── */
   var reveals = document.querySelectorAll('.reveal');
+
   if (!('IntersectionObserver' in window)) {
-    reveals.forEach(function(el) { el.classList.add('in'); });
+    reveals.forEach(function(el) {
+      el.classList.add('in');
+    });
   } else {
-    var obs = new IntersectionObserver(function(entries, o) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); }
+    var obs = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
-    reveals.forEach(function(el) { obs.observe(el); });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -32px 0px'
+    });
+
+    reveals.forEach(function(el) {
+      obs.observe(el);
+    });
   }
 
-  /* ── Hero ambient canvas ────────────────────────────────────────── */
+  /* HERO AMBIENT CANVAS */
   (function () {
     var canvas = document.getElementById('hero-ambient');
     if (!canvas) return;
+
     var ctx = canvas.getContext('2d');
     var section = canvas.closest ? canvas.closest('section') : canvas.parentElement;
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var W = 0, H = 0, dpr = 1, t = 0, last = 0;
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* 4 slow precision reference lines — very faint cobalt waveforms */
+    var W = 0;
+    var H = 0;
+    var dpr = 1;
+    var t = 0;
+    var last = 0;
+
     var LINES = [
-      { yFrac: 0.17, amp: 11, freq: 0.75, phase: 0.0,  spd: 0.21 },
-      { yFrac: 0.37, amp:  7, freq: 0.55, phase: 1.9,  spd: 0.17 },
-      { yFrac: 0.59, amp: 14, freq: 0.88, phase: 3.2,  spd: 0.25 },
-      { yFrac: 0.78, amp:  5, freq: 0.65, phase: 0.6,  spd: 0.14 },
+      { yFrac: 0.17, amp: 11, freq: 0.75, phase: 0.0, spd: 0.21 },
+      { yFrac: 0.37, amp: 7, freq: 0.55, phase: 1.9, spd: 0.17 },
+      { yFrac: 0.59, amp: 14, freq: 0.88, phase: 3.2, spd: 0.25 },
+      { yFrac: 0.78, amp: 5, freq: 0.65, phase: 0.6, spd: 0.14 }
     ];
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = section.offsetWidth;
       H = section.offsetHeight;
-      canvas.width  = W * dpr;
+      canvas.width = W * dpr;
       canvas.height = H * dpr;
-      canvas.style.width  = W + 'px';
+      canvas.style.width = W + 'px';
       canvas.style.height = H + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
@@ -1509,56 +1755,73 @@ document.addEventListener('DOMContentLoaded', function () {
     function draw() {
       ctx.clearRect(0, 0, W, H);
       if (reduced) return;
-      LINES.forEach(function (l) {
-        var baseY = H * l.yFrac;
+
+      LINES.forEach(function (line) {
+        var baseY = H * line.yFrac;
+
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(22,82,240,0.026)';
+        ctx.strokeStyle = 'rgba(22,82,240,0.014)';
         ctx.lineWidth = 1;
+
         for (var x = 0; x <= W; x += 3) {
-          var phase = (x / W) * Math.PI * 2 * l.freq + t * l.spd + l.phase;
-          var y = baseY + Math.sin(phase) * l.amp;
-          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          var phase = (x / W) * Math.PI * 2 * line.freq + t * line.spd + line.phase;
+          var y = baseY + Math.sin(phase) * line.amp;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
         }
+
         ctx.stroke();
       });
     }
 
-    function loop(ts) {
-      var dt = Math.min((ts - last) / 1000, 0.05);
-      last = ts; t += dt;
+    function loop(timestamp) {
+      var dt = Math.min((timestamp - last) / 1000, 0.05);
+      last = timestamp;
+      t += dt;
       draw();
       requestAnimationFrame(loop);
     }
 
     resize();
     window.addEventListener('resize', resize, { passive: true });
+
     if (!reduced) {
       last = performance.now();
       requestAnimationFrame(loop);
+    } else {
+      draw();
     }
   })();
 
-  /* ── Stream canvas (mechanism frame) ───────────────────────────── */
+  /* STREAM CANVAS */
   (function () {
     var canvas = document.getElementById('stream-canvas');
-    if (!canvas) return;
-    var frame  = document.getElementById('mechanism-frame');
-    var ctx    = canvas.getContext('2d');
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var W = 0, H = 0, dpr = 1, t = 0, last = 0;
+    var frame = document.getElementById('mechanism-frame');
 
-    var CH = 5;
+    if (!canvas || !frame) return;
+
+    var ctx = canvas.getContext('2d');
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var W = 0;
+    var H = 0;
+    var dpr = 1;
+    var t = 0;
+    var last = 0;
     var channels = [];
     var particles = [];
+    var channelCount = 5;
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = frame.offsetWidth;
       H = frame.offsetHeight;
-      canvas.width  = W * dpr;
+
+      canvas.width = W * dpr;
       canvas.height = H * dpr;
-      canvas.style.width  = W + 'px';
+      canvas.style.width = W + 'px';
       canvas.style.height = H + 'px';
+
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       buildScene();
     }
@@ -1566,21 +1829,25 @@ document.addEventListener('DOMContentLoaded', function () {
     function buildScene() {
       channels = [];
       particles = [];
+
       var pad = H * 0.14;
-      var spacing = (H - pad * 2) / (CH - 1);
-      for (var i = 0; i < CH; i++) {
+      var spacing = (H - pad * 2) / (channelCount - 1);
+
+      for (var i = 0; i < channelCount; i++) {
         channels.push(pad + i * spacing);
       }
+
       channels.forEach(function (cy, ci) {
         var count = 2 + (ci % 2 === 0 ? 1 : 0);
+
         for (var j = 0; j < count; j++) {
           particles.push({
-            x:     (j / count) * W + Math.random() * (W / count * 0.8),
-            baseY:  cy,
-            speed:  22 + ci * 2.5 + Math.random() * 10,
-            phase:  Math.random() * Math.PI * 2,
-            size:   1.5 + Math.random() * 0.9,
-            alpha:  0.42 + Math.random() * 0.36,
+            x: (j / count) * W + Math.random() * (W / count * 0.8),
+            baseY: cy,
+            speed: 22 + ci * 2.5 + Math.random() * 10,
+            phase: Math.random() * Math.PI * 2,
+            size: 1.5 + Math.random() * 0.9,
+            alpha: 0.42 + Math.random() * 0.36
           });
         }
       });
@@ -1589,77 +1856,89 @@ document.addEventListener('DOMContentLoaded', function () {
     function draw() {
       ctx.clearRect(0, 0, W, H);
 
-      var z1 = W * 0.33, z2 = W * 0.67;
+      var z1 = W * 0.33;
+      var z2 = W * 0.67;
 
-      /* Governed zone very faint tint */
       ctx.fillStyle = 'rgba(22,82,240,0.014)';
       ctx.fillRect(z2, 0, W - z2, H);
 
-      /* Zone dividers — dashed */
       ctx.setLineDash([3, 5]);
       ctx.lineWidth = 1;
       ctx.strokeStyle = 'rgba(211,217,232,0.55)';
+
       [z1, z2].forEach(function (x) {
         ctx.beginPath();
         ctx.moveTo(x, 18);
         ctx.lineTo(x, H - 18);
         ctx.stroke();
       });
+
       ctx.setLineDash([]);
 
-      /* Channel rails */
-      channels.forEach(function (cy, ci) {
-        /* Fragmented: dashed */
+      channels.forEach(function (cy) {
         ctx.setLineDash([4, 7]);
         ctx.lineWidth = 1;
         ctx.strokeStyle = 'rgba(185,196,222,0.44)';
-        ctx.beginPath(); ctx.moveTo(0,  cy); ctx.lineTo(z1, cy); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, cy);
+        ctx.lineTo(z1, cy);
+        ctx.stroke();
 
-        /* Processing: short dash */
         ctx.setLineDash([7, 4]);
         ctx.strokeStyle = 'rgba(140,162,210,0.40)';
-        ctx.beginPath(); ctx.moveTo(z1, cy); ctx.lineTo(z2, cy); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(z1, cy);
+        ctx.lineTo(z2, cy);
+        ctx.stroke();
 
-        /* Governed: solid */
         ctx.setLineDash([]);
         ctx.strokeStyle = 'rgba(22,82,240,0.18)';
-        ctx.beginPath(); ctx.moveTo(z2, cy); ctx.lineTo(W,  cy); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(z2, cy);
+        ctx.lineTo(W, cy);
+        ctx.stroke();
       });
 
-      /* Particles */
       particles.forEach(function (p) {
         var xn = p.x / W;
         var inGov = xn > 0.67;
         var inPro = !inGov && xn > 0.33;
 
-        /* Y jitter — decreases as particle moves toward governed zone */
         var jitter = 0;
+
         if (!inGov && !inPro) {
           jitter = Math.sin(t * 2.6 + p.phase) * 7;
         } else if (inPro) {
           jitter = Math.sin(t * 2.6 + p.phase) * (1 - (xn - 0.33) / 0.34) * 4;
         }
+
         var drawY = p.baseY + jitter;
+        var r;
+        var g;
+        var b;
 
-        var r, g, b;
-        if      (inGov) { r = 22;  g = 82;  b = 240; }
-        else if (inPro) { r = 72;  g = 108; b = 216; }
-        else            { r = 136; g = 150; b = 188; }
+        if (inGov) {
+          r = 22; g = 82; b = 240;
+        } else if (inPro) {
+          r = 72; g = 108; b = 216;
+        } else {
+          r = 136; g = 150; b = 188;
+        }
 
-        /* Trail */
-        var tlen = inGov ? 20 : inPro ? 12 : 6;
-        var grad = ctx.createLinearGradient(p.x - tlen, 0, p.x, 0);
+        var trailLength = inGov ? 20 : inPro ? 12 : 6;
+        var grad = ctx.createLinearGradient(p.x - trailLength, 0, p.x, 0);
+
         grad.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',0)');
         grad.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')');
+
         ctx.strokeStyle = grad;
         ctx.lineWidth = p.size;
         ctx.setLineDash([]);
         ctx.beginPath();
-        ctx.moveTo(p.x - tlen, drawY);
+        ctx.moveTo(p.x - trailLength, drawY);
         ctx.lineTo(p.x, drawY);
         ctx.stroke();
 
-        /* Dot */
         ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + p.alpha + ')';
         ctx.beginPath();
         ctx.arc(p.x, drawY, p.size * 0.72, 0, Math.PI * 2);
@@ -1667,15 +1946,19 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    function tick(ts) {
-      var dt = Math.min((ts - last) / 1000, 0.05);
-      last = ts; t += dt;
+    function tick(timestamp) {
+      var dt = Math.min((timestamp - last) / 1000, 0.05);
+      last = timestamp;
+      t += dt;
 
       particles.forEach(function (p) {
         var xn = p.x / W;
-        var spd = p.speed * (xn > 0.67 ? 1.28 : xn > 0.33 ? 0.96 : 0.72);
-        p.x += spd * dt;
-        if (p.x > W + 28) p.x = -28;
+        var speed = p.speed * (xn > 0.67 ? 1.28 : xn > 0.33 ? 0.96 : 0.72);
+        p.x += speed * dt;
+
+        if (p.x > W + 28) {
+          p.x = -28;
+        }
       });
 
       draw();
@@ -1683,6 +1966,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     resize();
+
     window.addEventListener('resize', function () {
       resize();
       if (reduced) draw();
@@ -1693,13 +1977,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       last = performance.now();
       requestAnimationFrame(tick);
-    }
-  })();
-
-    if (prefersReducedMotion) {
-      draw();
-    } else {
-      startLoop();
     }
   })();
 });
