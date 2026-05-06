@@ -14,14 +14,14 @@
   --rq-ink-3: oklch(62% 0.015 275);
   --rq-ink-4: oklch(80% 0.012 275);
   --rq-hair: oklch(82% 0.015 275 / 0.55);
-  --rq-accent: oklch(54% 0.17 282);
-  --rq-accent-2: oklch(68% 0.13 282);
+  --rq-accent: #1652F0;
+  --rq-accent-2: #4474F7;
   --rq-conflict: oklch(70% 0.13 55);
   --rq-gap: oklch(64% 0.04 275);
-  --rq-routed: oklch(58% 0.16 282);
+  --rq-routed: #1652F0;
   --rq-verified: oklch(64% 0.10 160);
-  --rq-serif: "Fraunces", Georgia, "Times New Roman", serif;
-  --rq-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --rq-serif: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --rq-sans: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
   --rq-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   position: relative;
@@ -68,11 +68,11 @@
 }
 
 .rq-mechanism-wordmark {
-  font-family: var(--rq-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 22px;
-  letter-spacing: 0.01em;
+  font-family: var(--rq-sans);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.022em;
   color: var(--rq-ink);
 }
 
@@ -302,11 +302,11 @@
   top: 178px;
   width: 280px;
   text-align: center;
-  font-family: var(--rq-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 38px;
-  letter-spacing: 0.005em;
+  font-family: var(--rq-sans);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 34px;
+  letter-spacing: -0.025em;
   color: var(--rq-ink);
   line-height: 1;
   opacity: 0.55;
@@ -931,22 +931,22 @@
 ============================================================ */
 
 .rq-mechanism {
-  --rq-bg: #FAFBFF;
-  --rq-bg-wash: #F3F5FC;
+  --rq-bg: #F2F4F9;
+  --rq-bg-wash: #E8EBF3;
 
   background:
     radial-gradient(
       ellipse 60% 55% at 50% 45%,
-      rgba(79, 70, 229, 0.045) 0%,
-      rgba(79, 70, 229, 0.018) 42%,
-      rgba(250, 251, 255, 0) 72%
+      rgba(22, 82, 240, 0.032) 0%,
+      rgba(22, 82, 240, 0.012) 44%,
+      rgba(242, 244, 249, 0) 74%
     ),
-    #FAFBFF !important;
+    #F2F4F9 !important;
 }
 
 .rq-mechanism-header {
-  background: rgba(255, 255, 255, 0.72) !important;
-  border-bottom-color: rgba(55, 48, 163, 0.09) !important;
+  background: rgba(255, 255, 255, 0.80) !important;
+  border-bottom-color: rgba(22, 82, 240, 0.08) !important;
 }
 
 .rq-mechanism-stage-wrap,
@@ -960,22 +960,15 @@
 .how-mechanism-frame,
 .rq-mechanism-frame,
 .mechanism-frame {
-  background:
-    radial-gradient(
-      ellipse 900px 520px at 52% 45%,
-      rgba(79, 70, 229, 0.042) 0%,
-      rgba(79, 70, 229, 0.016) 36%,
-      rgba(255, 255, 255, 0) 72%
-    ),
-    #FAFBFF !important;
+  background: #F2F4F9 !important;
 }
 
 /* Prevent warm host-page variables from leaking into the component */
 
 .rq-mechanism,
 .rq-mechanism * {
-  --paper: #FAFBFF !important;
-  --paper-2: #F8F9FC !important;
-  --cream: #FAFBFF !important;
-  --ivory: #FAFBFF !important;
+  --paper: #F2F4F9 !important;
+  --paper-2: #E8EBF3 !important;
+  --cream: #F2F4F9 !important;
+  --ivory: #F2F4F9 !important;
 }
