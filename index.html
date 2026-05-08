@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://db.onlinewebfonts.com/c/f21923cb0f60b46d41a66875255790b3?family=Neue+Haas+Grotesk+Display+Pro+65+Medium" rel="stylesheet" />
 
 <!-- Requivo mechanism animation -->
 <link rel="stylesheet" href="requivo-mechanism.css" />
@@ -17,30 +18,6 @@
 </script>
 
 <style>
-@font-face {
-  font-family: 'Neue Haas Grotesk Display';
-  src: url('fonts/NeueHaasGroteskDisplay-Roman.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Neue Haas Grotesk Display';
-  src: url('fonts/NeueHaasGroteskDisplay-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Neue Haas Grotesk Display';
-  src: url('fonts/NeueHaasGroteskDisplay-Bold.woff2') format('woff2');
-  font-weight: 600 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --bg:          #ffffff;
   --bg-off:      #f8f9fc;
@@ -58,8 +35,8 @@
   --indigo-pale: #f5f6ff;
   --sky:         #0ea5e9;
   --sky-soft:    #e0f2fe;
-  --font-display: 'Neue Haas Grotesk Display', 'Helvetica Now Display', 'Helvetica Neue', Arial, sans-serif;
-  --font-sans:    'Neue Haas Grotesk Display', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: "Neue Haas Grotesk Display Pro 65 Medium", "Helvetica Neue", Arial, sans-serif;
+  --font-sans:    "Neue Haas Grotesk Display Pro 65 Medium", "Helvetica Neue", Arial, sans-serif;
   --font-mono:    'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --max:         1180px;
   --ease:        cubic-bezier(.16,1,.3,1);
@@ -248,7 +225,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
 .hero h1 {
   font-family: var(--font-display);
   font-size: clamp(42px, 6vw, 82px);
-  font-weight: 400;
+  font-weight: 500;
   line-height: .92;
   letter-spacing: -.06em;
   color: var(--text);
@@ -265,7 +242,7 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
   line-height: 1.8;
   color: var(--text-soft);
   max-width: 560px;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 36px;
 }
 
@@ -415,7 +392,7 @@ section + section { border-top: 1px solid var(--line-soft); }
 .section-title {
   font-family: var(--font-display);
   font-size: clamp(28px, 3.4vw, 46px);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.02;
   letter-spacing: -.045em;
   color: var(--text);
@@ -428,7 +405,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   line-height: 1.82;
   color: var(--text-soft);
   max-width: 700px;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 52px;
 }
 
@@ -503,7 +480,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-size: 15px;
   line-height: 1.82;
   color: var(--text-soft);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* SOLUTION */
@@ -518,7 +495,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-size: 17px;
   line-height: 1.88;
   color: var(--text-soft);
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 20px;
 }
 
@@ -559,7 +536,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-size: 13.5px;
   line-height: 1.7;
   color: var(--text-soft);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* WHY */
@@ -599,7 +576,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   line-height: 1.75;
   display: flex;
   align-items: center;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .strata-row:nth-child(1) { background: #d1d9f0; color: #1e2650; }
@@ -656,7 +633,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-size: 15px;
   line-height: 1.82;
   color: var(--text-soft);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* CONTACT */
@@ -737,7 +714,7 @@ footer {
 .footer-brand p {
   font-size: 14px;
   line-height: 1.8;
-  font-weight: 300;
+  font-weight: 400;
   color: #7b8fad;
   max-width: 280px;
 }
@@ -756,7 +733,7 @@ footer {
   display: block;
   font-size: 14px;
   line-height: 2.1;
-  font-weight: 300;
+  font-weight: 400;
   color: #8fa3be;
   transition: color .18s;
 }
