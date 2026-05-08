@@ -28,7 +28,7 @@
 
   --text:        #0b1020;
   --text-mid:    #303444;
-  --text-soft:   #5f6472;
+  --text-soft:   rgba(11,16,32,.60);
   --text-dim:    #9a9da8;
 
   --indigo:      #2c2a7a;
@@ -165,22 +165,7 @@ nav.raised {
     linear-gradient(180deg, #fcfbf7 0%, #f7f5ee 58%, #f1efe7 100%);
 }
 
-.hero-premium::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: linear-gradient(rgba(44,42,122,.028) 1px, transparent 1px);
-  background-size: 100% 32px;
-  mask-image: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(0,0,0,.18) 22%,
-    rgba(0,0,0,.12) 64%,
-    transparent 100%
-  );
-}
+.hero-premium::before { content: none; }
 
 .hero-premium::after {
   content: "";
@@ -237,7 +222,7 @@ nav.raised {
   line-height: 1.62;
   color: rgba(11,16,32,.64);
   max-width: 760px;
-  font-weight: 300;
+  font-weight: 400;
   margin: clamp(34px, 4vw, 46px) auto 0;
   text-wrap: balance;
 }
@@ -246,7 +231,7 @@ nav.raised {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 22px;
   flex-wrap: wrap;
   margin-top: clamp(38px, 5vw, 56px);
 }
@@ -292,19 +277,21 @@ nav.raised {
     0 1px 2px rgba(15,23,42,.08);
 }
 
-.btn-secondary {
-  background: rgba(255,255,255,.24);
-  color: rgba(11,16,32,.74);
-  border-color: rgba(17,24,39,.12);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.55),
-    0 1px 2px rgba(15,23,42,.035);
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(11,16,32,.62);
+  border-bottom: 1px solid rgba(11,16,32,.22);
+  transition: color .18s, border-color .18s, transform .18s;
 }
 
-.btn-secondary:hover {
-  background: rgba(255,255,255,.46);
-  border-color: rgba(17,24,39,.18);
+.hero-link:hover {
   color: var(--text);
+  border-color: rgba(11,16,32,.5);
+  transform: translateY(-1px);
 }
 
 /* SECTIONS */
@@ -342,7 +329,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   line-height: 1.82;
   color: var(--text-soft);
   max-width: 700px;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 52px;
 }
 
@@ -362,60 +349,46 @@ section + section { border-top: 1px solid var(--line-soft); }
   overflow: hidden;
   background: #fbfcff;
   box-shadow:
-    0 1px 2px rgba(15,28,58,.04),
-    0 12px 42px rgba(44,42,122,.07),
-    0 28px 80px rgba(15,28,58,.055);
+    0 1px 2px rgba(15,28,58,.035),
+    0 18px 60px rgba(15,28,58,.055);
 }
 
-/* PROBLEM */
-.prob-grid {
+/* EDITORIAL PROBLEM SECTION */
+.editorial-grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, .95fr) minmax(360px, .75fr);
+  gap: clamp(48px, 8vw, 120px);
+  align-items: start;
 }
 
-.prob-card {
-  border-top: 2px solid var(--line);
-  padding: 28px 0 0;
-  position: relative;
+.editorial-grid .section-sub {
+  margin-bottom: 0;
 }
 
-.prob-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--indigo-mid);
-  transition: width .4s var(--ease);
+.editorial-list {
+  border-top: 1px solid var(--line);
 }
 
-.prob-card:hover::before { width: 100%; }
-
-.prob-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .12em;
-  color: var(--text-dim);
-  margin-bottom: 14px;
+.editorial-item {
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line-soft);
 }
 
-.prob-card h3 {
+.editorial-item h3 {
   font-family: var(--font-serif);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 400;
+  line-height: 1.12;
   letter-spacing: -.02em;
-  line-height: 1.2;
   color: var(--text);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-.prob-card p {
-  font-size: 15px;
-  line-height: 1.82;
+.editorial-item p {
+  font-size: 15.5px;
+  line-height: 1.76;
   color: var(--text-soft);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* SOLUTION */
@@ -430,7 +403,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-size: 17px;
   line-height: 1.88;
   color: var(--text-soft);
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 20px;
 }
 
@@ -441,12 +414,6 @@ section + section { border-top: 1px solid var(--line-soft); }
 .sol-panel {
   padding: 22px 24px;
   border-left: 2px solid var(--line);
-  transition: border-color .25s var(--ease), background .25s var(--ease);
-}
-
-.sol-panel:hover {
-  border-left-color: var(--indigo-mid);
-  background: rgba(255,255,255,.38);
 }
 
 .sol-tag {
@@ -471,7 +438,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-size: 13.5px;
   line-height: 1.7;
   color: var(--text-soft);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* WHY */
@@ -479,22 +446,18 @@ section + section { border-top: 1px solid var(--line-soft); }
 
 .strata {
   display: grid;
-  gap: 1px;
-  border-radius: 10px;
-  overflow: hidden;
+  border-top: 1px solid var(--line);
 }
 
 .strata-row {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 220px 1fr;
   align-items: stretch;
-  transition: filter .18s;
+  border-bottom: 1px solid var(--line-soft);
 }
 
-.strata-row:hover { filter: brightness(.97); }
-
 .strata-label {
-  padding: 24px 26px;
+  padding: 24px 26px 24px 0;
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
@@ -502,30 +465,18 @@ section + section { border-top: 1px solid var(--line-soft); }
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  border-right: 1px solid rgba(255,255,255,.08);
+  color: rgba(44,42,122,.72);
 }
 
 .strata-body {
-  padding: 24px 32px;
+  padding: 24px 0 24px 32px;
   font-size: 15px;
   line-height: 1.75;
   display: flex;
   align-items: center;
-  font-weight: 300;
-}
-
-.strata-row:nth-child(1) { background: #d8d6e7; color: #1e1d42; }
-.strata-row:nth-child(2) { background: #c6c2df; color: #1e1d42; }
-.strata-row:nth-child(3) { background: #aca6d2; color: #19183b; }
-.strata-row:nth-child(4) { background: #817abd; color: #111033; }
-.strata-row:nth-child(5) { background: #5b55a5; color: #ffffff; }
-.strata-row:nth-child(6) { background: #2c2a7a; color: #eceaf8; }
-
-.strata-row:nth-child(1) .strata-label,
-.strata-row:nth-child(2) .strata-label,
-.strata-row:nth-child(3) .strata-label,
-.strata-row:nth-child(4) .strata-label {
-  border-right-color: rgba(0,0,0,.08);
+  font-weight: 400;
+  color: var(--text-soft);
+  border-left: 1px solid var(--line-soft);
 }
 
 /* USE CASES */
@@ -541,19 +492,6 @@ section + section { border-top: 1px solid var(--line-soft); }
   position: relative;
 }
 
-.use-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--sky);
-  transition: width .4s var(--ease);
-}
-
-.use-card:hover::before { width: 100%; }
-
 .use-card h3 {
   font-family: var(--font-serif);
   font-size: 22px;
@@ -568,7 +506,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-size: 15px;
   line-height: 1.82;
   color: var(--text-soft);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* CONTACT */
@@ -583,19 +521,6 @@ section + section { border-top: 1px solid var(--line-soft); }
   padding: 24px 0 0;
   position: relative;
 }
-
-.contact-card::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--indigo-mid);
-  transition: width .4s var(--ease);
-}
-
-.contact-card:hover::before { width: 100%; }
 
 .contact-card h3 {
   font-family: var(--font-serif);
@@ -649,7 +574,7 @@ footer {
 .footer-brand p {
   font-size: 14px;
   line-height: 1.8;
-  font-weight: 300;
+  font-weight: 400;
   color: #7b8fad;
   max-width: 280px;
 }
@@ -668,7 +593,7 @@ footer {
   display: block;
   font-size: 14px;
   line-height: 2.1;
-  font-weight: 300;
+  font-weight: 400;
   color: #8fa3be;
   transition: color .18s;
 }
@@ -739,14 +664,16 @@ footer {
 
   .hero-actions {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     max-width: 320px;
     margin-left: auto;
     margin-right: auto;
+    gap: 16px;
   }
 
   .btn { width: 100%; }
 
+  .editorial-grid,
   .prob-grid,
   .use-grid,
   .contact-grid {
@@ -754,8 +681,8 @@ footer {
   }
 
   .strata-row { grid-template-columns: 1fr; }
-  .strata-label { padding: 16px 20px 6px; border-right: none; }
-  .strata-body { padding: 0 20px 16px; }
+  .strata-label { padding: 18px 0 6px; }
+  .strata-body { padding: 0 0 18px; border-left: none; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 8px; }
 
@@ -805,7 +732,7 @@ footer {
 
       <div class="hero-actions">
         <a href="#how-it-works" class="btn btn-primary">Explore how it works</a>
-        <a href="#contact" class="btn btn-secondary">Contact the team</a>
+        <a href="#contact" class="hero-link">Contact the team</a>
       </div>
     </div>
   </div>
@@ -931,26 +858,25 @@ footer {
 </section>
 
 <section id="problem">
-  <div class="wrap">
-    <div class="section-label">Problem</div>
-    <div class="section-title reveal">Operational knowledge is everywhere — but rarely ready to use.</div>
-    <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
+  <div class="wrap editorial-grid">
+    <div>
+      <div class="section-label">Problem</div>
+      <div class="section-title reveal">Operational knowledge is everywhere — but rarely ready to use.</div>
+      <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
+    </div>
 
-    <div class="prob-grid">
-      <div class="prob-card reveal">
-        <div class="prob-num">01</div>
+    <div class="editorial-list">
+      <div class="editorial-item reveal">
         <h3>Expertise stays in people’s heads</h3>
         <p>Critical know-how often lives in individual experts, informal workarounds, and local context — instead of becoming reusable organisational knowledge.</p>
       </div>
 
-      <div class="prob-card reveal d1">
-        <div class="prob-num">02</div>
+      <div class="editorial-item reveal d1">
         <h3>Documents do not transfer judgment</h3>
         <p>Teams may inherit files and procedures, but not the reasoning, exceptions, decisions, and operational context behind them.</p>
       </div>
 
-      <div class="prob-card reveal d2">
-        <div class="prob-num">03</div>
+      <div class="editorial-item reveal d2">
         <h3>Answers remain fragmented</h3>
         <p>Relevant signals are spread across systems, versions, and teams. Without validation and ownership, it is hard to know what is current, complete, or reliable.</p>
       </div>
