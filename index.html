@@ -160,30 +160,12 @@ nav.raised {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(44,42,122,.04), transparent 35%),
-    linear-gradient(180deg, #fcfbf7 0%, #f7f5ee 58%, #f1efe7 100%);
+  background: linear-gradient(180deg, #fcfbf7 0%, #f7f5ee 58%, #f1efe7 100%);
 }
 
-.hero-premium::before { content: none; }
-
+.hero-premium::before,
 .hero-premium::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -26%;
-  width: min(980px, 90vw);
-  height: 420px;
-  transform: translateX(-50%);
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(44,42,122,.075) 0%,
-    rgba(44,42,122,.035) 34%,
-    transparent 70%
-  );
-  filter: blur(22px);
+  content: none;
 }
 
 .hero-premium-inner {
@@ -373,7 +355,21 @@ section + section { border-top: 1px solid var(--line-soft); }
 .editorial-item {
   padding: 26px 0;
   border-bottom: 1px solid var(--line-soft);
+  position: relative;
 }
+
+.editorial-item::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--indigo-mid);
+  transition: width .4s var(--ease);
+}
+
+.editorial-item:hover::before { width: 100%; }
 
 .editorial-item h3 {
   font-family: var(--font-serif);
