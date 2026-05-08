@@ -7,8 +7,7 @@
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link href="https://db.onlinewebfonts.com/c/f21923cb0f60b46d41a66875255790b3?family=Neue+Haas+Grotesk+Display+Pro+65+Medium" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <!-- Requivo mechanism animation -->
 <link rel="stylesheet" href="requivo-mechanism.css" />
@@ -19,60 +18,32 @@
 
 <style>
 :root {
-  --bg:          #ffffff;
-  --bg-off:      #f8f9fc;
-  --bg-panel:    #f2f4f8;
+  --bg:          #fbfaf5;
+  --bg-off:      #f4f2ec;
+  --bg-panel:    #f2f0e8;
   --bg-deep:     #0f1c3a;
-  --line:        #dde3ed;
-  --line-soft:   #eaecf2;
-  --text:        #0d1424;
-  --text-mid:    #374259;
-  --text-soft:   #677390;
-  --text-dim:    #98a3b8;
-  --indigo:      #3730a3;
-  --indigo-mid:  #4338ca;
-  --indigo-soft: #eef2ff;
-  --indigo-pale: #f5f6ff;
+
+  --line:        rgba(17, 24, 39, 0.12);
+  --line-soft:   rgba(17, 24, 39, 0.08);
+
+  --text:        #0b1020;
+  --text-mid:    #303444;
+  --text-soft:   #5f6472;
+  --text-dim:    #9a9da8;
+
+  --indigo:      #2c2a7a;
+  --indigo-hover:#232163;
+  --indigo-mid:  #3b38a0;
+  --indigo-soft: #eceaf8;
+  --indigo-pale: #f5f4fb;
+
   --sky:         #0ea5e9;
   --sky-soft:    #e0f2fe;
-  /*
-   * TYPOGRAPHY SYSTEM
-   *
-   * --font-display-serif: Signifier by Klim Type Foundry (klim.co.nz).
-   *   License and self-host the files when ready. To add Signifier, place
-   *   the .woff2 files in a /fonts/ directory and prepend this @font-face:
-   *
-   *   @font-face {
-   *     font-family: "Signifier";
-   *     src: url("fonts/Signifier-Regular.woff2") format("woff2");
-   *     font-weight: 400;
-   *     font-style: normal;
-   *     font-display: swap;
-   *   }
-   *   @font-face {
-   *     font-family: "Signifier";
-   *     src: url("fonts/Signifier-Light.woff2") format("woff2");
-   *     font-weight: 300;
-   *     font-style: normal;
-   *     font-display: swap;
-   *   }
-   *
-   *   Until then, Georgia renders as a solid editorial fallback.
-   *
-   * --font-display-sans: Neue Haas Grotesk Display Pro 65 Medium.
-   *   Loaded via the existing stylesheet link. Used for section titles,
-   *   card heads, nav, buttons, and UI elements.
-   *
-   * --font-sans: Helvetica Neue / system sans. Used for body paragraphs,
-   *   subtitles, and any text where the display weight feels too heavy.
-   *
-   * --font-mono: IBM Plex Mono. Used for all technical labels, section
-   *   markers, captions, metadata, and mechanism annotations.
-   */
-  --font-display-serif: "Signifier", "Domaine Display", "Tiempos Headline", "Georgia", serif;
-  --font-display-sans:  "Neue Haas Grotesk Display Pro 65 Medium", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Arial, sans-serif;
-  --font-sans:          "Helvetica Neue", Arial, system-ui, sans-serif;
-  --font-mono:          "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --font-serif:  'Instrument Serif', Georgia, serif;
+  --font-sans:   'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono:   'IBM Plex Mono', monospace;
+
   --max:         1180px;
   --ease:        cubic-bezier(.16,1,.3,1);
 }
@@ -101,12 +72,16 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(14px);
+  background: rgba(251,250,245,.86);
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line-soft);
-  transition: box-shadow .25s;
+  transition: box-shadow .25s, background .25s;
 }
-nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09); }
+
+nav.raised {
+  background: rgba(251,250,245,.94);
+  box-shadow: 0 1px 0 var(--line-soft), 0 18px 50px rgba(15, 23, 42, .045);
+}
 
 .nav-inner {
   display: flex;
@@ -116,16 +91,15 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
   gap: 32px;
 }
 
-/* LOGO */
 .logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-display-sans);
-  font-size: 17px;
-  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: 19px;
+  font-weight: 400;
   color: var(--text);
-  letter-spacing: -.022em;
+  letter-spacing: -.02em;
 }
 
 .nav-links {
@@ -137,8 +111,8 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
 .nav-links a {
   font-size: 13.5px;
   font-weight: 400;
-  color: var(--text-soft);
-  letter-spacing: -.005em;
+  color: rgba(11, 16, 32, .58);
+  letter-spacing: .01em;
   transition: color .18s;
 }
 
@@ -147,16 +121,22 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
 .nav-cta {
   background: var(--indigo) !important;
   color: #fff !important;
-  padding: 9px 20px;
-  border-radius: 6px;
+  padding: 9px 22px;
+  border-radius: 999px;
   font-size: 13px !important;
   font-weight: 500 !important;
-  transition: background .18s, transform .18s !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 8px 22px rgba(44,42,122,.16);
+  transition: background .18s, transform .18s, box-shadow .18s !important;
 }
 
 .nav-cta:hover {
-  background: #312e81 !important;
+  background: var(--indigo-hover) !important;
   transform: translateY(-1px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 12px 28px rgba(44,42,122,.22) !important;
 }
 
 /* FOOTER LOGO */
@@ -164,138 +144,132 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-display-sans);
-  font-size: 17px;
-  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: 19px;
+  font-weight: 400;
   color: #fff;
-  letter-spacing: -.022em;
+  letter-spacing: -.02em;
 }
 
-/* HERO */
-.hero {
-  padding: 96px 0 92px;
-  position: relative;
-  overflow: hidden;
-  min-height: 96vh;
+/* PREMIUM HERO */
+.hero-premium {
+  min-height: calc(100vh - 64px);
+  padding: clamp(92px, 13vh, 148px) 0 clamp(86px, 12vh, 132px);
   display: flex;
   align-items: center;
+  position: relative;
+  overflow: hidden;
   isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(44,42,122,.045), transparent 34%),
+    linear-gradient(180deg, #fbfaf5 0%, #f7f5ee 56%, #f3f1ea 100%);
 }
 
-.hero::before {
-  content: '';
+.hero-premium::before {
+  content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: repeating-linear-gradient(
-    180deg,
-    transparent,
-    transparent 31px,
-    rgba(55,48,163,.04) 31px,
-    rgba(55,48,163,.04) 32px
-  );
+  background-image: linear-gradient(rgba(44,42,122,.028) 1px, transparent 1px);
+  background-size: 100% 32px;
   mask-image: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(0,0,0,.42) 14%,
-    rgba(0,0,0,.42) 86%,
+    rgba(0,0,0,.18) 22%,
+    rgba(0,0,0,.12) 64%,
     transparent 100%
   );
 }
 
-#topo-canvas {
+.hero-premium::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  left: 50%;
+  bottom: -26%;
+  width: min(980px, 90vw);
+  height: 420px;
+  transform: translateX(-50%);
   z-index: 0;
-}
-
-.hero-vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
   pointer-events: none;
-  background:
-    linear-gradient(90deg,
-      rgba(250,251,255,.97) 0%,
-      rgba(250,251,255,.90) 25%,
-      rgba(250,251,255,.54) 50%,
-      rgba(250,251,255,.18) 72%,
-      transparent 100%
-    );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(44,42,122,.075) 0%,
+    rgba(44,42,122,.035) 34%,
+    transparent 70%
+  );
+  filter: blur(22px);
 }
 
-.hero-inner {
+.hero-premium-inner {
   position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
-  gap: clamp(32px, 5vw, 64px);
-  align-items: center;
+  z-index: 1;
+  width: min(980px, 100%);
+  margin: 0 auto;
+  text-align: center;
 }
 
-.hero-tag {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 10px;
+.hero-kicker {
+  font-family: var(--font-serif);
+  font-size: clamp(13px, 1.15vw, 16px);
   font-weight: 400;
-  letter-spacing: 0.18em;
+  line-height: 1;
+  letter-spacing: .34em;
   text-transform: uppercase;
-  color: var(--text-soft);
-  border: 1px solid rgba(55,48,163,.22);
-  padding: 5px 11px;
-  border-radius: 3px;
-  margin-bottom: 32px;
+  color: rgba(44,42,122,.56);
+  margin-bottom: clamp(36px, 5vw, 54px);
 }
 
-.hero h1 {
-  font-family: var(--font-display-serif);
-  font-size: clamp(58px, 6.4vw, 94px);
+.hero-premium h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(56px, 8.1vw, 118px);
   font-weight: 400;
-  line-height: 0.96;
-  letter-spacing: -0.055em;
+  line-height: .88;
+  letter-spacing: -.055em;
   color: var(--text);
-  margin-bottom: 24px;
-  max-width: 780px;
-}
-
-.hero h1 .accent {
-  color: #4338ca;
+  max-width: 1060px;
+  margin: 0 auto;
+  text-wrap: balance;
 }
 
 .hero-sub {
-  font-family: var(--font-sans);
-  font-size: 18px;
-  line-height: 1.72;
-  color: #536079;
-  max-width: 620px;
-  font-weight: 400;
-  margin-bottom: 36px;
+  font-size: clamp(18px, 1.7vw, 23px);
+  line-height: 1.62;
+  color: rgba(11,16,32,.64);
+  max-width: 760px;
+  font-weight: 300;
+  margin: clamp(34px, 4vw, 46px) auto 0;
+  text-wrap: balance;
 }
 
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
   flex-wrap: wrap;
+  margin-top: clamp(38px, 5vw, 56px);
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 22px;
-  border-radius: 5px;
-  font-family: var(--font-display-sans);
-  font-size: 13px;
+  justify-content: center;
+  min-height: 48px;
+  padding: 13px 25px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -.005em;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: transform .2s var(--ease), box-shadow .2s, background .18s, border-color .18s;
+  transition:
+    transform .22s var(--ease),
+    box-shadow .22s var(--ease),
+    background .18s,
+    border-color .18s,
+    color .18s;
 }
 
 .btn:hover { transform: translateY(-1px); }
@@ -303,99 +277,34 @@ nav.raised { box-shadow: 0 1px 0 var(--line-soft), 0 4px 24px rgba(55,48,163,.09
 .btn-primary {
   background: var(--indigo);
   color: #fff;
-  border-color: var(--indigo);
-  box-shadow: 0 1px 3px rgba(55,48,163,.18);
+  border-color: rgba(44,42,122,.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 10px 28px rgba(44,42,122,.18),
+    0 1px 2px rgba(15,23,42,.08);
 }
 
 .btn-primary:hover {
-  background: #312e81;
-  box-shadow: 0 2px 10px rgba(55,48,163,.24);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--text-mid);
-  border-color: var(--line);
-}
-
-.btn-outline:hover {
-  border-color: var(--text-dim);
-  background: var(--bg-off);
-}
-
-/* HERO IMAGE */
-.hero-aside {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-.hero-shot {
-  width: 100%;
-  max-width: 540px;
-}
-
-.hero-shot-frame {
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  overflow: hidden;
-  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+  background: var(--indigo-hover);
   box-shadow:
-    0 1px 3px rgba(15,28,58,.05),
-    0 6px 20px rgba(15,28,58,.08),
-    0 20px 56px rgba(15,28,58,.07);
-  padding: 18px;
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 16px 38px rgba(44,42,122,.24),
+    0 1px 2px rgba(15,23,42,.08);
 }
 
-.hero-shot-frame.hero-no-img {
-  min-height: 360px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(145deg, #f0f4fb 0%, #e8eef7 100%);
-  position: relative;
-  overflow: hidden;
+.btn-secondary {
+  background: rgba(255,255,255,.24);
+  color: rgba(11,16,32,.74);
+  border-color: rgba(17,24,39,.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    0 1px 2px rgba(15,23,42,.035);
 }
 
-.hero-shot-frame.hero-no-img::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(55,48,163,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(55,48,163,.05) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-.hero-shot-frame.hero-no-img::after {
-  content: 'Interface fragment coming soon';
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .1em;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-shot-frame img {
-  width: 100%;
-  height: auto;
-  max-height: 640px;
-  object-fit: contain;
-  object-position: center center;
-  border-radius: 12px;
-  background: #fff;
-  border: 1px solid #e7ebf2;
-}
-
-.hero-shot-caption {
-  margin-top: 12px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--text-dim);
+.btn-secondary:hover {
+  background: rgba(255,255,255,.46);
+  border-color: rgba(17,24,39,.18);
+  color: var(--text);
 }
 
 /* SECTIONS */
@@ -415,29 +324,25 @@ section + section { border-top: 1px solid var(--line-soft); }
   gap: 9px;
 }
 
-.section-label::before {
-  content: none;
-}
+.section-label::before { content: none; }
 
 .section-title {
-  /* Optionally swap to var(--font-display-serif) for a selective editorial touch */
-  font-family: var(--font-display-sans);
-  font-size: clamp(26px, 3vw, 40px);
-  font-weight: 500;
-  line-height: 1.06;
-  letter-spacing: -.032em;
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.4vw, 46px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -.02em;
   color: var(--text);
   margin-bottom: 18px;
   max-width: 820px;
 }
 
 .section-sub {
-  font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.82;
   color: var(--text-soft);
-  max-width: 680px;
-  font-weight: 400;
+  max-width: 700px;
+  font-weight: 300;
   margin-bottom: 52px;
 }
 
@@ -447,9 +352,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   padding: 112px 0;
 }
 
-.how-head {
-  margin-bottom: 48px;
-}
+.how-head { margin-bottom: 48px; }
 
 .mechanism-shell {
   width: min(100%, 1320px);
@@ -460,8 +363,8 @@ section + section { border-top: 1px solid var(--line-soft); }
   background: #fbfcff;
   box-shadow:
     0 1px 2px rgba(15,28,58,.04),
-    0 12px 42px rgba(55,48,163,.08),
-    0 28px 80px rgba(15,28,58,.06);
+    0 12px 42px rgba(44,42,122,.07),
+    0 28px 80px rgba(15,28,58,.055);
 }
 
 /* PROBLEM */
@@ -499,21 +402,20 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 
 .prob-card h3 {
-  font-family: var(--font-display-sans);
-  font-size: 19px;
-  font-weight: 500;
-  letter-spacing: -.022em;
-  line-height: 1.22;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.2;
   color: var(--text);
   margin-bottom: 12px;
 }
 
 .prob-card p {
-  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.82;
   color: var(--text-soft);
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* SOLUTION */
@@ -525,11 +427,10 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 
 .sol-copy p {
-  font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.88;
   color: var(--text-soft);
-  font-weight: 400;
+  font-weight: 300;
   margin-bottom: 20px;
 }
 
@@ -545,7 +446,7 @@ section + section { border-top: 1px solid var(--line-soft); }
 
 .sol-panel:hover {
   border-left-color: var(--indigo-mid);
-  background: var(--indigo-pale);
+  background: rgba(255,255,255,.38);
 }
 
 .sol-tag {
@@ -558,20 +459,19 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 
 .sol-panel h3 {
-  font-family: var(--font-display-sans);
-  font-size: 16px;
-  font-weight: 500;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 400;
   color: var(--text);
   margin-bottom: 6px;
-  letter-spacing: -.016em;
+  letter-spacing: -.01em;
 }
 
 .sol-panel p {
-  font-family: var(--font-sans);
   font-size: 13.5px;
   line-height: 1.7;
   color: var(--text-soft);
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* WHY */
@@ -607,20 +507,19 @@ section + section { border-top: 1px solid var(--line-soft); }
 
 .strata-body {
   padding: 24px 32px;
-  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.75;
   display: flex;
   align-items: center;
-  font-weight: 400;
+  font-weight: 300;
 }
 
-.strata-row:nth-child(1) { background: #d1d9f0; color: #1e2650; }
-.strata-row:nth-child(2) { background: #b8c4e8; color: #1e2650; }
-.strata-row:nth-child(3) { background: #9baade; color: #1a224a; }
-.strata-row:nth-child(4) { background: #6e85cc; color: #111a3e; }
-.strata-row:nth-child(5) { background: #4f68bc; color: #ffffff; }
-.strata-row:nth-child(6) { background: #3730a3; color: #e0e7ff; }
+.strata-row:nth-child(1) { background: #d8d6e7; color: #1e1d42; }
+.strata-row:nth-child(2) { background: #c6c2df; color: #1e1d42; }
+.strata-row:nth-child(3) { background: #aca6d2; color: #19183b; }
+.strata-row:nth-child(4) { background: #817abd; color: #111033; }
+.strata-row:nth-child(5) { background: #5b55a5; color: #ffffff; }
+.strata-row:nth-child(6) { background: #2c2a7a; color: #eceaf8; }
 
 .strata-row:nth-child(1) .strata-label,
 .strata-row:nth-child(2) .strata-label,
@@ -656,21 +555,20 @@ section + section { border-top: 1px solid var(--line-soft); }
 .use-card:hover::before { width: 100%; }
 
 .use-card h3 {
-  font-family: var(--font-display-sans);
-  font-size: 19px;
-  font-weight: 500;
-  letter-spacing: -.022em;
-  line-height: 1.22;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.2;
   color: var(--text);
   margin-bottom: 12px;
 }
 
 .use-card p {
-  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.82;
   color: var(--text-soft);
-  font-weight: 400;
+  font-weight: 300;
 }
 
 /* CONTACT */
@@ -700,9 +598,9 @@ section + section { border-top: 1px solid var(--line-soft); }
 .contact-card:hover::before { width: 100%; }
 
 .contact-card h3 {
-  font-family: var(--font-display-sans);
-  font-size: 18px;
-  font-weight: 500;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
   letter-spacing: -.02em;
   color: var(--text);
   margin-bottom: 4px;
@@ -751,7 +649,7 @@ footer {
 .footer-brand p {
   font-size: 14px;
   line-height: 1.8;
-  font-weight: 400;
+  font-weight: 300;
   color: #7b8fad;
   max-width: 280px;
 }
@@ -770,7 +668,7 @@ footer {
   display: block;
   font-size: 14px;
   line-height: 2.1;
-  font-weight: 400;
+  font-weight: 300;
   color: #8fa3be;
   transition: color .18s;
 }
@@ -809,19 +707,6 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 1180px) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .hero-aside {
-    justify-content: flex-start;
-  }
-
-  .hero-shot {
-    max-width: 680px;
-  }
-
   .solution-layout { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -830,6 +715,37 @@ footer {
   .wrap { width: calc(100% - 32px); }
   .nav-links { display: none; }
   section { padding: 80px 0; }
+
+  .hero-premium {
+    min-height: auto;
+    padding: 92px 0 86px;
+  }
+
+  .hero-premium h1 {
+    font-size: clamp(52px, 16vw, 78px);
+    line-height: .92;
+    letter-spacing: -.045em;
+  }
+
+  .hero-kicker {
+    letter-spacing: .24em;
+    margin-bottom: 32px;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn { width: 100%; }
 
   .prob-grid,
   .use-grid,
@@ -843,30 +759,8 @@ footer {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 8px; }
 
-  .hero-shot-frame {
-    padding: 12px;
-    border-radius: 16px;
-  }
-
-  .hero-shot-frame.hero-no-img {
-    min-height: 360px;
-  }
-
-  .hero-shot-frame img {
-    max-height: none;
-  }
-
-  .hero {
-    min-height: auto;
-  }
-
-  #how-it-works {
-    padding: 80px 0;
-  }
-
-  .mechanism-shell {
-    border-radius: 14px;
-  }
+  #how-it-works { padding: 80px 0; }
+  .mechanism-shell { border-radius: 14px; }
 }
 </style>
 </head>
@@ -894,32 +788,24 @@ footer {
   </div>
 </nav>
 
-<section class="hero" id="top">
-  <canvas id="topo-canvas"></canvas>
-  <div class="hero-vignette"></div>
-
+<section class="hero-premium" id="top">
   <div class="wrap">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-tag">Operational knowledge system</div>
-        <h1>Critical knowledge exists. <span class="accent">Requivo makes it usable.</span></h1>
-        <p class="hero-sub">Requivo turns scattered documents, systems, workflows, and expert know-how into a governed operational knowledge layer that teams and AI systems can use.</p>
-        <div class="hero-actions">
-          <a href="#how-it-works" class="btn btn-primary">Explore how it works</a>
-          <a href="#contact" class="btn btn-outline">Contact the team</a>
-        </div>
-      </div>
+    <div class="hero-premium-inner">
+      <div class="hero-kicker">Operational Knowledge System</div>
 
-      <div class="hero-aside">
-        <div class="hero-shot">
-          <div class="hero-shot-frame">
-            <img
-              src="requivo-fragment.png"
-              alt="Selected interface fragment from Requivo"
-              onerror="this.style.display='none';this.parentElement.classList.add('hero-no-img')" />
-          </div>
-          <div class="hero-shot-caption">Selected interface fragment</div>
-        </div>
+      <h1>
+        Critical knowledge exists.<br />
+        Requivo makes it usable.
+      </h1>
+
+      <p class="hero-sub">
+        Requivo turns scattered documents, systems, workflows, and expert know-how
+        into a governed operational knowledge layer that teams and AI systems can use.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#how-it-works" class="btn btn-primary">Explore how it works</a>
+        <a href="#contact" class="btn btn-secondary">Contact the team</a>
       </div>
     </div>
   </div>
@@ -987,22 +873,17 @@ footer {
           </svg>
 
           <div class="rq-mechanism-evidence" data-evidence></div>
-
           <div class="rq-mechanism-mark" data-mark>Requivo</div>
 
           <div class="rq-mechanism-engine" data-engine>
-            <div class="rq-mechanism-engine-header">
-              <span>Resolution Engine</span>
-            </div>
+            <div class="rq-mechanism-engine-header"><span>Resolution Engine</span></div>
             <div class="rq-mechanism-engine-rule"></div>
             <div class="rq-mechanism-engine-rows" data-engine-rows></div>
             <div class="rq-mechanism-anchor rq-mechanism-anchor--right"></div>
           </div>
 
-          <svg class="rq-mechanism-loop" viewBox="0 0 350 420" preserveAspectRatio="none" aria-hidden="true"
-               style="left:702px;top:170px;width:350px;height:420px">
-            <path d="M 12 30 C 12 8, 50 6, 175 6 C 300 6, 338 8, 338 30 L 338 390 C 338 412, 300 414, 175 414 C 50 414, 12 412, 12 390 Z"
-                  fill="none" stroke="oklch(72% 0.08 282 / 0.28)" stroke-width="1" stroke-dasharray="2 4"/>
+          <svg class="rq-mechanism-loop" viewBox="0 0 350 420" preserveAspectRatio="none" aria-hidden="true" style="left:702px;top:170px;width:350px;height:420px">
+            <path d="M 12 30 C 12 8, 50 6, 175 6 C 300 6, 338 8, 338 30 L 338 390 C 338 412, 300 414, 175 414 C 50 414, 12 412, 12 390 Z" fill="none" stroke="oklch(72% 0.08 282 / 0.28)" stroke-width="1" stroke-dasharray="2 4"/>
           </svg>
 
           <div class="rq-mechanism-zone-label" style="left:720px;top:188px" data-zone-out>
@@ -1033,7 +914,6 @@ footer {
           </div>
 
           <div class="rq-mechanism-apps" data-apps></div>
-
           <div class="rq-mechanism-rail" data-rail></div>
         </div>
       </div>
@@ -1287,802 +1167,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     reveals.forEach(el => observer.observe(el));
   }
-
-  (function () {
-    const canvas = document.getElementById('topo-canvas');
-    const ctx = canvas.getContext('2d', { alpha: true });
-    const hero = document.getElementById('top');
-    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let profile = null;
-    let CFG = null;
-
-    let W = 0, H = 0, cellW = 0, cellH = 0, dpr = 1;
-    let pts = [];
-    let ghostPts = [];
-    let anchors = [];
-    let memoryTrails = [];
-    let time = 0;
-    let running = false;
-    let rafId = null;
-    let lastFrameTime = 0;
-
-    let mouse = {
-      x: -9999,
-      y: -9999,
-      active: false,
-      lastX: -9999,
-      lastY: -9999
-    };
-
-    function getProfile() {
-      const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      const isTouch = window.matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window);
-      const lowPowerMode = isMobile || isTouch;
-
-      return {
-        isMobile,
-        isTouch,
-        lowPowerMode,
-        targetFPS: lowPowerMode ? 30 : 60
-      };
-    }
-
-    function buildConfig(currentProfile) {
-      const low = currentProfile.lowPowerMode;
-
-      return {
-        COLS: low ? 14 : 24,
-        ROWS: low ? 9 : 15,
-        GHOST_COLS: low ? 8 : 15,
-        GHOST_ROWS: low ? 5 : 9,
-
-        NOISE_SCALE: low ? 0.0092 : 0.0102,
-        NOISE_SPEED: low ? 0.00022 : 0.00034,
-
-        AMP_LEFT: low ? 42 : 74,
-        AMP_MID: low ? 9 : 14,
-        AMP_RIGHT: low ? 1.5 : 2.1,
-
-        SPRING_LEFT: 0.036,
-        SPRING_MID: 0.068,
-        SPRING_RIGHT: 0.128,
-
-        FRICTION_LEFT: 0.80,
-        FRICTION_MID: 0.72,
-        FRICTION_RIGHT: 0.56,
-
-        MOUSE_RADIUS: low ? 80 : 140,
-        MOUSE_PULL: low ? 0.06 : 0.10,
-        REVEAL_RADIUS: low ? 70 : 130,
-
-        DOT_R: low ? 0.92 : 1.12,
-        DOT_R_ACTIVE: low ? 1.55 : 2.15,
-
-        INDIGO: [55,48,163],
-        SKY: [14,165,233],
-        SLATE: [132,147,169],
-        VALID: [79,70,229]
-      };
-    }
-
-    function clamp(v, min, max) {
-      return Math.max(min, Math.min(max, v));
-    }
-
-    function lerp(a, b, t) {
-      return a + (b - a) * t;
-    }
-
-    function lerpColor(a, b, t) {
-      return [
-        Math.round(lerp(a[0], b[0], t)),
-        Math.round(lerp(a[1], b[1], t)),
-        Math.round(lerp(a[2], b[2], t))
-      ];
-    }
-
-    function smoothstep(a, b, x) {
-      const t = clamp((x - a) / (b - a), 0, 1);
-      return t * t * (3 - 2 * t);
-    }
-
-    function distance(x1, y1, x2, y2) {
-      const dx = x1 - x2;
-      const dy = y1 - y2;
-      return Math.sqrt(dx * dx + dy * dy);
-    }
-
-    function noise(x, y, t) {
-      const n = Math.sin(x * 127.1 + y * 311.7 + t * 74.3) * 43758.5453;
-      return (n - Math.floor(n)) * 2 - 1;
-    }
-
-    function smoothNoise(x, y, t) {
-      const ix = Math.floor(x), iy = Math.floor(y);
-      const fx = x - ix, fy = y - iy;
-      const ux = fx * fx * (3 - 2 * fx);
-      const uy = fy * fy * (3 - 2 * fy);
-
-      return (
-        noise(ix, iy, t) * (1 - ux) * (1 - uy) +
-        noise(ix + 1, iy, t) * ux * (1 - uy) +
-        noise(ix, iy + 1, t) * (1 - ux) * uy +
-        noise(ix + 1, iy + 1, t) * ux * uy
-      );
-    }
-
-    function resize() {
-      profile = getProfile();
-      CFG = buildConfig(profile);
-
-      dpr = Math.min(window.devicePixelRatio || 1, profile.lowPowerMode ? 1.5 : 2);
-
-      W = hero.offsetWidth;
-      H = hero.offsetHeight;
-
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      canvas.style.width = W + 'px';
-      canvas.style.height = H + 'px';
-
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-
-      cellW = W / (CFG.COLS - 1);
-      cellH = H / (CFG.ROWS - 1);
-
-      buildGrid();
-      buildGhostGrid();
-      memoryTrails = [];
-    }
-
-    function buildGrid() {
-      pts = [];
-      anchors = [];
-
-      for (let row = 0; row < CFG.ROWS; row++) {
-        for (let col = 0; col < CFG.COLS; col++) {
-          const ox = col * cellW;
-          const oy = row * cellH;
-          const xn = ox / W;
-
-          const toMid = smoothstep(0.18, 0.52, xn);
-          const toRight = smoothstep(0.56, 0.90, xn);
-
-          const amp = lerp(lerp(CFG.AMP_LEFT, CFG.AMP_MID, toMid), CFG.AMP_RIGHT, toRight);
-          const spring = lerp(lerp(CFG.SPRING_LEFT, CFG.SPRING_MID, toMid), CFG.SPRING_RIGHT, toRight);
-          const friction = lerp(lerp(CFG.FRICTION_LEFT, CFG.FRICTION_MID, toMid), CFG.FRICTION_RIGHT, toRight);
-
-          const zone = xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed';
-
-          const validationHub =
-            !profile.lowPowerMode &&
-            zone === 'governed' &&
-            (col === CFG.COLS - 5 || col === CFG.COLS - 8 || col === CFG.COLS - 11) &&
-            (row === 3 || row === 7 || row === 11);
-
-          const anchor =
-            zone === 'governed' &&
-            (col === CFG.COLS - 7 || col === CFG.COLS - 10) &&
-            (row === Math.max(2, Math.floor(CFG.ROWS * 0.3)) || row === Math.max(4, Math.floor(CFG.ROWS * 0.7)));
-
-          const backbone =
-            zone === 'governed' &&
-            !profile.lowPowerMode &&
-            (col === CFG.COLS - 8 || col === CFG.COLS - 6);
-
-          const point = {
-            ox, oy,
-            x: ox, y: oy,
-            vx: 0, vy: 0,
-            col, row,
-            zone,
-            amp,
-            spring,
-            friction,
-            phase: Math.random() * Math.PI * 2,
-            edge: col === 0 || col === CFG.COLS - 1 || row === 0 || row === CFG.ROWS - 1,
-            validationHub,
-            anchor,
-            backbone
-          };
-
-          if (anchor) anchors.push(point);
-          pts.push(point);
-        }
-      }
-    }
-
-    function buildGhostGrid() {
-      ghostPts = [];
-
-      if (profile.lowPowerMode) return;
-
-      const gw = W / (CFG.GHOST_COLS - 1);
-      const gh = H / (CFG.GHOST_ROWS - 1);
-
-      for (let row = 0; row < CFG.GHOST_ROWS; row++) {
-        for (let col = 0; col < CFG.GHOST_COLS; col++) {
-          const ox = col * gw + (col % 2 ? gw * 0.10 : 0);
-          const oy = row * gh + ((row % 2) ? gh * 0.06 : 0);
-          const xn = clamp(ox / W, 0, 1);
-
-          ghostPts.push({
-            ox, oy,
-            x: ox, y: oy,
-            zone: xn < 0.34 ? 'fragmented' : xn < 0.66 ? 'aligned' : 'governed',
-            phase: Math.random() * Math.PI * 2,
-            col, row
-          });
-        }
-      }
-    }
-
-    function edgeClass(a, b) {
-      if (a.validationHub || b.validationHub) return 'validated';
-      if (a.anchor || b.anchor) return 'anchored';
-      if (a.backbone || b.backbone) return 'backbone';
-      if (a.zone === 'governed' && b.zone === 'governed') return 'supporting';
-      if (a.zone === 'aligned' || b.zone === 'aligned') return 'reconcile';
-      return 'tentative';
-    }
-
-    function updatePrimary() {
-      const t = time * CFG.NOISE_SPEED;
-
-      pts.forEach(p => {
-        const nx = p.ox * CFG.NOISE_SCALE;
-        const ny = p.oy * CFG.NOISE_SCALE;
-
-        let dx = smoothNoise(nx, ny, t) * p.amp;
-        let dy = smoothNoise(nx + 31, ny + 17, t) * p.amp;
-
-        dx += smoothNoise(nx * 2.05, ny * 2.05, t * 1.5) * p.amp * (profile.lowPowerMode ? 0.10 : 0.18);
-        dy += smoothNoise(nx * 2.05 + 3, ny * 2.05 + 2, t * 1.35) * p.amp * (profile.lowPowerMode ? 0.08 : 0.14);
-
-        if (p.zone === 'aligned') {
-          dx *= 0.58;
-          dy *= 0.50;
-        }
-
-        if (p.zone === 'governed') {
-          dx *= 0.10;
-          dy *= 0.09;
-          dx += Math.sin(t * 130 + p.row * 0.18) * (profile.lowPowerMode ? 0.12 : 0.22);
-          dy += Math.cos(t * 118 + p.col * 0.08) * (profile.lowPowerMode ? 0.03 : 0.06);
-        }
-
-        if (p.zone === 'fragmented') {
-          dx += Math.sin(t * 230 + p.phase) * (profile.lowPowerMode ? 2.0 : 3.2);
-          dy += Math.cos(t * 205 + p.phase) * (profile.lowPowerMode ? 1.2 : 2.0);
-        }
-
-        if (p.anchor) {
-          dx *= 0.18;
-          dy *= 0.16;
-        }
-        if (p.validationHub) {
-          dx *= 0.14;
-          dy *= 0.12;
-        }
-
-        if (p.zone === 'governed') {
-          const laneA = Math.round((W * 0.73) / cellW) * cellW;
-          const laneB = Math.round((W * 0.82) / cellW) * cellW;
-          const laneWeightA = Math.exp(-Math.abs(p.ox - laneA) / 118);
-          const laneWeightB = Math.exp(-Math.abs(p.ox - laneB) / 118);
-          const laneMix = Math.max(0.0001, laneWeightA + laneWeightB);
-          const snapTargetX = (laneA * laneWeightA + laneB * laneWeightB) / laneMix;
-
-          dx += (snapTargetX - p.ox) * 0.016 * laneMix;
-
-          const rowSnap = Math.round(p.oy / cellH) * cellH;
-          dy += (rowSnap - p.oy) * 0.014;
-        }
-
-        if (p.zone === 'governed' && !p.anchor && !p.validationHub && anchors.length) {
-          let basinX = 0;
-          let basinY = 0;
-          let basinW = 0;
-
-          for (let i = 0; i < anchors.length; i++) {
-            const a = anchors[i];
-            const d = distance(p.ox, p.oy, a.ox, a.oy);
-            if (d > 170) continue;
-            const w = 1 - d / 170;
-            basinX += a.ox * w;
-            basinY += a.oy * w;
-            basinW += w;
-          }
-
-          if (basinW > 0) {
-            dx += ((basinX / basinW) - p.ox) * 0.012;
-            dy += ((basinY / basinW) - p.oy) * 0.008;
-          }
-        }
-
-        let tx = p.ox + dx;
-        let ty = p.oy + dy;
-
-        const md = distance(p.x, p.y, mouse.x, mouse.y);
-        if (mouse.active && md < CFG.MOUSE_RADIUS && md > 0) {
-          const falloff = 1 - md / CFG.MOUSE_RADIUS;
-          const pull =
-            p.zone === 'fragmented' ? CFG.MOUSE_PULL :
-            p.zone === 'aligned' ? CFG.MOUSE_PULL * 0.62 :
-            CFG.MOUSE_PULL * 0.34;
-
-          tx += (mouse.x - p.x) * falloff * pull;
-          ty += (mouse.y - p.y) * falloff * pull;
-        }
-
-        p.vx += (tx - p.x) * p.spring;
-        p.vy += (ty - p.y) * p.spring;
-        p.vx *= p.friction;
-        p.vy *= p.friction;
-        p.x += p.vx;
-        p.y += p.vy;
-      });
-    }
-
-    function updateGhost() {
-      if (profile.lowPowerMode || ghostPts.length === 0) return;
-
-      const tt = time * 0.00022;
-      ghostPts.forEach(p => {
-        const amp = p.zone === 'fragmented' ? 10 : p.zone === 'aligned' ? 5 : 1.8;
-        p.x = p.ox + Math.sin(tt * 180 + p.phase + p.row * 0.08) * amp;
-        p.y = p.oy + Math.cos(tt * 145 + p.phase + p.col * 0.05) * amp * 0.38;
-      });
-    }
-
-    function updateMemoryTrails() {
-      if (profile.lowPowerMode) {
-        memoryTrails.length = 0;
-        return;
-      }
-
-      memoryTrails = memoryTrails
-        .map(t => ({ ...t, life: t.life - 1 }))
-        .filter(t => t.life > 0);
-    }
-
-    function update() {
-      time += 1;
-      updatePrimary();
-      updateGhost();
-      updateMemoryTrails();
-    }
-
-    function revealStrength(x, y) {
-      if (!mouse.active) return 0;
-      const d = distance(x, y, mouse.x, mouse.y);
-      if (d > CFG.REVEAL_RADIUS) return 0;
-      return 1 - d / CFG.REVEAL_RADIUS;
-    }
-
-    function zoneThreshold(zone) {
-      if (zone === 'fragmented') return 1.00;
-      if (zone === 'aligned') return 1.13;
-      return 1.18;
-    }
-
-    function drawAtmosphere() {
-      const leftGlow = ctx.createRadialGradient(W * 0.14, H * 0.48, 0, W * 0.14, H * 0.48, W * 0.32);
-      leftGlow.addColorStop(0, 'rgba(79,70,229,0.032)');
-      leftGlow.addColorStop(1, 'rgba(79,70,229,0)');
-      ctx.fillStyle = leftGlow;
-      ctx.fillRect(0, 0, W, H);
-
-      const rightGlow = ctx.createRadialGradient(W * 0.82, H * 0.44, 0, W * 0.82, H * 0.44, W * 0.22);
-      rightGlow.addColorStop(0, 'rgba(14,165,233,0.022)');
-      rightGlow.addColorStop(1, 'rgba(14,165,233,0)');
-      ctx.fillStyle = rightGlow;
-      ctx.fillRect(0, 0, W, H);
-    }
-
-    function drawGovernanceField() {
-      const x = W * 0.72;
-      const grad = ctx.createLinearGradient(x - 26, 0, x + 26, 0);
-      grad.addColorStop(0, 'rgba(255,255,255,0)');
-      grad.addColorStop(0.5, 'rgba(79,70,229,0.028)');
-      grad.addColorStop(1, 'rgba(255,255,255,0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(x - 26, 0, 52, H);
-    }
-
-    function drawPrimaryEdges() {
-      for (let i = 0; i < pts.length; i++) {
-        const a = pts[i];
-        const neighbours = [];
-
-        if (a.col < CFG.COLS - 1) neighbours.push(pts[i + 1]);
-        if (a.row < CFG.ROWS - 1) neighbours.push(pts[i + CFG.COLS]);
-        if (!profile.lowPowerMode && a.zone !== 'fragmented' && a.col < CFG.COLS - 1 && a.row < CFG.ROWS - 1) {
-          neighbours.push(pts[i + CFG.COLS + 1]);
-        }
-
-        for (let n = 0; n < neighbours.length; n++) {
-          const b = neighbours[n];
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const expected = Math.max(cellW, cellH) * 1.16;
-
-          const zone =
-            a.zone === b.zone ? a.zone :
-            (a.zone === 'governed' || b.zone === 'governed') ? 'aligned' : 'fragmented';
-
-          if (dist > expected * zoneThreshold(zone)) continue;
-          if (zone === 'fragmented' && dist > expected * 0.84) continue;
-
-          const mx = (a.x + b.x) * 0.5;
-          const my = (a.y + b.y) * 0.5;
-          const xNorm = clamp(mx / W, 0, 1);
-          const wGov = smoothstep(0.46, 0.92, xNorm);
-
-          let rgb = lerpColor(CFG.INDIGO, CFG.SKY, wGov);
-          const kind = edgeClass(a, b);
-
-          const md = distance(mx, my, mouse.x, mouse.y);
-          const mouseBoost = mouse.active && md < CFG.MOUSE_RADIUS
-            ? (1 - md / CFG.MOUSE_RADIUS) * 0.045
-            : 0;
-
-          const tension = clamp(Math.abs(dist - expected) / expected, 0, 1);
-          let alpha = (0.016 + wGov * 0.065 + mouseBoost) * (1 - tension * 0.58);
-
-          if (zone === 'fragmented') alpha *= 0.78;
-          if (zone === 'governed') alpha *= 1.02;
-
-          if (kind === 'backbone') {
-            alpha *= 1.10;
-          } else if (kind === 'anchored') {
-            alpha *= 1.08;
-            rgb = lerpColor(CFG.INDIGO, CFG.SKY, 0.68);
-          } else if (kind === 'validated') {
-            alpha *= 1.14;
-            rgb = CFG.VALID;
-          } else if (kind === 'supporting') {
-            alpha *= 0.88;
-          } else if (kind === 'tentative') {
-            alpha *= 0.72;
-          }
-
-          if (profile.lowPowerMode) alpha *= 0.88;
-
-          ctx.globalAlpha = alpha;
-          ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-          ctx.lineWidth =
-            kind === 'validated' ? 0.82 :
-            kind === 'anchored' ? 0.70 :
-            kind === 'backbone' ? 0.62 :
-            kind === 'supporting' ? 0.46 :
-            (a.edge || b.edge ? 0.34 : 0.46);
-
-          if (profile.lowPowerMode) {
-            ctx.lineWidth *= 0.92;
-          }
-
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    function drawGhostEdges() {
-      if (profile.lowPowerMode || ghostPts.length === 0) return;
-
-      for (let i = 0; i < ghostPts.length; i++) {
-        const a = ghostPts[i];
-        const neighbours = [];
-
-        if (a.col < CFG.GHOST_COLS - 1) neighbours.push(ghostPts[i + 1]);
-        if (a.row < CFG.GHOST_ROWS - 1) neighbours.push(ghostPts[i + CFG.GHOST_COLS]);
-
-        for (let n = 0; n < neighbours.length; n++) {
-          const b = neighbours[n];
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const expected = Math.max(W / (CFG.GHOST_COLS - 1), H / (CFG.GHOST_ROWS - 1)) * 1.10;
-          if (dist > expected * 1.03) continue;
-          if (a.zone === 'fragmented' && dist > expected * 0.88) continue;
-
-          const mx = (a.x + b.x) * 0.5;
-          const my = (a.y + b.y) * 0.5;
-          const reveal = revealStrength(mx, my);
-          if (reveal < 0.09) continue;
-
-          const xNorm = clamp(mx / W, 0, 1);
-          const wGov = smoothstep(0.44, 0.94, xNorm);
-          const rgb = lerpColor(CFG.SLATE, CFG.SKY, wGov);
-
-          ctx.globalAlpha = (0.010 + wGov * 0.012) * reveal;
-          ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-          ctx.lineWidth = 0.36;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    function drawBackboneLanes() {
-      if (profile.lowPowerMode) return;
-
-      const cols = [CFG.COLS - 8, CFG.COLS - 6];
-      cols.forEach((col, i) => {
-        ctx.beginPath();
-        for (let row = 1; row < CFG.ROWS - 1; row++) {
-          const p = pts[row * CFG.COLS + col];
-          if (!p) continue;
-          if (row === 1) ctx.moveTo(p.x, p.y);
-          else ctx.lineTo(p.x, p.y);
-        }
-        ctx.globalAlpha = 0.036 + Math.sin(time * 0.008 + i) * 0.004;
-        ctx.strokeStyle = i === 0 ? 'rgb(79,70,229)' : 'rgb(14,165,233)';
-        ctx.lineWidth = 0.52;
-        ctx.stroke();
-      });
-    }
-
-    function addMemoryTrail() {
-      if (profile.lowPowerMode || !mouse.active) return;
-      if (mouse.x < W * 0.64) return;
-
-      const moved = distance(mouse.x, mouse.y, mouse.lastX, mouse.lastY);
-      if (moved < 24) return;
-
-      const nearby = pts.filter(p => p.zone === 'governed' && distance(p.x, p.y, mouse.x, mouse.y) < 62).slice(0, 6);
-      if (nearby.length < 2) return;
-
-      for (let i = 0; i < nearby.length - 1; i++) {
-        const a = nearby[i];
-        const b = nearby[i + 1];
-        memoryTrails.push({
-          x1: a.x, y1: a.y,
-          x2: b.x, y2: b.y,
-          life: 14
-        });
-      }
-
-      mouse.lastX = mouse.x;
-      mouse.lastY = mouse.y;
-    }
-
-    function drawMemoryTrails() {
-      if (profile.lowPowerMode) return;
-
-      memoryTrails.forEach(t => {
-        const alpha = (t.life / 14) * 0.040;
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = 'rgb(79,70,229)';
-        ctx.lineWidth = 0.50;
-        ctx.beginPath();
-        ctx.moveTo(t.x1, t.y1);
-        ctx.lineTo(t.x2, t.y2);
-        ctx.stroke();
-      });
-      ctx.globalAlpha = 1;
-    }
-
-    function drawInteractionField() {
-      if (!mouse.active) return;
-      if (mouse.x < W * 0.55) return;
-
-      const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, CFG.REVEAL_RADIUS);
-      grad.addColorStop(0, 'rgba(79,70,229,0.016)');
-      grad.addColorStop(0.55, 'rgba(14,165,233,0.010)');
-      grad.addColorStop(1, 'rgba(14,165,233,0)');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, CFG.REVEAL_RADIUS, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    function drawNodes() {
-      pts.forEach(p => {
-        const md = distance(p.x, p.y, mouse.x, mouse.y);
-        const mouseGlow = mouse.active && md < CFG.MOUSE_RADIUS ? (1 - md / CFG.MOUSE_RADIUS) : 0;
-
-        let rgb = CFG.SLATE;
-        let alpha = p.edge ? 0.05 : 0.13;
-        let radius = p.edge ? CFG.DOT_R * 0.72 : CFG.DOT_R;
-
-        if (p.zone === 'fragmented') {
-          rgb = CFG.INDIGO;
-          alpha *= 0.82;
-        } else if (p.zone === 'governed') {
-          rgb = CFG.SKY;
-          alpha *= 0.98;
-        }
-
-        if (p.backbone) {
-          rgb = CFG.SKY;
-          alpha *= 1.04;
-        }
-
-        if (p.anchor) {
-          rgb = CFG.INDIGO;
-          alpha = 0.28;
-          radius = profile.lowPowerMode ? 1.35 : 1.75;
-        }
-
-        if (p.validationHub) {
-          rgb = CFG.VALID;
-          alpha = 0.34 + Math.sin(time * 0.018 + p.row) * 0.014;
-          radius = profile.lowPowerMode ? 1.5 : 1.9;
-        }
-
-        alpha += mouseGlow * 0.18;
-        radius += mouseGlow * (CFG.DOT_R_ACTIVE - CFG.DOT_R);
-
-        if (!profile.lowPowerMode && ((mouseGlow > 0.14 && p.zone === 'governed') || p.validationHub)) {
-          const haloR = p.validationHub ? radius * 2.8 : radius * 2.8;
-          const haloA = p.validationHub ? 0.055 : mouseGlow * 0.05;
-          const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, haloR);
-          grad.addColorStop(0, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${haloA})`);
-          grad.addColorStop(1, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, haloR, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.globalAlpha = Math.min(1, alpha);
-        ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-        ctx.fill();
-
-        if (!profile.lowPowerMode && p.validationHub) {
-          const ring = 3.6 + Math.sin(time * 0.014 + p.col) * 0.10;
-          ctx.globalAlpha = 0.055;
-          ctx.strokeStyle = 'rgb(79,70,229)';
-          ctx.lineWidth = 0.50;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, ring, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-      });
-
-      if (!profile.lowPowerMode) {
-        ghostPts.forEach(p => {
-          const reveal = revealStrength(p.x, p.y);
-          if (reveal < 0.10) return;
-
-          const xNorm = clamp(p.x / W, 0, 1);
-          const wGov = smoothstep(0.46, 0.94, xNorm);
-          const rgb = lerpColor(CFG.SLATE, CFG.SKY, wGov);
-
-          ctx.globalAlpha = (0.018 + wGov * 0.012) * reveal;
-          ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 0.62, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      }
-
-      ctx.globalAlpha = 1;
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      drawAtmosphere();
-      drawGovernanceField();
-
-      if (!profile.lowPowerMode) {
-        drawGhostEdges();
-      }
-
-      drawPrimaryEdges();
-
-      if (!profile.lowPowerMode) {
-        drawBackboneLanes();
-        drawMemoryTrails();
-      }
-
-      drawInteractionField();
-      drawNodes();
-      ctx.globalAlpha = 1;
-    }
-
-    function stopLoop() {
-      running = false;
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-    }
-
-    function loop(timestamp = 0) {
-      if (!running) return;
-
-      const interval = 1000 / profile.targetFPS;
-      if (!lastFrameTime || timestamp - lastFrameTime >= interval) {
-        lastFrameTime = timestamp;
-        update();
-        addMemoryTrail();
-        draw();
-      }
-
-      rafId = requestAnimationFrame(loop);
-    }
-
-    function startLoop() {
-      if (prefersReducedMotion) return;
-      if (running) return;
-      running = true;
-      lastFrameTime = 0;
-      rafId = requestAnimationFrame(loop);
-    }
-
-    function handlePointerMove(clientX, clientY) {
-      const r = canvas.getBoundingClientRect();
-      mouse.x = clientX - r.left;
-      mouse.y = clientY - r.top;
-      mouse.active = true;
-    }
-
-    function resetMouse() {
-      mouse.x = -9999;
-      mouse.y = -9999;
-      mouse.active = false;
-      mouse.lastX = -9999;
-      mouse.lastY = -9999;
-    }
-
-    if (!profile) {
-      profile = getProfile();
-    }
-
-    if (!profile.isTouch) {
-      hero.addEventListener('mousemove', e => {
-        handlePointerMove(e.clientX, e.clientY);
-      }, { passive: true });
-
-      hero.addEventListener('mouseleave', resetMouse, { passive: true });
-    }
-
-    window.addEventListener('resize', () => {
-      const prevLowPower = profile ? profile.lowPowerMode : null;
-      resize();
-
-      if (prevLowPower !== null && prevLowPower !== profile.lowPowerMode) {
-        resetMouse();
-      }
-
-      if (prefersReducedMotion) {
-        draw();
-      }
-    }, { passive: true });
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stopLoop();
-      } else if (!prefersReducedMotion) {
-        startLoop();
-      }
-    });
-
-    window.addEventListener('pagehide', stopLoop);
-    window.addEventListener('pageshow', () => {
-      if (!prefersReducedMotion) startLoop();
-    });
-
-    resize();
-
-    if (prefersReducedMotion) {
-      draw();
-    } else {
-      startLoop();
-    }
-  })();
 });
 </script>
 
