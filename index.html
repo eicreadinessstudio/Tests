@@ -319,21 +319,32 @@ section + section { border-top: 1px solid var(--line-soft); }
 /* HOW REQUIVO WORKS */
 #how-it-works {
   background: var(--bg-off);
-  padding: 80px 0 112px;
+  padding: 52px 0 104px;
 }
 
-.how-head { margin-bottom: 48px; }
+.how-head {
+  margin-bottom: 28px;
+}
+
+.how-head.compact {
+  max-width: 760px;
+}
+
+.how-head.compact .section-sub {
+  margin-bottom: 0;
+  max-width: 760px;
+}
 
 .mechanism-shell {
   width: min(100%, 1320px);
   margin: 0 auto;
-  border: 1px solid var(--line-soft);
-  border-radius: 18px;
+  border: 1px solid rgba(17,24,39,.14);
+  border-radius: 10px;
   overflow: hidden;
-  background: #fbfcff;
+  background: #f8f8f4;
   box-shadow:
-    0 1px 2px rgba(15,28,58,.035),
-    0 18px 60px rgba(15,28,58,.055);
+    0 1px 0 rgba(255,255,255,.8) inset,
+    0 18px 48px rgba(17,24,39,.065);
 }
 
 /* EDITORIAL PROBLEM SECTION */
@@ -785,9 +796,8 @@ footer {
 
 <section id="how-it-works">
   <div class="wrap">
-    <div class="how-head">
+    <div class="how-head compact">
       <div class="section-label">How Requivo works</div>
-      <div class="section-title reveal">From scattered evidence to governed operational knowledge.</div>
       <div class="section-sub reveal d1">Requivo connects fragmented sources, identifies weak or conflicting knowledge, routes unresolved areas to experts, and builds a maintained knowledge layer for reuse across the organisation.</div>
     </div>
   </div>
