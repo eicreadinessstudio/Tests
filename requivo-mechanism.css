@@ -20,9 +20,9 @@
   --rq-gap: oklch(64% 0.04 275);
   --rq-routed: #1652F0;
   --rq-verified: oklch(64% 0.10 160);
-  --rq-serif: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
-  --rq-sans: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
-  --rq-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --rq-serif: "Helvetica Neue", Arial, system-ui, sans-serif;
+  --rq-sans: "Helvetica Neue", Arial, system-ui, sans-serif;
+  --rq-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   position: relative;
   display: block;
