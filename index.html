@@ -207,61 +207,21 @@ nav.raised {
   height: 34px;
 }
 
-.hero-specimen-frame span:nth-child(1) {
-  top: 0;
-  left: 0;
-}
-
+.hero-specimen-frame span:nth-child(1) { top: 0; left: 0; }
 .hero-specimen-frame span:nth-child(1)::before,
-.hero-specimen-frame span:nth-child(1)::after {
-  top: 0;
-  left: 0;
-}
+.hero-specimen-frame span:nth-child(1)::after { top: 0; left: 0; }
 
-.hero-specimen-frame span:nth-child(2) {
-  top: 0;
-  right: 0;
-}
+.hero-specimen-frame span:nth-child(2) { top: 0; right: 0; }
+.hero-specimen-frame span:nth-child(2)::before { top: 0; right: 0; }
+.hero-specimen-frame span:nth-child(2)::after { top: 0; right: 0; }
 
-.hero-specimen-frame span:nth-child(2)::before {
-  top: 0;
-  right: 0;
-}
+.hero-specimen-frame span:nth-child(3) { bottom: 0; left: 0; }
+.hero-specimen-frame span:nth-child(3)::before { bottom: 0; left: 0; }
+.hero-specimen-frame span:nth-child(3)::after { bottom: 0; left: 0; }
 
-.hero-specimen-frame span:nth-child(2)::after {
-  top: 0;
-  right: 0;
-}
-
-.hero-specimen-frame span:nth-child(3) {
-  bottom: 0;
-  left: 0;
-}
-
-.hero-specimen-frame span:nth-child(3)::before {
-  bottom: 0;
-  left: 0;
-}
-
-.hero-specimen-frame span:nth-child(3)::after {
-  bottom: 0;
-  left: 0;
-}
-
-.hero-specimen-frame span:nth-child(4) {
-  bottom: 0;
-  right: 0;
-}
-
-.hero-specimen-frame span:nth-child(4)::before {
-  bottom: 0;
-  right: 0;
-}
-
-.hero-specimen-frame span:nth-child(4)::after {
-  bottom: 0;
-  right: 0;
-}
+.hero-specimen-frame span:nth-child(4) { bottom: 0; right: 0; }
+.hero-specimen-frame span:nth-child(4)::before { bottom: 0; right: 0; }
+.hero-specimen-frame span:nth-child(4)::after { bottom: 0; right: 0; }
 
 .hero-kicker {
   font-family: var(--font-serif);
@@ -362,54 +322,6 @@ nav.raised {
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.74),
     0 8px 22px rgba(15,23,42,.06);
-}
-
-/* HERO: EDITORIAL-TECH */
-.hero-editorial-tech {
-  min-height: auto;
-  padding: clamp(96px, 13vh, 148px) 0 clamp(84px, 11vh, 120px);
-  background: linear-gradient(180deg, #fcfbf7 0%, #f7f5ee 58%, #f1efe7 100%);
-}
-
-.hero-editorial-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(360px, .72fr);
-  gap: clamp(56px, 8vw, 128px);
-  align-items: center;
-}
-
-.hero-editorial-tech .hero-kicker {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: rgba(44,42,122,.62);
-  margin-bottom: 22px;
-}
-
-.hero-editorial-tech h1 {
-  font-family: var(--font-sans);
-  font-size: clamp(58px, 7.4vw, 112px);
-  font-weight: 600;
-  line-height: .92;
-  letter-spacing: -.065em;
-  color: var(--text);
-  max-width: 820px;
-}
-
-.hero-right p {
-  font-family: var(--font-serif);
-  font-size: clamp(25px, 2.15vw, 36px);
-  line-height: 1.16;
-  letter-spacing: -.025em;
-  color: var(--text);
-  max-width: 520px;
-}
-
-.hero-right .hero-actions {
-  justify-content: flex-start;
-  margin-top: 34px;
 }
 
 /* SECTIONS */
@@ -828,34 +740,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .hero-editorial-tech {
-    padding: 84px 0 76px;
-  }
-
-  .hero-editorial-grid {
-    grid-template-columns: 1fr;
-    gap: 34px;
-  }
-
-  .hero-editorial-tech h1 {
-    font-size: clamp(52px, 15vw, 78px);
-    line-height: .94;
-    letter-spacing: -.052em;
-  }
-
-  .hero-right p {
-    font-size: 25px;
-    line-height: 1.18;
-  }
-
-  .hero-right .hero-actions {
-    justify-content: flex-start;
-    align-items: stretch;
-    max-width: 320px;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
   .wrap { width: calc(100% - 32px); }
   .nav-links { display: none; }
   section { padding: 80px 0; }
@@ -938,18 +822,24 @@ footer {
   </div>
 </nav>
 
-<section class="hero-editorial-tech" id="top">
-  <div class="wrap hero-editorial-grid">
-    <div class="hero-left">
+<section class="hero-premium" id="top">
+  <div class="wrap">
+    <div class="hero-premium-inner">
+      <div class="hero-specimen-frame" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
       <div class="hero-kicker">Operational Knowledge System</div>
+
       <h1>
         Critical knowledge exists.<br />
         Requivo makes it usable.
       </h1>
-    </div>
 
-    <div class="hero-right">
-      <p>
+      <p class="hero-sub">
         Requivo turns scattered documents, systems, workflows, and expert know-how
         into a governed operational knowledge layer that teams and AI systems can use.
       </p>
