@@ -364,16 +364,7 @@ nav.raised {
     0 8px 22px rgba(15,23,42,.06);
 }
 
-/* HERO A/B SWITCH */
-body.hero-variant-b .hero-premium {
-  display: none;
-}
-
-body:not(.hero-variant-b) .hero-editorial-tech {
-  display: none;
-}
-
-/* HERO B: EDITORIAL-TECH */
+/* HERO: EDITORIAL-TECH */
 .hero-editorial-tech {
   min-height: auto;
   padding: clamp(96px, 13vh, 148px) 0 clamp(84px, 11vh, 120px);
@@ -405,13 +396,6 @@ body:not(.hero-variant-b) .hero-editorial-tech {
   letter-spacing: -.065em;
   color: var(--text);
   max-width: 820px;
-}
-
-.hero-editorial-tech h1 span {
-  text-decoration-line: underline;
-  text-decoration-thickness: .035em;
-  text-underline-offset: .08em;
-  text-decoration-color: rgba(11,16,32,.82);
 }
 
 .hero-right p {
@@ -954,45 +938,13 @@ footer {
   </div>
 </nav>
 
-<!-- HERO A: current premium serif direction. To test Hero B, add class="hero-variant-b" to <body>. -->
-<section class="hero-premium" id="top">
-  <div class="wrap">
-    <div class="hero-premium-inner">
-      <div class="hero-specimen-frame" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <div class="hero-kicker">Operational Knowledge System</div>
-
-      <h1>
-        Critical knowledge exists.<br />
-        Requivo makes it usable.
-      </h1>
-
-      <p class="hero-sub">
-        Requivo turns scattered documents, systems, workflows, and expert know-how
-        into a governed operational knowledge layer that teams and AI systems can use.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#how-it-works" class="btn btn-primary">Explore how it works</a>
-        <a href="#contact" class="btn btn-secondary">Contact the team</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HERO B: editorial-tech direction. Hidden by default. Activate with <body class="hero-variant-b">. -->
-<section class="hero-editorial-tech" aria-label="Requivo hero editorial tech variant">
+<section class="hero-editorial-tech" id="top">
   <div class="wrap hero-editorial-grid">
     <div class="hero-left">
       <div class="hero-kicker">Operational Knowledge System</div>
       <h1>
         Critical knowledge exists.<br />
-        <span>Requivo makes it usable.</span>
+        Requivo makes it usable.
       </h1>
     </div>
 
