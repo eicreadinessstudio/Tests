@@ -174,7 +174,54 @@ nav.raised {
   width: min(980px, 100%);
   margin: 0 auto;
   text-align: center;
+  padding: clamp(18px, 3vw, 34px);
 }
+
+.hero-specimen-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-specimen-frame span {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  opacity: .32;
+}
+
+.hero-specimen-frame span::before,
+.hero-specimen-frame span::after {
+  content: "";
+  position: absolute;
+  background: rgba(44,42,122,.24);
+}
+
+.hero-specimen-frame span::before {
+  width: 34px;
+  height: 1px;
+}
+
+.hero-specimen-frame span::after {
+  width: 1px;
+  height: 34px;
+}
+
+.hero-specimen-frame span:nth-child(1) { top: 0; left: 0; }
+.hero-specimen-frame span:nth-child(1)::before,
+.hero-specimen-frame span:nth-child(1)::after { top: 0; left: 0; }
+
+.hero-specimen-frame span:nth-child(2) { top: 0; right: 0; }
+.hero-specimen-frame span:nth-child(2)::before { top: 0; right: 0; }
+.hero-specimen-frame span:nth-child(2)::after { top: 0; right: 0; }
+
+.hero-specimen-frame span:nth-child(3) { bottom: 0; left: 0; }
+.hero-specimen-frame span:nth-child(3)::before { bottom: 0; left: 0; }
+.hero-specimen-frame span:nth-child(3)::after { bottom: 0; left: 0; }
+
+.hero-specimen-frame span:nth-child(4) { bottom: 0; right: 0; }
+.hero-specimen-frame span:nth-child(4)::before { bottom: 0; right: 0; }
+.hero-specimen-frame span:nth-child(4)::after { bottom: 0; right: 0; }
 
 .hero-kicker {
   font-family: var(--font-serif);
@@ -338,63 +385,74 @@ section + section { border-top: 1px solid var(--line-soft); }
 .mechanism-shell {
   width: min(100%, 1320px);
   margin: 0 auto;
-  border: 1px solid var(--line-soft);
-  border-radius: 18px;
+  border: 1px solid rgba(17,24,39,.14);
+  border-radius: 10px;
   overflow: hidden;
-  background: #fbfcff;
+  background: #f8f8f4;
   box-shadow:
-    0 1px 2px rgba(15,28,58,.035),
-    0 18px 60px rgba(15,28,58,.055);
+    0 1px 0 rgba(255,255,255,.8) inset,
+    0 18px 48px rgba(17,24,39,.065);
 }
 
-/* EDITORIAL PROBLEM SECTION */
-.editorial-grid {
+/* PROBLEM */
+#problem .section-title {
+  max-width: 780px;
+}
+
+#problem .section-sub {
+  max-width: 720px;
+  margin-bottom: 64px;
+}
+
+.prob-grid {
   display: grid;
-  grid-template-columns: minmax(0, .95fr) minmax(360px, .75fr);
-  gap: clamp(48px, 8vw, 120px);
-  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
 }
 
-.editorial-grid .section-sub {
-  margin-bottom: 0;
-}
-
-.editorial-list {
-  border-top: 1px solid var(--line);
-}
-
-.editorial-item {
-  padding: 26px 0;
-  border-bottom: 1px solid var(--line-soft);
+.prob-card {
+  border-top: 2px solid var(--line);
+  padding: 32px 0 0;
   position: relative;
 }
 
-.editorial-item::before {
+.prob-card::before {
   content: '';
   position: absolute;
-  top: -1px;
+  top: -2px;
   left: 0;
   width: 0;
-  height: 1px;
+  height: 2px;
   background: var(--indigo-mid);
   transition: width .4s var(--ease);
 }
 
-.editorial-item:hover::before { width: 100%; }
-
-.editorial-item h3 {
-  font-family: var(--font-serif);
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -.02em;
-  color: var(--text);
-  margin-bottom: 8px;
+.prob-card:hover::before {
+  width: 100%;
 }
 
-.editorial-item p {
+.prob-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: rgba(44,42,122,.52);
+  margin-bottom: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.prob-card h3 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.prob-card p {
   font-size: 15.5px;
-  line-height: 1.76;
+  line-height: 1.82;
   color: var(--text-soft);
   font-weight: 400;
 }
@@ -727,9 +785,12 @@ footer {
     gap: 16px;
   }
 
+  .hero-specimen-frame {
+    display: none;
+  }
+
   .btn { width: 100%; }
 
-  .editorial-grid,
   .prob-grid,
   .use-grid,
   .contact-grid {
@@ -774,6 +835,13 @@ footer {
 <section class="hero-premium" id="top">
   <div class="wrap">
     <div class="hero-premium-inner">
+      <div class="hero-specimen-frame" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
       <div class="hero-kicker">Operational Knowledge System</div>
 
       <h1>
@@ -913,25 +981,26 @@ footer {
 </section>
 
 <section id="problem">
-  <div class="wrap editorial-grid">
-    <div>
-      <div class="section-label">Problem</div>
-      <div class="section-title reveal">Operational knowledge is everywhere — but rarely ready to use.</div>
-      <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
-    </div>
+  <div class="wrap">
+    <div class="section-label">Problem</div>
+    <div class="section-title reveal">Operational knowledge is everywhere — but rarely ready to use.</div>
+    <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
 
-    <div class="editorial-list">
-      <div class="editorial-item reveal">
+    <div class="prob-grid">
+      <div class="prob-card reveal">
+        <div class="prob-num">01</div>
         <h3>Expertise stays in people’s heads</h3>
         <p>Critical know-how often lives in individual experts, informal workarounds, and local context — instead of becoming reusable organisational knowledge.</p>
       </div>
 
-      <div class="editorial-item reveal d1">
+      <div class="prob-card reveal d1">
+        <div class="prob-num">02</div>
         <h3>Documents do not transfer judgment</h3>
         <p>Teams may inherit files and procedures, but not the reasoning, exceptions, decisions, and operational context behind them.</p>
       </div>
 
-      <div class="editorial-item reveal d2">
+      <div class="prob-card reveal d2">
+        <div class="prob-num">03</div>
         <h3>Answers remain fragmented</h3>
         <p>Relevant signals are spread across systems, versions, and teams. Without validation and ownership, it is hard to know what is current, complete, or reliable.</p>
       </div>
