@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
+<!-- Requivo mechanism animation -->
 <link rel="stylesheet" href="requivo-mechanism.css" />
 
 <script>
@@ -35,9 +36,6 @@
   --indigo-mid:  #3b38a0;
   --indigo-soft: #eceaf8;
   --indigo-pale: #f5f4fb;
-
-  --charcoal:    #171717;
-  --charcoal-h:  #0a0a0a;
 
   --sky:         #0ea5e9;
   --sky-soft:    #e0f2fe;
@@ -82,7 +80,7 @@ nav {
 
 nav.raised {
   background: rgba(252,251,247,.94);
-  box-shadow: 0 14px 40px rgba(15, 23, 42, .04);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, .045);
 }
 
 .nav-inner {
@@ -121,25 +119,33 @@ nav.raised {
 .nav-links a:hover { color: var(--text); }
 
 .nav-cta {
-  background: var(--charcoal) !important;
+  background: #171717 !important;
   color: #fff !important;
-  padding: 8px 20px;
-  border-radius: 999px;
+  padding: 9px 22px;
+  border-radius: 9px;
   font-size: 13px !important;
   font-weight: 500 !important;
-  border: 1px solid rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.10),
-    0 4px 14px rgba(17,17,17,.12);
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 1px 0 rgba(255,255,255,.48),
+    0 8px 20px rgba(17,17,17,.13);
   transition: background .18s, transform .18s, box-shadow .18s !important;
 }
 
-.nav-cta:hover {
-  background: var(--charcoal-h) !important;
+.nav-cta:hover,
+.nav-cta:focus-visible {
+  background: #0f0f0f !important;
   transform: translateY(-1px) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.12),
-    0 8px 22px rgba(17,17,17,.18) !important;
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 1px 0 rgba(255,255,255,.52),
+    0 12px 26px rgba(17,17,17,.20) !important;
+}
+
+.nav-cta:active {
+  transform: translateY(0) !important;
+  background: #050505 !important;
 }
 
 /* FOOTER LOGO */
@@ -156,170 +162,247 @@ nav.raised {
 
 /* PREMIUM HERO */
 .hero-premium {
-  padding: clamp(96px, 12vh, 144px) 0 clamp(80px, 10vh, 120px);
+  min-height: auto;
+  padding: clamp(88px, 11vh, 128px) 0 clamp(72px, 9vh, 104px);
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 38%, rgba(44, 42, 122, 0.045) 0%, transparent 70%),
-    linear-gradient(180deg, #fcfbf7 0%, #f7f5ee 58%, #f1efe7 100%);
+  background: linear-gradient(180deg, #fcfbf7 0%, #f7f5ee 58%, #f1efe7 100%);
+}
+
+.hero-premium::before,
+.hero-premium::after {
+  content: none;
 }
 
 .hero-premium-inner {
   position: relative;
   z-index: 1;
-  width: min(960px, 100%);
+  width: min(980px, 100%);
   margin: 0 auto;
   text-align: center;
-  padding: clamp(20px, 3vw, 40px);
+  padding: clamp(18px, 3vw, 34px);
 }
 
-/* Kicker — quiet system identification */
+.hero-specimen-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-specimen-frame span {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  opacity: .32;
+}
+
+.hero-specimen-frame span::before,
+.hero-specimen-frame span::after {
+  content: "";
+  position: absolute;
+  background: rgba(44,42,122,.24);
+}
+
+.hero-specimen-frame span::before {
+  width: 34px;
+  height: 1px;
+}
+
+.hero-specimen-frame span::after {
+  width: 1px;
+  height: 34px;
+}
+
+.hero-specimen-frame span:nth-child(1) { top: 0; left: 0; }
+.hero-specimen-frame span:nth-child(1)::before,
+.hero-specimen-frame span:nth-child(1)::after { top: 0; left: 0; }
+
+.hero-specimen-frame span:nth-child(2) { top: 0; right: 0; }
+.hero-specimen-frame span:nth-child(2)::before { top: 0; right: 0; }
+.hero-specimen-frame span:nth-child(2)::after { top: 0; right: 0; }
+
+.hero-specimen-frame span:nth-child(3) { bottom: 0; left: 0; }
+.hero-specimen-frame span:nth-child(3)::before { bottom: 0; left: 0; }
+.hero-specimen-frame span:nth-child(3)::after { bottom: 0; left: 0; }
+
+.hero-specimen-frame span:nth-child(4) { bottom: 0; right: 0; }
+.hero-specimen-frame span:nth-child(4)::before { bottom: 0; right: 0; }
+.hero-specimen-frame span:nth-child(4)::after { bottom: 0; right: 0; }
+
 .hero-kicker {
   font-family: var(--font-mono);
-  font-size: clamp(10.5px, 0.9vw, 12px);
+  font-size: clamp(10px, .9vw, 12px);
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.22em;
+  letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(44, 42, 122, 0.55);
-  margin-bottom: clamp(36px, 4.6vw, 54px);
+  color: rgba(44,42,122,.64);
+  margin-bottom: clamp(34px, 4.4vw, 50px);
 }
 
-.hero-kicker .kicker-slash {
-  display: inline-block;
-  margin: 0 6px 0 4px;
-  color: rgba(44, 42, 122, 0.32);
-  font-weight: 400;
-}
-
-/* Headline — the editorial declaration */
 .hero-premium h1 {
   font-family: var(--font-serif);
-  font-size: clamp(54px, 7.2vw, 92px);
+  font-size: clamp(52px, 7vw, 92px);
   font-weight: 400;
-  line-height: 0.94;
-  letter-spacing: -0.045em;
+  line-height: .94;
+  letter-spacing: -.045em;
   color: var(--text);
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
   text-wrap: balance;
 }
 
-/* System line — process language, restrained */
 .hero-system-line {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-top: clamp(28px, 3.4vw, 40px);
+  margin-top: clamp(26px, 3.2vw, 38px);
   font-family: var(--font-mono);
-  font-size: clamp(10.5px, 0.9vw, 12px);
+  font-size: clamp(10px, .88vw, 12px);
   font-weight: 500;
-  letter-spacing: 0.24em;
+  letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(44, 42, 122, 0.7);
+  color: rgba(44,42,122,.72);
 }
 
-.hero-system-line .hero-dot {
-  display: inline-block;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(44, 42, 122, 0.34);
-}
-
-/* Sub copy */
 .hero-sub {
-  font-size: clamp(18px, 1.6vw, 22px);
-  line-height: 1.6;
-  color: rgba(11, 16, 32, 0.62);
-  max-width: 720px;
+  font-size: clamp(18px, 1.7vw, 23px);
+  line-height: 1.62;
+  color: rgba(11,16,32,.64);
+  max-width: 760px;
   font-weight: 400;
-  margin: clamp(34px, 4.2vw, 48px) auto 0;
+  margin: clamp(34px, 4vw, 46px) auto 0;
   text-wrap: balance;
 }
 
-/* Actions */
 .hero-actions {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
-  margin-top: clamp(40px, 5.2vw, 60px);
+  margin-top: clamp(38px, 5vw, 56px);
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  min-height: 48px;
-  padding: 13px 26px;
-  border-radius: 999px;
+  gap: 10px;
+  min-height: 50px;
+  padding: 13px 22px;
+  border-radius: 9px;
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: -0.005em;
+  letter-spacing: -.005em;
   cursor: pointer;
   border: 1px solid transparent;
   transition:
-    transform 0.22s var(--ease),
-    box-shadow 0.22s var(--ease),
-    background 0.18s,
-    border-color 0.18s,
-    color 0.18s;
+    transform .22s var(--ease),
+    box-shadow .22s var(--ease),
+    background .18s,
+    border-color .18s,
+    color .18s;
+}
+
+.btn-label {
+  line-height: 1;
 }
 
 .btn-glyph {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
-  opacity: 0.85;
+  opacity: .88;
+}
+
+.btn-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 21px;
+  padding: 0 7px;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: .02em;
 }
 
 .btn:hover { transform: translateY(-1px); }
 
 .btn-primary {
-  background: var(--charcoal);
+  background: #171717;
   color: #fff;
-  border-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255,255,255,.10);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 8px 24px rgba(17, 17, 17, 0.14),
-    0 1px 2px rgba(15, 23, 42, 0.08);
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 1px 0 rgba(255,255,255,.48),
+    0 12px 28px rgba(17,17,17,.16),
+    0 1px 2px rgba(15,23,42,.08);
 }
 
-.btn-primary:hover {
-  background: var(--charcoal-h);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 12px 32px rgba(17, 17, 17, 0.20),
-    0 1px 2px rgba(15, 23, 42, 0.08);
+.btn-primary .btn-key {
+  color: rgba(255,255,255,.72);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
 }
 
-.btn-primary .btn-glyph { opacity: 0.92; }
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: #0f0f0f;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 1px 0 rgba(255,255,255,.52),
+    0 16px 38px rgba(17,17,17,.22),
+    0 1px 2px rgba(15,23,42,.08);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  background: #050505;
+}
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.65);
-  color: rgba(11, 16, 32, 0.78);
-  border-color: rgba(44, 42, 122, 0.14);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.025);
+  background: rgba(255,255,255,.30);
+  color: rgba(11,16,32,.70);
+  border-color: rgba(17,24,39,.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.70),
+    0 1px 2px rgba(15,23,42,.035);
 }
 
-.btn-secondary:hover {
-  background: #ffffff;
-  border-color: rgba(44, 42, 122, 0.24);
+.btn-secondary .btn-glyph {
+  color: var(--indigo-mid);
+}
+
+.btn-secondary .btn-key {
+  color: rgba(44,42,122,.66);
+  background: rgba(44,42,122,.055);
+  border: 1px solid rgba(44,42,122,.16);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.60);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  background: rgba(255,255,255,.58);
+  border-color: rgba(44,42,122,.22);
   color: var(--text);
   box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 6px 18px rgba(15, 23, 42, 0.06);
+    inset 0 1px 0 rgba(255,255,255,.78),
+    0 8px 22px rgba(15,23,42,.06);
 }
 
-.btn-secondary .btn-glyph { color: rgba(44, 42, 122, 0.7); }
+.btn-secondary:active {
+  transform: translateY(0);
+  background: rgba(255,255,255,.72);
+}
 
 /* SECTIONS */
 section { padding: 112px 0; }
@@ -366,9 +449,18 @@ section + section { border-top: 1px solid var(--line-soft); }
   padding: 52px 0 104px;
 }
 
-.how-head { margin-bottom: 28px; }
-.how-head.compact { max-width: 760px; }
-.how-head.compact .section-sub { margin-bottom: 0; max-width: 760px; }
+.how-head {
+  margin-bottom: 28px;
+}
+
+.how-head.compact {
+  max-width: 760px;
+}
+
+.how-head.compact .section-sub {
+  margin-bottom: 0;
+  max-width: 760px;
+}
 
 .mechanism-shell {
   width: min(100%, 1320px);
@@ -383,8 +475,14 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 
 /* PROBLEM */
-#problem .section-title { max-width: 780px; }
-#problem .section-sub { max-width: 720px; margin-bottom: 64px; }
+#problem .section-title {
+  max-width: 780px;
+}
+
+#problem .section-sub {
+  max-width: 720px;
+  margin-bottom: 64px;
+}
 
 .prob-grid {
   display: grid;
@@ -409,7 +507,9 @@ section + section { border-top: 1px solid var(--line-soft); }
   transition: width .4s var(--ease);
 }
 
-.prob-card:hover::before { width: 100%; }
+.prob-card:hover::before {
+  width: 100%;
+}
 
 .prob-num {
   font-family: var(--font-mono);
@@ -711,8 +811,15 @@ footer {
   transition: opacity .65s var(--ease), transform .65s var(--ease);
 }
 
-.js .reveal { opacity: 0; transform: translateY(22px); }
-.js .reveal.in { opacity: 1; transform: none; }
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
 
 .d1 { transition-delay: .08s; }
 .d2 { transition-delay: .16s; }
@@ -728,43 +835,47 @@ footer {
   .nav-links { display: none; }
   section { padding: 80px 0; }
 
-  .hero-premium { padding: 84px 0 76px; }
+  .hero-premium {
+    min-height: auto;
+    padding: 84px 0 76px;
+  }
 
   .hero-premium h1 {
-    font-size: clamp(48px, 14vw, 72px);
-    line-height: .94;
-    letter-spacing: -.04em;
+    font-size: clamp(52px, 16vw, 78px);
+    line-height: .92;
+    letter-spacing: -.045em;
   }
 
   .hero-kicker {
-    letter-spacing: .22em;
-    margin-bottom: 30px;
-  }
-
-  .hero-system-line {
-    letter-spacing: .22em;
-    margin-top: 24px;
+    letter-spacing: .24em;
+    margin-bottom: 32px;
   }
 
   .hero-sub {
-    font-size: 17px;
-    line-height: 1.62;
+    font-size: 18px;
+    line-height: 1.65;
   }
 
   .hero-actions {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     max-width: 320px;
     margin-left: auto;
     margin-right: auto;
-    gap: 12px;
+    gap: 16px;
+  }
+
+  .hero-specimen-frame {
+    display: none;
   }
 
   .btn { width: 100%; }
 
   .prob-grid,
   .use-grid,
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
 
   .strata-row { grid-template-columns: 1fr; }
   .strata-label { padding: 16px 20px 6px; border-right: none; }
@@ -804,21 +915,21 @@ footer {
 <section class="hero-premium" id="top">
   <div class="wrap">
     <div class="hero-premium-inner">
+      <div class="hero-specimen-frame" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-      <div class="hero-kicker">Requivo System<span class="kicker-slash">/</span>Operational Knowledge</div>
+      <div class="hero-kicker">Requivo System / Operational Knowledge</div>
 
       <h1>
         Critical knowledge exists.<br />
         Requivo makes it usable.
       </h1>
 
-      <div class="hero-system-line">
-        <span>Structure</span>
-        <span class="hero-dot" aria-hidden="true"></span>
-        <span>Validation</span>
-        <span class="hero-dot" aria-hidden="true"></span>
-        <span>Reuse</span>
-      </div>
+      <div class="hero-system-line">Structure · Validation · Reuse</div>
 
       <p class="hero-sub">
         Requivo turns scattered documents, systems, workflows, and expert know-how
@@ -826,16 +937,9 @@ footer {
       </p>
 
       <div class="hero-actions">
-        <a href="#how-it-works" class="btn btn-primary">
-          <span class="btn-glyph">▸</span>
-          <span>Explore how it works</span>
-        </a>
-        <a href="#contact" class="btn btn-secondary">
-          <span class="btn-glyph">→</span>
-          <span>Contact the team</span>
-        </a>
+        <a href="#how-it-works" class="btn btn-primary"><span class="btn-glyph">▸</span><span class="btn-label">Explore how it works</span><span class="btn-key">↵</span></a>
+        <a href="#contact" class="btn btn-secondary"><span class="btn-glyph">→</span><span class="btn-label">Contact the team</span><span class="btn-key">⌘C</span></a>
       </div>
-
     </div>
   </div>
 </section>
@@ -967,11 +1071,236 @@ footer {
     <div class="prob-grid">
       <div class="prob-card reveal">
         <div class="prob-num">01</div>
-        <h3>Expertise stays in people's heads</h3>
+        <h3>Expertise stays in people’s heads</h3>
         <p>Critical know-how often lives in individual experts, informal workarounds, and local context — instead of becoming reusable organisational knowledge.</p>
       </div>
 
       <div class="prob-card reveal d1">
         <div class="prob-num">02</div>
         <h3>Documents do not transfer judgment</h3>
-        <p>Teams may inherit files and procedures, but not the reasoning, exceptions, decisions,
+        <p>Teams may inherit files and procedures, but not the reasoning, exceptions, decisions, and operational context behind them.</p>
+      </div>
+
+      <div class="prob-card reveal d2">
+        <div class="prob-num">03</div>
+        <h3>Answers remain fragmented</h3>
+        <p>Relevant signals are spread across systems, versions, and teams. Without validation and ownership, it is hard to know what is current, complete, or reliable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="solution">
+  <div class="wrap">
+    <div class="section-label">Solution</div>
+    <div class="section-title reveal">Requivo creates a governed operational knowledge layer from scattered enterprise knowledge.</div>
+
+    <div class="solution-layout">
+      <div class="sol-copy reveal">
+        <p>Requivo works where critical knowledge is distributed across documents, systems, workflows, and expert know-how.</p>
+        <p>It structures fragmented inputs into a governed knowledge layer, surfaces weak or conflicting areas, and routes unresolved knowledge to the right experts for validation.</p>
+        <p>The result is not just a better answer. It is a reusable operational knowledge asset that can support writing, verification, management, and controlled AI access.</p>
+      </div>
+
+      <div class="sol-panels reveal d1">
+        <div class="sol-panel">
+          <div class="sol-tag">Core flow</div>
+          <h3>Fragmented evidence → structure → governed knowledge</h3>
+          <p>Connect scattered evidence and transform it into maintained operational knowledge.</p>
+        </div>
+
+        <div class="sol-panel">
+          <div class="sol-tag">Validation loop</div>
+          <h3>Gaps become expert tasks</h3>
+          <p>Weak, missing, or conflicting knowledge is surfaced and routed into structured expert follow-up.</p>
+        </div>
+
+        <div class="sol-panel">
+          <div class="sol-tag">Application layer</div>
+          <h3>One layer, multiple uses</h3>
+          <p>The same governed knowledge layer can support writing, management, verification, and controlled AI access.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="section-label">Why Requivo</div>
+    <div class="section-title reveal">Better retrieval is not enough when the underlying knowledge is fragmented.</div>
+    <div class="section-sub reveal d1">Requivo focuses on the layer before answers: the structure, validation, ownership, and maintenance of operational knowledge.</div>
+
+    <div class="strata reveal d1">
+      <div class="strata-row">
+        <div class="strata-label">Fragmented</div>
+        <div class="strata-body">Critical knowledge is distributed across files, systems, workflows, and experts — often without a single maintained structure.</div>
+      </div>
+
+      <div class="strata-row">
+        <div class="strata-label">Weakly structured</div>
+        <div class="strata-body">Existing information rarely reflects real operational hierarchy, ownership, currentness, and reliability.</div>
+      </div>
+
+      <div class="strata-row">
+        <div class="strata-label">Expert-dependent</div>
+        <div class="strata-body">Operational judgment, exceptions, and edge-case reasoning often remain with individual experts until they are lost.</div>
+      </div>
+
+      <div class="strata-row">
+        <div class="strata-label">Validated</div>
+        <div class="strata-body">Reliable knowledge requires validation, ownership, and a process for resolving weak or conflicting areas.</div>
+      </div>
+
+      <div class="strata-row">
+        <div class="strata-label">Governed</div>
+        <div class="strata-body">The goal is a maintained knowledge layer with traceable structure, clear ownership, and controlled reuse.</div>
+      </div>
+
+      <div class="strata-row">
+        <div class="strata-label">Reusable</div>
+        <div class="strata-body">Once governed, operational knowledge becomes an organisational asset for teams, workflows, and AI systems.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="use-cases">
+  <div class="wrap">
+    <div class="section-label">Use cases</div>
+    <div class="section-title reveal">Built for organisations where operational knowledge must be preserved, validated, and reused.</div>
+
+    <div class="use-grid">
+      <div class="use-card reveal">
+        <h3>Operations &amp; manufacturing</h3>
+        <p>Preserve procedures, incidents, maintenance knowledge, and operational context so teams are not dependent on scattered files or individual memory.</p>
+      </div>
+
+      <div class="use-card reveal d1">
+        <h3>Engineering &amp; technical services</h3>
+        <p>Keep documentation, configurations, decisions, and practical know-how aligned across teams, projects, and versions.</p>
+      </div>
+
+      <div class="use-card reveal d2">
+        <h3>Regulated and process-heavy environments</h3>
+        <p>Support traceability, validation, and knowledge ownership where operational reliability depends on trusted internal knowledge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-label">Contact</div>
+    <div class="section-title reveal">Requivo is preparing selected pilot and validation collaborations. If your organisation depends on complex operational knowledge, we would be glad to discuss a potential use case.</div>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <h3>Agnieszka Pisz-Weglarz</h3>
+        <div class="contact-role">CEO / Co-Founder</div>
+        <a class="contact-email" href="mailto:agnieszka.weglarz@requivo.at">agnieszka.weglarz@requivo.at</a>
+      </div>
+
+      <div class="contact-card reveal d1">
+        <h3>Patrick Pirchheim</h3>
+        <div class="contact-role">CTO / Co-Founder</div>
+        <a class="contact-email" href="mailto:patrick.pirchheim@requivo.at">patrick.pirchheim@requivo.at</a>
+      </div>
+
+      <div class="contact-card reveal d2">
+        <h3>Jakub Weglarz</h3>
+        <div class="contact-role">COO / Delivery Lead</div>
+        <a class="contact-email" href="mailto:jakub@requivo.at">jakub@requivo.at</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="footer-logo" aria-label="Requivo home">
+          <svg viewBox="0 0 44 36" width="36" height="29" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M15 3.5 C7.5 3.5,3 8,3 14 L3 22 C3 28,7.5 32.5,15 32.5" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M29 3.5 C36.5 3.5,41 8,41 14 L41 22 C41 28,36.5 32.5,29 32.5" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <rect x="16" y="12" width="12" height="12" rx="1" fill="#818cf8" transform="rotate(45 22 18)"/>
+          </svg>
+          Requivo
+        </a>
+
+        <p>Turning fragmented enterprise knowledge into a governed operational knowledge layer.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="#how-it-works">How it works</a>
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#why">Why Requivo</a>
+        <a href="#use-cases">Use cases</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="mission-vision.html">Mission &amp; Vision</a>
+        <a href="#contact">Contact</a>
+        <a href="requivo-vs-llm.html">Requivo vs LLM models</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:agnieszka.weglarz@requivo.at">agnieszka.weglarz@requivo.at</a>
+        <a href="mailto:jakub@requivo.at">jakub@requivo.at</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Requivo</span>
+      <span>All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="requivo-mechanism.js" defer></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const nav = document.getElementById('nav');
+  const reveals = document.querySelectorAll('.reveal');
+
+  function updateNav() {
+    if (window.scrollY > 8) {
+      nav.classList.add('raised');
+    } else {
+      nav.classList.remove('raised');
+    }
+  }
+
+  updateNav();
+  window.addEventListener('scroll', updateNav, { passive: true });
+
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('in'));
+  } else {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(el => observer.observe(el));
+  }
+});
+</script>
+
+</body>
+</html>
