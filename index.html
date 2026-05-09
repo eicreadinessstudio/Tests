@@ -119,28 +119,93 @@ nav.raised {
 .nav-links a:hover { color: var(--text); }
 
 .nav-cta {
-  background: #171717 !important;
-  color: #fff !important;
-  padding: 9px 22px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 48px;
+  height: 42px;
+  padding: 0 13px;
   border-radius: 9px;
   font-size: 13px !important;
   font-weight: 500 !important;
-  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(44,42,122,.72) !important;
+  background: rgba(255,255,255,.34) !important;
+  border: 1px solid rgba(17,24,39,.09);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.14),
-    0 1px 0 rgba(255,255,255,.48),
-    0 8px 20px rgba(17,17,17,.13);
-  transition: background .18s, transform .18s, box-shadow .18s !important;
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 1px 2px rgba(15,23,42,.035);
+  overflow: hidden;
+  transition:
+    min-width .26s var(--ease),
+    padding .26s var(--ease),
+    background .18s,
+    color .18s,
+    border-color .18s,
+    box-shadow .18s,
+    transform .18s !important;
+}
+
+.nav-cta .nav-cta-label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transform: translateX(6px);
+  transition:
+    max-width .26s var(--ease),
+    opacity .16s ease,
+    transform .26s var(--ease);
+}
+
+.nav-cta .nav-cta-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: .02em;
+  color: rgba(44,42,122,.70);
+  background: rgba(44,42,122,.055);
+  border: 1px solid rgba(44,42,122,.16);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.60);
+  transition:
+    color .18s,
+    background .18s,
+    border-color .18s;
 }
 
 .nav-cta:hover,
 .nav-cta:focus-visible {
-  background: #0f0f0f !important;
+  min-width: 112px;
+  padding: 0 17px;
+  background: #171717 !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,.10);
   transform: translateY(-1px) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.16),
-    0 1px 0 rgba(255,255,255,.52),
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 1px 0 rgba(255,255,255,.48),
     0 12px 26px rgba(17,17,17,.20) !important;
+}
+
+.nav-cta:hover .nav-cta-label,
+.nav-cta:focus-visible .nav-cta-label {
+  max-width: 76px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.nav-cta:hover .nav-cta-key,
+.nav-cta:focus-visible .nav-cta-key {
+  color: rgba(255,255,255,.72);
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.18);
 }
 
 .nav-cta:active {
@@ -370,16 +435,33 @@ nav.raised {
 }
 
 .btn-secondary {
+  min-width: 50px;
+  width: 50px;
+  padding: 13px;
   background: rgba(255,255,255,.30);
   color: rgba(11,16,32,.70);
   border-color: rgba(17,24,39,.10);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.70),
     0 1px 2px rgba(15,23,42,.035);
+  overflow: hidden;
+}
+
+.btn-secondary .btn-glyph,
+.btn-secondary .btn-label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transform: translateX(6px);
+  transition:
+    max-width .26s var(--ease),
+    opacity .16s ease,
+    transform .26s var(--ease);
 }
 
 .btn-secondary .btn-glyph {
-  color: var(--indigo-mid);
+  color: rgba(255,255,255,.72);
 }
 
 .btn-secondary .btn-key {
@@ -391,17 +473,43 @@ nav.raised {
 
 .btn-secondary:hover,
 .btn-secondary:focus-visible {
-  background: rgba(255,255,255,.58);
-  border-color: rgba(44,42,122,.22);
-  color: var(--text);
+  width: auto;
+  min-width: 218px;
+  padding: 13px 22px;
+  background: #171717;
+  border-color: rgba(255,255,255,.10);
+  color: #fff;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.78),
-    0 8px 22px rgba(15,23,42,.06);
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 1px 0 rgba(255,255,255,.48),
+    0 12px 26px rgba(17,17,17,.18),
+    0 1px 2px rgba(15,23,42,.08);
+}
+
+.btn-secondary:hover .btn-glyph,
+.btn-secondary:focus-visible .btn-glyph {
+  max-width: 16px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.btn-secondary:hover .btn-label,
+.btn-secondary:focus-visible .btn-label {
+  max-width: 150px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.btn-secondary:hover .btn-key,
+.btn-secondary:focus-visible .btn-key {
+  color: rgba(255,255,255,.72);
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.18);
 }
 
 .btn-secondary:active {
   transform: translateY(0);
-  background: rgba(255,255,255,.72);
+  background: #050505;
 }
 
 /* SECTIONS */
@@ -907,7 +1015,7 @@ footer {
       <a href="#solution">Solution</a>
       <a href="#why">Why Requivo</a>
       <a href="#use-cases">Use cases</a>
-      <a href="#contact" class="nav-cta">Contact</a>
+      <a href="#contact" class="nav-cta"><span class="nav-cta-label">Contact</span><span class="nav-cta-key">C</span></a>
     </div>
   </div>
 </nav>
@@ -938,7 +1046,7 @@ footer {
 
       <div class="hero-actions">
         <a href="#how-it-works" class="btn btn-primary"><span class="btn-glyph">▸</span><span class="btn-label">Explore how it works</span><span class="btn-key">↵</span></a>
-        <a href="#contact" class="btn btn-secondary"><span class="btn-glyph">→</span><span class="btn-label">Contact the team</span><span class="btn-key">⌘C</span></a>
+        <a href="#contact" class="btn btn-secondary"><span class="btn-glyph">→</span><span class="btn-label">Contact the team</span><span class="btn-key">C</span></a>
       </div>
     </div>
   </div>
