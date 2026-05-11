@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-<!-- Requivo mechanism animation -->
 <link rel="stylesheet" href="requivo-mechanism.css" />
 
 <script>
@@ -17,13 +16,6 @@
 </script>
 
 <style>
-/*
-  Type scale — golden ratio (φ ≈ 1.618) from 16 px base
-  Pure steps: 10 → 16 → 26 → 42 → 68
-  Intermediate (×√φ ≈ 1.272): 10 → 12 → 16 → 20 → 26 → 33 → 42 → 54 → 68
-  Applied: 10 (labels) / 13 (nav, btn) / 16 (body) / 19 (lead) / 21 (cards) / 38 max (section) / 60 max (hero)
-*/
-
 :root {
   --bg:          #f4f7fb;
   --bg-off:      #ecf1f8;
@@ -34,14 +26,15 @@
   --line-soft:   rgba(7, 16, 30, 0.08);
 
   --text:        #07101e;
-  --text-mid:    #2b3650;
-  --text-soft:   rgba(7,16,30,.55);
+  --text-mid:    #253149;
+  --text-soft:   rgba(7,16,30,.58);
   --text-dim:    #8094b0;
 
-  --arctic:      #1a54d8;
-  --arctic-mid:  #2260e8;
-  --arctic-soft: #edf3ff;
-  --arctic-pale: #f0f5ff;
+  --blue:        #1a54d8;
+  --blue-hover:  #1648c4;
+  --blue-dark:   #123fba;
+  --blue-soft:   #edf3ff;
+  --blue-pale:   #f0f5ff;
 
   --indigo:      #2c2a7a;
   --indigo-hover:#232163;
@@ -60,7 +53,12 @@
   --ease:        cubic-bezier(.16,1,.3,1);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -80,45 +78,56 @@ body.menu-open {
   overflow: hidden;
 }
 
-a { text-decoration: none; color: inherit; }
-img { display: block; max-width: 100%; }
-button { font: inherit; }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+}
 
 .wrap {
   width: min(var(--max), calc(100% - 48px));
   margin: 0 auto;
 }
 
-/* ── ANNOUNCEMENT BAR ── */
+/* ANNOUNCEMENT BAR */
 .announcement-bar {
   background: var(--bg-deep);
   height: 34px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid rgba(255,255,255,.055);
+  border-bottom: 1px solid rgba(255,255,255,.06);
 }
 
-.announcement-bar .wrap {
+.announcement-inner {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 9px;
   font-family: var(--font-mono);
   font-size: 10px;
+  line-height: 1;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.44);
+  color: rgba(255,255,255,.46);
 }
 
 .announcement-dot {
   width: 5px;
   height: 5px;
-  border-radius: 50%;
-  background: var(--arctic);
-  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--blue);
+  box-shadow: 0 0 16px rgba(26,84,216,.8);
 }
 
-/* ── NAV ── */
+/* NAV */
 nav {
   position: sticky;
   top: 0;
@@ -131,7 +140,7 @@ nav {
 
 nav.raised {
   background: rgba(244,247,251,.97);
-  box-shadow: 0 12px 40px rgba(7,16,30,.042);
+  box-shadow: 0 12px 40px rgba(7,16,30,.045);
 }
 
 .nav-inner {
@@ -151,6 +160,8 @@ nav.raised {
   font-weight: 500;
   color: var(--text);
   letter-spacing: -.025em;
+  position: relative;
+  z-index: 140;
 }
 
 .nav-links {
@@ -162,16 +173,15 @@ nav.raised {
 .nav-links a {
   font-size: 13px;
   font-weight: 400;
-  color: rgba(7, 16, 30, .58);
+  color: rgba(7,16,30,.70);
   letter-spacing: -.005em;
-  transition: color .16s;
+  transition: color .16s, border-color .16s, background .16s;
 }
 
 .nav-links a:hover {
   color: var(--text);
 }
 
-/* Nav CTA — clean blue outline, matches hero secondary button */
 .nav-cta {
   display: inline-flex;
   align-items: center;
@@ -179,59 +189,35 @@ nav.raised {
   height: 34px;
   padding: 0 16px;
   border-radius: 7px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--arctic);
+  color: var(--blue) !important;
   background: transparent;
-  border: 1px solid rgba(26,84,216,.28);
-  letter-spacing: -.005em;
-  transition: background .16s, color .16s, border-color .16s;
+  border: 1px solid rgba(26,84,216,.32);
+  font-size: 13px !important;
+  font-weight: 500 !important;
 }
 
 .nav-cta:hover,
 .nav-cta:focus-visible {
-  background: var(--arctic);
-  color: #fff;
-  border-color: var(--arctic);
+  background: var(--blue);
+  color: #fff !important;
+  border-color: var(--blue);
 }
 
 .nav-cta:focus-visible {
-  outline: 2px solid var(--arctic);
-  outline-offset: 2px;
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
 }
 
-/* ── MOBILE NAV ── */
-.nav-mobile-controls {
+/* MOBILE NAV */
+.nav-toggle {
   display: none;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn-nav-mobile {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
   background: transparent;
-  color: var(--arctic);
-  border: 1px solid rgba(26,84,216,.30);
-  border-radius: 7px;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 7px 15px;
-  transition: background .16s, color .16s, border-color .16s;
-  white-space: nowrap;
-}
-
-.btn-nav-mobile:hover {
-  background: var(--arctic);
-  color: #fff;
-  border-color: var(--arctic);
-}
-
-.nav-hamburger {
-  display: flex;
-  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  z-index: 140;
   align-items: center;
   justify-content: center;
 }
@@ -243,7 +229,7 @@ nav.raised {
 
 .nav-toggle-lines span {
   display: block;
-  width: 28px;
+  width: 26px;
   height: 2px;
   background: var(--text);
   border-radius: 999px;
@@ -262,10 +248,7 @@ nav.raised {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-.nav-mobile-links a:last-child { border-bottom: none; }
-.nav-mobile-links a:hover { color: var(--text); }
-
-/* ── FOOTER LOGO ── */
+/* FOOTER LOGO */
 .footer-logo {
   display: flex;
   align-items: center;
@@ -277,17 +260,14 @@ nav.raised {
   letter-spacing: -.025em;
 }
 
-/* ── HERO ── */
+/* HERO */
 .hero-premium {
-  min-height: auto;
+  min-height: 92vh;
   padding: clamp(88px, 11vh, 128px) 0 clamp(72px, 9vh, 108px);
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
-  min-height: 92vh;
-  display: flex;
-  align-items: center;
   isolation: isolate;
   background:
     radial-gradient(circle at 76% 20%, rgba(79,70,229,.055), transparent 28%),
@@ -296,7 +276,9 @@ nav.raised {
 }
 
 .hero-premium::before,
-.hero-premium::after { content: none; }
+.hero-premium::after {
+  content: none;
+}
 
 .hero-premium-inner {
   position: relative;
@@ -307,10 +289,13 @@ nav.raised {
   padding: clamp(18px, 3vw, 34px);
 }
 
-/* Corner bracket ornament */
-.hero-specimen-frame { position: absolute; inset: 0; pointer-events: none; }
+.hero-specimen-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
 
-.hero-vignette {
+.hero-specimen-frame span {
   position: absolute;
   width: 26px;
   height: 26px;
@@ -324,8 +309,15 @@ nav.raised {
   background: rgba(44,42,122,.22);
 }
 
-.hero-specimen-frame span::before { width: 26px; height: 1px; }
-.hero-specimen-frame span::after  { width: 1px;  height: 26px; }
+.hero-specimen-frame span::before {
+  width: 26px;
+  height: 1px;
+}
+
+.hero-specimen-frame span::after {
+  width: 1px;
+  height: 26px;
+}
 
 .hero-specimen-frame span:nth-child(1) { top: 0; left: 0; }
 .hero-specimen-frame span:nth-child(1)::before,
@@ -333,15 +325,15 @@ nav.raised {
 
 .hero-specimen-frame span:nth-child(2) { top: 0; right: 0; }
 .hero-specimen-frame span:nth-child(2)::before { top: 0; right: 0; }
-.hero-specimen-frame span:nth-child(2)::after  { top: 0; right: 0; }
+.hero-specimen-frame span:nth-child(2)::after { top: 0; right: 0; }
 
 .hero-specimen-frame span:nth-child(3) { bottom: 0; left: 0; }
 .hero-specimen-frame span:nth-child(3)::before { bottom: 0; left: 0; }
-.hero-specimen-frame span:nth-child(3)::after  { bottom: 0; left: 0; }
+.hero-specimen-frame span:nth-child(3)::after { bottom: 0; left: 0; }
 
 .hero-specimen-frame span:nth-child(4) { bottom: 0; right: 0; }
 .hero-specimen-frame span:nth-child(4)::before { bottom: 0; right: 0; }
-.hero-specimen-frame span:nth-child(4)::after  { bottom: 0; right: 0; }
+.hero-specimen-frame span:nth-child(4)::after { bottom: 0; right: 0; }
 
 .hero-kicker {
   font-family: var(--font-mono);
@@ -354,7 +346,6 @@ nav.raised {
   margin-bottom: clamp(26px, 3.8vw, 42px);
 }
 
-/* Hero title — golden-ratio sized, refined */
 .hero-premium h1 {
   font-family: var(--font-serif);
   font-size: clamp(36px, 4.6vw, 60px);
@@ -367,7 +358,14 @@ nav.raised {
   text-wrap: balance;
 }
 
-.hero-premium h1 .accent { color: var(--arctic); }
+.hero-premium h1 span {
+  display: block;
+}
+
+.hero-premium h1 .accent {
+  display: inline;
+  color: var(--blue);
+}
 
 .hero-sub {
   font-size: clamp(15.5px, 1.4vw, 18.5px);
@@ -388,7 +386,7 @@ nav.raised {
   margin-top: clamp(32px, 4.4vw, 50px);
 }
 
-/* ── BUTTONS — premium, clean geometry ── */
+/* BUTTONS */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -412,12 +410,16 @@ nav.raised {
     color .16s;
 }
 
-.btn:hover { transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
+.btn:hover {
+  transform: translateY(-1px);
+}
 
-/* Primary — blue filled */
+.btn:active {
+  transform: translateY(0);
+}
+
 .btn-primary {
-  background: var(--arctic);
+  background: var(--blue);
   color: #fff;
   border-color: rgba(255,255,255,.08);
   box-shadow:
@@ -428,7 +430,7 @@ nav.raised {
 
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  background: #1648c4;
+  background: var(--blue-hover);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.12),
     0 1px 2px rgba(26,84,216,.20),
@@ -436,58 +438,54 @@ nav.raised {
 }
 
 .btn-primary:focus-visible {
-  outline: 2px solid var(--arctic);
+  outline: 2px solid var(--blue);
   outline-offset: 3px;
 }
 
 .btn-primary:active {
-  background: #1240ad;
+  background: var(--blue-dark);
   box-shadow: none;
 }
 
-/* Secondary — blue outline */
 .btn-secondary {
   background: transparent;
-  color: var(--arctic);
-  border-color: rgba(26,84,216,.30);
+  color: var(--blue);
+  border-color: rgba(26,84,216,.32);
 }
 
 .btn-secondary:hover,
 .btn-secondary:focus-visible {
-  background: var(--arctic);
+  background: var(--blue);
   color: #fff;
-  border-color: var(--arctic);
+  border-color: var(--blue);
   box-shadow: 0 6px 20px rgba(26,84,216,.18);
 }
 
 .btn-secondary:focus-visible {
-  outline: 2px solid var(--arctic);
+  outline: 2px solid var(--blue);
   outline-offset: 3px;
 }
 
-.btn-secondary:active {
-  background: #1240ad;
-  color: #fff;
-  border-color: #1240ad;
+/* SECTIONS */
+section {
+  padding: 112px 0;
 }
 
-/* ── SECTIONS ── */
-section { padding: 112px 0; }
-section + section { border-top: 1px solid var(--line-soft); }
+section + section {
+  border-top: 1px solid var(--line-soft);
+}
 
-/* Section label — 10 px mono, understated */
 .section-label {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 400;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: rgba(128, 148, 176, .78);
+  color: rgba(128,148,176,.84);
   margin-bottom: 15px;
   display: block;
 }
 
-/* Section title — reduced, golden-ratio based */
 .section-title {
   font-family: var(--font-serif);
   font-size: clamp(24px, 2.8vw, 38px);
@@ -510,7 +508,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   margin-bottom: 52px;
 }
 
-/* ── HOW REQUIVO WORKS — dark technical panel ── */
+/* HOW REQUIVO WORKS */
 #how-it-works {
   background: #0e1a2e;
   padding: 72px 0 108px;
@@ -518,24 +516,22 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 
 #how-it-works .section-label {
-  color: rgba(148, 163, 184, .48);
+  color: rgba(148,163,184,.48);
+}
+
+#how-it-works .section-title {
+  color: rgba(245,248,252,.92);
 }
 
 #how-it-works .section-sub {
-  color: rgba(186, 204, 224, .56);
+  color: rgba(186,204,224,.62);
   margin-bottom: 0;
 }
 
-.how-head { margin-bottom: 36px; }
-
-.how-head.compact { max-width: 720px; }
-
-.how-head.compact .section-sub {
-  margin-bottom: 0;
-  max-width: 720px;
+.how-head {
+  margin-bottom: 36px;
 }
 
-/* Mechanism shell — lit panel on dark section */
 .mechanism-shell {
   width: min(100%, 1320px);
   margin: 0 auto;
@@ -549,8 +545,10 @@ section + section { border-top: 1px solid var(--line-soft); }
     0 24px 64px rgba(0,0,0,.40);
 }
 
-/* ── PROBLEM ── */
-#problem .section-title { max-width: 780px; }
+/* PROBLEM */
+#problem .section-title {
+  max-width: 780px;
+}
 
 #problem .section-sub {
   max-width: 720px;
@@ -576,11 +574,13 @@ section + section { border-top: 1px solid var(--line-soft); }
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--indigo-mid);
+  background: var(--blue);
   transition: width .4s var(--ease);
 }
 
-.prob-card:hover::before { width: 100%; }
+.prob-card:hover::before {
+  width: 100%;
+}
 
 .prob-num {
   font-family: var(--font-mono);
@@ -610,7 +610,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   letter-spacing: -.015em;
 }
 
-/* ── SOLUTION ── */
+/* SOLUTION */
 .solution-layout {
   display: grid;
   grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr);
@@ -627,9 +627,14 @@ section + section { border-top: 1px solid var(--line-soft); }
   margin-bottom: 20px;
 }
 
-.sol-copy p:last-child { margin-bottom: 0; }
+.sol-copy p:last-child {
+  margin-bottom: 0;
+}
 
-.sol-panels { display: grid; gap: 1px; }
+.sol-panels {
+  display: grid;
+  gap: 1px;
+}
 
 .sol-panel {
   padding: 22px 24px;
@@ -638,8 +643,8 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 
 .sol-panel:hover {
-  border-left-color: var(--indigo-mid);
-  background: var(--indigo-pale);
+  border-left-color: var(--blue);
+  background: var(--blue-pale);
 }
 
 .sol-tag {
@@ -668,8 +673,10 @@ section + section { border-top: 1px solid var(--line-soft); }
   letter-spacing: -.01em;
 }
 
-/* ── WHY ── */
-#why { background: var(--bg-off); }
+/* WHY */
+#why {
+  background: var(--bg-off);
+}
 
 .strata {
   display: grid;
@@ -685,7 +692,9 @@ section + section { border-top: 1px solid var(--line-soft); }
   transition: filter .18s;
 }
 
-.strata-row:hover { filter: brightness(.97); }
+.strata-row:hover {
+  filter: brightness(.97);
+}
 
 .strata-label {
   padding: 24px 26px;
@@ -722,7 +731,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   border-right-color: rgba(0,0,0,.08);
 }
 
-/* ── USE CASES ── */
+/* USE CASES */
 .use-grid {
   display: grid;
   grid-template-columns: repeat(3,1fr);
@@ -742,11 +751,13 @@ section + section { border-top: 1px solid var(--line-soft); }
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--arctic);
+  background: var(--blue);
   transition: width .4s var(--ease);
 }
 
-.use-card:hover::before { width: 100%; }
+.use-card:hover::before {
+  width: 100%;
+}
 
 .use-card h3 {
   font-family: var(--font-serif);
@@ -766,7 +777,12 @@ section + section { border-top: 1px solid var(--line-soft); }
   letter-spacing: -.015em;
 }
 
-/* ── CONTACT ── */
+/* CONTACT */
+#contact .section-title {
+  font-size: clamp(22px, 2.35vw, 32px);
+  max-width: 980px;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3,1fr);
@@ -786,11 +802,13 @@ section + section { border-top: 1px solid var(--line-soft); }
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--indigo-mid);
+  background: var(--blue);
   transition: width .4s var(--ease);
 }
 
-.contact-card:hover::before { width: 100%; }
+.contact-card:hover::before {
+  width: 100%;
+}
 
 .contact-card h3 {
   font-family: var(--font-serif);
@@ -812,16 +830,16 @@ section + section { border-top: 1px solid var(--line-soft); }
 
 .contact-email {
   font-size: 14px;
-  color: var(--indigo-mid);
+  color: var(--blue);
   transition: color .18s;
 }
 
 .contact-email:hover {
-  color: var(--indigo);
+  color: var(--blue-dark);
   text-decoration: underline;
 }
 
-/* ── FOOTER ── */
+/* FOOTER */
 footer {
   background: var(--bg-deep);
   padding: 80px 0 60px;
@@ -868,7 +886,9 @@ footer {
   transition: color .18s;
 }
 
-.footer-col a:hover { color: #c0d4e8; }
+.footer-col a:hover {
+  color: #c0d4e8;
+}
 
 .footer-bottom {
   padding-top: 24px;
@@ -880,7 +900,7 @@ footer {
   align-items: center;
 }
 
-/* ── REVEAL ── */
+/* REVEAL */
 .reveal {
   opacity: 1;
   transform: none;
@@ -900,27 +920,29 @@ footer {
 .d1 { transition-delay: .08s; }
 .d2 { transition-delay: .16s; }
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media (max-width: 1180px) {
-  .hero-inner {
+  .solution-layout {
     grid-template-columns: 1fr;
-    gap: 46px;
   }
 
-  .hero-aside {
-    justify-content: flex-start;
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
   }
-
-  .hero-shot {
-    max-width: 680px;
-  }
-
-  .solution-layout { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
-  .wrap { width: calc(100% - 32px); }
+  .wrap {
+    width: calc(100% - 32px);
+  }
+
+  .announcement-bar {
+    height: 30px;
+  }
+
+  .announcement-inner {
+    justify-content: flex-start;
+  }
 
   .nav-inner {
     height: 66px;
@@ -939,8 +961,8 @@ footer {
     align-items: flex-start;
     justify-content: flex-start;
     gap: 0;
-    padding: 92px 24px 32px;
-    background: rgba(255,255,255,.98);
+    padding: 100px 24px 32px;
+    background: rgba(244,247,251,.98);
     backdrop-filter: blur(18px);
     transform: translateX(100%);
     transition: transform .28s var(--ease);
@@ -954,25 +976,28 @@ footer {
     width: 100%;
     padding: 18px 0;
     border-bottom: 1px solid var(--line-soft);
-    font-size: 24px;
+    font-family: var(--font-serif);
+    font-size: 26px;
     font-weight: 400;
     color: var(--text);
-    letter-spacing: -.05em;
+    letter-spacing: -.04em;
   }
 
   .nav-links .nav-cta {
     width: auto;
+    height: auto;
     margin-top: 26px;
     padding: 12px 24px;
-    border-bottom: 1px solid rgba(8, 11, 24, .72);
-    border-radius: 999px;
+    border-radius: 8px;
+    border: 1px solid rgba(26,84,216,.32);
+    font-family: var(--font-sans);
     font-size: 16px !important;
-    letter-spacing: -.03em !important;
+    letter-spacing: -.02em !important;
   }
 
-  section { padding: 80px 0; }
-
-  .announcement-bar { height: 30px; }
+  section {
+    padding: 80px 0;
+  }
 
   .hero-premium {
     min-height: auto;
@@ -1004,7 +1029,9 @@ footer {
     gap: 10px;
   }
 
-  .hero-specimen-frame { display: none; }
+  .hero-specimen-frame {
+    display: none;
+  }
 
   .btn {
     width: 100%;
@@ -1018,25 +1045,46 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .strata-row { grid-template-columns: 1fr; }
-  .strata-label { padding: 16px 20px 6px; border-right: none; }
-  .strata-body { padding: 0 20px 16px; }
+  .strata-row {
+    grid-template-columns: 1fr;
+  }
 
-  .footer-grid { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; gap: 8px; }
+  .strata-label {
+    padding: 16px 20px 6px;
+    border-right: none;
+  }
 
-  #how-it-works { padding: 72px 0 80px; }
-  .mechanism-shell { border-radius: 8px; }
+  .strata-body {
+    padding: 0 20px 16px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #how-it-works {
+    padding: 72px 0 80px;
+  }
+
+  .mechanism-shell {
+    border-radius: 8px;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <nav id="nav">
   <div class="announcement-bar">
-    <div class="wrap">
+    <div class="wrap announcement-inner">
       <span class="announcement-dot"></span>
-      Pre-seed round
+      <span>Pre-seed round</span>
     </div>
   </div>
 
@@ -1066,61 +1114,29 @@ footer {
       <a href="#use-cases">Use cases</a>
       <a href="#contact" class="nav-cta">Contact</a>
     </div>
-
-    <div class="nav-mobile-controls">
-      <a href="#contact" class="btn-nav-mobile">Contact</a>
-      <button
-        class="nav-hamburger"
-        id="nav-hamburger"
-        type="button"
-        aria-label="Open menu"
-        aria-expanded="false"
-        aria-controls="nav-mobile-menu"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </div>
-
-  <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
-    <div class="wrap nav-mobile-links">
-      <a href="#how-it-works">How it works</a>
-      <a href="#problem">Problem</a>
-      <a href="#solution">Solution</a>
-      <a href="#why">Why Requivo</a>
-      <a href="#use-cases">Use cases</a>
-      <a href="#contact">Contact</a>
-    </div>
   </div>
 </nav>
 
-<section class="hero" id="top">
-  <div class="hero-vignette"></div>
-
+<section class="hero-premium" id="top">
   <div class="wrap">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-tag">Operational knowledge system</div>
-        <h1>Critical knowledge exists. <span class="accent">Requivo makes it usable.</span></h1>
-        <p class="hero-sub">Requivo turns scattered documents, systems, workflows, and expert know-how into a governed operational knowledge layer that teams and AI systems can use.</p>
-        <div class="hero-actions">
-          <a href="#how-it-works" class="btn btn-primary">Explore how it works</a>
-          <a href="#contact" class="btn btn-outline">Contact the team</a>
-        </div>
+    <div class="hero-premium-inner">
+      <div class="hero-specimen-frame" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
 
       <div class="hero-kicker">Requivo Operational Knowledge System</div>
 
       <h1>
-        Critical knowledge exists<br />
-        <span class="accent">Requivo</span> makes it usable
+        <span>Critical knowledge exists</span>
+        <span><span class="accent">Requivo</span> makes it usable</span>
       </h1>
 
       <p class="hero-sub">
         Requivo turns scattered documents, systems, workflows, and expert know-how
-        into a governed operational knowledge layer that teams and AI systems can use.
+        into a governed operational knowledge layer that teams and AI systems can use
       </p>
 
       <div class="hero-actions">
@@ -1135,8 +1151,10 @@ footer {
   <div class="wrap">
     <div class="how-head">
       <div class="section-label">How Requivo works</div>
-      <div class="section-title reveal">From scattered evidence to governed operational knowledge.</div>
-      <div class="section-sub reveal d1">Requivo connects fragmented sources, identifies weak or conflicting knowledge, routes unresolved areas to experts, and builds a maintained knowledge layer for reuse across the organisation.</div>
+      <div class="section-title reveal">From scattered evidence to governed operational knowledge</div>
+      <div class="section-sub reveal d1">
+        Requivo connects fragmented sources, identifies weak or conflicting knowledge, routes unresolved areas to experts, and builds a maintained knowledge layer for reuse across the organisation
+      </div>
     </div>
   </div>
 
@@ -1258,12 +1276,14 @@ footer {
   <div class="wrap">
     <div class="section-label">Problem</div>
     <div class="section-title reveal">Operational knowledge is everywhere — but rarely ready to use</div>
-    <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
+    <div class="section-sub reveal d1">
+      Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals
+    </div>
 
     <div class="prob-grid">
       <div class="prob-card reveal">
         <div class="prob-num">01</div>
-        <h3>Expertise stays in people's heads</h3>
+        <h3>Expertise stays in people’s heads</h3>
         <p>Critical know-how often lives in individual experts, informal workarounds, and local context — instead of becoming reusable organisational knowledge.</p>
       </div>
 
@@ -1321,7 +1341,9 @@ footer {
   <div class="wrap">
     <div class="section-label">Why Requivo</div>
     <div class="section-title reveal">Better retrieval is not enough when the underlying knowledge is fragmented</div>
-    <div class="section-sub reveal d1">Requivo focuses on the layer before answers: the structure, validation, ownership, and maintenance of operational knowledge.</div>
+    <div class="section-sub reveal d1">
+      Requivo focuses on the layer before answers: the structure, validation, ownership, and maintenance of operational knowledge
+    </div>
 
     <div class="strata reveal d1">
       <div class="strata-row">
@@ -1384,7 +1406,9 @@ footer {
 <section id="contact">
   <div class="wrap">
     <div class="section-label">Contact</div>
-    <div class="section-title reveal">Requivo is preparing selected pilot and validation collaborations. If your organisation depends on complex operational knowledge, we would be glad to discuss a potential use case.</div>
+    <div class="section-title reveal">
+      Requivo is preparing selected pilot and validation collaborations. If your organisation depends on complex operational knowledge, we would be glad to discuss a potential use case
+    </div>
 
     <div class="contact-grid">
       <div class="contact-card reveal">
@@ -1451,7 +1475,7 @@ footer {
 
     <div class="footer-bottom">
       <span>© 2026 Requivo</span>
-      <span>All rights reserved.</span>
+      <span>All rights reserved</span>
     </div>
   </div>
 </footer>
