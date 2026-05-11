@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
+<!-- Requivo mechanism animation -->
 <link rel="stylesheet" href="requivo-mechanism.css" />
 
 <script>
@@ -46,6 +47,13 @@
 
   --max:         1180px;
   --ease:        cubic-bezier(.16,1,.3,1);
+
+  /* Golden-ratio type scale */
+  --step-0:      1rem;
+  --step-1:      1.618rem;
+  --step-2:      2.618rem;
+  --step-3:      4.236rem;
+  --step-4:      6.854rem;
 }
 
 *, *::before, *::after {
@@ -60,7 +68,7 @@ body {
   font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.55;
+  line-height: 1.58;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -138,7 +146,7 @@ nav.raised {
   font-family: var(--font-sans);
   font-size: 13.5px;
   font-weight: 500;
-  color: rgba(11,16,32,.74);
+  color: rgba(11,16,32,.78);
   letter-spacing: -.01em;
   transition: color .18s;
 }
@@ -151,7 +159,7 @@ nav.raised {
   background: #fff !important;
   color: var(--indigo-mid) !important;
   padding: 9px 20px;
-  border: 1px solid rgba(79,70,229,.34);
+  border: 1px solid rgba(79,70,229,.38);
   border-radius: 6px;
   font-family: var(--font-display) !important;
   font-size: 13.5px !important;
@@ -164,7 +172,7 @@ nav.raised {
 
 .nav-cta:hover {
   background: var(--indigo-pale) !important;
-  border-color: rgba(79,70,229,.52) !important;
+  border-color: rgba(79,70,229,.56) !important;
   color: var(--indigo-dark) !important;
   transform: translateY(-1px) !important;
   box-shadow:
@@ -212,28 +220,16 @@ nav.raised {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* FOOTER LOGO */
-.footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 500;
-  color: #fff;
-  letter-spacing: -.025em;
-}
-
 /* HERO */
 .hero {
   position: relative;
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(circle at 50% 18%, rgba(14,165,233,.045), transparent 34%),
-    radial-gradient(circle at 50% 92%, rgba(67,56,202,.06), transparent 38%),
-    linear-gradient(180deg, #ffffff 0%, #fbfdff 52%, #f6f9fd 100%);
-  padding: clamp(72px, 9vh, 104px) 0 clamp(64px, 8vh, 92px);
+    radial-gradient(circle at 50% 20%, rgba(79,70,229,.055), transparent 36%),
+    radial-gradient(circle at 50% 92%, rgba(14,165,233,.045), transparent 40%),
+    linear-gradient(180deg, #ffffff 0%, #fbfdff 52%, #f7f9fc 100%);
+  padding: clamp(76px, 9vh, 112px) 0 clamp(72px, 8vh, 104px);
 }
 
 .hero::before {
@@ -242,32 +238,14 @@ nav.raised {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(rgba(79,70,229,.075) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79,70,229,.075) 1px, transparent 1px),
-    radial-gradient(circle at center, rgba(14,165,233,.20) 0 1px, transparent 1.6px),
-    linear-gradient(135deg, transparent 0 47%, rgba(14,165,233,.055) 48%, rgba(14,165,233,.055) 52%, transparent 53% 100%);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(79,70,229,.11) 0 1px, transparent 1.4px),
+    linear-gradient(135deg, transparent 0 48%, rgba(14,165,233,.045) 49%, rgba(14,165,233,.045) 51%, transparent 52% 100%);
   background-size:
-    72px 72px,
-    72px 72px,
-    22px 22px,
+    24px 24px,
     96px 96px;
-  mask-image:
-    radial-gradient(ellipse at center, rgba(0,0,0,.82) 0%, rgba(0,0,0,.58) 48%, transparent 78%);
-  opacity: .72;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 56%;
-  width: min(980px, 84vw);
-  height: 1px;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, transparent, rgba(79,70,229,.18), transparent);
-  pointer-events: none;
-  opacity: .7;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,.72) 0%, rgba(0,0,0,.46) 42%, transparent 76%);
+  opacity: .42;
 }
 
 .hero-inner {
@@ -282,54 +260,63 @@ nav.raised {
   content: '';
   position: absolute;
   left: 50%;
-  top: 54%;
-  width: min(980px, 88vw);
-  height: 360px;
+  top: 58%;
+  width: min(920px, 88vw);
+  height: 340px;
   transform: translateX(-50%);
   z-index: -1;
   pointer-events: none;
-  border: 1px solid rgba(79,70,229,.10);
+  border: 1px solid rgba(79,70,229,.08);
   border-radius: 24px;
   background:
-    linear-gradient(90deg, transparent 0 49.8%, rgba(79,70,229,.13) 50%, transparent 50.2% 100%),
-    linear-gradient(180deg, transparent 0 49.8%, rgba(14,165,233,.11) 50%, transparent 50.2% 100%),
-    radial-gradient(circle at 50% 50%, rgba(79,70,229,.07), transparent 58%);
-  opacity: .9;
+    linear-gradient(90deg, transparent 0 49.8%, rgba(79,70,229,.10) 50%, transparent 50.2% 100%),
+    linear-gradient(180deg, transparent 0 49.8%, rgba(14,165,233,.085) 50%, transparent 50.2% 100%),
+    radial-gradient(circle at 50% 50%, rgba(79,70,229,.045), transparent 58%);
+  opacity: .72;
 }
 
 .hero-kicker {
   font-family: var(--font-mono);
-  font-size: clamp(15px, 1.45vw, 21px);
+  font-size: clamp(14px, 1.35vw, 20px);
   font-weight: 500;
   line-height: 1.18;
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--indigo-mid);
-  margin-bottom: clamp(24px, 3.2vw, 36px);
+  margin-bottom: clamp(26px, 3.2vw, 38px);
 }
 
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(36px, 4.55vw, 58px);
   font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -.045em;
   color: var(--text);
-  max-width: 880px;
-  margin: 0 auto clamp(24px, 3vw, 32px);
+  max-width: 960px;
+  margin: 0 auto clamp(26px, 3vw, 36px);
   text-wrap: balance;
 }
 
-.hero h1 span {
+.hero h1 .h-line {
   display: block;
 }
 
-.hero h1 .accent {
-  color: var(--indigo-mid);
+.hero h1 .h-primary {
+  font-size: clamp(36px, 4.5vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -.052em;
 }
 
-.hero h1 .accent .accent-rest {
-  color: var(--text);
+.hero h1 .h-brand {
+  font-size: clamp(58px, 7.28vw, 110px);
+  line-height: .94;
+  letter-spacing: -.065em;
+  color: var(--indigo-mid);
+  margin: clamp(4px, .8vw, 10px) 0;
+}
+
+.hero h1 .h-secondary {
+  font-size: clamp(36px, 4.5vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -.052em;
 }
 
 .hero-sub {
@@ -339,7 +326,7 @@ nav.raised {
   color: var(--text-soft);
   max-width: 760px;
   font-weight: 400;
-  margin: 0 auto clamp(32px, 4vw, 44px);
+  margin: 0 auto clamp(34px, 4vw, 48px);
   text-wrap: balance;
 }
 
@@ -349,7 +336,7 @@ nav.raised {
   justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
-  margin-bottom: clamp(42px, 5.5vw, 64px);
+  margin-bottom: clamp(44px, 5.5vw, 68px);
 }
 
 .btn {
@@ -821,6 +808,17 @@ footer {
   padding: 76px 0 56px;
 }
 
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -.025em;
+}
+
 .footer-grid {
   display: grid;
   grid-template-columns: 1.2fr .8fr .8fr 1fr;
@@ -956,7 +954,7 @@ footer {
     width: auto;
     margin-top: 24px;
     padding: 12px 24px;
-    border-bottom: 1px solid rgba(79,70,229,.34);
+    border-bottom: 1px solid rgba(79,70,229,.38);
     font-size: 15px !important;
   }
 
@@ -970,15 +968,13 @@ footer {
 
   .hero::before {
     background-size:
-      48px 48px,
-      48px 48px,
       18px 18px,
       72px 72px;
-    opacity: .58;
+    opacity: .34;
   }
 
   .hero-inner::before {
-    top: 58%;
+    top: 60%;
     height: 300px;
     width: min(700px, 94vw);
   }
@@ -986,13 +982,20 @@ footer {
   .hero-kicker {
     font-size: 13px;
     letter-spacing: .2em;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
   }
 
-  .hero h1 {
-    font-size: clamp(32px, 9.2vw, 46px);
-    line-height: 1.05;
-    letter-spacing: -.044em;
+  .hero h1 .h-primary,
+  .hero h1 .h-secondary {
+    font-size: clamp(31px, 8.6vw, 44px);
+    line-height: 1.04;
+    letter-spacing: -.048em;
+  }
+
+  .hero h1 .h-brand {
+    font-size: clamp(50px, 13.9vw, 72px);
+    line-height: .92;
+    letter-spacing: -.07em;
   }
 
   .hero-sub {
@@ -1121,12 +1124,13 @@ footer {
       <div class="hero-kicker">Operational knowledge system</div>
 
       <h1>
-        <span>Critical knowledge exists</span>
-        <span class="accent">Requivo <span class="accent-rest">makes it usable</span></span>
+        <span class="h-line h-primary">Critical knowledge exists</span>
+        <span class="h-line h-brand">Requivo</span>
+        <span class="h-line h-secondary">makes it usable</span>
       </h1>
 
       <p class="hero-sub">
-        Requivo turns scattered documents, systems, workflows, and expert know-how into a governed operational knowledge layer that teams and AI systems can use.
+        Requivo turns scattered documents, systems, workflows, and expert know-how into a governed operational knowledge layer that teams and AI systems can use
       </p>
 
       <div class="hero-actions">
@@ -1150,7 +1154,7 @@ footer {
     <div class="how-head">
       <div class="section-label">How Requivo works</div>
       <div class="section-title reveal">From scattered evidence to governed operational knowledge</div>
-      <div class="section-sub reveal d1">Requivo connects fragmented sources, identifies weak or conflicting knowledge, routes unresolved areas to experts, and builds a maintained knowledge layer for reuse across the organisation.</div>
+      <div class="section-sub reveal d1">Requivo connects fragmented sources, identifies weak or conflicting knowledge, routes unresolved areas to experts, and builds a maintained knowledge layer for reuse across the organisation</div>
     </div>
   </div>
 
@@ -1272,25 +1276,25 @@ footer {
   <div class="wrap">
     <div class="section-label">Problem</div>
     <div class="section-title reveal">Operational knowledge is everywhere — but rarely ready to use</div>
-    <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals.</div>
+    <div class="section-sub reveal d1">Most organisations do not fail because information does not exist. They fail because the knowledge they depend on is fragmented, difficult to validate, and often concentrated in a few individuals</div>
 
     <div class="prob-grid">
       <div class="prob-card reveal">
         <div class="prob-num">01</div>
         <h3>Expertise stays in people’s heads</h3>
-        <p>Critical know-how often lives in individual experts, informal workarounds, and local context — instead of becoming reusable organisational knowledge.</p>
+        <p>Critical know-how often lives in individual experts, informal workarounds, and local context — instead of becoming reusable organisational knowledge</p>
       </div>
 
       <div class="prob-card reveal d1">
         <div class="prob-num">02</div>
         <h3>Documents do not transfer judgment</h3>
-        <p>Teams may inherit files and procedures, but not the reasoning, exceptions, decisions, and operational context behind them.</p>
+        <p>Teams may inherit files and procedures, but not the reasoning, exceptions, decisions, and operational context behind them</p>
       </div>
 
       <div class="prob-card reveal d2">
         <div class="prob-num">03</div>
         <h3>Answers remain fragmented</h3>
-        <p>Relevant signals are spread across systems, versions, and teams. Without validation and ownership, it is hard to know what is current, complete, or reliable.</p>
+        <p>Relevant signals are spread across systems, versions, and teams. Without validation and ownership, it is hard to know what is current, complete, or reliable</p>
       </div>
     </div>
   </div>
@@ -1303,28 +1307,28 @@ footer {
 
     <div class="solution-layout">
       <div class="sol-copy reveal">
-        <p>Requivo works where critical knowledge is distributed across documents, systems, workflows, and expert know-how.</p>
-        <p>It structures fragmented inputs into a governed knowledge layer, surfaces weak or conflicting areas, and routes unresolved knowledge to the right experts for validation.</p>
-        <p>The result is not just a better answer. It is a reusable operational knowledge asset that can support writing, verification, management, and controlled AI access.</p>
+        <p>Requivo works where critical knowledge is distributed across documents, systems, workflows, and expert know-how</p>
+        <p>It structures fragmented inputs into a governed knowledge layer, surfaces weak or conflicting areas, and routes unresolved knowledge to the right experts for validation</p>
+        <p>The result is not just a better answer. It is a reusable operational knowledge asset that can support writing, verification, management, and controlled AI access</p>
       </div>
 
       <div class="sol-panels reveal d1">
         <div class="sol-panel">
           <div class="sol-tag">Core flow</div>
           <h3>Fragmented evidence → structure → governed knowledge</h3>
-          <p>Connect scattered evidence and transform it into maintained operational knowledge.</p>
+          <p>Connect scattered evidence and transform it into maintained operational knowledge</p>
         </div>
 
         <div class="sol-panel">
           <div class="sol-tag">Validation loop</div>
           <h3>Gaps become expert tasks</h3>
-          <p>Weak, missing, or conflicting knowledge is surfaced and routed into structured expert follow-up.</p>
+          <p>Weak, missing, or conflicting knowledge is surfaced and routed into structured expert follow-up</p>
         </div>
 
         <div class="sol-panel">
           <div class="sol-tag">Application layer</div>
           <h3>One layer, multiple uses</h3>
-          <p>The same governed knowledge layer can support writing, management, verification, and controlled AI access.</p>
+          <p>The same governed knowledge layer can support writing, management, verification, and controlled AI access</p>
         </div>
       </div>
     </div>
@@ -1335,37 +1339,37 @@ footer {
   <div class="wrap">
     <div class="section-label">Why Requivo</div>
     <div class="section-title reveal">Better retrieval is not enough when the underlying knowledge is fragmented</div>
-    <div class="section-sub reveal d1">Requivo focuses on the layer before answers: the structure, validation, ownership, and maintenance of operational knowledge.</div>
+    <div class="section-sub reveal d1">Requivo focuses on the layer before answers: the structure, validation, ownership, and maintenance of operational knowledge</div>
 
     <div class="strata reveal d1">
       <div class="strata-row">
         <div class="strata-label">Fragmented</div>
-        <div class="strata-body">Critical knowledge is distributed across files, systems, workflows, and experts — often without a single maintained structure.</div>
+        <div class="strata-body">Critical knowledge is distributed across files, systems, workflows, and experts — often without a single maintained structure</div>
       </div>
 
       <div class="strata-row">
         <div class="strata-label">Weakly structured</div>
-        <div class="strata-body">Existing information rarely reflects real operational hierarchy, ownership, currentness, and reliability.</div>
+        <div class="strata-body">Existing information rarely reflects real operational hierarchy, ownership, currentness, and reliability</div>
       </div>
 
       <div class="strata-row">
         <div class="strata-label">Expert-dependent</div>
-        <div class="strata-body">Operational judgment, exceptions, and edge-case reasoning often remain with individual experts until they are lost.</div>
+        <div class="strata-body">Operational judgment, exceptions, and edge-case reasoning often remain with individual experts until they are lost</div>
       </div>
 
       <div class="strata-row">
         <div class="strata-label">Validated</div>
-        <div class="strata-body">Reliable knowledge requires validation, ownership, and a process for resolving weak or conflicting areas.</div>
+        <div class="strata-body">Reliable knowledge requires validation, ownership, and a process for resolving weak or conflicting areas</div>
       </div>
 
       <div class="strata-row">
         <div class="strata-label">Governed</div>
-        <div class="strata-body">The goal is a maintained knowledge layer with traceable structure, clear ownership, and controlled reuse.</div>
+        <div class="strata-body">The goal is a maintained knowledge layer with traceable structure, clear ownership, and controlled reuse</div>
       </div>
 
       <div class="strata-row">
         <div class="strata-label">Reusable</div>
-        <div class="strata-body">Once governed, operational knowledge becomes an organisational asset for teams, workflows, and AI systems.</div>
+        <div class="strata-body">Once governed, operational knowledge becomes an organisational asset for teams, workflows, and AI systems</div>
       </div>
     </div>
   </div>
@@ -1379,17 +1383,17 @@ footer {
     <div class="use-grid">
       <div class="use-card reveal">
         <h3>Operations &amp; manufacturing</h3>
-        <p>Preserve procedures, incidents, maintenance knowledge, and operational context so teams are not dependent on scattered files or individual memory.</p>
+        <p>Preserve procedures, incidents, maintenance knowledge, and operational context so teams are not dependent on scattered files or individual memory</p>
       </div>
 
       <div class="use-card reveal d1">
         <h3>Engineering &amp; technical services</h3>
-        <p>Keep documentation, configurations, decisions, and practical know-how aligned across teams, projects, and versions.</p>
+        <p>Keep documentation, configurations, decisions, and practical know-how aligned across teams, projects, and versions</p>
       </div>
 
       <div class="use-card reveal d2">
         <h3>Regulated and process-heavy environments</h3>
-        <p>Support traceability, validation, and knowledge ownership where operational reliability depends on trusted internal knowledge.</p>
+        <p>Support traceability, validation, and knowledge ownership where operational reliability depends on trusted internal knowledge</p>
       </div>
     </div>
   </div>
@@ -1435,7 +1439,7 @@ footer {
           Requivo
         </a>
 
-        <p>Turning fragmented enterprise knowledge into a governed operational knowledge layer.</p>
+        <p>Turning fragmented enterprise knowledge into a governed operational knowledge layer</p>
       </div>
 
       <div class="footer-col">
@@ -1465,7 +1469,7 @@ footer {
 
     <div class="footer-bottom">
       <span>© 2026 Requivo</span>
-      <span>All rights reserved.</span>
+      <span>All rights reserved</span>
     </div>
   </div>
 </footer>
