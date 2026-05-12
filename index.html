@@ -39,31 +39,31 @@
   --text-on-dark:        #e8ecf7;
   --text-on-dark-soft:   #9aa6c4;
   --text-on-dark-dim:    #6a7595;
-  --indigo:      #3730a3;
+  --indigo:      #3730a3;     /* system / structural — buttons, links, focus */
   --indigo-mid:  #4f46e5;
   --indigo-soft: #eef2ff;
   --indigo-pale: #f5f6ff;
   --indigo-on-dark: #a5b4fc;
-  --brand:       #4f46e5;
+  --brand:       #4f46e5;     /* brand / identity — wordmark, labels, interaction lines */
   --sky:         #0ea5e9;
 
   /* Type families */
   --font-sans:   'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono:   'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
 
-  /* Type scale */
-  --fs-micro:    11px;
+  /* Type scale (golden-ratio derived) */
+  --fs-micro:    11px;     /* mono uppercase labels */
   --fs-xs:       12px;
-  --fs-sm:       13.5px;
-  --fs-base:     15.5px;
-  --fs-lead:     clamp(19px, 1.35vw, 23px);
-  --fs-card:     20px;
+  --fs-sm:       13.5px;   /* nav, small UI text */
+  --fs-base:     15.5px;   /* body */
+  --fs-lead:     17.5px;   /* hero sub, section sub */
+  --fs-card:     20px;     /* card titles */
   --fs-h3:       26px;
-  --fs-h2:       clamp(28px, 3.2vw, 42px);
-  --fs-h1:       clamp(56px, 5.4vw, 84px);
+  --fs-h2:       clamp(28px, 3.2vw, 42px);   /* section title */
+  --fs-h1:       clamp(40px, 5.6vw, 64px);   /* hero title */
 
   /* Spacing / radius / motion */
-  --max:         1440px;
+  --max:         1180px;
   --radius:      6px;
   --radius-lg:   14px;
   --radius-xl:   18px;
@@ -164,6 +164,7 @@ nav.raised {
   gap: 32px;
 }
 
+/* LOGO */
 .logo {
   display: flex;
   align-items: center;
@@ -192,6 +193,7 @@ nav.raised {
 
 .nav-links a:hover { color: var(--text); }
 
+/* outlined nav CTA — matches the secondary hero button */
 .nav-cta {
   border: 1px solid var(--indigo) !important;
   color: var(--indigo) !important;
@@ -208,6 +210,7 @@ nav.raised {
   color: #fff !important;
 }
 
+/* FOOTER LOGO */
 .footer-logo {
   display: flex;
   align-items: center;
@@ -220,13 +223,13 @@ nav.raised {
 }
 
 /* =========================================================
-   HERO  (golden-ratio composition)
+   HERO  (no canvas grid — clean white)
    ========================================================= */
 .hero {
-  padding: 104px 0 120px;
+  padding: 96px 0 92px;
   position: relative;
   overflow: hidden;
-  min-height: calc(100vh - 100px);
+  min-height: 92vh;
   display: flex;
   align-items: center;
   isolation: isolate;
@@ -237,14 +240,9 @@ nav.raised {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1.618fr) minmax(420px, 1fr);
-  gap: clamp(56px, 6vw, 92px);
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+  gap: clamp(32px, 5vw, 64px);
   align-items: center;
-}
-
-.hero-copy {
-  max-width: 890px;
-  transform: translateY(-8px);
 }
 
 .hero-tag {
@@ -254,14 +252,14 @@ nav.raised {
   font-family: var(--font-mono);
   font-size: var(--fs-micro);
   font-weight: 500;
-  letter-spacing: .18em;
+  letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--text-soft);
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 .hero-tag::before {
   content: '';
-  width: 22px;
+  width: 18px;
   height: 1px;
   background: var(--text-dim);
 }
@@ -270,25 +268,25 @@ nav.raised {
   font-family: var(--font-sans);
   font-size: var(--fs-h1);
   font-weight: 500;
-  line-height: .99;
-  letter-spacing: -.046em;
+  line-height: 1.03;
+  letter-spacing: -.032em;
   color: var(--text);
-  margin-bottom: 30px;
-  max-width: 860px;
+  margin-bottom: 26px;
+  max-width: 720px;
 }
 
 .hero h1 .line { display: block; }
-.hero h1 .line + .line { margin-top: .055em; }
+.hero h1 .line + .line { margin-top: .04em; }
 .hero h1 .accent { color: var(--brand); }
 
 .hero-sub {
   font-size: var(--fs-lead);
-  line-height: 1.46;
+  line-height: 1.6;
   color: var(--text-soft);
-  max-width: 640px;
+  max-width: 560px;
   font-weight: 400;
-  margin-bottom: 32px;
-  letter-spacing: -.008em;
+  margin-bottom: 36px;
+  letter-spacing: -.005em;
 }
 
 .hero-actions {
@@ -342,12 +340,11 @@ nav.raised {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  transform: translateY(52px);
 }
 
 .hero-shot {
   width: 100%;
-  max-width: 520px;
+  max-width: 540px;
 }
 
 .hero-shot-frame {
@@ -357,13 +354,13 @@ nav.raised {
   background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
   box-shadow:
     0 1px 3px rgba(15,28,58,.05),
-    0 8px 24px rgba(15,28,58,.08),
-    0 28px 72px rgba(15,28,58,.08);
-  padding: 16px;
+    0 6px 20px rgba(15,28,58,.08),
+    0 20px 56px rgba(15,28,58,.07);
+  padding: 18px;
 }
 
 .hero-shot-frame.hero-no-img {
-  min-height: 340px;
+  min-height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -396,7 +393,7 @@ nav.raised {
 .hero-shot-frame img {
   width: 100%;
   height: auto;
-  max-height: 600px;
+  max-height: 640px;
   object-fit: contain;
   object-position: center center;
   border-radius: 12px;
@@ -408,7 +405,7 @@ nav.raised {
   margin-top: 12px;
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: .18em;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--text-dim);
 }
@@ -857,23 +854,10 @@ footer {
 @media (max-width: 1180px) {
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
-
-  .hero-copy {
-    max-width: 860px;
-    transform: none;
-  }
-
-  .hero-aside {
-    justify-content: flex-start;
-    transform: none;
-  }
-
-  .hero-shot {
-    max-width: 680px;
-  }
-
+  .hero-aside { justify-content: flex-start; }
+  .hero-shot { max-width: 680px; }
   .solution-layout { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -897,33 +881,14 @@ footer {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 8px; }
 
-  .hero {
-    min-height: auto;
-    padding: 72px 0 84px;
-  }
-
-  .hero h1 {
-    line-height: 1.02;
-    letter-spacing: -.04em;
-  }
-
-  .hero-sub {
-    max-width: 100%;
-    margin-bottom: 28px;
-  }
-
   .hero-shot-frame {
     padding: 12px;
     border-radius: var(--radius-lg);
   }
+  .hero-shot-frame.hero-no-img { min-height: 360px; }
+  .hero-shot-frame img { max-height: none; }
 
-  .hero-shot-frame.hero-no-img {
-    min-height: 320px;
-  }
-
-  .hero-shot-frame img {
-    max-height: none;
-  }
+  .hero { min-height: auto; }
 
   #how-it-works { padding: 80px 0; }
   .mechanism-shell { border-radius: var(--radius-lg); }
@@ -972,13 +937,13 @@ footer {
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-inner">
-      <div class="hero-copy">
+      <div>
         <div class="hero-tag">Operational knowledge system</div>
         <h1>
-          <span class="line">Critical knowledge exists.</span>
-          <span class="line"><span class="accent">Requivo</span> makes it usable.</span>
+          <span class="line">Critical knowledge exists</span>
+          <span class="line"><span class="accent">Requivo</span> makes it usable</span>
         </h1>
-        <p class="hero-sub">Requivo transforms fragmented enterprise knowledge into a governed, auditable layer for people, workflows, and AI systems.</p>
+        <p class="hero-sub">Requivo turns scattered documents, systems, workflows, and expert know-how into a governed operational knowledge layer that teams and AI systems can use.</p>
         <div class="hero-actions">
           <a href="#how-it-works" class="btn btn-primary">Explore how it works</a>
           <a href="#contact" class="btn btn-outline">Contact the team</a>
