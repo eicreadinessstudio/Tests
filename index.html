@@ -52,11 +52,12 @@
   --font-mono:   'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
 
   /* Type scale (golden-ratio derived) */
-  --fs-micro:    11px;     /* mono uppercase labels */
+  --fs-micro:    11px;     /* mono uppercase labels (legacy) */
   --fs-xs:       12px;
   --fs-sm:       13.5px;   /* nav, small UI text */
   --fs-base:     15.5px;   /* body */
   --fs-lead:     17.5px;   /* hero sub, section sub */
+  --fs-label:    20px;     /* section sub-titles (Inter sentence case) */
   --fs-card:     20px;     /* card titles */
   --fs-h3:       26px;
   --fs-h2:       clamp(28px, 3.2vw, 42px);   /* section title */
@@ -103,33 +104,34 @@ img { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  height: 36px;
+  gap: 10px;
+  height: 38px;
   font-family: var(--font-sans);
-  font-size: var(--fs-xs);
+  font-size: 14px;
   font-weight: 450;
-  letter-spacing: .005em;
+  letter-spacing: -.005em;
   color: #e8ecf7;
 }
 .announce-inner a {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 .announce-tag {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--indigo-on-dark);
-  padding-right: 10px;
-  border-right: 1px solid rgba(165,180,252,.22);
-  margin-right: 6px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 450;
+  letter-spacing: -.005em;
+  text-transform: none;
+  color: rgba(232,236,247,.62);
+  padding-right: 12px;
+  border-right: 1px solid rgba(255,255,255,.14);
+  margin-right: 4px;
 }
 .announce-arrow {
   display: inline-flex;
-  margin-left: 2px;
-  opacity: .65;
+  margin-left: 4px;
+  opacity: .8;
   transition: transform .2s var(--ease), opacity .2s;
 }
 .announce a:hover .announce-arrow {
@@ -246,22 +248,14 @@ nav.raised {
 }
 
 .hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
   font-weight: 500;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--text-soft);
-  margin-bottom: 28px;
-}
-.hero-tag::before {
-  content: '';
-  width: 18px;
-  height: 1px;
-  background: var(--text-dim);
+  letter-spacing: -.012em;
+  text-transform: none;
+  color: var(--brand);
+  margin-bottom: 22px;
 }
 
 .hero h1 {
@@ -417,27 +411,17 @@ section { padding: 112px 0; }
 section + section { border-top: 1px solid var(--line-soft); }
 
 .section-label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
   font-weight: 500;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+  letter-spacing: -.012em;
+  text-transform: none;
   color: var(--brand);
-  margin-bottom: 18px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  margin-bottom: 16px;
+  display: block;
   background: transparent;
   padding: 0;
   border: 0;
-}
-.section-label::before {
-  content: '';
-  width: 22px;
-  height: 1px;
-  background: var(--brand);
-  flex-shrink: 0;
-  opacity: .55;
 }
 
 .section-title {
@@ -486,7 +470,6 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 
 #how-it-works .section-label { color: var(--indigo-on-dark); }
-#how-it-works .section-label::before { background: rgba(165,180,252,.45); }
 #how-it-works .section-title { color: #fff; }
 #how-it-works .section-sub { color: var(--text-on-dark-soft); }
 
@@ -791,30 +774,34 @@ footer {
 }
 
 .footer-brand p {
-  font-size: var(--fs-sm);
-  line-height: 1.7;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.65;
   font-weight: 400;
   color: var(--text-on-dark-soft);
-  max-width: 280px;
+  max-width: 300px;
+  letter-spacing: -.003em;
 }
 
 .footer-col h4 {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  letter-spacing: -.005em;
+  text-transform: none;
   font-weight: 500;
-  color: var(--text-on-dark-dim);
-  margin-bottom: 18px;
+  color: var(--indigo-on-dark);
+  margin-bottom: 16px;
 }
 
 .footer-col a,
 .footer-col p {
   display: block;
-  font-size: var(--fs-sm);
+  font-family: var(--font-sans);
+  font-size: 14px;
   line-height: 2;
   font-weight: 400;
   color: var(--text-on-dark-soft);
+  letter-spacing: -.003em;
   transition: color .18s;
 }
 .footer-col a:hover { color: #fff; }
@@ -822,7 +809,8 @@ footer {
 .footer-bottom {
   padding-top: 24px;
   border-top: 1px solid rgba(255,255,255,.08);
-  font-size: var(--fs-xs);
+  font-family: var(--font-sans);
+  font-size: 12px;
   color: var(--text-on-dark-dim);
   display: flex;
   justify-content: space-between;
@@ -867,6 +855,7 @@ footer {
   .nav-links { display: none; }
   section { padding: 80px 0; }
 
+  .announce-inner { font-size: 13px; height: 36px; }
   .announce-tag { padding-right: 8px; margin-right: 4px; }
 
   .prob-grid,
@@ -905,7 +894,7 @@ footer {
       <span>Selected pilot and validation collaborations open</span>
       <span class="announce-arrow" aria-hidden="true">
         <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4.5 2.5l3.5 3.5-3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
     </a>
@@ -1257,7 +1246,7 @@ footer {
           Requivo
         </a>
 
-        <p>Turning fragmented enterprise knowledge into a governed operational knowledge layer.</p>
+        <p>Turning fragmented enterprise evidence into a governed operational knowledge layer.</p>
       </div>
 
       <div class="footer-col">
