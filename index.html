@@ -916,12 +916,10 @@ footer {
 
 /* =========================================================
    REQUIVO · WHAT-YOU-GET SPOTLIGHT SUITE
-   Four outcome spotlights, one running scenario (line restart),
-   alternating zigzag, on the dark instrument field.
-   Self-contained · namespaced .rqw-* · tokens scoped to .rqw-suite.
-   To use: paste this <style> block + the <section id="rqw-suite">
-   + the small <script> at the bottom. Replaces your text-only
-   "What you get" panels.
+   Four outcome spotlights · one running scenario
+   (starting a new customer project) · alternating zigzag
+   on the dark instrument field.
+   Self-contained · namespaced .rqw-* · tokens scoped to .rqw-suite
    ========================================================= */
 .rqw-suite {
   --rqw-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -947,7 +945,6 @@ footer {
   --rqw-red: #b23227;
   --rqw-red-bg: #fdecea;
   --rqw-red-line: #f4d2cd;
-  --rqw-amber: #8a5d0f;
   --rqw-amber-bg: #fdf4e3;
   --rqw-amber-line: #f0e2bd;
   --rqw-ease: cubic-bezier(.2,.7,.2,1);
@@ -965,9 +962,9 @@ footer {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 80% 12%, rgba(79,70,229,.16) 0%, transparent 50%),
-    radial-gradient(ellipse at 14% 64%, rgba(14,165,233,.07) 0%, transparent 52%),
-    radial-gradient(ellipse at 90% 92%, rgba(79,70,229,.10) 0%, transparent 50%);
+    radial-gradient(ellipse at 82% 10%, rgba(79,70,229,.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 14% 62%, rgba(14,165,233,.08) 0%, transparent 52%),
+    radial-gradient(ellipse at 88% 92%, rgba(79,70,229,.10) 0%, transparent 50%);
   pointer-events: none;
 }
 .rqw-inner {
@@ -978,15 +975,24 @@ footer {
 }
 
 /* ---------- suite header ---------- */
-.rqw-head { max-width: 720px; margin: 0 0 24px; }
-.rqw-head .rqw-kicker { margin-bottom: 16px; }
-.rqw-head h2 {
-  margin: 0 0 16px;
-  font-family: var(--rqw-sans);
-  font-size: clamp(28px, 3.2vw, 42px);
+.rqw-head { max-width: 740px; margin: 0 0 16px; }
+.rqw-head .rqw-eyebrow {
+  display: inline-block;
+  font-family: var(--rqw-mono);
+  font-size: 11px;
   font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -.026em;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--rqw-indigo-on-dark);
+  margin-bottom: 18px;
+}
+.rqw-head h2 {
+  margin: 0 0 18px;
+  font-family: var(--rqw-sans);
+  font-size: clamp(28px, 3.3vw, 44px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.028em;
   color: #fff;
 }
 .rqw-head p {
@@ -996,7 +1002,7 @@ footer {
   font-weight: 400;
   letter-spacing: -.005em;
   color: var(--rqw-on-dark-soft);
-  max-width: 640px;
+  max-width: 660px;
 }
 
 /* ---------- row / zigzag ---------- */
@@ -1005,7 +1011,7 @@ footer {
   grid-template-columns: 1fr 1fr;
   gap: clamp(40px, 5vw, 84px);
   align-items: center;
-  padding: clamp(56px, 6vw, 84px) 0;
+  padding: clamp(60px, 6.5vw, 88px) 0;
 }
 .rqw-row + .rqw-row { border-top: 1px solid rgba(255,255,255,.07); }
 .rqw-row--flip .rqw-copy { order: 1; }
@@ -1019,34 +1025,36 @@ footer {
 }
 .rqw-row--flip .rqw-fragment { justify-self: start; }
 
-/* ---------- copy ---------- */
-.rqw-kicker {
+/* ---------- chapter marker (matches existing eyebrow style) ---------- */
+.rqw-mark {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  margin-bottom: 22px;
   font-family: var(--rqw-mono);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: .15em;
+  letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--rqw-indigo-on-dark);
-  margin-bottom: 18px;
 }
-.rqw-kicker .rqw-ix { color: var(--rqw-on-dark-dim); }
-.rqw-kicker .rqw-ix::after {
-  content: '';
-  display: inline-block;
-  width: 22px;
+.rqw-mark-ord {
+  flex: none;
+  color: var(--rqw-on-dark-dim);
+}
+.rqw-mark-rule {
+  flex: none;
+  width: 26px;
   height: 1px;
-  margin-left: 10px;
-  vertical-align: middle;
-  background: rgba(165,180,252,.4);
+  background: rgba(165,180,252,.5);
 }
+.rqw-mark-label { flex: none; }
+
 .rqw-title {
   font-family: var(--rqw-sans);
   font-size: clamp(26px, 2.9vw, 35px);
   font-weight: 500;
-  line-height: 1.12;
+  line-height: 1.14;
   letter-spacing: -.026em;
   color: #fff;
   margin: 0 0 18px;
@@ -1059,21 +1067,33 @@ footer {
   color: var(--rqw-on-dark-soft);
   margin: 0 0 26px;
 }
+
+/* ---------- visible meta pills ---------- */
 .rqw-meta {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 9px 13px;
-  font-family: var(--rqw-mono);
-  font-size: 11px;
-  letter-spacing: .05em;
-  color: var(--rqw-on-dark-dim);
+  gap: 9px;
 }
-.rqw-meta span { white-space: nowrap; }
-.rqw-meta i {
-  display: inline-block;
-  width: 3px; height: 3px; border-radius: 50%;
-  background: var(--rqw-indigo-on-dark); opacity: .6;
+.rqw-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--rqw-sans);
+  font-size: 12.5px;
+  font-weight: 450;
+  letter-spacing: -.003em;
+  color: rgba(232,236,247,.94);
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(165,180,252,.22);
+  border-radius: 100px;
+  padding: 7px 13px 7px 11px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.rqw-meta-pill svg {
+  display: block;
+  color: var(--rqw-indigo-on-dark);
+  flex: none;
 }
 
 /* ---------- cards ---------- */
@@ -1113,11 +1133,12 @@ footer {
   position: relative; height: 46px;
   display: flex; align-items: center; justify-content: center;
 }
-.rqw-flow--solo { height: auto; margin-top: -16px; }
+.rqw-flow--solo { height: auto; margin-top: -8px; padding-top: 18px; }
 .rqw-thread {
   position: absolute; top: 0; bottom: 0; left: 50%;
   width: 0; border-left: 2px dashed rgba(79,70,229,.45);
   transform: translateX(-50%);
+  transform-origin: top center;
 }
 .rqw-verb {
   position: relative; z-index: 2;
@@ -1132,7 +1153,7 @@ footer {
 .rqw-verb svg { display: block; }
 .rqw-verb .rqw-spark { color: var(--rqw-indigo-on-dark); }
 
-/* ---------- chips / badges / cites ---------- */
+/* ---------- chips ---------- */
 .rqw-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .rqw-chip {
   display: inline-flex; align-items: center; gap: 7px;
@@ -1147,11 +1168,12 @@ footer {
   color: #fff; background: var(--rqw-text-dim);
   border-radius: 4px; padding: 3px 5px;
 }
-.rqw-chip[data-t="pdf"]  b { background: #d8453a; }
-.rqw-chip[data-t="yml"]  b { background: #4f46e5; }
-.rqw-chip[data-t="eng"]  b { background: #0e9488; }
-.rqw-chip[data-t="wiki"] b { background: #2563eb; }
-.rqw-chip[data-t="log"]  b { background: #6b7280; }
+.rqw-chip[data-t="pdf"]   b { background: #d8453a; }
+.rqw-chip[data-t="doc"]   b { background: #2563eb; }
+.rqw-chip[data-t="wiki"]  b { background: #4f46e5; }
+.rqw-chip[data-t="crm"]   b { background: #0e9488; }
+.rqw-chip[data-t="mail"]  b { background: #b45309; }
+.rqw-chip[data-t="tpl"]   b { background: #6b7280; }
 
 .rqw-badge {
   flex: none;
@@ -1215,10 +1237,11 @@ footer {
 .rqw-val-n {
   display: block;
   font-family: var(--rqw-sans);
-  font-size: 16px; font-weight: 500; letter-spacing: -.01em; color: var(--rqw-text);
+  font-size: 14px; font-weight: 500; letter-spacing: -.01em; color: var(--rqw-text);
+  line-height: 1.2;
 }
 .rqw-val-src {
-  display: block; margin-top: 3px;
+  display: block; margin-top: 4px;
   font-family: var(--rqw-mono); font-size: 9px; letter-spacing: .02em; color: var(--rqw-text-dim);
 }
 
@@ -1252,16 +1275,21 @@ footer {
   color: var(--rqw-text-dim); margin-bottom: 8px;
 }
 .rqw-confirm {
-  display: flex; align-items: center; gap: 9px; margin-top: 12px;
-  font-size: 13px; color: var(--rqw-text);
+  display: flex; align-items: flex-start; gap: 10px; margin-top: 14px;
+  padding-top: 12px; border-top: 1px solid var(--rqw-line-soft);
+  font-size: 13px; line-height: 1.45; color: var(--rqw-text);
 }
 .rqw-confirm .rqw-check {
   flex: none; width: 18px; height: 18px; border-radius: 50%;
   background: var(--rqw-ok-bg); color: var(--rqw-ok);
   display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
 }
-.rqw-confirm b { font-weight: 500; }
-.rqw-confirm span { color: var(--rqw-text-soft); }
+.rqw-confirm-body b { font-weight: 500; }
+.rqw-confirm-meta {
+  display: block; margin-top: 4px;
+  font-family: var(--rqw-mono); font-size: 10px; letter-spacing: .04em; color: var(--rqw-text-dim);
+}
 
 /* ---------- article (writer output) ---------- */
 .rqw-article-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
@@ -1276,38 +1304,41 @@ footer {
   color: var(--rqw-text-dim); margin: 6px 0 16px;
 }
 .rqw-rule { height: 1px; background: var(--rqw-line-soft); margin: 0 0 14px; }
-.rqw-step { margin-bottom: 14px; }
+.rqw-step { margin-bottom: 11px; }
 .rqw-step:last-of-type { margin-bottom: 0; }
 .rqw-step-head { display: flex; align-items: baseline; gap: 10px; }
 .rqw-step-n { flex: none; font-family: var(--rqw-mono); font-size: 11px; font-weight: 500; color: var(--rqw-indigo); width: 16px; }
-.rqw-step-title { font-size: 14px; font-weight: 500; letter-spacing: -.01em; color: var(--rqw-text); line-height: 1.4; }
-.rqw-step-title em { font-style: normal; font-weight: 400; color: var(--rqw-text-soft); }
-.rqw-step .rqw-cites { margin: 7px 0 0 26px; }
+.rqw-step-title { font-size: 13.5px; font-weight: 450; letter-spacing: -.01em; color: var(--rqw-text); line-height: 1.4; }
 .rqw-foot {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rqw-line-soft);
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rqw-line-soft);
   font-family: var(--rqw-mono); font-size: 10.5px; letter-spacing: .04em; color: var(--rqw-text-dim);
 }
 .rqw-foot i { width: 3px; height: 3px; border-radius: 50%; background: var(--rqw-text-dim); opacity: .55; }
+.rqw-foot .rqw-foot-ok { color: var(--rqw-ok); }
 
 /* ---------- ask / answer (mcp) ---------- */
 .rqw-ask {
-  align-self: flex-end; max-width: 86%;
+  align-self: flex-end; max-width: 90%;
   margin-left: auto;
   background: var(--rqw-card-2); border: 1px solid var(--rqw-line);
   border-radius: 12px 12px 4px 12px; padding: 11px 14px;
-  font-size: 13.5px; color: var(--rqw-text);
+  font-size: 13.5px; line-height: 1.45; color: var(--rqw-text);
+}
+.rqw-ask-from {
+  display: block; margin-bottom: 4px;
+  font-family: var(--rqw-mono); font-size: 9.5px; letter-spacing: .06em; color: var(--rqw-text-dim);
 }
 .rqw-answer-body { font-size: 13.5px; line-height: 1.55; color: var(--rqw-text); margin: 0 0 12px; }
 .rqw-answer-body b { font-weight: 500; }
 .rqw-source {
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 9px;
   background: var(--rqw-card-2); border: 1px solid var(--rqw-line);
   border-radius: 8px; padding: 8px 11px; margin-bottom: 12px;
 }
 .rqw-source-icon { flex: none; color: var(--rqw-indigo); display: flex; }
 .rqw-source-name { font-size: 12.5px; font-weight: 450; color: var(--rqw-text); }
-.rqw-source-name span { color: var(--rqw-ok); font-family: var(--rqw-mono); font-size: 10px; letter-spacing: .04em; margin-left: 4px; }
+.rqw-source-name span { color: var(--rqw-ok); font-family: var(--rqw-mono); font-size: 10px; letter-spacing: .04em; margin-left: 6px; }
 .rqw-tags { display: flex; flex-wrap: wrap; gap: 7px; }
 .rqw-tag-mono {
   font-family: var(--rqw-mono);
@@ -1317,13 +1348,63 @@ footer {
 }
 .rqw-tag-mono b { color: var(--rqw-indigo); font-weight: 500; }
 
-/* ---------- motion (progressive enhancement) ---------- */
-.rqw-suite.rqw-anim .rqw-row { opacity: 0; transform: translateY(22px); }
-.rqw-suite.rqw-anim .rqw-row.rqw-in {
-  opacity: 1; transform: none;
-  transition: opacity .7s var(--rqw-ease), transform .7s var(--rqw-ease);
-}
+/* =========================================================
+   SCROLL-IN MOTION
+   Triggered by IntersectionObserver adding .rqw-in to each .rqw-row.
+   Cascade within a row: copy → top card → thread draws → verb pulses → bottom card.
+   Skipped entirely when prefers-reduced-motion is set.
+   ========================================================= */
 @media (prefers-reduced-motion: no-preference) {
+  .rqw-suite.rqw-anim .rqw-copy,
+  .rqw-suite.rqw-anim .rqw-fragment .rqw-card,
+  .rqw-suite.rqw-anim .rqw-fragment .rqw-verb,
+  .rqw-suite.rqw-anim .rqw-fragment .rqw-thread {
+    will-change: opacity, transform;
+  }
+  .rqw-suite.rqw-anim .rqw-copy {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .75s var(--rqw-ease), transform .75s var(--rqw-ease);
+  }
+  .rqw-suite.rqw-anim .rqw-fragment .rqw-card {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .75s var(--rqw-ease), transform .75s var(--rqw-ease);
+  }
+  .rqw-suite.rqw-anim .rqw-fragment .rqw-card:nth-of-type(2) {
+    transition-delay: .42s;
+  }
+  .rqw-suite.rqw-anim .rqw-fragment .rqw-thread {
+    transform: translateX(-50%) scaleY(0);
+    transition: transform .5s var(--rqw-ease) .22s;
+  }
+  .rqw-suite.rqw-anim .rqw-fragment .rqw-verb {
+    opacity: 0;
+    transform: scale(.9);
+    transition: opacity .45s var(--rqw-ease) .34s, transform .45s var(--rqw-ease) .34s, box-shadow .6s var(--rqw-ease);
+  }
+  .rqw-suite.rqw-anim .rqw-row.rqw-in .rqw-copy {
+    opacity: 1;
+    transform: none;
+    transition-delay: .04s;
+  }
+  .rqw-suite.rqw-anim .rqw-row.rqw-in .rqw-fragment .rqw-card {
+    opacity: 1;
+    transform: none;
+  }
+  .rqw-suite.rqw-anim .rqw-row.rqw-in .rqw-fragment .rqw-thread {
+    transform: translateX(-50%) scaleY(1);
+  }
+  .rqw-suite.rqw-anim .rqw-row.rqw-in .rqw-fragment .rqw-verb {
+    opacity: 1;
+    transform: none;
+    animation: rqw-verb-glow .9s var(--rqw-ease) .42s 1;
+  }
+  @keyframes rqw-verb-glow {
+    0%   { box-shadow: 0 2px 8px rgba(55,48,163,.45), 0 8px 24px rgba(8,14,38,.35), 0 0 0 0 rgba(165,180,252,.55); }
+    55%  { box-shadow: 0 2px 8px rgba(55,48,163,.45), 0 8px 24px rgba(8,14,38,.35), 0 0 0 12px rgba(165,180,252,0); }
+    100% { box-shadow: 0 2px 8px rgba(55,48,163,.45), 0 8px 24px rgba(8,14,38,.35), 0 0 0 0 rgba(165,180,252,0); }
+  }
   .rqw-card { transition: transform .35s var(--rqw-ease), box-shadow .35s var(--rqw-ease); }
   .rqw-fragment:hover .rqw-card:last-child {
     transform: translateY(-3px);
@@ -1334,7 +1415,7 @@ footer {
 /* ---------- responsive ---------- */
 @media (max-width: 980px) {
   .rqw-suite { padding: 72px 0 80px; }
-  .rqw-row { grid-template-columns: 1fr; gap: 40px; padding: 52px 0; }
+  .rqw-row { grid-template-columns: 1fr; gap: 40px; padding: 56px 0; }
   .rqw-row--flip .rqw-copy { order: 0; }
   .rqw-copy { max-width: 600px; }
   .rqw-fragment, .rqw-row--flip .rqw-fragment { justify-self: start; }
@@ -1399,7 +1480,7 @@ footer {
           <span class="line">Critical knowledge exists</span>
           <span class="line"><span class="accent">Requivo</span> makes it usable</span>
         </h1>
-        <p class="hero-sub">Requivo turns scattered documents, systems, and expert know-how into validated answers, living procedures, expert review tasks, and controlled AI access — all backed by source evidence and governance.</p>
+        <p class="hero-sub">Requivo turns scattered documents, internal systems, and expert know-how into a governed operational knowledge layer your teams and AI tools can safely query, reuse, and trust.</p>
         <div class="hero-actions">
           <a href="#what-you-get" class="btn btn-primary">See what users get</a>
           <a href="#how-it-works" class="btn btn-outline">Explore how it works</a>
@@ -1452,17 +1533,20 @@ footer {
 <section class="rqw-suite" id="what-you-get" aria-label="What you get">
   <div class="rqw-inner">
 
-    <!-- optional suite header (drop your existing one if you use this) -->
     <header class="rqw-head">
-      <span class="rqw-kicker">What users get</span>
+      <span class="rqw-eyebrow">What you get</span>
       <h2>From scattered knowledge to outputs your team can trust</h2>
-      <p>Follow one everyday operational problem — restarting a line after maintenance — as Requivo turns it into visible risks, expert validation, living documentation, and AI answers grounded in verified knowledge.</p>
+      <p>Follow one everyday problem — starting a new customer project — as Requivo turns scattered documents, conflicting instructions, and expert memory into a governed knowledge layer your team can use.</p>
     </header>
 
     <!-- ============ 01 · CONFLICT & GAP ============ -->
     <div class="rqw-row">
       <div class="rqw-copy">
-        <div class="rqw-kicker"><span class="rqw-ix">01</span> Conflict &amp; gap detection</div>
+        <div class="rqw-mark">
+          <span class="rqw-mark-ord">01</span>
+          <span class="rqw-mark-rule" aria-hidden="true"></span>
+          <span class="rqw-mark-label">Conflict &amp; gap detection</span>
+        </div>
         <h2 class="rqw-title">Catch the contradictions nobody noticed</h2>
         <p class="rqw-sub">
           Requivo reads across every source at once and flags where they disagree —
@@ -1470,9 +1554,18 @@ footer {
           see, made visible before they reach the floor.
         </p>
         <div class="rqw-meta">
-          <span>Contradictions</span><i></i>
-          <span>Missing steps</span><i></i>
-          <span>Silent drift</span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Contradictions surfaced
+          </span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Missing steps flagged
+          </span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Silent drift caught
+          </span>
         </div>
       </div>
 
@@ -1485,23 +1578,23 @@ footer {
 
           <div class="rqw-finding rqw-finding--conflict">
             <div class="rqw-finding-head">
-              <span class="rqw-finding-label">Safe restart pressure</span>
+              <span class="rqw-finding-label">Customer kickoff approval timeline</span>
               <span class="rqw-tag rqw-tag--conflict">Conflict</span>
             </div>
-            <p class="rqw-finding-desc">Three sources give three different values.</p>
+            <p class="rqw-finding-desc">Three sources give three different answers.</p>
             <div class="rqw-vals">
-              <div class="rqw-val"><span class="rqw-val-n">5.5 bar</span><span class="rqw-val-src">Safety SOP · 2019</span></div>
-              <div class="rqw-val"><span class="rqw-val-n">6.2 bar</span><span class="rqw-val-src">Line settings · 2024</span></div>
-              <div class="rqw-val"><span class="rqw-val-n">5.8 bar</span><span class="rqw-val-src">Team wiki · 2021</span></div>
+              <div class="rqw-val"><span class="rqw-val-n">2 days</span><span class="rqw-val-src">Sales playbook · 2022</span></div>
+              <div class="rqw-val"><span class="rqw-val-n">5 days</span><span class="rqw-val-src">Ops handbook · 2024</span></div>
+              <div class="rqw-val"><span class="rqw-val-n">Before signing</span><span class="rqw-val-src">Team wiki · 2021</span></div>
             </div>
           </div>
 
           <div class="rqw-finding rqw-finding--gap">
             <div class="rqw-finding-head">
-              <span class="rqw-finding-label">Post-maintenance check</span>
+              <span class="rqw-finding-label">Handover from sales to delivery</span>
               <span class="rqw-tag rqw-tag--gap">Gap</span>
             </div>
-            <p class="rqw-finding-desc">No source describes the checks needed after a restart. Referenced in Ticket ENG-4412 — never written down.</p>
+            <p class="rqw-finding-desc">No approved source explains what must be transferred before the project starts.</p>
           </div>
         </div>
 
@@ -1517,7 +1610,11 @@ footer {
     <!-- ============ 02 · KNOWLEDGE VERIFIER ============ -->
     <div class="rqw-row rqw-row--flip">
       <div class="rqw-copy">
-        <div class="rqw-kicker"><span class="rqw-ix">02</span> Knowledge Verifier</div>
+        <div class="rqw-mark">
+          <span class="rqw-mark-ord">02</span>
+          <span class="rqw-mark-rule" aria-hidden="true"></span>
+          <span class="rqw-mark-label">Knowledge Verifier</span>
+        </div>
         <h2 class="rqw-title">The right question reaches the right person</h2>
         <p class="rqw-sub">
           Requivo knows who actually owns each answer, and sends them one focused
@@ -1525,9 +1622,18 @@ footer {
           Open questions get resolved, not buried in a backlog.
         </p>
         <div class="rqw-meta">
-          <span>Auto-routed</span><i></i>
-          <span>One question</span><i></i>
-          <span>Confirmed, not chased</span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Right person, automatically
+          </span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            One precise question
+          </span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Confirmed, not chased
+          </span>
         </div>
       </div>
 
@@ -1539,15 +1645,15 @@ footer {
           </div>
           <div class="rqw-person-top">
             <div class="rqw-person-id">
-              <div class="rqw-avatar" aria-hidden="true">FM</div>
+              <div class="rqw-avatar" aria-hidden="true">PL</div>
               <div>
-                <div class="rqw-person-name">Franz Moser</div>
-                <div class="rqw-person-role">Senior engineer · your team</div>
+                <div class="rqw-person-name">Petra Lang</div>
+                <div class="rqw-person-role">Process owner · operations</div>
               </div>
             </div>
             <span class="rqw-pill-soft">Auto-selected</span>
           </div>
-          <p class="rqw-person-note">Wrote the original procedure and has resolved four similar conflicts before — so the question goes to him, not the whole team.</p>
+          <p class="rqw-person-note">Owns the customer onboarding process and has resolved similar approval questions before — so the question goes to her, not the whole team.</p>
         </div>
 
         <div class="rqw-flow">
@@ -1560,12 +1666,15 @@ footer {
 
         <div class="rqw-card rqw-card-pad">
           <div class="rqw-msg-meta">REQUIVO · 14:32</div>
-          <div class="rqw-msg">Sources disagree on the safe restart pressure — 5.5, 6.2 or 5.8 bar. Which is correct for this line?</div>
+          <div class="rqw-msg">Sources disagree on when customer kickoff approval is required. Which rule applies for new customer projects?</div>
           <div class="rqw-confirm">
             <span class="rqw-check" aria-hidden="true">
               <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            <b>Franz confirmed</b><span>· 6.2 bar (2024) · 2 min</span>
+            <div class="rqw-confirm-body">
+              Approval must be completed <b>before internal kickoff</b>. Current rule: Ops handbook 2024.
+              <span class="rqw-confirm-meta">Confirmed by Petra · 2 min</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1574,7 +1683,11 @@ footer {
     <!-- ============ 03 · KNOWLEDGE WRITER ============ -->
     <div class="rqw-row">
       <div class="rqw-copy">
-        <div class="rqw-kicker"><span class="rqw-ix">03</span> Knowledge Writer</div>
+        <div class="rqw-mark">
+          <span class="rqw-mark-ord">03</span>
+          <span class="rqw-mark-rule" aria-hidden="true"></span>
+          <span class="rqw-mark-label">Knowledge Writer</span>
+        </div>
         <h2 class="rqw-title">Living knowledge articles nobody had to write from scratch</h2>
         <p class="rqw-sub">
           Once an answer is confirmed, Requivo writes and maintains it as a structured,
@@ -1582,9 +1695,18 @@ footer {
           living document the whole team can read, follow and trust.
         </p>
         <div class="rqw-meta">
-          <span>Auto-detected topics</span><i></i>
-          <span>Procedure steps</span><i></i>
-          <span>Every line cited</span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Auto-detected topics
+          </span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Procedure steps
+          </span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Every line cited
+          </span>
         </div>
       </div>
 
@@ -1592,14 +1714,15 @@ footer {
         <div class="rqw-card rqw-card-pad">
           <div class="rqw-card-head">
             <h4>Source evidence</h4>
-            <span class="rqw-pill-soft">5 sources linked</span>
+            <span class="rqw-pill-soft">6 sources linked</span>
           </div>
           <div class="rqw-chips">
-            <span class="rqw-chip" data-t="pdf"><b>PDF</b>Restart procedure</span>
-            <span class="rqw-chip" data-t="yml"><b>YML</b>Line settings</span>
-            <span class="rqw-chip" data-t="eng"><b>ENG</b>Ticket ENG-4412</span>
+            <span class="rqw-chip" data-t="pdf"><b>PDF</b>Sales playbook</span>
+            <span class="rqw-chip" data-t="doc"><b>DOC</b>Ops handbook</span>
             <span class="rqw-chip" data-t="wiki"><b>WIKI</b>Team wiki</span>
-            <span class="rqw-chip" data-t="log"><b>LOG</b>Maintenance log</span>
+            <span class="rqw-chip" data-t="crm"><b>CRM</b>Account notes</span>
+            <span class="rqw-chip" data-t="mail"><b>MAIL</b>Email thread</span>
+            <span class="rqw-chip" data-t="tpl"><b>TPL</b>Project template</span>
           </div>
         </div>
 
@@ -1614,50 +1737,25 @@ footer {
 
         <div class="rqw-card rqw-card-pad">
           <div class="rqw-article-head">
-            <h3>Restarting a line after maintenance</h3>
+            <h3>Starting a new customer project</h3>
             <span class="rqw-badge rqw-badge--ok">
               <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
               Verified
             </span>
           </div>
-          <div class="rqw-article-meta">Auto-generated · approved by F. Moser · updated today</div>
+          <div class="rqw-article-meta">Auto-generated · approved by P. Lang · updated today</div>
           <div class="rqw-rule"></div>
 
-          <div class="rqw-step">
-            <div class="rqw-step-head">
-              <span class="rqw-step-n">01</span>
-              <span class="rqw-step-title">Confirm the line is safe to restart <em>— power off, area clear</em></span>
-            </div>
-            <div class="rqw-cites">
-              <span class="rqw-cite">Safety SOP v3</span>
-              <span class="rqw-cite">Maintenance log</span>
-            </div>
-          </div>
-
-          <div class="rqw-step">
-            <div class="rqw-step-head">
-              <span class="rqw-step-n">02</span>
-              <span class="rqw-step-title">Check settings match the approved version <em>— flag anything that has drifted</em></span>
-            </div>
-            <div class="rqw-cites">
-              <span class="rqw-cite">Approved spec v3</span>
-              <span class="rqw-cite">Change record</span>
-            </div>
-          </div>
-
-          <div class="rqw-step">
-            <div class="rqw-step-head">
-              <span class="rqw-step-n">03</span>
-              <span class="rqw-step-title">Record who restarted it, and when <em>— operator, time, result</em></span>
-            </div>
-            <div class="rqw-cites">
-              <span class="rqw-cite">Ops handbook</span>
-            </div>
-          </div>
+          <div class="rqw-step"><div class="rqw-step-head"><span class="rqw-step-n">01</span><span class="rqw-step-title">Confirm contract and scope</span></div></div>
+          <div class="rqw-step"><div class="rqw-step-head"><span class="rqw-step-n">02</span><span class="rqw-step-title">Complete internal kickoff approval</span></div></div>
+          <div class="rqw-step"><div class="rqw-step-head"><span class="rqw-step-n">03</span><span class="rqw-step-title">Assign delivery owner</span></div></div>
+          <div class="rqw-step"><div class="rqw-step-head"><span class="rqw-step-n">04</span><span class="rqw-step-title">Transfer customer context from sales to delivery</span></div></div>
+          <div class="rqw-step"><div class="rqw-step-head"><span class="rqw-step-n">05</span><span class="rqw-step-title">Create project workspace and first milestone plan</span></div></div>
 
           <div class="rqw-foot">
-            <span>5 sources cited</span><i></i>
-            <span>0 open conflicts</span><i></i>
+            <span>6 sources cited</span><i></i>
+            <span class="rqw-foot-ok">0 open conflicts</span><i></i>
+            <span>Approved by process owner</span><i></i>
             <span>Living document</span>
           </div>
         </div>
@@ -1667,17 +1765,30 @@ footer {
     <!-- ============ 04 · CONNECTED AI / MCP ============ -->
     <div class="rqw-row rqw-row--flip">
       <div class="rqw-copy">
-        <div class="rqw-kicker"><span class="rqw-ix">04</span> Governed AI access</div>
-        <h2 class="rqw-title">Your AI, grounded in your truth</h2>
+        <div class="rqw-mark">
+          <span class="rqw-mark-ord">04</span>
+          <span class="rqw-mark-rule" aria-hidden="true"></span>
+          <span class="rqw-mark-label">Connected AI · MCP</span>
+        </div>
+        <h2 class="rqw-title">Your AI, grounded in your organisation’s truth</h2>
         <p class="rqw-sub">
-          Point the AI tools your team already uses at your governed knowledge, through
-          your own key. Answers about your organisation come from what you’ve actually
-          verified — with the source attached, and never locked to one model.
+          The AI tools your team already uses can answer from governed knowledge
+          instead of raw documents. Every answer can carry source evidence, validation
+          state, and approval history.
         </p>
         <div class="rqw-meta">
-          <span>Bring your own key</span><i></i>
-          <span>Model-agnostic</span><i></i>
-          <span>Always cited</span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Bring your own key
+          </span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Model-agnostic
+          </span>
+          <span class="rqw-meta-pill">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Always cited
+          </span>
         </div>
       </div>
 
@@ -1687,31 +1798,36 @@ footer {
             <h4>Your assistant</h4>
             <span class="rqw-pill-soft">via MCP</span>
           </div>
-          <div class="rqw-ask">How do we restart the line safely?</div>
+          <div class="rqw-ask">
+            <span class="rqw-ask-from">USER</span>
+            What do I need to do before starting a new customer project?
+          </div>
         </div>
 
         <div class="rqw-flow">
           <span class="rqw-thread" aria-hidden="true"></span>
           <span class="rqw-verb">
-            Answered from verified knowledge
+            Answered from approved knowledge
           </span>
         </div>
 
         <div class="rqw-card rqw-card-pad">
           <p class="rqw-answer-body">
-            Confirm the line is safe, check settings against the approved version, then
-            log the restart. The confirmed safe pressure is <b>6.2 bar</b>.
+            Confirm contract and scope, complete internal kickoff approval, assign the
+            delivery owner, transfer customer context from sales to delivery, and create
+            the project workspace. This answer is based on the <b>approved customer
+            project start procedure</b>.
           </p>
           <div class="rqw-source">
             <span class="rqw-source-icon" aria-hidden="true">
               <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M4 2.5h6l2.5 2.5v8.5H4z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M6 7.5h4M6 9.8h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
             </span>
-            <span class="rqw-source-name">Restarting a line after maintenance <span>· verified</span></span>
+            <span class="rqw-source-name">Starting a new customer project <span>· approved</span></span>
           </div>
           <div class="rqw-tags">
             <span class="rqw-tag-mono"><b>BYOK</b> · your key</span>
             <span class="rqw-tag-mono">Model-agnostic</span>
-            <span class="rqw-tag-mono">Approved by F. Moser</span>
+            <span class="rqw-tag-mono">Approved by P. Lang</span>
           </div>
         </div>
       </div>
