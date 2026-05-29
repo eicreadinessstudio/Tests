@@ -138,7 +138,7 @@ img { display: block; max-width: 100%; }
   align-items: center;
   gap: 8px;
 }
-.announce-msg { color: rgba(232,236,247,.90); }
+.announce-msg { color: rgba(232,236,247,.92); font-weight: 450; letter-spacing: -.004em; }
 
 .announce-arrow {
   flex: none;
@@ -414,51 +414,53 @@ nav.raised {
 }
 
 /* =========================================================
-   HERO INGESTION FRAGMENT
-   Interactive replacement for the static screenshot.
-   Animates progress bars → badges in a continuous loop.
+   HERO INGESTION PANEL — dark floating instrument
+   No frame. Sits directly on white hero background.
    ========================================================= */
-.hi-step {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 12px;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--brand);
-}
-.hi-step-sep { color: var(--text-dim); font-weight: 400; }
 
-/* White card inside the light-gradient frame */
-.hi-card {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 12px;
+/* Panel floats on white hero bg — drama comes from its own shadow */
+.hi-panel {
+  width: 100%;
+  max-width: 486px;
+  background: #0c1528;
+  border: 1px solid rgba(165,180,252,.18);
+  border-radius: 16px;
   overflow: hidden;
   box-shadow:
-    0 1px 2px rgba(15,28,58,.04),
-    0 4px 12px rgba(15,28,58,.06);
+    0 1px 2px   rgba(0,0,0,.50),
+    0 8px 28px  rgba(0,0,0,.36),
+    0 24px 60px rgba(0,0,0,.26),
+    0 0 0 1px   rgba(79,70,229,.08),
+    0 20px 56px rgba(79,70,229,.18);
 }
 
-.hi-header {
+/* Panel header: step label + connector title + status */
+.hi-panel-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--line-soft);
+  padding: 11px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
 }
-.hi-header-label {
+.hi-panel-meta { display: flex; flex-direction: column; gap: 2px; }
+.hi-panel-step {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: .14em;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: #a5b4fc;
 }
-/* Status badge: shares base styles, variants set by JS classnames */
+.hi-panel-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.36);
+}
+
+/* Status pill — dark variants */
 .hi-status {
   font-family: var(--font-mono);
   font-size: 9.5px;
@@ -470,60 +472,60 @@ nav.raised {
   border: 1px solid transparent;
 }
 .hi-status--active {
-  color: var(--indigo-mid);
-  background: var(--indigo-pale);
-  border-color: #e0e4ff;
+  color: #a5b4fc;
+  background: rgba(79,70,229,.22);
+  border-color: rgba(165,180,252,.28);
 }
 .hi-status--ok {
-  color: #0e7a53;
-  background: #e7f6ee;
-  border-color: #c9ead9;
+  color: #6ee7b7;
+  background: rgba(16,185,129,.16);
+  border-color: rgba(52,211,153,.26);
 }
 
 /* Source rows */
 .hi-row {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 9px 14px;
-  border-bottom: 1px solid var(--line-soft);
+  gap: 8px;
+  padding: 7px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
 }
 .hi-row:last-child { border-bottom: none; }
 
 .hi-icon {
   flex: none;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: rgba(255,255,255,.92);
   font-family: var(--font-mono);
-  font-size: 7.5px;
+  font-size: 7px;
   font-weight: 600;
   letter-spacing: .02em;
 }
 
 .hi-name {
   flex: 0 0 auto;
-  max-width: 172px;
+  max-width: 158px;
   font-family: var(--font-sans);
-  font-size: 12.5px;
-  font-weight: 450;
-  color: var(--text);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,.75);
   letter-spacing: -.005em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Progress bar track + fill */
+/* Precision-thin progress track */
 .hi-bar-wrap {
   flex: 1 1 auto;
   min-width: 0;
-  height: 4px;
-  background: var(--line-soft);
+  height: 3px;
+  background: rgba(255,255,255,.07);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -531,67 +533,58 @@ nav.raised {
   height: 100%;
   width: 0%;
   border-radius: 2px;
-  /* gradient driven by JS on state changes */
-  background: linear-gradient(90deg, #4f46e5 0%, #818cf8 100%);
+  background: linear-gradient(90deg, #5b52f0 0%, #818cf8 100%);
 }
 
-/* Percentage / badge at row end */
+/* Percentage / type pill */
 .hi-pct {
   flex: none;
-  width: 56px;
+  width: 52px;
   text-align: right;
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: .02em;
-  color: var(--text-dim);
+  color: rgba(255,255,255,.28);
   white-space: nowrap;
 }
-/* Badge pops in — animation lives on the pill so each insertion triggers fresh */
-.hi-pct--done {
-  /* container marker only; styling is on .hi-type-pill child */
+.hi-pct--done { /* marker only — styling on .hi-type-pill child */ }
+
+/* Colored type pills — dark background variants */
+.hi-type-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 100px;
+  border: 1px solid;
+  white-space: nowrap;
+  animation: hi-badge-in .26s cubic-bezier(.34,1.56,.64,1) both;
 }
 @keyframes hi-badge-in {
   from { opacity: 0; transform: scale(.76) translateY(3px); }
   to   { opacity: 1; transform: none; }
 }
 
-/* Colored type pill: background/color/border set inline per source */
-.hi-type-pill {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 100px;
-  border: 1px solid;
-  white-space: nowrap;
-  animation: hi-badge-in .26s cubic-bezier(.34,1.56,.64,1) both;
-}
-
-/* Summary footer — green pill, fades in at cycle end */
+/* Footer: subtle green completion strip at card base */
 .hi-footer {
-  margin: 10px 12px 12px;
-  padding: 10px 13px;
-  border-radius: 10px;
-  background: #e7f6ee;
-  border: 1px solid #c9ead9;
   display: flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 8px;
+  padding: 9px 16px 11px;
+  border-top: 1px solid rgba(52,211,153,.16);
+  background: rgba(16,185,129,.055);
   font-family: var(--font-sans);
-  font-size: 12px;
-  line-height: 1.55;
-  color: #1e4d38;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: rgba(110,231,183,.85);
   opacity: 0;
 }
-.hi-footer-icon { flex: none; margin-top: 1px; }
-.hi-footer b {
-  color: #0a3321;
-  font-weight: 600;
-}
+.hi-footer-icon { flex: none; margin-top: 1px; color: #34d399; }
+.hi-footer b { font-weight: 600; color: #a7f3d0; }
 
 /* =========================================================
    SECTIONS
@@ -1090,9 +1083,11 @@ footer {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 82% 10%, rgba(79,70,229,.18) 0%, transparent 50%),
-    radial-gradient(ellipse at 14% 62%, rgba(14,165,233,.08) 0%, transparent 52%),
-    radial-gradient(ellipse at 88% 92%, rgba(79,70,229,.10) 0%, transparent 50%);
+    radial-gradient(circle, rgba(255,255,255,.048) 1px, transparent 1px),
+    radial-gradient(ellipse at 82% 10%,  rgba(79,70,229,.22)  0%, transparent 50%),
+    radial-gradient(ellipse at 14% 62%,  rgba(14,165,233,.10) 0%, transparent 52%),
+    radial-gradient(ellipse at 88% 92%,  rgba(79,70,229,.13)  0%, transparent 50%);
+  background-size: 28px 28px, 100% 100%, 100% 100%, 100% 100%;
   pointer-events: none;
 }
 .rqw-inner {
@@ -1139,7 +1134,16 @@ footer {
   align-items: center;
   padding: clamp(60px, 6.5vw, 88px) 0;
 }
-.rqw-row + .rqw-row { border-top: 1px solid rgba(255,255,255,.07); }
+.rqw-row + .rqw-row {
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.13) 22%,
+    rgba(255,255,255,.13) 78%,
+    transparent 100%
+  ) 1;
+}
 .rqw-row--flip .rqw-copy { order: 1; }
 
 .rqw-copy { max-width: 480px; }
@@ -1174,15 +1178,15 @@ footer {
 
 .rqw-title {
   font-family: var(--rqw-sans);
-  font-size: clamp(26px, 2.9vw, 35px);
-  font-weight: 500;
-  line-height: 1.14;
-  letter-spacing: -.026em;
+  font-size: clamp(26px, 2.9vw, 40px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -.030em;
   color: #fff;
   margin: 0 0 18px;
 }
 .rqw-sub {
-  font-size: 16.5px;
+  font-size: 16px;
   line-height: 1.62;
   font-weight: 400;
   letter-spacing: -.005em;
@@ -1203,9 +1207,9 @@ footer {
   font-size: 12.5px;
   font-weight: 450;
   letter-spacing: -.003em;
-  color: rgba(232,236,247,.94);
-  background: rgba(255,255,255,.035);
-  border: 1px solid rgba(165,180,252,.22);
+  color: rgba(232,236,247,.96);
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(165,180,252,.36);
   border-radius: 100px;
   padding: 7px 13px 7px 11px;
   backdrop-filter: blur(8px);
@@ -1222,15 +1226,19 @@ footer {
   border: 1px solid var(--rqw-line);
   border-radius: 16px;
   box-shadow:
-    0 1px 2px rgba(8,14,38,.30),
+    0 1px 2px  rgba(8,14,38,.30),
     0 18px 48px rgba(8,14,38,.42),
-    0 40px 96px rgba(8,14,38,.28);
+    0 40px 96px rgba(8,14,38,.28),
+    0 0 0 1px  rgba(79,70,229,.07),
+    0 20px 60px rgba(79,70,229,.18);
 }
-.rqw-card-pad { padding: 18px 18px 20px; }
+.rqw-card-pad { padding: 20px 20px 22px; }
 
 .rqw-card-head {
   display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 12px;
   margin-bottom: 14px;
+  border-bottom: 1px solid var(--rqw-line-soft);
 }
 .rqw-card-head h4 {
   margin: 0;
@@ -1255,7 +1263,7 @@ footer {
 .rqw-flow--solo { height: auto; margin-top: -8px; padding-top: 18px; }
 .rqw-thread {
   position: absolute; top: 0; bottom: 0; left: 50%;
-  width: 0; border-left: 2px dashed rgba(79,70,229,.45);
+  width: 0; border-left: 1px dashed rgba(79,70,229,.32);
   transform: translateX(-50%);
   transform-origin: top center;
 }
@@ -1264,14 +1272,21 @@ footer {
   display: inline-flex; align-items: center; gap: 9px;
   font-family: var(--rqw-sans);
   font-size: 13px; font-weight: 500; letter-spacing: -.005em;
-  color: #fff; background: var(--rqw-indigo);
-  border: 1px solid var(--rqw-indigo);
+  color: #fff;
+  background: linear-gradient(145deg, #5b52f0 0%, #3730a3 100%);
+  border: 1px solid rgba(165,180,252,.28);
   border-radius: 100px; padding: 9px 16px;
-  box-shadow: 0 2px 8px rgba(55,48,163,.45), 0 8px 24px rgba(8,14,38,.35);
+  box-shadow:
+    0 2px 8px  rgba(55,48,163,.52),
+    0 8px 24px rgba(8,14,38,.38),
+    inset 0 1px 0 rgba(255,255,255,.16);
   transition: box-shadow .28s var(--rqw-ease), transform .22s var(--rqw-ease);
 }
 .rqw-verb:hover {
-  box-shadow: 0 4px 14px rgba(55,48,163,.55), 0 12px 32px rgba(8,14,38,.40);
+  box-shadow:
+    0 4px 16px rgba(55,48,163,.62),
+    0 14px 36px rgba(8,14,38,.44),
+    inset 0 1px 0 rgba(255,255,255,.16);
   transform: translateY(-1px);
 }
 .rqw-verb svg { display: block; }
@@ -1623,14 +1638,19 @@ footer {
     transform: none;
   }
   @keyframes rqw-verb-glow {
-    0%   { box-shadow: 0 2px 8px rgba(55,48,163,.45), 0 8px 24px rgba(8,14,38,.35), 0 0 0 0 rgba(165,180,252,.55); }
-    55%  { box-shadow: 0 2px 8px rgba(55,48,163,.45), 0 8px 24px rgba(8,14,38,.35), 0 0 0 12px rgba(165,180,252,0); }
-    100% { box-shadow: 0 2px 8px rgba(55,48,163,.45), 0 8px 24px rgba(8,14,38,.35), 0 0 0 0 rgba(165,180,252,0); }
+    0%   { box-shadow: 0 2px 8px rgba(55,48,163,.52), 0 8px 24px rgba(8,14,38,.38), inset 0 1px 0 rgba(255,255,255,.16), 0 0 0 0   rgba(165,180,252,.58); }
+    55%  { box-shadow: 0 2px 8px rgba(55,48,163,.52), 0 8px 24px rgba(8,14,38,.38), inset 0 1px 0 rgba(255,255,255,.16), 0 0 0 13px rgba(165,180,252,0); }
+    100% { box-shadow: 0 2px 8px rgba(55,48,163,.52), 0 8px 24px rgba(8,14,38,.38), inset 0 1px 0 rgba(255,255,255,.16), 0 0 0 0   rgba(165,180,252,0); }
   }
   .rqw-card { transition: transform .35s var(--rqw-ease), box-shadow .35s var(--rqw-ease); }
   .rqw-fragment:hover .rqw-card:last-child {
     transform: translateY(-3px);
-    box-shadow: 0 2px 4px rgba(8,14,38,.30), 0 24px 60px rgba(8,14,38,.46), 0 50px 110px rgba(8,14,38,.30);
+    box-shadow:
+      0 2px 4px   rgba(8,14,38,.30),
+      0 24px 60px rgba(8,14,38,.46),
+      0 50px 110px rgba(8,14,38,.30),
+      0 0 0 1px   rgba(79,70,229,.10),
+      0 24px 70px rgba(79,70,229,.24);
   }
 }
 
@@ -1653,8 +1673,7 @@ footer {
 <!-- Announcement bar -->
 <div class="announce">
   <div class="wrap announce-inner">
-    <a href="#contact" aria-label="Pre-seed round — selected pilot and validation collaborations open">
-      <span class="announce-badge">Pre-seed round</span>
+    <a href="#contact" aria-label="Selected pilot and validation collaborations open">
       <span class="announce-line">
         <span class="announce-msg">Selected pilot &amp; validation collaborations open</span>
         <span class="announce-arrow" aria-hidden="true">
@@ -1707,33 +1726,26 @@ footer {
 
       <div class="hero-aside">
         <div class="hero-shot">
-          <div class="hero-shot-frame">
 
-            <!-- Step label -->
-            <div class="hi-step">
-              <span>Step 1</span>
-              <span class="hi-step-sep">·</span>
-              <span>Ingestion</span>
-            </div>
-
-            <!-- Animated card -->
-            <div class="hi-card" id="hi-card">
-              <div class="hi-header">
-                <span class="hi-header-label">Source Connectors</span>
-                <span class="hi-status hi-status--active" id="hi-status">Ingesting…</span>
+          <!-- Dark floating panel — no frame wrapper -->
+          <div class="hi-panel" id="hi-card">
+            <div class="hi-panel-head">
+              <div class="hi-panel-meta">
+                <span class="hi-panel-step">Step 1 · Ingestion</span>
+                <span class="hi-panel-label">Source Connectors</span>
               </div>
-              <!-- Rows injected by JS -->
-              <div id="hi-rows"></div>
-              <div class="hi-footer" id="hi-footer">
-                <svg class="hi-footer-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <circle cx="8" cy="8" r="7" fill="#0e7a53" opacity=".18"/>
-                  <path d="M5.2 8.2l1.8 1.8 3.8-3.8" stroke="#0e7a53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span><b><span id="hi-count">0</span> evidence objects</b> ingested from 6 sources — typed, dated, linked to origin.</span>
-              </div>
+              <span class="hi-status hi-status--active" id="hi-status">Ingesting…</span>
             </div>
-
+            <div id="hi-rows"></div>
+            <div class="hi-footer" id="hi-footer">
+              <svg class="hi-footer-icon" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="8" r="7" fill="currentColor" opacity=".22"/>
+                <path d="M5.2 8.2l1.8 1.8 3.8-3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span><b><span id="hi-count">0</span> evidence objects</b> ingested from 6 sources — typed, dated, linked to origin.</span>
+            </div>
           </div>
+
           <div class="hero-shot-caption">Step 1 of 4 · Ingestion · live preview</div>
         </div>
       </div>
@@ -1778,7 +1790,7 @@ footer {
     <header class="rqw-head">
       <span class="rqw-eyebrow">What you get</span>
       <h2>From scattered knowledge to outputs your team can trust</h2>
-      <p>Follow one everyday problem — starting a new customer project — as Requivo turns scattered documents, conflicting instructions, and expert memory into a governed knowledge layer your team can use.</p>
+      <p>One everyday scenario — starting a new customer project — from fragmented sources to trusted, governed knowledge.</p>
     </header>
 
     <!-- ============ 01 · CONFLICT & GAP ============ -->
@@ -2547,20 +2559,20 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   'use strict';
 
-  /* ── Source data (English, no brand names) ───────────── */
+  /* ── Source data ─────────────────────────────────────── */
   const SOURCES = [
-    { abbr: 'CFG', name: 'PLC config exports',      badge: 'Config',   color: '#4338ca', pBg: '#eef2ff', pColor: '#3730a3', pBdr: '#c7d2fe', dur: 920  },
-    { abbr: 'SOP', name: 'Maintenance procedures',  badge: 'SOP',      color: '#0078d4', pBg: '#e0f2fe', pColor: '#0369a1', pBdr: '#bae6fd', dur: 1660 },
-    { abbr: 'LOG', name: 'Fault & incident log',    badge: 'Incident', color: '#b45309', pBg: '#fdf4e3', pColor: '#92400e', pBdr: '#fde68a', dur: 2180 },
-    { abbr: 'WO',  name: 'Work order history',      badge: 'Order',    color: '#1a6c37', pBg: '#ecfdf5', pColor: '#065f46', pBdr: '#6ee7b7', dur: 2820 },
-    { abbr: 'PDF', name: 'Equipment manuals',       badge: 'Manual',   color: '#d8453a', pBg: '#fef2f2', pColor: '#b23227', pBdr: '#fca5a5', dur: 3360 },
-    { abbr: 'ENG', name: 'Engineering wiki',        badge: 'Wiki',     color: '#5b21b6', pBg: '#f5f3ff', pColor: '#5b21b6', pBdr: '#ddd6fe', dur: 4050 },
+    { abbr: 'CFG', name: 'PLC config exports',     badge: 'Config',   color: '#4338ca', pBg: 'rgba(79,70,229,.30)',   pColor: '#a5b4fc', pBdr: 'rgba(165,180,252,.34)', dur: 920  },
+    { abbr: 'SOP', name: 'Maintenance procedures', badge: 'SOP',      color: '#0284c7', pBg: 'rgba(6,182,212,.22)',   pColor: '#7dd3fc', pBdr: 'rgba(125,211,252,.32)', dur: 1660 },
+    { abbr: 'LOG', name: 'Fault & incident log',   badge: 'Incident', color: '#b45309', pBg: 'rgba(245,158,11,.22)',  pColor: '#fcd34d', pBdr: 'rgba(252,211,77,.30)',  dur: 2180 },
+    { abbr: 'WO',  name: 'Work order history',     badge: 'Order',    color: '#1a6c37', pBg: 'rgba(16,185,129,.20)',  pColor: '#6ee7b7', pBdr: 'rgba(110,231,183,.30)', dur: 2820 },
+    { abbr: 'PDF', name: 'Equipment manuals',      badge: 'Manual',   color: '#d8453a', pBg: 'rgba(239,68,68,.22)',   pColor: '#fca5a5', pBdr: 'rgba(252,165,165,.30)', dur: 3360 },
+    { abbr: 'ENG', name: 'Engineering wiki',       badge: 'Wiki',     color: '#7c3aed', pBg: 'rgba(139,92,246,.24)',  pColor: '#c4b5fd', pBdr: 'rgba(196,181,253,.32)', dur: 4050 },
   ];
   const MAX_DUR   = Math.max(...SOURCES.map(s => s.dur));
   const COUNT_TARGET = 2340;
 
-  /* Gradient strings reused in reset and completion */
-  const BAR_ACTIVE = 'linear-gradient(90deg,#4f46e5 0%,#818cf8 100%)';
+  /* Gradient strings — brighter on dark track */
+  const BAR_ACTIVE = 'linear-gradient(90deg,#5b52f0 0%,#818cf8 100%)';
   const BAR_DONE   = 'linear-gradient(90deg,#059669 0%,#34d399 100%)';
 
   /* ── DOM refs ────────────────────────────────────────── */
