@@ -414,6 +414,186 @@ nav.raised {
 }
 
 /* =========================================================
+   HERO INGESTION FRAGMENT
+   Interactive replacement for the static screenshot.
+   Animates progress bars → badges in a continuous loop.
+   ========================================================= */
+.hi-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+.hi-step-sep { color: var(--text-dim); font-weight: 400; }
+
+/* White card inside the light-gradient frame */
+.hi-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 2px rgba(15,28,58,.04),
+    0 4px 12px rgba(15,28,58,.06);
+}
+
+.hi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.hi-header-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+/* Status badge: shares base styles, variants set by JS classnames */
+.hi-status {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 100px;
+  border: 1px solid transparent;
+}
+.hi-status--active {
+  color: var(--indigo-mid);
+  background: var(--indigo-pale);
+  border-color: #e0e4ff;
+}
+.hi-status--ok {
+  color: #0e7a53;
+  background: #e7f6ee;
+  border-color: #c9ead9;
+}
+
+/* Source rows */
+.hi-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.hi-row:last-child { border-bottom: none; }
+
+.hi-icon {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.hi-name {
+  flex: 0 0 auto;
+  max-width: 172px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 450;
+  color: var(--text);
+  letter-spacing: -.005em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Progress bar track + fill */
+.hi-bar-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 4px;
+  background: var(--line-soft);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.hi-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 2px;
+  /* gradient driven by JS on state changes */
+  background: linear-gradient(90deg, #4f46e5 0%, #818cf8 100%);
+}
+
+/* Percentage / badge at row end */
+.hi-pct {
+  flex: none;
+  width: 56px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .02em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+/* Badge pops in — animation lives on the pill so each insertion triggers fresh */
+.hi-pct--done {
+  /* container marker only; styling is on .hi-type-pill child */
+}
+@keyframes hi-badge-in {
+  from { opacity: 0; transform: scale(.76) translateY(3px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Colored type pill: background/color/border set inline per source */
+.hi-type-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 100px;
+  border: 1px solid;
+  white-space: nowrap;
+  animation: hi-badge-in .26s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+/* Summary footer — green pill, fades in at cycle end */
+.hi-footer {
+  margin: 10px 12px 12px;
+  padding: 10px 13px;
+  border-radius: 10px;
+  background: #e7f6ee;
+  border: 1px solid #c9ead9;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.55;
+  color: #1e4d38;
+  opacity: 0;
+}
+.hi-footer-icon { flex: none; margin-top: 1px; }
+.hi-footer b {
+  color: #0a3321;
+  font-weight: 600;
+}
+
+/* =========================================================
    SECTIONS
    ========================================================= */
 section { padding: 112px 0; }
@@ -1528,12 +1708,33 @@ footer {
       <div class="hero-aside">
         <div class="hero-shot">
           <div class="hero-shot-frame">
-            <img
-              src="requivo-fragment.png"
-              alt="Selected interface fragment from Requivo"
-              onerror="this.style.display='none';this.parentElement.classList.add('hero-no-img')" />
+
+            <!-- Step label -->
+            <div class="hi-step">
+              <span>Step 1</span>
+              <span class="hi-step-sep">·</span>
+              <span>Ingestion</span>
+            </div>
+
+            <!-- Animated card -->
+            <div class="hi-card" id="hi-card">
+              <div class="hi-header">
+                <span class="hi-header-label">Source Connectors</span>
+                <span class="hi-status hi-status--active" id="hi-status">Ingesting…</span>
+              </div>
+              <!-- Rows injected by JS -->
+              <div id="hi-rows"></div>
+              <div class="hi-footer" id="hi-footer">
+                <svg class="hi-footer-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="8" r="7" fill="#0e7a53" opacity=".18"/>
+                  <path d="M5.2 8.2l1.8 1.8 3.8-3.8" stroke="#0e7a53" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span><b><span id="hi-count">0</span> evidence objects</b> ingested from 6 sources — typed, dated, linked to origin.</span>
+              </div>
+            </div>
+
           </div>
-          <div class="hero-shot-caption">Selected interface fragment</div>
+          <div class="hero-shot-caption">Step 1 of 4 · Ingestion · live preview</div>
         </div>
       </div>
     </div>
@@ -2309,6 +2510,212 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }, { threshold: 0.30 }).observe(row);
+
+})();
+</script>
+
+<!--
+  ============================================================
+  HERO · INGESTION ANIMATION
+  ============================================================
+  Sequence per cycle (~9 s total):
+
+    1. 350 ms  — initial pause, card visible, "Ingesting…"
+    2. ~4 000 ms — all 6 bars fill simultaneously at
+                   different speeds (rAF + ease-out cubic).
+                   Each bar completes → bar turns green
+                   → pct swaps to "✓ {type}" badge.
+    3. 250 ms  — last bar done buffer
+    4. status → "Ingested" (green pill)
+    5. 380 ms  → footer count fades in
+    6. 2 700 ms hold
+    7. card fades to opacity 0 (420 ms)
+    8. restart from step 1
+
+  DACH Mittelstand sources:
+    PLC  Siemens TIA-Konfig   → Config
+    SP   SharePoint SOPs       → SOP
+    CM   CMMS Störungsprotokoll → Incident
+    SAP  SAP PM Aufträge       → Order
+    PDF  PDF Maschinendoku     → Manual
+    CO   Confluence Eng.-Wiki  → Wiki
+
+  Respects prefers-reduced-motion (shows final state instantly).
+  ============================================================
+-->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Source data (English, no brand names) ───────────── */
+  const SOURCES = [
+    { abbr: 'CFG', name: 'PLC config exports',      badge: 'Config',   color: '#4338ca', pBg: '#eef2ff', pColor: '#3730a3', pBdr: '#c7d2fe', dur: 920  },
+    { abbr: 'SOP', name: 'Maintenance procedures',  badge: 'SOP',      color: '#0078d4', pBg: '#e0f2fe', pColor: '#0369a1', pBdr: '#bae6fd', dur: 1660 },
+    { abbr: 'LOG', name: 'Fault & incident log',    badge: 'Incident', color: '#b45309', pBg: '#fdf4e3', pColor: '#92400e', pBdr: '#fde68a', dur: 2180 },
+    { abbr: 'WO',  name: 'Work order history',      badge: 'Order',    color: '#1a6c37', pBg: '#ecfdf5', pColor: '#065f46', pBdr: '#6ee7b7', dur: 2820 },
+    { abbr: 'PDF', name: 'Equipment manuals',       badge: 'Manual',   color: '#d8453a', pBg: '#fef2f2', pColor: '#b23227', pBdr: '#fca5a5', dur: 3360 },
+    { abbr: 'ENG', name: 'Engineering wiki',        badge: 'Wiki',     color: '#5b21b6', pBg: '#f5f3ff', pColor: '#5b21b6', pBdr: '#ddd6fe', dur: 4050 },
+  ];
+  const MAX_DUR   = Math.max(...SOURCES.map(s => s.dur));
+  const COUNT_TARGET = 2340;
+
+  /* Gradient strings reused in reset and completion */
+  const BAR_ACTIVE = 'linear-gradient(90deg,#4f46e5 0%,#818cf8 100%)';
+  const BAR_DONE   = 'linear-gradient(90deg,#059669 0%,#34d399 100%)';
+
+  /* ── DOM refs ────────────────────────────────────────── */
+  const card     = document.getElementById('hi-card');
+  const statusEl = document.getElementById('hi-status');
+  const footerEl = document.getElementById('hi-footer');
+  const rowsEl   = document.getElementById('hi-rows');
+  const countEl  = document.getElementById('hi-count');
+  if (!card || !statusEl || !footerEl || !rowsEl) return;
+
+  /* ── Build rows ──────────────────────────────────────── */
+  SOURCES.forEach(function (src, i) {
+    const row = document.createElement('div');
+    row.className = 'hi-row';
+    row.innerHTML =
+      '<div class="hi-icon" style="background:' + src.color + '">' + src.abbr + '</div>' +
+      '<span class="hi-name">' + src.name + '</span>' +
+      '<div class="hi-bar-wrap"><div class="hi-bar-fill" id="hib' + i + '"></div></div>' +
+      '<span class="hi-pct" id="hip' + i + '">—</span>';
+    rowsEl.appendChild(row);
+  });
+
+  /* ── Reduced motion: show completed state immediately ── */
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    SOURCES.forEach(function (src, i) {
+      const b = document.getElementById('hib' + i);
+      const p = document.getElementById('hip' + i);
+      if (b) { b.style.background = BAR_DONE; b.style.width = '100%'; }
+      if (p) {
+        p.className = 'hi-pct hi-pct--done';
+        p.innerHTML = '<span class="hi-type-pill" style="background:' + src.pBg + ';color:' + src.pColor + ';border-color:' + src.pBdr + '">' + src.badge + '</span>';
+      }
+    });
+    statusEl.textContent = 'Ingested';
+    statusEl.className   = 'hi-status hi-status--ok';
+    if (countEl) countEl.textContent = COUNT_TARGET.toLocaleString('en');
+    footerEl.style.opacity = '1';
+    return;
+  }
+
+  /* ── Helpers ─────────────────────────────────────────── */
+  const wait         = ms => new Promise(res => setTimeout(res, ms));
+  const easeOutCubic = t  => 1 - Math.pow(1 - t, 3);
+
+  /* Counts el from 0 → target over duration ms */
+  function animateCounter(el, target, duration) {
+    var st = null;
+    function frame(ts) {
+      if (!st) st = ts;
+      var raw = Math.min((ts - st) / duration, 1);
+      el.textContent = Math.round(target * easeOutCubic(raw)).toLocaleString('en');
+      if (raw < 1) requestAnimationFrame(frame);
+      else el.textContent = target.toLocaleString('en');
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ── Reset to initial state ──────────────────────────── */
+  function resetState() {
+    card.style.transition = 'none';
+    card.style.opacity    = '1';
+
+    statusEl.textContent  = 'Ingesting\u2026';
+    statusEl.className    = 'hi-status hi-status--active';
+
+    footerEl.style.transition = 'none';
+    footerEl.style.opacity    = '0';
+    if (countEl) countEl.textContent = '0';
+
+    SOURCES.forEach(function (src, i) {
+      const b = document.getElementById('hib' + i);
+      const p = document.getElementById('hip' + i);
+      if (b) { b.style.background = BAR_ACTIVE; b.style.width = '0%'; }
+      if (p) { p.innerHTML = '—'; p.className = 'hi-pct'; delete p.dataset.done; }
+    });
+  }
+
+  /* ── Animate all bars simultaneously ────────────────── */
+  function animateAllBars() {
+    SOURCES.forEach(function (src, i) {
+      const barEl = document.getElementById('hib' + i);
+      const pctEl = document.getElementById('hip' + i);
+      if (!barEl || !pctEl) return;
+
+      var startTime = null;
+
+      function frame(ts) {
+        if (!startTime) startTime = ts;
+        var raw   = Math.min((ts - startTime) / src.dur, 1);
+        var eased = easeOutCubic(raw);
+        var pct   = Math.round(eased * 100);
+
+        barEl.style.width = pct + '%';
+
+        if (!pctEl.dataset.done) {
+          pctEl.textContent = pct + '%';
+        }
+
+        if (raw < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          /* Bar complete: green gradient + spring-pop colored type pill */
+          barEl.style.background = BAR_DONE;
+          pctEl.className        = 'hi-pct hi-pct--done';
+          pctEl.dataset.done     = '1';
+          /* Insert pill fresh so CSS animation triggers on each cycle */
+          pctEl.innerHTML =
+            '<span class="hi-type-pill" style="background:' + src.pBg +
+            ';color:' + src.pColor +
+            ';border-color:' + src.pBdr + '">' + src.badge + '</span>';
+        }
+      }
+
+      requestAnimationFrame(frame);
+    });
+  }
+
+  /* ── Main animation loop ─────────────────────────────── */
+  async function runCycle() {
+    resetState();
+
+    await wait(350);
+
+    animateAllBars();
+
+    await wait(MAX_DUR + 250);
+
+    /* Status pill → Ingested */
+    statusEl.textContent = 'Ingested';
+    statusEl.className   = 'hi-status hi-status--ok';
+
+    await wait(380);
+
+    /* Green pill fades in + counter counts up */
+    footerEl.style.transition = 'opacity .38s ease';
+    footerEl.style.opacity    = '1';
+    if (countEl) animateCounter(countEl, COUNT_TARGET, 900);
+
+    await wait(2700);
+
+    /* Fade out */
+    card.style.transition = 'opacity .42s ease';
+    card.style.opacity    = '0';
+
+    await wait(460);
+
+    runCycle();
+  }
+
+  /* ── Kick off ────────────────────────────────────────── */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runCycle);
+  } else {
+    runCycle();
+  }
 
 })();
 </script>
