@@ -104,7 +104,7 @@ nav.raised {
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   font-family: var(--font-sans);
   font-size: 16.5px;
   font-weight: 500;
@@ -872,11 +872,11 @@ footer .wrap { position: relative; z-index: 1; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle, rgba(255,255,255,.048) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,.036) 1px, transparent 1px),
     radial-gradient(ellipse at 82% 10%,  rgba(79,70,229,.22)  0%, transparent 50%),
     radial-gradient(ellipse at 14% 62%,  rgba(14,165,233,.10) 0%, transparent 52%),
     radial-gradient(ellipse at 88% 92%,  rgba(79,70,229,.13)  0%, transparent 50%);
-  background-size: 28px 28px, 100% 100%, 100% 100%, 100% 100%;
+  background-size: 22px 22px, 100% 100%, 100% 100%, 100% 100%;
   pointer-events: none;
 }
 .rqw-inner { position: relative; z-index: 1; width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
@@ -899,9 +899,9 @@ footer .wrap { position: relative; z-index: 1; }
 .rqw-copy { max-width: 480px; }
 .rqw-fragment { position: relative; width: 100%; max-width: 520px; justify-self: end; }
 .rqw-row--flip .rqw-fragment { justify-self: start; }
-.rqw-mark { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; font-family: var(--rqw-mono); font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--rqw-indigo-on-dark); }
+.rqw-mark { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-family: var(--rqw-mono); font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--rqw-indigo-on-dark); }
 .rqw-mark-ord { flex: none; color: var(--rqw-on-dark-dim); }
-.rqw-mark-rule { flex: none; width: 26px; height: 1px; background: rgba(165,180,252,.5); }
+.rqw-mark-rule { flex: none; width: 16px; height: 1px; background: rgba(165,180,252,.45); }
 .rqw-mark-label { flex: none; }
 .rqw-title { font-family: var(--rqw-sans); font-size: clamp(26px, 2.9vw, 40px); font-weight: 600; line-height: 1.1; letter-spacing: -.030em; color: #fff; margin: 0 0 18px; text-wrap: balance; }
 .rqw-sub { font-size: 16px; line-height: 1.62; font-weight: 400; letter-spacing: -.005em; color: var(--rqw-on-dark-soft); margin: 0 0 26px; }
@@ -912,28 +912,30 @@ footer .wrap { position: relative; z-index: 1; }
   color: rgba(232,236,247,.96);
   background: rgba(255,255,255,.07);
   border: 1px solid rgba(165,180,252,.36);
-  border-radius: 100px; padding: 7px 13px 7px 11px;
+  border-radius: 5px; padding: 7px 13px 7px 11px;
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
 .rqw-meta-pill svg { display: block; color: var(--rqw-indigo-on-dark); flex: none; }
 .rqw-card {
   background: var(--rqw-card);
-  border: 1px solid var(--rqw-line);
-  border-radius: 16px;
+  border: 0.5px solid rgba(15,28,58,.09);
+  border-radius: 10px;
   box-shadow:
-    0 1px 2px  rgba(8,14,38,.30),
-    0 18px 48px rgba(8,14,38,.42),
-    0 40px 96px rgba(8,14,38,.28),
-    0 0 0 1px  rgba(79,70,229,.07),
-    0 20px 60px rgba(79,70,229,.18);
+    0 0 0 0.5px rgba(15,28,58,.06),
+    0 1px 3px   rgba(8,14,38,.14),
+    0 4px 10px  rgba(8,14,38,.18),
+    0 16px 40px rgba(8,14,38,.36),
+    0 40px 80px rgba(8,14,38,.22),
+    0 0 0 1px   rgba(79,70,229,.05),
+    0 18px 52px rgba(79,70,229,.15);
 }
-.rqw-card-pad { padding: 20px 20px 22px; }
-.rqw-card-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--rqw-line-soft); }
+.rqw-card-pad { padding: 20px 22px; }
+.rqw-card-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 0.5px solid var(--rqw-line-soft); }
 .rqw-card-head h4 { margin: 0; font-family: var(--rqw-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--rqw-text-dim); }
-.rqw-pill-soft { font-family: var(--rqw-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .04em; color: var(--rqw-indigo); background: var(--rqw-indigo-pale); border: 1px solid #e0e4ff; border-radius: 100px; padding: 4px 10px; }
+.rqw-pill-soft { font-family: var(--rqw-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .04em; color: var(--rqw-indigo); background: var(--rqw-indigo-pale); border: 0.5px solid #d4d9ff; border-radius: 4px; padding: 4px 10px; }
 .rqw-flow { position: relative; height: 46px; display: flex; align-items: center; justify-content: center; }
 .rqw-flow--solo { height: auto; margin-top: -8px; padding-top: 18px; }
-.rqw-thread { position: absolute; top: 0; bottom: 0; left: 50%; width: 0; border-left: 1px dashed rgba(79,70,229,.32); transform: translateX(-50%); transform-origin: top center; }
+.rqw-thread { position: absolute; top: 0; bottom: 0; left: 50%; width: 0; border-left: 1px solid rgba(165,180,252,.20); transform: translateX(-50%); transform-origin: top center; }
 .rqw-verb {
   position: relative; z-index: 2;
   display: inline-flex; align-items: center; gap: 9px;
@@ -941,7 +943,7 @@ footer .wrap { position: relative; z-index: 1; }
   color: #fff;
   background: linear-gradient(145deg, #5b52f0 0%, #3730a3 100%);
   border: 1px solid rgba(165,180,252,.28);
-  border-radius: 100px; padding: 9px 16px;
+  border-radius: 8px; padding: 9px 18px;
   box-shadow: 0 2px 8px rgba(55,48,163,.52), 0 8px 24px rgba(8,14,38,.38), inset 0 1px 0 rgba(255,255,255,.16);
   transition: box-shadow .28s var(--rqw-ease), transform .22s var(--rqw-ease);
 }
@@ -957,7 +959,7 @@ footer .wrap { position: relative; z-index: 1; }
 .rqw-chip[data-t="crm"]  b { background: #0e9488; }
 .rqw-chip[data-t="mail"] b { background: #b45309; }
 .rqw-chip[data-t="tpl"]  b { background: #6b7280; }
-.rqw-badge { flex: none; display: inline-flex; align-items: center; gap: 5px; font-family: var(--rqw-mono); font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 100px; }
+.rqw-badge { flex: none; display: inline-flex; align-items: center; gap: 5px; font-family: var(--rqw-mono); font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 4px; }
 .rqw-badge svg { display: block; }
 .rqw-badge--ok { color: var(--rqw-ok); background: var(--rqw-ok-bg); border: 1px solid var(--rqw-ok-line); }
 .rqw-badge--review { color: #8a5d0f; background: var(--rqw-amber-bg); border: 1px solid var(--rqw-amber-line); }
@@ -1063,7 +1065,7 @@ footer .wrap { position: relative; z-index: 1; }
     100% { box-shadow: 0 2px 8px rgba(55,48,163,.52), 0 8px 24px rgba(8,14,38,.38), inset 0 1px 0 rgba(255,255,255,.16), 0 0 0 0   rgba(165,180,252,0); }
   }
   .rqw-card { transition: transform .35s var(--rqw-ease), box-shadow .35s var(--rqw-ease); }
-  .rqw-fragment:hover .rqw-card:last-child { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(8,14,38,.30), 0 24px 60px rgba(8,14,38,.46), 0 50px 110px rgba(8,14,38,.30), 0 0 0 1px rgba(79,70,229,.10), 0 24px 70px rgba(79,70,229,.24); }
+  .rqw-fragment:hover .rqw-card:last-child { transform: translateY(-2px); box-shadow: 0 0 0 0.5px rgba(15,28,58,.08), 0 2px 6px rgba(8,14,38,.18), 0 8px 18px rgba(8,14,38,.24), 0 24px 56px rgba(8,14,38,.42), 0 50px 100px rgba(8,14,38,.26), 0 0 0 1px rgba(79,70,229,.08), 0 22px 64px rgba(79,70,229,.20); }
 }
 
 @media (max-width: 980px) {
@@ -1087,10 +1089,10 @@ footer .wrap { position: relative; z-index: 1; }
 <nav id="nav">
   <div class="wrap nav-inner">
     <a href="#top" class="logo" aria-label="Requivo home">
-      <svg viewBox="0 0 44 36" width="34" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M15 3.5 C7.5 3.5,3 8,3 14 L3 22 C3 28,7.5 32.5,15 32.5" stroke="#2c2a7a" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <path d="M29 3.5 C36.5 3.5,41 8,41 14 L41 22 C41 28,36.5 32.5,29 32.5" stroke="#2c2a7a" stroke-width="3" stroke-linecap="round" fill="none"/>
-        <rect x="16" y="12" width="12" height="12" rx="1" fill="#4f46e5" transform="rotate(45 22 18)"/>
+      <svg viewBox="0 0 44 36" width="32" height="26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M15 3.5 C7.5 3.5,3 8,3 14 L3 22 C3 28,7.5 32.5,15 32.5" stroke="#3730a3" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M29 3.5 C36.5 3.5,41 8,41 14 L41 22 C41 28,36.5 32.5,29 32.5" stroke="#3730a3" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M22 10 L28.5 18 L22 26 L15.5 18 Z" fill="#4f46e5"/>
       </svg>
       Requivo
     </a>
@@ -1466,10 +1468,10 @@ footer .wrap { position: relative; z-index: 1; }
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#top" class="footer-logo" aria-label="Requivo home">
-          <svg viewBox="0 0 44 36" width="34" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M15 3.5 C7.5 3.5,3 8,3 14 L3 22 C3 28,7.5 32.5,15 32.5" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <path d="M29 3.5 C36.5 3.5,41 8,41 14 L41 22 C41 28,36.5 32.5,29 32.5" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <rect x="16" y="12" width="12" height="12" rx="1" fill="#818cf8" transform="rotate(45 22 18)"/>
+          <svg viewBox="0 0 44 36" width="32" height="26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M15 3.5 C7.5 3.5,3 8,3 14 L3 22 C3 28,7.5 32.5,15 32.5" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M29 3.5 C36.5 3.5,41 8,41 14 L41 22 C41 28,36.5 32.5,29 32.5" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M22 10 L28.5 18 L22 26 L15.5 18 Z" fill="#a5b4fc"/>
           </svg>
           Requivo
         </a>
