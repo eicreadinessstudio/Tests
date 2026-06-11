@@ -15,9 +15,9 @@
    DESIGN TOKENS
    ================================================ */
 :root {
-  --dark:        #05070d;
+  --dark:        #07090f;
   --dark-2:      #0c1225;
-  --light:       #ffffff;
+  --light:       #fcfcfd;
   --off:         #f7f8fb;
   --text:        #0a1124;
   --text-soft:   #5a6584;
@@ -46,6 +46,7 @@ body {
   font-family: var(--sans);
   font-size: 15.5px;
   background: var(--dark);
+  /* ink base — the sheet floats above it */
   color: var(--text);
   line-height: 1.68;
   font-weight: 400;
@@ -83,7 +84,7 @@ img { display: block; max-width: 100%; }
   background: rgba(8,12,26,.92);
   border-bottom-color: rgba(255,255,255,.06);
 }
-#nav[data-theme="dark"].scrolled {
+#nav[data-theme="light"].scrolled {
   background: rgba(255,255,255,.92);
   border-bottom-color: rgba(0,0,0,.07);
 }
@@ -105,11 +106,11 @@ img { display: block; max-width: 100%; }
   transition: color .25s ease;
 }
 #nav[data-theme="dark"] .logo { color: var(--on-dk); }
-#nav[data-theme="dark"] .logo { color: var(--text); }
+#nav[data-theme="light"] .logo { color: var(--text); }
 #nav[data-theme="dark"]  .lm-bracket { stroke: #c7d2fe; }
 #nav[data-theme="dark"]  .lm-diamond { fill: #a5b4fc; }
-#nav[data-theme="dark"] .lm-bracket { stroke: var(--indigo); }
-#nav[data-theme="dark"] .lm-diamond { fill: var(--brand); }
+#nav[data-theme="light"] .lm-bracket { stroke: var(--indigo); }
+#nav[data-theme="light"] .lm-diamond { fill: var(--brand); }
 
 .nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links a {
@@ -121,7 +122,7 @@ img { display: block; max-width: 100%; }
 .nav-links a:not(.nav-cta) { opacity: .55; }
 .nav-links a:not(.nav-cta):hover { opacity: 1; }
 #nav[data-theme="dark"] .nav-links a:not(.nav-cta) { color: var(--on-dk); }
-#nav[data-theme="dark"] .nav-links a:not(.nav-cta) { color: var(--text); }
+#nav[data-theme="light"] .nav-links a:not(.nav-cta) { color: var(--text); }
 
 .nav-cta {
   font-size: 13px;
@@ -141,11 +142,11 @@ img { display: block; max-width: 100%; }
   color: var(--text);
   border-color: #fff;
 }
-#nav[data-theme="dark"] .nav-cta {
+#nav[data-theme="light"] .nav-cta {
   color: var(--text);
   border-color: rgba(0,0,0,.18);
 }
-#nav[data-theme="dark"] .nav-cta:hover {
+#nav[data-theme="light"] .nav-cta:hover {
   background: var(--text);
   color: #fff;
   border-color: var(--text);
@@ -182,6 +183,8 @@ img { display: block; max-width: 100%; }
   gap: clamp(40px,5vw,80px);
   align-items: center;
 }
+.hero-copy { position: relative; z-index: 3; }
+.hero-aside { position: relative; z-index: 1; }
 .hero-tag {
   font-family: var(--mono);
   font-size: 11px;
@@ -441,7 +444,7 @@ img { display: block; max-width: 100%; }
 .rqw-suite {
   --rqw-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --rqw-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
-  --rqw-bg-deep: #05070d;
+  --rqw-bg-deep: #07090f;
   --rqw-indigo: #3730a3;
   --rqw-indigo-mid: #4f46e5;
   --rqw-indigo-on-dark: #a5b4fc;
@@ -468,7 +471,7 @@ img { display: block; max-width: 100%; }
   position: relative;
   overflow: hidden;
   background: var(--rqw-bg-deep);
-  padding: 128px 0 140px;
+  padding: 128px 0 220px;
   font-family: var(--rqw-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -789,6 +792,39 @@ img { display: block; max-width: 100%; }
   .rqw-fragment:hover .rqw-card:last-child { transform: translateY(-2px); box-shadow: 0 0 0 0.5px rgba(15,28,58,.08), 0 2px 6px rgba(8,14,38,.18), 0 8px 18px rgba(8,14,38,.24), 0 24px 56px rgba(8,14,38,.42), 0 50px 100px rgba(8,14,38,.26), 0 22px 64px rgba(79,70,229,.20); }
 }
 
+
+/* ================================================
+   DEPTH STACK — the signature
+   The light middle of the page is a physical sheet
+   floating above the ink, with sheets peeking
+   behind its edges. The page is built from layers.
+   ================================================ */
+.stack {
+  position: relative;
+  z-index: 5;
+  margin-top: -72px;
+  margin-bottom: -72px;
+}
+.stack-edge {
+  position: absolute;
+  height: 30px;
+  pointer-events: none;
+}
+.stack-edge--1 { top: -12px; left: 2.5%; right: 2.5%; background: rgba(252,252,253,.46); border-radius: 22px 22px 0 0; }
+.stack-edge--2 { top: -23px; left: 5%;   right: 5%;   background: rgba(252,252,253,.20); border-radius: 22px 22px 0 0; }
+.stack-edge--b1 { bottom: -12px; left: 2.5%; right: 2.5%; background: rgba(252,252,253,.46); border-radius: 0 0 22px 22px; }
+.stack-edge--b2 { bottom: -23px; left: 5%;   right: 5%;   background: rgba(252,252,253,.20); border-radius: 0 0 22px 22px; }
+.sheet {
+  position: relative;
+  background: var(--light);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 -22px 64px rgba(0,0,0,.42),
+    0  22px 64px rgba(0,0,0,.42),
+    0 0 0 0.5px rgba(255,255,255,.05);
+}
+
 /* ================================================
    SOLUTION
    ================================================ */
@@ -805,7 +841,7 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase;
   display: block;
   margin-bottom: 16px;
-  color: rgba(165,180,252,.55);
+  color: var(--brand);
 }
 .s-title {
   font-size: clamp(28px, 3.2vw, 44px);
@@ -813,7 +849,7 @@ img { display: block; max-width: 100%; }
   line-height: 1.1;
   letter-spacing: -.026em;
   text-wrap: balance;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 0;
 }
 .sol-grid {
@@ -825,7 +861,7 @@ img { display: block; max-width: 100%; }
 .sol-copy p {
   font-size: 16px;
   line-height: 1.72;
-  color: rgba(255,255,255,.55);
+  color: var(--text-soft);
   letter-spacing: -.005em;
   margin-bottom: 20px;
 }
@@ -833,21 +869,21 @@ img { display: block; max-width: 100%; }
 .sol-panels { display: grid; gap: 0; }
 .sol-panel {
   padding: 22px 0;
-  border-top: 0.5px solid rgba(255,255,255,.08);
+  border-top: 0.5px solid var(--line);
 }
-.sol-panel:last-child { border-bottom: 0.5px solid rgba(255,255,255,.08); }
+.sol-panel:last-child { border-bottom: 0.5px solid var(--line); }
 .sol-panel-tag {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.30);
+  color: var(--text-dim);
   margin-bottom: 6px;
 }
 .sol-panel h3 {
   font-size: 15.5px;
   font-weight: 500;
-  color: rgba(255,255,255,.92);
+  color: var(--text);
   letter-spacing: -.012em;
   margin-bottom: 6px;
   line-height: 1.3;
@@ -855,7 +891,7 @@ img { display: block; max-width: 100%; }
 .sol-panel p {
   font-size: 14px;
   line-height: 1.6;
-  color: rgba(255,255,255,.50);
+  color: var(--text-soft);
 }
 
 /* ================================================
@@ -864,13 +900,13 @@ img { display: block; max-width: 100%; }
 .s-governance {
   background: transparent;
   padding: 128px 0;
-  border-top: 0.5px solid rgba(255,255,255,.07);
+  border-top: 0.5px solid var(--line);
 }
 .gov-header { margin-bottom: 64px; }
 .gov-sub {
   font-size: 16px;
   line-height: 1.7;
-  color: rgba(255,255,255,.50);
+  color: var(--text-soft);
   max-width: 580px;
   margin-top: 16px;
   letter-spacing: -.005em;
@@ -882,21 +918,21 @@ img { display: block; max-width: 100%; }
 }
 .gov-item {
   padding: 40px 0;
-  border-top: 0.5px solid rgba(255,255,255,.08);
+  border-top: 1px solid var(--line);
 }
 .gov-item:nth-child(odd)  { padding-right: 48px; }
-.gov-item:nth-child(even) { padding-left: 48px; border-left: 0.5px solid rgba(255,255,255,.07); }
+.gov-item:nth-child(even) { padding-left: 48px; border-left: 0.5px solid var(--line); }
 .gov-num {
   font-family: var(--mono);
   font-size: 10.5px;
   letter-spacing: .12em;
-  color: rgba(165,180,252,.45);
+  color: var(--text-dim);
   margin-bottom: 14px;
 }
 .gov-item h3 {
   font-size: 19px;
   font-weight: 500;
-  color: rgba(255,255,255,.92);
+  color: var(--text);
   letter-spacing: -.018em;
   line-height: 1.25;
   margin-bottom: 10px;
@@ -904,32 +940,32 @@ img { display: block; max-width: 100%; }
 .gov-item p {
   font-size: 14.5px;
   line-height: 1.65;
-  color: rgba(255,255,255,.50);
+  color: var(--text-soft);
 }
 
 /* ================================================
    WHY
    ================================================ */
 .s-why {
-  background: transparent;
+  background: #f3f4f8;
   padding: 128px 0;
-  border-top: 0.5px solid rgba(255,255,255,.07);
+  border-top: 0.5px solid var(--line);
 }
 .why-header { margin-bottom: 48px; }
 .why-sub {
   font-size: 16px;
   line-height: 1.7;
-  color: rgba(255,255,255,.50);
+  color: var(--text-soft);
   max-width: 640px;
   margin-top: 16px;
   letter-spacing: -.005em;
 }
-.strata { border-top: 0.5px solid rgba(255,255,255,.08); }
+.strata { border-top: 0.5px solid var(--line); }
 .strata-row {
   display: grid;
   grid-template-columns: 196px 1fr;
   align-items: stretch;
-  border-bottom: 0.5px solid rgba(255,255,255,.07);
+  border-bottom: 0.5px solid var(--line);
 }
 .strata-label {
   padding: 20px 24px 20px 0;
@@ -938,56 +974,56 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.34);
+  color: var(--text-dim);
   display: flex;
   align-items: center;
-  border-right: 0.5px solid rgba(255,255,255,.07);
+  border-right: 0.5px solid var(--line);
 }
 .strata-body {
   padding: 20px 0 20px 32px;
   font-size: 15px;
   line-height: 1.65;
-  color: rgba(255,255,255,.55);
+  color: var(--text-soft);
   display: flex;
   align-items: center;
 }
-.strata-row:nth-child(4) .strata-label { color: #a5b4fc; }
-.strata-row:nth-child(5) .strata-label { color: #a5b4fc; }
-.strata-row:nth-child(6) .strata-label { color: #c7d2fe; }
+.strata-row:nth-child(4) .strata-label { color: var(--brand); }
+.strata-row:nth-child(5) .strata-label { color: var(--brand); }
+.strata-row:nth-child(6) .strata-label { color: var(--indigo); }
 .strata-row:nth-child(5),
-.strata-row:nth-child(6) { background: rgba(79,70,229,.06); }
+.strata-row:nth-child(6) { background: rgba(79,70,229,.025); }
 
 /* ================================================
    USE CASES
    ================================================ */
 .s-use-cases {
   background: transparent;
-  padding: 128px 0;
-  border-top: 0.5px solid rgba(255,255,255,.07);
+  padding: 128px 0 136px;
+  border-top: 0.5px solid var(--line);
 }
 .uc-header { margin-bottom: 48px; }
-.use-rows { border-top: 0.5px solid rgba(255,255,255,.08); }
+.use-rows { border-top: 0.5px solid var(--line); }
 .use-row {
   display: grid;
   grid-template-columns: minmax(200px, 224px) 1fr;
   gap: 52px;
   align-items: baseline;
   padding: 34px 0;
-  border-bottom: 0.5px solid rgba(255,255,255,.07);
+  border-bottom: 0.5px solid var(--line);
   transition: background .18s ease;
 }
-.use-row:hover { background: rgba(79,70,229,.06); margin: 0 -24px; padding-left: 24px; padding-right: 24px; }
+.use-row:hover { background: rgba(79,70,229,.018); margin: 0 -24px; padding-left: 24px; padding-right: 24px; }
 .use-row h3 {
   font-size: 17px;
   font-weight: 500;
-  color: rgba(255,255,255,.92);
+  color: var(--text);
   letter-spacing: -.016em;
   line-height: 1.3;
 }
 .use-row p {
   font-size: 15px;
   line-height: 1.65;
-  color: rgba(255,255,255,.55);
+  color: var(--text-soft);
 }
 
 /* ================================================
@@ -995,7 +1031,7 @@ img { display: block; max-width: 100%; }
    ================================================ */
 .s-contact {
   background: var(--dark);
-  padding: 128px 0;
+  padding: 232px 0 128px;
 }
 .contact-label {
   font-family: var(--mono);
@@ -1107,69 +1143,6 @@ footer {
   color: var(--on-dk-dim);
 }
 
-
-/* ================================================
-   THE CONTINUUM THREAD — the signature
-   A single luminous line descends the page,
-   lighting up as the reader travels through it.
-   Each section is a station on the pipeline.
-   ================================================ */
-#thread {
-  position: absolute;
-  left: clamp(18px, 2.6vw, 44px);
-  width: 1px;
-  z-index: 60;
-  pointer-events: none;
-}
-.thread-base {
-  position: absolute;
-  inset: 0;
-  width: 1px;
-  background: rgba(165,180,252,.10);
-}
-.thread-lit {
-  position: absolute;
-  top: 0; left: 0;
-  width: 1px;
-  height: 0;
-  background: linear-gradient(180deg, rgba(79,70,229,0) 0%, #4f46e5 6%, #818cf8 100%);
-  box-shadow: 0 0 14px rgba(99,102,241,.55), 0 0 3px rgba(129,140,248,.9);
-}
-.thread-node {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: #0a0f1f;
-  border: 1px solid rgba(165,180,252,.30);
-  transition: background .35s ease, border-color .35s ease, box-shadow .35s ease;
-}
-.thread-node.on {
-  background: #4f46e5;
-  border-color: #a5b4fc;
-  box-shadow: 0 0 12px rgba(99,102,241,.75);
-}
-.thread-node-label {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgba(165,180,252,.0);
-  white-space: nowrap;
-  transition: color .35s ease;
-}
-.thread-node.on .thread-node-label { color: rgba(165,180,252,.45); }
-@media (max-width: 1180px) { #thread { display: none; } }
-@media (prefers-reduced-motion: reduce) {
-  .thread-lit { transition: none; }
-}
-
 /* ================================================
    REVEAL
    ================================================ */
@@ -1210,6 +1183,12 @@ footer {
 @media (max-width: 768px) {
   .wrap { width: calc(100% - 32px); }
   .nav-links a:not(.nav-cta) { display: none; }
+  .stack { margin-top: -36px; margin-bottom: -36px; }
+  .sheet { border-radius: 16px; }
+  .stack-edge--1 { top: -8px; }  .stack-edge--2 { top: -15px; }
+  .stack-edge--b1 { bottom: -8px; } .stack-edge--b2 { bottom: -15px; }
+  .hero-copy { margin-right: 0; }
+  .s-contact { padding: 160px 0 96px; }
   .s-solution,
   .s-governance,
   .s-why,
@@ -1242,12 +1221,6 @@ footer {
 </head>
 <body>
 
-<!-- THE CONTINUUM THREAD -->
-<div id="thread" aria-hidden="true">
-  <i class="thread-base"></i>
-  <i class="thread-lit" id="thread-lit"></i>
-</div>
-
 <!-- ================================================
      NAV
      ================================================ -->
@@ -1278,7 +1251,7 @@ footer {
 <section class="hero" id="top" data-theme="dark">
   <div class="wrap">
     <div class="hero-inner">
-      <div>
+      <div class="hero-copy">
         <span class="hero-tag hero-rise hero-rise-1">Governed operational knowledge layer</span>
         <h1 class="hero-rise hero-rise-2">
           Critical knowledge exists<br>
@@ -1558,9 +1531,14 @@ footer {
 </section>
 
 <!-- ================================================
-     SOLUTION
+     DEPTH STACK — light sheet floating above the ink
      ================================================ -->
-<section class="s-solution" id="solution" data-theme="dark">
+<div class="stack" data-theme="light">
+  <i class="stack-edge stack-edge--2" aria-hidden="true"></i>
+  <i class="stack-edge stack-edge--1" aria-hidden="true"></i>
+  <div class="sheet">
+
+<section class="s-solution" id="solution">
   <div class="wrap">
     <div class="sol-header reveal">
       <span class="s-label">Solution</span>
@@ -1596,7 +1574,7 @@ footer {
 <!-- ================================================
      GOVERNANCE
      ================================================ -->
-<section class="s-governance" id="governance" data-theme="dark">
+<section class="s-governance" id="governance">
   <div class="wrap">
     <div class="gov-header reveal">
       <span class="s-label">Governance</span>
@@ -1631,7 +1609,7 @@ footer {
 <!-- ================================================
      WHY
      ================================================ -->
-<section class="s-why" id="why" data-theme="dark">
+<section class="s-why" id="why">
   <div class="wrap">
     <div class="why-header reveal">
       <span class="s-label">Why Requivo</span>
@@ -1670,7 +1648,7 @@ footer {
 <!-- ================================================
      USE CASES
      ================================================ -->
-<section class="s-use-cases" id="use-cases" data-theme="dark">
+<section class="s-use-cases" id="use-cases">
   <div class="wrap">
     <div class="uc-header reveal">
       <span class="s-label">Use cases</span>
@@ -1692,6 +1670,11 @@ footer {
     </div>
   </div>
 </section>
+
+  </div><!-- /sheet -->
+  <i class="stack-edge stack-edge--b1" aria-hidden="true"></i>
+  <i class="stack-edge stack-edge--b2" aria-hidden="true"></i>
+</div><!-- /stack -->
 
 <!-- ================================================
      CONTACT
@@ -1996,87 +1979,6 @@ document.addEventListener('DOMContentLoaded', function () {
   function start() { freeze(); reveal(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
-})();
-</script>
-
-
-<!-- Continuum thread: layout, scroll lighting, station nodes -->
-<script>
-(function () {
-  'use strict';
-  var thread = document.getElementById('thread');
-  var lit = document.getElementById('thread-lit');
-  if (!thread || !lit) return;
-
-  var STATIONS = [
-    { sel: '#top',          label: '01 · evidence'   },
-    { sel: '#what-you-get', label: '02 · capability' },
-    { sel: '#solution',     label: '03 · layer'      },
-    { sel: '#governance',   label: '04 · governed'   },
-    { sel: '#why',          label: '05 · trusted'    },
-    { sel: '#use-cases',    label: '06 · applied'    },
-    { sel: '#contact',      label: '07 · contact'    }
-  ];
-
-  var nodes = [];
-  var threadTop = 0, threadH = 0;
-
-  function build() {
-    nodes.forEach(function (n) { n.el.remove(); });
-    nodes = [];
-    STATIONS.forEach(function (s) {
-      var sec = document.querySelector(s.sel);
-      if (!sec) return;
-      var el = document.createElement('span');
-      el.className = 'thread-node';
-      el.innerHTML = '<span class="thread-node-label">' + s.label + '</span>';
-      thread.appendChild(el);
-      nodes.push({ el: el, sec: sec });
-    });
-  }
-
-  function layout() {
-    var hero = document.getElementById('top');
-    var contact = document.getElementById('contact');
-    if (!hero || !contact) return;
-    threadTop = hero.offsetTop + 140;
-    var end = contact.offsetTop + contact.offsetHeight - 80;
-    threadH = Math.max(0, end - threadTop);
-    thread.style.top = threadTop + 'px';
-    thread.style.height = threadH + 'px';
-    nodes.forEach(function (n) {
-      var y = n.sec.offsetTop + 120 - threadTop;
-      y = Math.max(10, Math.min(threadH - 10, y));
-      n.el.style.top = y + 'px';
-      n.y = y;
-    });
-  }
-
-  var ticking = false;
-  function update() {
-    var probe = window.scrollY + window.innerHeight * 0.42 - threadTop;
-    var h = Math.max(0, Math.min(threadH, probe));
-    lit.style.height = h + 'px';
-    nodes.forEach(function (n) {
-      if (n.y <= h) n.el.classList.add('on');
-      else n.el.classList.remove('on');
-    });
-    ticking = false;
-  }
-  function onScroll() {
-    if (!ticking) { ticking = true; requestAnimationFrame(update); }
-  }
-
-  function init() {
-    build();
-    layout();
-    update();
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
-  window.addEventListener('load', function () { layout(); update(); });
-  window.addEventListener('resize', function () { layout(); update(); }, { passive: true });
-  window.addEventListener('scroll', onScroll, { passive: true });
 })();
 </script>
 
